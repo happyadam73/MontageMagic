@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface UIImage (NonCached)
 
 + (UIImage *)imageFromFile:(NSString*)aFileName;

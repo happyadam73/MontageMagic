@@ -38,7 +38,6 @@
 - (void)removeViewShadow;
 - (void)addViewBorder;
 - (void)removeViewBorder;
-- (void)applyMaskToBounds;
 - (void)updateTextDimensionsWithLines:(NSArray *)lines font:(UIFont *)font;
 - (void)updateLabelTextLines:(NSArray *)lines withFont:(UIFont *)font;
 - (void)updateLabelTextWithFont:(UIFont *)font;

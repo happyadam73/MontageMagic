@@ -29,7 +29,6 @@
     }
 
     return image;
-
 }
 
 - (UIImage *)imageBorderedWithColor:(UIColor *)color thickness:(CGFloat)borderPixels
@@ -49,7 +48,6 @@
     
     return image;
 }
-
 
 - (UIImage *)imageBorderedWithColor:(UIColor *)color thickness:(CGFloat)borderPixels transparentEdgeThickness:(CGFloat)edgePixels
 {

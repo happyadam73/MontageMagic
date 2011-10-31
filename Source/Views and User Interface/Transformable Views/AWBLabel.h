@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface AWBLabel : UILabel {
-    
-}
+@interface AWBLabel : UILabel
 
 @end

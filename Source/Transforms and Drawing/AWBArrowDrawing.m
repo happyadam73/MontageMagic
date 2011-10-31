@@ -8,8 +8,6 @@
 
 #import "AWBArrowDrawing.h"
 
-
-
 CGSize AWBCGArrowSuggestedSize(CGFloat length, AWBArrowThicknessType thicknessType, AWBArrowType arrowType, AWBArrowHeadType arrowHeadType, AWBArrowLineShapeType arrowLineShapeType)
 {
     CGSize suggestedSize = CGSizeMake(length, length);

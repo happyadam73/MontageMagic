@@ -52,7 +52,6 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    
     NSString *key = [aDecoder decodeObjectForKey:@"imageKey"];
     UIImage *image = AWBLoadImageWithKey(key);
     

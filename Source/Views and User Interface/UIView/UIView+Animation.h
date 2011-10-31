@@ -13,6 +13,5 @@
 - (void)addSubviewWithAnimation:(UIView *)view duration:(NSTimeInterval)duration moveToPoint:(CGPoint)point;
 - (CGPoint)randomViewPointWithMarginThickness:(CGFloat)margin;
 - (CGPoint)randomViewPoint;
-//- (CGPoint)randomPointInAreaWithIndex:(NSUInteger)areaIndex totalAreasWide:(NSUInteger)areasWide totalAreasHigh:(NSUInteger)areasHigh screenMarginPercentage:(CGFloat)screenMarginPerc areaMarginPercentage:(CGFloat)areaMarginPerc adjustMidPointsOnIndexOverflow:(BOOL)adjustMidPoints;
 
 @end

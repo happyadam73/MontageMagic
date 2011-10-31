@@ -29,7 +29,6 @@
 - (void)drawRect:(CGRect)rect  
 {    
     //adjust bounded frame size to take into account the scale transform (don't need to do this for the frame size)
-    //CGSize scaledBoundRectSize = CGSizeMake([self currentScale]*[self bounds].size.width, [self currentScale]*[self bounds].size.height);
     CGFloat theta = [self rotationAngleInRadians] + [self pendingRotationAngleInRadians];
     
     CGMutablePathRef path = CGPathCreateMutable();

@@ -107,13 +107,7 @@
         borderThickness = (minLabelLength/BORDER_HEIGHT_RATIO);
         if (borderThickness < 2.0) {
             borderThickness = 2.0;
-        }
-//        if (((scale * borderThickness) < 2.0) && (scale > 0.0)) {
-//            borderThickness = (2.0/scale);
-//        }
-        
-        //borderThickness = ([font lineHeight] > 50 ? 6.0 : 4.0);
-        
+        }        
         [self initialiseLayerRotation:rotation scale:scale];
         [self setHorizontalFlip:flip];
         [self.labelView setFont:textFont];
@@ -152,7 +146,6 @@
 {    
     [self updateTextDimensionsWithLines:lines font:font];
     CGRect newBounds = CGRectMake(0.0, 0.0, (1.2 * maxWidth) + (0.25 * maxHeight), (1.1 * totalHeight) + 10.0);
-    //borderThickness = ([font lineHeight] > 50 ? 6.0 : 4.0);
     [self.labelView setFont:font];
     [self.labelView setText:[lines componentsJoinedByString:@"\r\n"]];
     [self setBounds:newBounds];
@@ -269,7 +262,6 @@
     } else {
         [self removeViewBorder];
     }
-    [self applyMaskToBounds];
 }
 
 - (void)setAddShadow:(BOOL)addShadowValue
@@ -285,22 +277,11 @@
 - (void)setRoundedBorder:(BOOL)roundedBorderValue
 {
     roundedBorder = roundedBorderValue;
-    [self applyMaskToBounds];
-}
-
-- (void)applyMaskToBounds
-{
-//    if (roundedBorder && addBorder && (self.backgroundColor.CGColor != [UIColor clearColor].CGColor)) {
-//        self.layer.masksToBounds = YES;
-//    } else {
-//        self.layer.masksToBounds = NO;
-//    }    
 }
 
 - (void)setTextBackgroundColor:(UIColor *)backgroundColor
 {
     [self.labelView setBackgroundColor:backgroundColor];
-    [self applyMaskToBounds];
 }
 
 - (void)addViewShadow

@@ -165,12 +165,9 @@ CGFloat AWBQuantizeFloat(CGFloat value, CGFloat quantizationFactor, BOOL roundUp
     }
 }
 
-
 NSString *AWBScreenSizeFromQualityValue(CGFloat value)
 {
     CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;    
     
     return [NSString stringWithFormat:@"%d x %d", (int)(screenSize.height * value), (int)(screenSize.width * value)];
 }
-
-

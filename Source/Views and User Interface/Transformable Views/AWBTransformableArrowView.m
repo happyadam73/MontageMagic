@@ -83,7 +83,6 @@
         arrowLineShapeType = lineShapeType;
         arrowLineStrokeType = lineStroke;
         arrowColor = [color retain];
-        //[self setArrowColor:color];
         [self setBackgroundColor:[UIColor clearColor]];
         [self setClearsContextBeforeDrawing:NO];
         CATiledLayer *layerForView = (CATiledLayer *)self.layer;
