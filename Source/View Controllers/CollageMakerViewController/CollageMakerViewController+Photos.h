@@ -22,4 +22,5 @@
 - (void)applySettingsToImageView:(AWBTransformableImageView *)imageView;
 - (NSUInteger)recommendedMaxResolutionForImageSize:(CGSize)imageSize;
 
+
 @end
