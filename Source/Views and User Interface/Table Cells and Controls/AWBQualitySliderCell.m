@@ -64,11 +64,4 @@
     [self.detailTextLabel setText:AWBScreenSizeFromQualityValue(self.qualityValue)];
 }
 
-//- (NSString *)screenSizeFromQualityValue:(CGFloat)value
-//{
-//    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;    
-//    
-//    return [NSString stringWithFormat:@"%d x %d", (int)(screenSize.height * value), (int)(screenSize.width * value)];
-//}
-
 @end

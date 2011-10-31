@@ -157,7 +157,7 @@
 
 + (AWBSettings *)themeSettingsWithInfo:(NSDictionary *)info
 {
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup collageNameSettingsGroupWithInfo:info], [AWBSettingsGroup themeListSettingsGroupWithInfo:info header:@"Choose a Theme for the new collage" footer:@"You can change theme and modify theme settings at any time."], [AWBSettingsGroup collageAddContentOnCreationSettingsGroupWithInfo:info], nil];
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup collageNameSettingsGroupWithInfo:info], [AWBSettingsGroup themeListSettingsGroupWithInfo:info header:@"Choose a Theme for the new Collage" footer:@"You can change theme and modify theme settings at any time."], [AWBSettingsGroup collageAddContentOnCreationSettingsGroupWithInfo:info], nil];
     return [[[self alloc] initWithSettingsGroups:settings title:@"New Collage"] autorelease];
 }
 
@@ -220,7 +220,7 @@
 + (AWBSettings *)layoutSettingsWithInfo:(NSDictionary *)info
 {
     AWBSettingsGroup *snapToGridSettings = [AWBSettingsGroup snapToGridSettingsGroupWithInfo:info];
-    AWBSettingsGroup *layoutListSettings = [AWBSettingsGroup layoutListSettingsGroupWithInfo:info header:@"Automatic Layout" footer:@"Adding new photos and contacts automatically places them according to the chosen layout - you can still manually place all objects after they are added."];
+    AWBSettingsGroup *layoutListSettings = [AWBSettingsGroup layoutListSettingsGroupWithInfo:info header:@"Automatic Layout" footer:@"Adding new photos and contacts automatically places them according to the chosen layout - you can still manually place all objects after they are added.  Removing all objects resets the layout."];
     AWBSettingsGroup *autoMemoryReductionSettings = [AWBSettingsGroup autoMemoryReductionSettingsGroupWithInfo:info];
     
     NSMutableArray *settings = [NSMutableArray arrayWithObjects:snapToGridSettings, layoutListSettings, autoMemoryReductionSettings, nil];

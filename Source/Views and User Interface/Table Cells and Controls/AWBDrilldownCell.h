@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AWBDrilldownCell : UITableViewCell {
-    
-}
+@interface AWBDrilldownCell : UITableViewCell 
 
 - (id)initWithText:(NSString *)text textValue:(NSString *)value reuseIdentifier:(NSString *)reuseIdentifier;
 

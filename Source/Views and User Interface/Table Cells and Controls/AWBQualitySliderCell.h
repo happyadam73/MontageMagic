@@ -19,6 +19,5 @@
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (id)initWithQualityValue:(CGFloat)value reuseIdentifier:(NSString *)reuseIdentifier;
 - (void)sliderValueChanged:(id)sender;
-//- (NSString *)screenSizeFromQualityValue:(CGFloat)value;
 
 @end

@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AWBSettingTableCell.h"
 
-@interface AWBTextValueTableCell : UITableViewCell {
-    
-}
+@interface AWBTextValueTableCell : UITableViewCell 
 
 - (void)initialiseWithText:(NSString *)text value:(NSString *)value;
 - (id)initWithWithText:(NSString *)text value:(NSString *)value reuseIdentifier:(NSString *)reuseIdentifier;

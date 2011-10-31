@@ -11,11 +11,9 @@
 
 @interface AWBBusyView : UIView {
     UIActivityIndicatorView *busyIndicator;
-    //UILabel *progressLabel;
 }
 
 @property (nonatomic, retain) UIActivityIndicatorView *busyIndicator;
-//@property (nonatomic, retain) UILabel *progressLabel;
 
 - (id)initWithText:(NSString *)labelText detailText:(NSString *)detailText parentView:(UIView *)parentView centerAtPoint:(CGPoint)point;
 - (void)presentOnTopOfView:(UIView *)parentView centerAtPoint:(CGPoint)point;

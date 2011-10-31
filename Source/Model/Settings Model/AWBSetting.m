@@ -247,7 +247,6 @@
             break;
         case AWBSettingControlTypeQualitySlider:            
             self.settingValue = [NSNumber numberWithFloat:(((int)(2.0 * [(UISlider *)sender value])) / 2.0)];
-            //self.settingValue = [NSNumber numberWithFloat:[(UISlider *)sender value]];
             break;
         case AWBSettingControlTypeColorPicker:
             self.settingValue = [(AWBColorPickerSegmentedControl *)sender selectedColor];

@@ -36,7 +36,7 @@
     }
     
     self = [super initWithFrame:CGRectMake(0.0, 0.0, maxLabelWidth + 20.0, frameHeight)];    
-    //self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, 100.0)];
+
     if (self) {
         // Initialization code
         UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -59,7 +59,6 @@
             label.text = labelText;
             label.font = [UIFont systemFontOfSize:16.0];
             label.backgroundColor = [UIColor darkGrayColor];
-            //self.progressLabel = label;
             [self addSubview:label];
             [label release]; 
             currentY += 25.0;

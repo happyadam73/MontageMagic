@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AWBSettingTableCell.h"
 
-@interface AWBSubtitleTableCell : UITableViewCell {
-    
-}
+@interface AWBSubtitleTableCell : UITableViewCell
 
 - (void)initialiseWithText:(NSString *)text detailText:(NSString *)detailText image:(UIImage *)image;
 - (id)initWithWithText:(NSString *)text detailText:(NSString *)detailText image:(UIImage *)image reuseIdentifier:(NSString *)reuseIdentifier;

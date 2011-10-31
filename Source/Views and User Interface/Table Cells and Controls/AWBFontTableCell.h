@@ -10,12 +10,9 @@
 #import "AWBCollageFont.h"
 #import "AWBSettingTableCell.h"
 
-@interface AWBFontTableCell : UITableViewCell {
-    
-}
+@interface AWBFontTableCell : UITableViewCell 
 
 - (void)initialiseWithFontType:(AWBCollageFontType)fontType;
 - (id)initWithFontType:(AWBCollageFontType)fontType reuseIdentifier:(NSString *)reuseIdentifier;
-
 
 @end

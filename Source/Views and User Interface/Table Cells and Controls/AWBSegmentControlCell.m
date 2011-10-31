@@ -13,7 +13,6 @@
 
 @synthesize cellSegmentedControl, segmentIndexValue;
 
-
 - (id)initWithText:(NSString *)text items:(NSArray *)items segmentIndex:(NSInteger)segmentIndex reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AWBSetting.h"
 
-@interface UITableViewCell (Settings);
+@interface UITableViewCell (Settings)
 
 - (void)updateCellWithSetting:(AWBSetting *)aSetting;
 - (UIControl *)cellControl;

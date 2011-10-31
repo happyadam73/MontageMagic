@@ -381,24 +381,6 @@
 - (void)pushSymbol
 {
     [self pushSymbolIntoCenter];
-
-//    objectCount += 1;
-//    switch (objectLocatorType) {
-//        case kAWBCollageObjectLocatorTypeScatter:
-//            [self pushSymbolForScatterLayout];
-//            break;
-//        case kAWBCollageObjectLocatorTypeMosaicNanoImages:
-//        case kAWBCollageObjectLocatorTypeMosaicMicroImages:
-//        case kAWBCollageObjectLocatorTypeMosaicTinyImages:
-//        case kAWBCollageObjectLocatorTypeMosaicSmallImages:
-//        case kAWBCollageObjectLocatorTypeMosaicMediumImages:
-//        case kAWBCollageObjectLocatorTypeMosaicLargeImages:
-//            [self pushSymbolForMosaicLayout];
-//            break;
-//        default:
-//            [self pushSymbolForScatterLayout];
-//            break;
-//    }
 }
 
 - (void)pushSymbolIntoCenter
@@ -465,24 +447,6 @@
 - (void)pushTextLabel
 {
     [self pushTextLabelIntoCenter];
-    
-//    objectCount += 1;
-//    switch (objectLocatorType) {
-//        case kAWBCollageObjectLocatorTypeScatter:
-//            [self pushTextLabelForScatterLayout];
-//            break;
-//        case kAWBCollageObjectLocatorTypeMosaicNanoImages:
-//        case kAWBCollageObjectLocatorTypeMosaicMicroImages:
-//        case kAWBCollageObjectLocatorTypeMosaicTinyImages:
-//        case kAWBCollageObjectLocatorTypeMosaicSmallImages:
-//        case kAWBCollageObjectLocatorTypeMosaicMediumImages:
-//        case kAWBCollageObjectLocatorTypeMosaicLargeImages:
-//            [self pushTextLabelForMosaicLayout];
-//            break;
-//        default:
-//            [self pushTextLabelForScatterLayout];
-//            break;
-//    }
 }
 
 - (void)pushTextLabelIntoCenter
@@ -569,9 +533,6 @@
 
 - (CGPoint)randomPointInAreaWithIndex:(NSUInteger)areaIndex totalAreasWide:(NSUInteger)areasWide totalAreasHigh:(NSUInteger)areasHigh screenMarginPercentage:(CGFloat)screenMarginPerc areaMarginPercentage:(CGFloat)areaMarginPerc adjustMidPointsOnIndexOverflow:(BOOL)adjustMidPoints
 {
-//    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
-//    CGFloat screenWidth = (screenSize.height > screenSize.width ? screenSize.height : screenSize.width);
-//    CGFloat screenHeight = (screenSize.height > screenSize.width ? screenSize.width : screenSize.height);
     CGFloat screenOffsetX = screenLength * screenMarginPerc;
     CGFloat screenOffsetY = screenHeight * screenMarginPerc;
     CGFloat areaWidth = ((1.0 - (2.0*screenMarginPerc))*screenLength)/areasWide;
