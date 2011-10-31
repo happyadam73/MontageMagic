@@ -27,11 +27,9 @@
             if ((theta != 0.0) && (scale != 0.0)) {
 
                 //adjust rotation angle, and hit point to have (0,0) origin in top left
-                //CGFloat theta = -([view rotationAngleInRadians]+[view pendingRotationAngleInRadians]);
                 CGPoint hitPoint = CGPointMake(point.x - [view frame].origin.x, point.y - [view frame].origin.y);
                 
                 //adjust bounded frame size to take into account the scale transform (don't need to do this for the frame size)
-                //CGSize scaledBoundRectSize = CGSizeMake([view currentScale]*[view bounds].size.width, [view currentScale]*[view bounds].size.height);
                 CGSize scaledBoundRectSize = CGSizeMake([view quantisedScale]*[view bounds].size.width, [view quantisedScale]*[view bounds].size.height);
 
                 //check to see if point is within the rotated bound rectangle that sits rotated (by theta) within the outer non-rotated external frame

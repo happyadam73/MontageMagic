@@ -96,7 +96,7 @@
             ABRecordRef person = ABAddressBookGetPersonWithRecordID(addressBook, self.recordID); 
             if (person != NULL) {
                 CFDataRef imageData = ABPersonCopyImageData(person);
-                if (imageData) {
+                if (imageData != NULL) {
                     image = [UIImage imageWithData:(NSData *)imageData];
                     CFRelease(imageData);
                 }
@@ -128,7 +128,7 @@
             ABRecordRef person = ABAddressBookGetPersonWithRecordID(addressBook, self.recordID); 
             if ((person != NULL) && (ABPersonCopyImageDataWithFormat != NULL)) {
                 CFDataRef imageData = ABPersonCopyImageDataWithFormat(person, kABPersonImageFormatThumbnail);
-                if (imageData) {
+                if (imageData!= NULL) {
                     image = [[UIImage alloc] initWithData:(NSData *)imageData];
                     CFRelease(imageData);
                 }
@@ -297,7 +297,6 @@
     } else {
         return nil;
     }
-    
 }
 
 + (NSArray *)contactSortDescriptors
