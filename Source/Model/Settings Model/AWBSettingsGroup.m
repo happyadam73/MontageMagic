@@ -140,10 +140,7 @@
 {
     AWBSetting *addPhotoShadowsSetting = [AWBSetting switchSettingWithText:@"Photo Shadows" value:[info objectForKey:kAWBInfoKeyImageShadows] key:kAWBInfoKeyImageShadows];
     addPhotoShadowsSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
-    
-    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:addPhotoShadowsSetting];
-    
-    //AWBSettingsGroup *imageShadowSettings = [[self alloc] initWithSettings:buttonSettings header:@"Photo Shadows" footer:nil];
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:addPhotoShadowsSetting];    
     AWBSettingsGroup *imageShadowSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     imageShadowSettings.masterSwitchIsOn = addPhotoShadowsSetting.isSwitchedOn;
     addPhotoShadowsSetting.parentGroup = imageShadowSettings;
@@ -155,8 +152,6 @@
     AWBSetting *addTextShadowsSetting = [AWBSetting switchSettingWithText:@"Text Shadows" value:[info objectForKey:kAWBInfoKeyTextShadows] key:kAWBInfoKeyTextShadows];
     addTextShadowsSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:addTextShadowsSetting];
-    
-    //AWBSettingsGroup *textShadowSettings = [[self alloc] initWithSettings:buttonSettings header:@"Text Shadows" footer:nil];
     AWBSettingsGroup *textShadowSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     textShadowSettings.masterSwitchIsOn = addTextShadowsSetting.isSwitchedOn;
     addTextShadowsSetting.parentGroup = textShadowSettings;
@@ -168,8 +163,6 @@
     AWBSetting *addTextBackgroundSetting = [AWBSetting switchSettingWithText:@"Add Text Background" value:[info objectForKey:kAWBInfoKeyTextBackground] key:kAWBInfoKeyTextBackground];
     addTextBackgroundSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:addTextBackgroundSetting];
-    
-    //AWBSettingsGroup *textBackgroundSettings = [[self alloc] initWithSettings:buttonSettings header:@"Text Background" footer:nil];
     AWBSettingsGroup *textBackgroundSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     textBackgroundSettings.masterSwitchIsOn = addTextBackgroundSetting.isSwitchedOn;
     addTextBackgroundSetting.parentGroup = textBackgroundSettings;
@@ -188,9 +181,7 @@
     AWBSetting *roundedBordersSetting = [AWBSetting switchSettingWithText:@"Rounded Borders" value:[info objectForKey:kAWBInfoKeyImageRoundedBorders] key:kAWBInfoKeyImageRoundedBorders];
     roundedBordersSetting.masterSlaveType = AWBSettingMasterSlaveTypeSlaveCell;
     roundedBordersSetting.visible = addPhotoBordersSetting.isSwitchedOn;
-    
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:addPhotoBordersSetting, roundedBordersSetting, nil];    
-    //AWBSettingsGroup *imageBorderSettings = [[self alloc] initWithSettings:buttonSettings header:@"Photo Borders" footer:nil];
     AWBSettingsGroup *imageBorderSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     imageBorderSettings.masterSwitchIsOn = addPhotoBordersSetting.isSwitchedOn;
     addPhotoBordersSetting.parentGroup = imageBorderSettings;
@@ -205,7 +196,6 @@
     roundedBordersSetting.masterSlaveType = AWBSettingMasterSlaveTypeSlaveCell;
     roundedBordersSetting.visible = addTextBordersSetting.isSwitchedOn;
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:addTextBordersSetting, roundedBordersSetting, nil];
-    //AWBSettingsGroup *textBorderSettings = [[self alloc] initWithSettings:buttonSettings header:@"Text Borders" footer:nil];    
     AWBSettingsGroup *textBorderSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];    
     textBorderSettings.masterSwitchIsOn = addTextBordersSetting.isSwitchedOn;
     addTextBordersSetting.parentGroup = textBorderSettings; 
@@ -216,10 +206,7 @@
 {
     AWBSetting *addCollageBorderSetting = [AWBSetting switchSettingWithText:@"Add Collage Border" value:[info objectForKey:kAWBInfoKeyCollageBorder] key:kAWBInfoKeyCollageBorder];
     addCollageBorderSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
-    
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:addCollageBorderSetting];
-    
-    //AWBSettingsGroup *collageBorderSettings = [[self alloc] initWithSettings:buttonSettings header:@"Collage Border" footer:nil];
     AWBSettingsGroup *collageBorderSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     collageBorderSettings.masterSwitchIsOn = addCollageBorderSetting.isSwitchedOn;
     addCollageBorderSetting.parentGroup = collageBorderSettings;
@@ -271,7 +258,6 @@
 
 + (AWBSettingsGroup *)themesDrilldownSettingsGroupWithInfo:(NSDictionary *)info
 {
-    //CollageTheme *theme = [info objectForKey:kAWBInfoKeyCollageTheme];
     NSMutableArray *themeSettings = [NSMutableArray arrayWithObjects:[AWBSetting drilldownSettingWithText:@"Theme" value:info key:kAWBInfoKeyCollageTheme childSettings:[AWBSettings editThemeSettingsWithInfo:info]], nil];
     return [[[self alloc] initWithSettings:themeSettings header:@"Change Theme" footer:@"Warning! Changing theme will reload the collage and then reset all text objects to match the new theme."] autorelease];    
 }
@@ -337,7 +323,6 @@
 + (AWBSettingsGroup *)luckyDipSourceSettingsGroupWithInfo:(NSDictionary *)info
 {
     AWBSetting *luckyDipTypeSetting = [AWBSetting segmentControlSettingWithText:@"Lucky Dip Type" items:[NSArray arrayWithObjects:@"Photos", @"Contacts", nil] value:[info objectForKey:kAWBInfoKeyLuckyDipSourceSelectedIndex] key:kAWBInfoKeyLuckyDipSourceSelectedIndex];
-//    AWBSetting *luckyDipAmountSetting = [AWBSetting segmentControlSettingWithText:@"Number of Objects" items:[NSArray arrayWithObjects:@"  6 ", @" 12 ", @" 15 ", @" 20 ", @" 24 ", nil] value:[info objectForKey:kAWBInfoKeyLuckyDipAmountSelectedIndex] key:kAWBInfoKeyLuckyDipAmountSelectedIndex];
     
     NSArray *amountDescriptions = nil;
     if (DEVICE_IS_IPAD) {
@@ -398,8 +383,6 @@
     AWBSetting *backgroundTextureSwitchSetting = [AWBSetting switchSettingWithText:@"Use Textured Background" value:[info objectForKey:kAWBInfoKeyCollageUseBackgroundTexture] key:kAWBInfoKeyCollageUseBackgroundTexture];
     backgroundTextureSwitchSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:backgroundTextureSwitchSetting];
-    
-    //AWBSettingsGroup *backgroundTextureSwitchSettings = [[self alloc] initWithSettings:buttonSettings header:@"Background Type" footer:nil];
     AWBSettingsGroup *backgroundTextureSwitchSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     backgroundTextureSwitchSettings.masterSwitchIsOn = backgroundTextureSwitchSetting.isSwitchedOn;
     backgroundTextureSwitchSetting.parentGroup = backgroundTextureSwitchSettings;
@@ -418,10 +401,8 @@
     ALAssetsGroup *selectedGroup = [info objectForKey:kAWBInfoKeySelectedAssetGroup];
     if (selectedGroup) {
         if ([selectedGroup isEqual:[NSNull null]]) {
-            //selectedGroupName = kAWBAllPhotosGroupName;                
             selectedGroupName = kAWBAllPhotosGroupPersistentID;                
         } else {
-            //selectedGroupName = [selectedGroup valueForProperty:ALAssetsGroupPropertyName];            
             selectedGroupName = [selectedGroup valueForProperty:ALAssetsGroupPropertyPersistentID];            
         }
     }
@@ -431,12 +412,10 @@
     NSMutableArray *assetGroupSettings = [[NSMutableArray alloc] initWithCapacity:[assetGroups count]];
     for (ALAssetsGroup *assetGroup in assetGroups) {
         if ([assetGroup isEqual:[NSNull null]]) {
-            //if ([selectedGroupName isEqualToString:kAWBAllPhotosGroupName]) {
             if ([selectedGroupName isEqualToString:kAWBAllPhotosGroupPersistentID]) {
                 selectedIndex = assetGroupIndex;                
             }
         } else {
-            //if ([[assetGroup valueForProperty:ALAssetsGroupPropertyName] isEqualToString:selectedGroupName]) {
             if ([[assetGroup valueForProperty:ALAssetsGroupPropertyPersistentID] isEqualToString:selectedGroupName]) {
                 selectedIndex = assetGroupIndex;
             }
@@ -501,23 +480,6 @@
     return [luckyDipContactGroup autorelease];      
 }
 
-//+ (AWBSettingsGroup *)lockCollageSettingsGroupWithInfo:(NSDictionary *)info
-//{
-//    AWBSetting *lockCollageSetting = [AWBSetting switchSettingWithText:@"Lock Collage" value:[info objectForKey:kAWBInfoKeyObjectLocatorLockCollage] key:kAWBInfoKeyObjectLocatorLockCollage];
-//    lockCollageSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
-//    AWBSetting *snapToGridSetting = [AWBSetting switchSettingWithText:@"Snap to Grid" value:[info objectForKey:kAWBInfoKeyObjectLocatorSnapToGrid] key:kAWBInfoKeyObjectLocatorSnapToGrid];
-//    snapToGridSetting.masterSlaveType = AWBSettingMasterSlaveTypeSlaveCellNegative;
-//    snapToGridSetting.visible = (lockCollageSetting.isSwitchedOn == NO);
-//
-//    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:lockCollageSetting, snapToGridSetting, nil];
-//    
-//    AWBSettingsGroup *lockCollageSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
-//    lockCollageSettings.masterSwitchIsOn = lockCollageSetting.isSwitchedOn;
-//    lockCollageSetting.parentGroup = lockCollageSettings; 
-//    
-//    return [lockCollageSettings autorelease];
-//}
-
 + (AWBSettingsGroup *)snapToGridSettingsGroupWithInfo:(NSDictionary *)info
 {
     AWBSetting *snapToGridSetting = [AWBSetting switchSettingWithText:@"Snap to Grid" value:[info objectForKey:kAWBInfoKeyObjectLocatorSnapToGrid] key:kAWBInfoKeyObjectLocatorSnapToGrid];    
@@ -568,12 +530,6 @@
     AWBSettingsGroup *autoMemoryReductionSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:@"For mosaics with lots of smaller photos, images are further downsized to reduce memory usage.  A change to this setting does not affect existing photos."];
     return [autoMemoryReductionSettings autorelease];
 }
-
-//+ (AWBSettingsGroup *)layoutDrilldownSettingsGroupWithInfo:(NSDictionary *)info
-//{
-//    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:[AWBSetting drilldownSettingWithText:@"Auto Layout" value:nil key:nil childSettings:[AWBSettings layoutSettingsWithInfo:info]], nil];
-//    return [[[self alloc] initWithSettings:buttonSettings header:nil footer:nil] autorelease];    
-//}
 
 - (void)dealloc
 {

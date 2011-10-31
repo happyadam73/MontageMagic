@@ -117,11 +117,9 @@ static NSString *const kAWBInfoKeyAddContentOnCreation = @"AddContentOnCreation"
 + (AWBSettingsGroup *)backgroundTextureListSettingsGroupWithInfo:(NSDictionary *)info header:(NSString *)header footer:(NSString *)footer;   
 + (AWBSettingsGroup *)backgroundTextureSwitchSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)backgroundDrilldownSettingsGroupWithInfo:(NSDictionary *)info;
-//+ (AWBSettingsGroup *)lockCollageSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)snapToGridSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)layoutListSettingsGroupWithInfo:(NSDictionary *)info header:(NSString *)header footer:(NSString *)footer;
 + (AWBSettingsGroup *)lockAndLayoutSettingsGroupWithInfo:(NSDictionary *)info;
-//+ (AWBSettingsGroup *)layoutDrilldownSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)autoMemoryReductionSettingsGroupWithInfo:(NSDictionary *)info;
 
 - (id)initWithSettings:(NSMutableArray *)aSettings header:(NSString *)aHeader footer:(NSString *)aFooter;
