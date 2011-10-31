@@ -25,7 +25,7 @@
     return self;    
 }
 
--(void)setSymbols:(NSArray *)symbols
+- (void)setSymbols:(NSArray *)symbols
 {
     for(UIView *view in [self subviews]) 
     {		
@@ -34,7 +34,7 @@
 	self.symbolViews = symbols;
 }
 
--(void)layoutSubviews {
+- (void)layoutSubviews {
     CGPoint centerPoint = CGPointMake(36.0, 34.0);
     UIColor *borderColor;
     if ([self.symbolBackgroundColor isEqual:[UIColor blackColor]]) {

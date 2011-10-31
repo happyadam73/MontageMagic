@@ -205,7 +205,6 @@
     if (!self.isCollageInEditMode && !self.isImporting) {
         [self resetToNormalToolbar];
     }
-    //self.lowMemory = YES;
     [super didReceiveMemoryWarning];
 }
 
@@ -220,8 +219,6 @@
     } else {
         lowMemoryThresholdExceeded = (self.lowMemoryCount > ((int)(7.0 - (0.25 * totalImageSubviews))));
     }
-    
-    //NSLog(@"lowMemoryCount: %d totalImageViews: %d exceeded: %@", lowMemoryCount, totalImageSubviews, (lowMemoryThresholdExceeded ? @"YES": @"NO"));
     
     return lowMemoryThresholdExceeded;
 }
@@ -462,9 +459,6 @@
         totalLabelSubviews = collage.totalLabelSubviews;
         totalSymbolSubviews = collage.totalSymbolSubviews;
         self.exportQuality = collage.exportQuality;
-//        self.lockCollage = collage.lockCollage;
-//        self.snapToGrid = collage.snapToGrid;
-        //self.snapToGridSize = collage.snapToGridSize;
         
         if (!requestThemeChangeOnNextLoad) {
             self.addImageShadows = collage.addImageShadows;

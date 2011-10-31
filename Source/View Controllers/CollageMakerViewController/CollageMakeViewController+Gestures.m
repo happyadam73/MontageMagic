@@ -101,7 +101,6 @@
         } else {
             capturedView.pendingRotationAngleInRadians = paramSender.rotation;
         }
-        //[capturedView rotateAndScale];        
         [capturedView rotateAndScaleWithSnapToGrid:self.collageObjectLocator.snapToGrid gridSize:self.collageObjectLocator.snapToGridSize];       
     }   
     
@@ -130,7 +129,6 @@
         }  else {
             capturedView.currentScale = paramSender.scale;
         }
-        //[capturedView rotateAndScale];
         [capturedView rotateAndScaleWithSnapToGrid:self.collageObjectLocator.snapToGrid gridSize:self.collageObjectLocator.snapToGridSize];       
     }
 }
@@ -225,7 +223,6 @@
     
     if (view) {
         view.horizontalFlip = view.horizontalFlip ? NO : YES; 
-        //[view rotateAndScale];
         [view rotateAndScaleWithSnapToGrid:self.collageObjectLocator.snapToGrid gridSize:self.collageObjectLocator.snapToGridSize];       
     }
 }

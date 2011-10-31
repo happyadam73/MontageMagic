@@ -40,7 +40,8 @@
     [self.tableView reloadData];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
     [super viewDidLoad];
     [self setContentSizeForViewInPopover:CGSizeMake(480, 550)];
     
@@ -100,18 +101,20 @@
 #pragma mark -
 #pragma mark Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+{
     // Return the number of sections.
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+{
     return ([self.symbols count]/7);
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{    
     static NSString *CellIdentifier = @"SymbolGroupCell";
     
     AWBSymbolGroupCell *cell = (AWBSymbolGroupCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -124,7 +127,8 @@
     return cell;
 }
 
-- (NSMutableArray *)symbolsForIndexPath:(NSIndexPath*)indexPath {
+- (NSMutableArray *)symbolsForIndexPath:(NSIndexPath*)indexPath 
+{
     NSUInteger rowIndex = indexPath.row;
     NSUInteger minIndex = rowIndex * 7;
     NSInteger maxIndex = minIndex + 6;
@@ -139,11 +143,13 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+//{
+//	
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
 	return 68;
 }
 
@@ -156,7 +162,8 @@
 #pragma mark -
 #pragma mark Memory management
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
     // Releases the view if it doesn't have a superview.
     NSLog(@"AWBSymbolPickerController received memory warning!");
     [super didReceiveMemoryWarning];

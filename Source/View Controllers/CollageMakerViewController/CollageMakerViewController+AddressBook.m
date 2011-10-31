@@ -225,7 +225,6 @@
     [self setIsImporting:NO];
 }
 
-
 - (BOOL)luckyDipImportCollageIsFullForContactImageOfSize:(CGSize)imageSize
 {
     if (luckyDipInProgress && (self.luckyDipAmountIndex == kAWBLuckyDipAmountIndexAutoFill) && ([self.collageObjectLocator collageIsFullForContactImageOfSize:imageSize])) {

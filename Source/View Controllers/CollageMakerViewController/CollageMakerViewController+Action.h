@@ -18,7 +18,6 @@
 - (void)saveCollageAsPhoto;
 - (void)emailCollageAsPhoto;
 - (void)displayCollageEmailCompositionSheet:(UIImage *)image;
-//- (void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename;
 - (void)printItemWithSize:(NSNumber *)sizeNumber;
 - (NSString *)typeOfMontageDescription;
 - (BOOL)canUseTwitter;
@@ -26,4 +25,3 @@
 - (void)displayTwitterControllerWithImage:(UIImage *)image;
 
 @end
-

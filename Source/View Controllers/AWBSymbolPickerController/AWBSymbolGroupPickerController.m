@@ -19,7 +19,6 @@
 
 @synthesize symbolGroupTypes, symbolPickerDelegate, arrowColor, shapeType;
 
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -30,7 +29,6 @@
         self.arrowColor = [UIColor blackColor];
     }
     return self;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -92,8 +90,8 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{   
     static NSString *CellIdentifier0 = @"SymbolColorCell";
     static NSString *CellIdentifier1 = @"SymbolGroupCell";
     if ([indexPath section] == 0) {
@@ -140,7 +138,8 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
     if ([indexPath section] == 0) {
         return tableView.rowHeight;
     } else {

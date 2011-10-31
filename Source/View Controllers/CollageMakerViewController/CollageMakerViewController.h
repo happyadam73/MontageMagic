@@ -61,7 +61,6 @@
     UIActionSheet *chooseActionTypeSheet;
     
     BOOL isCollageInEditMode;
-    //BOOL lowMemory;
     NSInteger lowMemoryCount;
     BOOL isImporting;
     BOOL addImageShadows;
@@ -115,7 +114,6 @@
     BOOL createMagicCollage;
     BOOL luckyDipInProgress;
     
-    UIActivityIndicatorView *busyIndicator;
     AWBBusyView *busyView;
     
     ALAssetsLibrary *assetsLibrary; 

@@ -129,14 +129,7 @@
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.toolbarHidden = YES;
     self.busyView.hidden = YES;
-    
-    UIImage *collageImage = [self generateCollageImageWithScaleFactor:self.exportQuality];
-
-//    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, self.exportQuality);
-//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage *collageImage = UIGraphicsGetImageFromCurrentImageContext();    
-//    UIGraphicsEndImageContext();
-    
+    UIImage *collageImage = [self generateCollageImageWithScaleFactor:self.exportQuality];    
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.toolbarHidden = NO;
     self.busyView.hidden = NO;
@@ -164,9 +157,7 @@
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.toolbarHidden = YES;
     self.busyView.hidden = YES;
-    
     UIImage *collageImage = [self generateCollageImageWithScaleFactor:self.exportQuality];
-    
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.toolbarHidden = NO;
     self.busyView.hidden = NO;
@@ -190,8 +181,7 @@
     [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"montage.jpg"];
     
     // Fill out the email body text
-    NSString *emailBody = [NSString stringWithFormat:@"This %@ was made on my %@ using Montage Magic (Beta)", [self typeOfMontageDescription], machineFriendlyName()];
-//    NSString *emailBody = @"This collage was made using Collage Maker (from happyadam.com development)";
+    NSString *emailBody = [NSString stringWithFormat:@"This %@ was made on my %@ using Montage Magic", [self typeOfMontageDescription], machineFriendlyName()];
     [picker setMessageBody:emailBody isHTML:NO];
     [self presentModalViewController:picker animated:YES];
     
@@ -333,9 +323,7 @@
             printInfo.outputType = UIPrintInfoOutputGeneral;            
         }
         printInfo.jobName = self.navigationItem.title;
-        //printInfo.duplex = UIPrintInfoDuplexLongEdge;
         printController.printInfo = printInfo;
-        //printController.showsPageRange = YES;
         printController.printingItem = myData;
         
         void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
@@ -384,16 +372,8 @@
         self.navigationController.navigationBar.hidden = YES;
         self.navigationController.toolbarHidden = YES;
         self.busyView.hidden = YES;
-        
         CGFloat quality = (DEVICE_IS_IPAD? 1.0 : 2.0);
-        
         UIImage *collageImage = [self generateCollageImageWithScaleFactor:quality];
-
-//        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, quality);
-//        [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//        UIImage *collageImage = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-        
         self.navigationController.navigationBar.hidden = NO;
         self.navigationController.toolbarHidden = NO;
         self.busyView.hidden = NO;

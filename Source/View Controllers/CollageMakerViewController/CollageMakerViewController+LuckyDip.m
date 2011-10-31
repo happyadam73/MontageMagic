@@ -94,13 +94,13 @@
     NSString *errorDescription;
     switch ([error code]) {
         case ALAssetsLibraryDataUnavailableError:
-            errorDescription = @"Access to your Photo library is unavailable.  Use iTunes to syncronise photos to your device.";
+            errorDescription = @"Access to your Photo Library is unavailable.  Use iTunes to syncronise photos to your device.";
             break;
         case ALAssetsLibraryAccessUserDeniedError:
-            errorDescription = @"Photo library access requires granting this application access to Location Services.  To enable this please go to the Location Services Menu in Settings.";
+            errorDescription = @"Photo Library access requires granting this application access to Location Services.  To enable this please go to the Location Services Menu in Settings.";
             break;
         case ALAssetsLibraryAccessGloballyDeniedError:
-            errorDescription = @"Photo library access requires Location Services to be switched on.  To enable this please go to the Location Services Menu in Settings.";
+            errorDescription = @"Photo Library access requires Location Services to be switched on.  To enable this please go to the Location Services Menu in Settings.";
             break;
         default:
             errorDescription = [NSString stringWithFormat:@"An error occurred. %@", [error localizedDescription]];
@@ -136,7 +136,6 @@
 
 - (void)presentLuckyDipController
 {
-    //if (!self.selectedAssetsGroup && ([self.assetGroups count]>0)) {
     if ([self.assetGroups count] > 0) {
         self.selectedAssetsGroup = [self assetsGroupFromAssetsGroups:self.assetGroups withName:self.selectedAssetsGroupName];
         if (!self.selectedAssetsGroup) {
@@ -164,11 +163,9 @@
     self.selectedAssetsGroup = [info objectForKey:kAWBInfoKeySelectedAssetGroup];
     if (self.selectedAssetsGroup) {
         if ([self.selectedAssetsGroup isEqual:[NSNull null]]) {
-            //self.selectedAssetsGroupName = kAWBAllPhotosGroupName;
             self.selectedAssetsGroupName = kAWBAllPhotosGroupPersistentID;
         } else {
             [self.selectedAssetsGroup setAssetsFilter:[ALAssetsFilter allPhotos]];
-            //self.selectedAssetsGroupName = [self.selectedAssetsGroup valueForProperty:ALAssetsGroupPropertyName];                    
             self.selectedAssetsGroupName = [self.selectedAssetsGroup valueForProperty:ALAssetsGroupPropertyPersistentID];                    
         }
     }
@@ -205,7 +202,6 @@
                 [self.selectedAssetsGroup enumerateAssetsAtIndexes:randomIndices options:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) 
                  {      
                      if(result == nil) {
-                         //[randomAssets sortUsingFunction:AWBRandomSortComparitor context:nil];
                          [randomAssets randomShuffle];
                          luckyDipInProgress = YES;
                          [self performSelectorInBackground:@selector(addPhotosWithInfo:) withObject:randomAssets];
@@ -217,7 +213,6 @@
             }            
         }
     }
-    
     [pool drain];
 }
 
@@ -249,9 +244,7 @@
                 [group enumerateAssetsUsingBlock:assetEnumerator];
                 [pool drain];
             } else {
-                //[randomAssets sortUsingFunction:AWBRandomSortComparitor context:nil];
                 [randomAssets randomShuffle];
-                //[self performSelectorInBackground:@selector(addPhotosWithInfo:) withObject:randomAssets];
                 [self performSelectorOnMainThread:@selector(addPhotosWithInfo:) withObject:randomAssets waitUntilDone:YES];
                 return;
             }
@@ -266,7 +259,6 @@
                                usingBlock:assetGroupEnumerator
                              failureBlock:assetGroupEnumberatorFailure];  
         [pool release];
-        
     }
 }
 
@@ -351,7 +343,6 @@
                 if ([peopleArray1 count]>0) {
                     [self setToolbarForImporting];
                     [self setIsImporting:YES];
-                    //[peopleArray sortUsingFunction:AWBRandomSortComparitor context:nil];
                     luckyDipInProgress = YES;
                     [self performSelectorInBackground:@selector(addContactViewsWithContacts:) withObject:peopleArray1];
                 }
@@ -412,7 +403,6 @@
             amount = (DEVICE_IS_IPHONE? 5 : 6);
             break;
     }
-    
     return amount;
 }
 
@@ -448,13 +438,11 @@
     if (groupName && assetsGroups) {
         for (ALAssetsGroup *group in assetsGroups) {
             if ([group isEqual:[NSNull null]]) {
-                //if ([groupName isEqualToString:kAWBAllPhotosGroupName]) {
                 if ([groupName isEqualToString:kAWBAllPhotosGroupPersistentID]) {
                     selectedGroup = group;
                     break;
                 }
             } else {
-                //NSString *name = [group valueForProperty:ALAssetsGroupPropertyName];
                 NSString *name = [group valueForProperty:ALAssetsGroupPropertyPersistentID];
                 if ([name isEqualToString:groupName]) {
                     selectedGroup = group;
@@ -472,8 +460,7 @@
 
     totalAssets = 0;
     
-    //choose either photos or contacts, with 2/1 probability for doing photos
-    //NSUInteger sourceIndex = AWBRandomIntInRange(0, 2);
+    //choose either photos or contacts
     NSUInteger sourceIndex = [self bestLuckyDipSourceForCollageTheme:self.collageDescriptor.themeType];
     if (sourceIndex == 2) {
         sourceIndex = 0;
@@ -482,7 +469,6 @@
     if (sourceIndex == kAWBLuckyDipSourceIndexContacts) {
         [self autoStartLuckyDipWithSourceIndex:[NSNumber numberWithInteger:kAWBLuckyDipSourceIndexContacts]];
     } else {
-        
         dismissAssetsLibrary = YES;
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
         self.assetsLibrary = library;
@@ -621,11 +607,6 @@
 - (NSUInteger)bestAmountIndexForDevice
 {
     return kAWBLuckyDipAmountIndexAutoFill;
-    //    if (DEVICE_IS_IPAD) {
-//        return kAWBLuckyDipAmountIndex24Objects;
-//    } else {
-//        return kAWBLuckyDipAmountIndex15Objects;
-//    }
 }
 
 @end
