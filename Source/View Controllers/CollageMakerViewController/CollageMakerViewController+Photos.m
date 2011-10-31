@@ -55,7 +55,6 @@
             [(UIImagePickerController *)imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera]; 
             [(UIImagePickerController *)imagePicker setDelegate:self];
         } else {
-            
             dismissAssetsLibrary = YES;
             ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
             self.assetsLibrary = library;
@@ -122,7 +121,6 @@
     
     [self dismissToolbarAndPopover:imagePickerPopover];
     self.imagePickerPopover = nil;
-    
 }
 
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info   

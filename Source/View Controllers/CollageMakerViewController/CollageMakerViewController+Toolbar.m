@@ -158,8 +158,6 @@
 - (UIBarButtonItem *)addressBookButton
 {
     if (!addressBookButton) {
-//        addressBookButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(addContact:)];
-//        addressBookButton.style = UIBarButtonItemStyleBordered;
         addressBookButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"person"] style:UIBarButtonItemStyleBordered target:self action:@selector(addContact:)];
     }
     return addressBookButton;    

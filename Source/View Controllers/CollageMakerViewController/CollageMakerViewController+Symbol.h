@@ -16,4 +16,3 @@
 - (void)initialiseAddSymbolPopoverWithViewController:(UIViewController *)viewController andBarButtonItem:(UIBarButtonItem *)button;
 
 @end
-

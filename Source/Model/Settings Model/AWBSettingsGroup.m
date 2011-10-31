@@ -111,7 +111,7 @@
 
 + (AWBSettingsGroup *)textShadowColorPickerSettingsGroupWithInfo:(NSDictionary *)info
 {
-    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting colorSettingWithValue:[info objectForKey:kAWBInfoKeyTextShadowColor] andKey:kAWBInfoKeyTextShadowColor]] header:@"Text Shadow Colour" footer:@"Shadows affect performance.  Try laying out photos and text before adding shadows."] autorelease];
+    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting colorSettingWithValue:[info objectForKey:kAWBInfoKeyTextShadowColor] andKey:kAWBInfoKeyTextShadowColor]] header:@"Text Shadow Colour" footer:nil] autorelease];
 }
 
 + (AWBSettingsGroup *)imageBorderColorPickerSettingsGroupWithInfo:(NSDictionary *)info
@@ -133,7 +133,7 @@
 {
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:[AWBSetting switchSettingWithText:@"Photo Shadows" value:[info objectForKey:kAWBInfoKeyImageShadows] key:kAWBInfoKeyImageShadows], [AWBSetting switchSettingWithText:@"Text Shadows" value:[info objectForKey:kAWBInfoKeyTextShadows] key:kAWBInfoKeyTextShadows], nil];
     
-    return [[[self alloc] initWithSettings:buttonSettings header:@"Shadows" footer:@"Shadows affect performance.  Try laying out photos and text before adding shadows."] autorelease];    
+    return [[[self alloc] initWithSettings:buttonSettings header:@"Shadows" footer:nil] autorelease];    
 }
 
 + (AWBSettingsGroup *)imageShadowsSettingsGroupWithInfo:(NSDictionary *)info
@@ -152,7 +152,7 @@
     AWBSetting *addTextShadowsSetting = [AWBSetting switchSettingWithText:@"Text Shadows" value:[info objectForKey:kAWBInfoKeyTextShadows] key:kAWBInfoKeyTextShadows];
     addTextShadowsSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:addTextShadowsSetting];
-    AWBSettingsGroup *textShadowSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
+    AWBSettingsGroup *textShadowSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:@"Shadows can affect performance.  Try laying out photos and text before adding shadows."];
     textShadowSettings.masterSwitchIsOn = addTextShadowsSetting.isSwitchedOn;
     addTextShadowsSetting.parentGroup = textShadowSettings;
     return [textShadowSettings autorelease];    

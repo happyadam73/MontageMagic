@@ -208,16 +208,8 @@
     
     if (self.addCollageBorder && self.collageBorderColor) {
         [self addCollageBorderToView];
-//        [self view].layer.borderColor = [self.collageBorderColor CGColor];
-//        CGFloat borderThickness = 4.0;
-//        if (DEVICE_IS_IPAD) {
-//            borderThickness = 6.0;
-//        }
-//        [self view].layer.borderWidth = borderThickness;
     } else {
         [self removeCollageBorderFromView];
-//        [self view].layer.borderColor = [[UIColor blackColor] CGColor];
-//        [self view].layer.borderWidth = 0.0;            
     }
 }
 
@@ -416,11 +408,8 @@
     if (hidden) {
         [self dismissAllActionSheetsAndPopovers];        
     }
-//    [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:UIStatusBarAnimationSlide];
     [self.navigationController setNavigationBarHidden:hidden animated:animated];
     [self.navigationController setToolbarHidden:hidden animated:animated];  
-    
-
 }
 
 @end

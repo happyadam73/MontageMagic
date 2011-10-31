@@ -81,7 +81,6 @@
     totalSymbolSubviews += 1;
     [self saveChanges:YES];
     [self dismissToolbarAndPopover:addSymbolPopover];    
-
 }
 
 @end
