@@ -202,6 +202,11 @@
         objectRotation = AWBQuantizeFloat(AWBRandomRotationFromMinMaxRadians(-QUANTISED_ROTATION, ((2 * QUANTISED_ROTATION) - 0.001)), QUANTISED_ROTATION, NO);
         objectPosition.x = AWBQuantizeFloat(objectPosition.x, (self.snapToGridSize/2.0), NO);
         objectPosition.y = AWBQuantizeFloat(objectPosition.y, (self.snapToGridSize/2.0), NO);                
+    } else {
+        CGFloat minScale = MAX((48.0/MAX(objectHeight,objectWidth)),(24.0/MIN(objectHeight,objectWidth)));    
+        if (objectScale < minScale) {
+            objectScale = minScale;
+        }        
     }
 }
 

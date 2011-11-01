@@ -33,7 +33,7 @@
     
     CGFloat minLength = MIN(self.frame.size.width, self.frame.size.height);
     CGFloat maxLength = MAX(self.frame.size.width, self.frame.size.height);
-    minScale = (DEVICE_IS_IPAD ? 48.0 : 48.0)/minLength;
+    minScale = MAX((48.0/maxLength),(24.0/minLength));    
     maxScale = 2000.0/maxLength;
     
     self.layer.masksToBounds = NO;

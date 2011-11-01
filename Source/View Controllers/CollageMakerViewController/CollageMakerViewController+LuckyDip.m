@@ -245,7 +245,7 @@
                 [pool drain];
             } else {
                 [randomAssets randomShuffle];
-                [self performSelectorOnMainThread:@selector(addPhotosWithInfo:) withObject:randomAssets waitUntilDone:YES];
+                [self performSelectorInBackground:@selector(addPhotosWithInfo:) withObject:randomAssets];
                 return;
             }
         };
