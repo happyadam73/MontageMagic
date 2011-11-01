@@ -8,7 +8,6 @@
 
 #import "AWBMemoryWarningViewController.h"
 
-
 @implementation AWBMemoryWarningViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

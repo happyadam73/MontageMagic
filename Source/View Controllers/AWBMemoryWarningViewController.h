@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AWBMemoryWarningViewController : UIViewController {
-    
-}
+@interface AWBMemoryWarningViewController : UIViewController 
 
 - (void)dismissWarning:(id)sender;
 
