@@ -248,19 +248,12 @@
     NSMutableDictionary *info = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithBool:self.addImageShadows], kAWBInfoKeyImageShadows,
                                  [NSNumber numberWithBool:self.addTextShadows], kAWBInfoKeyTextShadows,
-                                 self.imageShadowColor, kAWBInfoKeyImageShadowColor,
-                                 self.textShadowColor, kAWBInfoKeyTextShadowColor,            
                                  [NSNumber numberWithBool:self.addImageBorders], kAWBInfoKeyImageBorders,
                                  [NSNumber numberWithBool:self.addTextBorders], kAWBInfoKeyTextBorders,
                                  [NSNumber numberWithBool:self.imageRoundedBorders], kAWBInfoKeyImageRoundedBorders,
                                  [NSNumber numberWithBool:self.textRoundedBorders], kAWBInfoKeyTextRoundedBorders,
                                  [NSNumber numberWithBool:self.addTextBackground], kAWBInfoKeyTextBackground,
-                                 self.imageBorderColor, kAWBInfoKeyImageBorderColor,
-                                 self.textBorderColor, kAWBInfoKeyTextBorderColor,
-                                 self.textBackgroundColor, kAWBInfoKeyTextBackgroundColor,
                                  [NSNumber numberWithFloat:self.exportQuality], kAWBInfoKeyExportQualityValue, 
-                                 self.labelTextColor, kAWBInfoKeyTextColor,
-                                 self.labelTextFont, kAWBInfoKeyTextFontName, 
                                  [NSNumber numberWithInt:self.luckyDipSourceIndex], kAWBInfoKeyLuckyDipSourceSelectedIndex,
                                  [NSNumber numberWithInt:self.luckyDipAmountIndex], kAWBInfoKeyLuckyDipAmountSelectedIndex,
                                  [NSNumber numberWithInt:self.luckyDipContactTypeIndex], kAWBInfoKeyLuckyDipContactTypeSelectedIndex,
@@ -273,7 +266,28 @@
                                  [NSNumber numberWithInteger:self.collageObjectLocator.objectLocatorType], kAWBInfoKeyObjectLocatorType,
                                  [NSNumber numberWithBool:self.collageObjectLocator.autoMemoryReduction], kAWBInfoKeyObjectLocatorAutoMemoryReduction,
                                  nil];
-
+    
+    if (self.imageShadowColor) {
+        [info setObject:self.imageShadowColor forKey:kAWBInfoKeyImageShadowColor];        
+    }
+    if (self.textShadowColor) {
+        [info setObject:self.textShadowColor forKey:kAWBInfoKeyTextShadowColor];        
+    }
+    if (self.imageBorderColor) {
+        [info setObject:self.imageBorderColor forKey:kAWBInfoKeyImageBorderColor];        
+    }
+    if (self.textBorderColor) {
+        [info setObject:self.textBorderColor forKey:kAWBInfoKeyTextBorderColor];        
+    }    
+    if (self.textBackgroundColor) {
+        [info setObject:self.textBackgroundColor forKey:kAWBInfoKeyTextBackgroundColor];        
+    }       
+    if (self.labelTextColor) {
+        [info setObject:self.labelTextColor forKey:kAWBInfoKeyTextColor];        
+    }    
+    if (self.labelTextFont) {
+        [info setObject:self.labelTextFont forKey:kAWBInfoKeyTextFontName];        
+    }     
     if (self.assetGroups) {
         [info setObject:self.assetGroups forKey:kAWBInfoKeyAssetGroups];        
     }

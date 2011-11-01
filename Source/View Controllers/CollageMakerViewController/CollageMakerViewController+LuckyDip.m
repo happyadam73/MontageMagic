@@ -97,7 +97,7 @@
             errorDescription = @"Access to your Photo Library is unavailable.  Use iTunes to syncronise photos to your device.";
             break;
         case ALAssetsLibraryAccessUserDeniedError:
-            errorDescription = @"Photo Library access requires granting this application access to Location Services.  To enable this please go to the Location Services Menu in Settings.";
+            errorDescription = @"Photo Library access requires granting Montage Magic access to Location Services.  To enable this please go to the Location Services Menu in Settings.";
             break;
         case ALAssetsLibraryAccessGloballyDeniedError:
             errorDescription = @"Photo Library access requires Location Services to be switched on.  To enable this please go to the Location Services Menu in Settings.";
