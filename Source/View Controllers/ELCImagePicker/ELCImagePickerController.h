@@ -9,14 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface ELCImagePickerController : UINavigationController {
-
 	id delegate;
 }
 
 @property (nonatomic, assign) id delegate;
 
--(void)selectedAssets:(NSArray*)_assets;
--(void)cancelImagePicker;
+- (void)selectedAssets:(NSArray*)_assets;
+- (void)cancelImagePicker;
 
 @end
 

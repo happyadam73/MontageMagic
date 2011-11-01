@@ -19,9 +19,9 @@
 @property (nonatomic, retain) ALAsset *asset;
 @property (nonatomic, assign) id parent;
 
--(id)initWithAsset:(ALAsset*)_asset;
--(BOOL)selected;
--(void)toggleSelection;
--(void)setSelected:(BOOL)_selected;
+- (id)initWithAsset:(ALAsset*)_asset;
+- (BOOL)selected;
+- (void)toggleSelection;
+- (void)setSelected:(BOOL)_selected;
 
 @end

@@ -13,16 +13,9 @@
 @interface ELCAssetTablePicker : UITableViewController
 {
 	ALAssetsGroup *assetGroup;
-	
 	NSMutableArray *elcAssets;
-//	int selectedAssets;
 	NSUInteger totalSelectedAssets;
 	id parent;
-	
-	NSOperationQueue *queue;
-    
-    IBOutlet UIView *headerView;
-    
     BOOL toolbarButtonSelectsAll;
     BOOL lowMemory;
 }
@@ -31,11 +24,9 @@
 @property (nonatomic, assign) ALAssetsGroup *assetGroup;
 @property (nonatomic, retain) NSMutableArray *elcAssets;
 @property (nonatomic, retain) IBOutlet UILabel *selectedAssetsLabel;
-@property (nonatomic, retain) IBOutlet UIView *headerView;
 @property (assign) BOOL lowMemory;
 @property (assign) NSUInteger totalSelectedAssets;
 
-//-(int)totalSelectedAssets;
 - (void)preparePhotos;
 - (void)assetToggled:(BOOL)selected;
 - (void)doneAction:(id)sender;

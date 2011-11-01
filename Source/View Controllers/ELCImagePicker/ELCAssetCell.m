@@ -12,8 +12,8 @@
 
 @synthesize rowAssets;
 
--(id)initWithAssets:(NSArray*)_assets reuseIdentifier:(NSString*)_identifier {
-    
+-(id)initWithAssets:(NSArray*)_assets reuseIdentifier:(NSString*)_identifier 
+{    
 	if((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_identifier])) {
         
 		self.rowAssets = _assets;
@@ -22,8 +22,8 @@
 	return self;
 }
 
--(void)setAssets:(NSArray*)_assets {
-	
+-(void)setAssets:(NSArray*)_assets 
+{	
 	for(UIView *view in [self subviews]) 
     {		
 		[view removeFromSuperview];
@@ -32,8 +32,8 @@
 	self.rowAssets = _assets;
 }
 
--(void)layoutSubviews {
-    
+-(void)layoutSubviews 
+{    
 	CGRect frame = CGRectMake(4, 2, 75, 75);
 	
 	for(ELCAsset *elcAsset in self.rowAssets) {
@@ -49,7 +49,6 @@
 -(void)dealloc 
 {
 	[rowAssets release];
-    
 	[super dealloc];
 }
 

@@ -16,14 +16,14 @@
 
 @synthesize delegate;
 
--(void)cancelImagePicker {
-
+- (void)cancelImagePicker 
+{
 	if([delegate respondsToSelector:@selector(elcImagePickerControllerDidCancel:)]) {
 		[delegate performSelector:@selector(elcImagePickerControllerDidCancel:) withObject:self];
 	}
 }
 
--(void)selectedAssets:(NSArray*)_assets 
+- (void)selectedAssets:(NSArray*)_assets 
 {
     [self popToRootViewControllerAnimated:NO];
     [[self parentViewController] dismissModalViewControllerAnimated:YES];
@@ -31,7 +31,6 @@
 	if([delegate respondsToSelector:@selector(elcImagePickerController:didFinishPickingMediaWithInfo:)]) {
 		[delegate performSelector:@selector(elcImagePickerController:didFinishPickingMediaWithInfo:) withObject:self withObject:[NSArray arrayWithArray:_assets]];
 	}
-
 }
 
 #pragma mark -
@@ -42,17 +41,20 @@
      return UIInterfaceOrientationIsLandscape(interfaceOrientation);   
 }
 
-- (void)didReceiveMemoryWarning {    
+- (void)didReceiveMemoryWarning 
+{    
     NSLog(@"ELC Image Picker received memory warning!!!");
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
     [super viewDidUnload];
 }
 
 
-- (void)dealloc {
+- (void)dealloc 
+{
     [super dealloc];
 }
 

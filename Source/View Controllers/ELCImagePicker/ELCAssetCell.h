@@ -7,14 +7,13 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface ELCAssetCell : UITableViewCell
 {
 	NSArray *rowAssets;
 }
 
--(id)initWithAssets:(NSArray*)_assets reuseIdentifier:(NSString*)_identifier;
--(void)setAssets:(NSArray*)_assets;
+- (id)initWithAssets:(NSArray*)_assets reuseIdentifier:(NSString*)_identifier;
+- (void)setAssets:(NSArray*)_assets;
 
 @property (nonatomic,retain) NSArray *rowAssets;
 

@@ -15,7 +15,6 @@
 @synthesize parent;
 @synthesize selectedAssetsLabel;
 @synthesize assetGroup, elcAssets;
-@synthesize headerView;
 @synthesize lowMemory;
 @synthesize totalSelectedAssets;
 
@@ -24,7 +23,8 @@
     [[self navigationController] setToolbarHidden:NO animated:YES];
 }
 
--(void)viewDidLoad {
+-(void)viewDidLoad 
+{
 	[self.tableView setSeparatorColor:[UIColor clearColor]];
 	[self.tableView setAllowsSelection:NO];
 
@@ -65,8 +65,8 @@
     self.parent = nil;
 }
 
--(void)preparePhotos {
-    
+-(void)preparePhotos 
+{    
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
     [self.assetGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) 
@@ -99,7 +99,6 @@
      }];    
     
     [pool release];
-
 }
 
 - (void)reloadTableData
@@ -121,7 +120,8 @@
     toolbarButtonSelectsAll = YES;
 }
 
-- (void) doneAction:(id)sender {
+- (void) doneAction:(id)sender 
+{
 	NSMutableArray *selectedAssetsImages = [[[NSMutableArray alloc] init] autorelease];
     
     @synchronized(self) {
@@ -149,18 +149,20 @@
     toolbarButtonSelectsAll = !toolbarButtonSelectsAll;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+{
     // Return the number of sections.
     return 1;
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+{
     return ((([self.assetGroup numberOfAssets]-1)/CELLS_PER_ROW)+1);
 }
 
-- (NSMutableArray *)assetsForIndexPath:(NSIndexPath*)_indexPath {
-    
+- (NSMutableArray *)assetsForIndexPath:(NSIndexPath*)_indexPath 
+{    
     NSUInteger rowIndex = _indexPath.row;
     NSUInteger assetCount = [self.elcAssets count];
     NSUInteger minIndex = rowIndex * CELLS_PER_ROW;
@@ -186,8 +188,8 @@
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{    
     static NSString *CellIdentifier = @"Cell";   
     
     ELCAssetCell *cell = (ELCAssetCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -206,25 +208,10 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath 
+{    
 	return 79;
 }
-
-//- (int)totalSelectedAssets {
-//    
-//    int count = 0;
-//    
-//    for(ELCAsset *asset in self.elcAssets) 
-//    {
-//		if([asset selected]) 
-//        {            
-//            count++;	
-//		}
-//	}
-//    
-//    return count;
-//}
 
 - (void)didReceiveMemoryWarning
 {

@@ -11,7 +11,6 @@
 @interface ELCAlbumPickerController : UITableViewController {
 	
 	NSMutableArray *assetGroups;
-	NSOperationQueue *queue;
 	id parent;
     NSUInteger currentGroupIndex;
     NSUInteger currentRun;
@@ -23,9 +22,8 @@
 @property (nonatomic, retain) NSMutableArray *assetGroups;
 @property (nonatomic, retain) ALAssetsLibrary *assetsLibrary;
 
--(void)selectedAssets:(NSArray*)_assets;
--(void)prepareGroups;
+- (void)selectedAssets:(NSArray*)_assets;
+- (void)prepareGroups;
 - (void)reloadTableView;
 
 @end
-

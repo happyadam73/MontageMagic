@@ -33,7 +33,8 @@
     self.tableView.delegate = nil;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
     [super viewDidLoad];
 
 	[self.navigationItem setTitle:@"Loading..."];
@@ -105,12 +106,9 @@
         };	
         
         // Enumerate Albums
-//        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-//        self.assetsLibrary = library;
         [self.assetsLibrary  enumerateGroupsWithTypes:ALAssetsGroupAll
                                usingBlock:assetGroupEnumerator 
                              failureBlock:assetGroupEnumberatorFailure];        
-//        [library release];
         [pool release];        
     });
                 
@@ -176,8 +174,8 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{	
 	ELCAssetTablePicker *picker = [[ELCAssetTablePicker alloc] initWithNibName:@"ELCAssetTablePicker" bundle:[NSBundle mainBundle]];
 	picker.parent = self;
 
@@ -190,15 +188,16 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath 
+{	
 	return 57;
 }
 
 #pragma mark -
 #pragma mark Memory management
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
     [super didReceiveMemoryWarning];
 }
 

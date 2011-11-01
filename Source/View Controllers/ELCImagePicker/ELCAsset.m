@@ -13,17 +13,17 @@
 @synthesize asset;
 @synthesize parent;
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame 
+{
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
     }
     return self;
 }
 
--(id)initWithAsset:(ALAsset*)_asset {
-	
+-(id)initWithAsset:(ALAsset*)_asset 
+{	
 	if ((self = [super initWithFrame:CGRectMake(0, 0, 0, 0)])) {
-		
 		self.asset = _asset;
 		CGRect viewFrames = CGRectMake(0, 0, 75, 75);
 		
@@ -48,8 +48,8 @@
     [(ELCAssetTablePicker *)parent assetToggled:!overlayView.hidden];
 }
 
--(BOOL)selected {
-	
+-(BOOL)selected 
+{	
 	return !overlayView.hidden;
 }
 
@@ -63,7 +63,6 @@
 
 - (void)dealloc 
 {    
-    //self.asset = nil;
     [asset release];
 	[overlayView release];
     [super dealloc];
