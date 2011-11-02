@@ -147,27 +147,35 @@
     AWBSettingsGroup *settingsGroup = [settings.visibleSettingsGroups objectAtIndex:[indexPath section]];
     AWBSetting *setting = [settingsGroup.visibleSettings objectAtIndex:[indexPath row]];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:setting.cellReuseIdentifier];
-    if (cell == nil) {
-        cell = [setting settingTableCell];
-    }
-    [cell updateCellWithSetting:setting];
-
-    if ([cell cellControl]) {
-        [[cell cellControl] addTarget:self action:@selector(cellSelectedOrCellControlValueChanged:) forControlEvents:UIControlEventValueChanged];        
+    UITableViewCell *cell = nil;
+    if (setting) {
+        cell = [tableView dequeueReusableCellWithIdentifier:setting.cellReuseIdentifier];
+        if (cell == nil) {
+            cell = [setting settingTableCell];
+        }
+        [cell updateCellWithSetting:setting];
+        
+        if ([cell cellControl]) {
+            [[cell cellControl] addTarget:self action:@selector(cellSelectedOrCellControlValueChanged:) forControlEvents:UIControlEventValueChanged];        
+        }
+        
+        if ([cell cellTextField]) {
+            [[cell cellTextField] setDelegate:self];
+        }
+        
+        if (settingsGroup.isMutuallyExclusive) {
+            if ([indexPath row]==settingsGroup.selectedIndex) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryNone;        
+            }  
+        }        
     }
     
-    if ([cell cellTextField]) {
-        [[cell cellTextField] setDelegate:self];
+    if (!cell) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MissingSettingCell"] autorelease];
     }
     
-    if (settingsGroup.isMutuallyExclusive) {
-        if ([indexPath row]==settingsGroup.selectedIndex) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        } else {
-            cell.accessoryType = UITableViewCellAccessoryNone;        
-        }  
-    }
     return cell;
 }
 

@@ -86,6 +86,9 @@
     if (!textFont) {
         textFont = [UIFont systemFontOfSize:28.0];
     }
+    if (!color) {
+        color = [UIColor darkGrayColor];
+    }
         
     [self updateTextDimensionsWithLines:lines font:textFont];
     
@@ -173,7 +176,9 @@
 
 - (void)updateLabelTextWithFont:(UIFont *)font
 {
-    [self updateLabelTextLines:[self.labelView.text componentsSeparatedByString:@"\r\n"] withFont:font];
+    if (font) {
+        [self updateLabelTextLines:[self.labelView.text componentsSeparatedByString:@"\r\n"] withFont:font];        
+    }
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
@@ -281,7 +286,9 @@
 
 - (void)setTextBackgroundColor:(UIColor *)backgroundColor
 {
-    [self.labelView setBackgroundColor:backgroundColor];
+    if (backgroundColor) {
+        [self.labelView setBackgroundColor:backgroundColor];        
+    }
 }
 
 - (void)addViewShadow

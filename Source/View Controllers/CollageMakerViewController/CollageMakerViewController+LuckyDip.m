@@ -292,14 +292,16 @@
                 NSMutableArray *nameContactIndices = [[NSMutableArray alloc] initWithCapacity:totalPeopleCount];
                 for (NSUInteger index = 0; index < totalPeopleCount; index++) {
                     ABRecordRef person = CFArrayGetValueAtIndex(people, index);
-                    AWBPersonContact *contact = [[AWBPersonContact alloc] initWithABRecordRef:person];
-                    if ([contact hasImageDataWithAddressBookRef:addressBook]) {
-                        [photoContactIndices addObject:[NSNumber numberWithInteger:index]];
+                    if (person != NULL) {
+                        AWBPersonContact *contact = [[AWBPersonContact alloc] initWithABRecordRef:person];
+                        if ([contact hasImageDataWithAddressBookRef:addressBook]) {
+                            [photoContactIndices addObject:[NSNumber numberWithInteger:index]];
+                        }
+                        if (contact.hasNameData) {
+                            [nameContactIndices addObject:[NSNumber numberWithInteger:index]];
+                        }
+                        [contact release];                               
                     }
-                    if (contact.hasNameData) {
-                        [nameContactIndices addObject:[NSNumber numberWithInteger:index]];
-                    }
-                    [contact release];                    
                 }
                 
                 if (self.luckyDipContactTypeIndex != kAWBLuckyDipContactTypeIndexTextOnly) {
@@ -311,16 +313,20 @@
                         [randomIndices enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
                             NSUInteger contactIndex = [[photoContactIndices objectAtIndex:idx] integerValue];
                             ABRecordRef person = CFArrayGetValueAtIndex(people, contactIndex);
-                            AWBPersonContact *contact = [[AWBPersonContact alloc] initWithABRecordRef:person];
-                            if (self.luckyDipContactTypeIndex == kAWBLuckyDipContactTypeIndexPhotoOnly) {
-                                contact.hideName = YES;
-                                contact.hideNumber = YES;
-                            } else {
-                                contact.hideNumber = (self.luckyDipContactIncludePhoneNumber == NO);
-                            }
                             
-                            [peopleArray1 addObject:contact];
-                            [contact release];
+                            if (person != NULL) {
+                                AWBPersonContact *contact = [[AWBPersonContact alloc] initWithABRecordRef:person];
+                                if (self.luckyDipContactTypeIndex == kAWBLuckyDipContactTypeIndexPhotoOnly) {
+                                    contact.hideName = YES;
+                                    contact.hideNumber = YES;
+                                } else {
+                                    contact.hideNumber = (self.luckyDipContactIncludePhoneNumber == NO);
+                                }
+                                if (contact) {
+                                    [peopleArray1 addObject:contact];
+                                }
+                                [contact release];                                
+                            }
                             [nameContactIndices removeObject:[NSNumber numberWithInteger:contactIndex]];
                         }];
                         requestedAmount -= [peopleArray1 count];
@@ -335,11 +341,15 @@
                     [randomIndices enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
                         NSUInteger contactIndex = [[nameContactIndices objectAtIndex:idx] integerValue];
                         ABRecordRef person = CFArrayGetValueAtIndex(people, contactIndex);
-                        AWBPersonContact *contact = [[AWBPersonContact alloc] initWithABRecordRef:person];
-                        contact.hideImage = YES;
-                        contact.hideNumber = (self.luckyDipContactIncludePhoneNumber == NO);
-                        [peopleArray2 addObject:contact];
-                        [contact release];
+                        if (person != NULL) {
+                            AWBPersonContact *contact = [[AWBPersonContact alloc] initWithABRecordRef:person];
+                            contact.hideImage = YES;
+                            contact.hideNumber = (self.luckyDipContactIncludePhoneNumber == NO);
+                            if (contact) {
+                                [peopleArray2 addObject:contact];
+                            }
+                            [contact release];                            
+                        }
                     }];
                 }
                 
@@ -504,9 +514,17 @@
             [self assetGroupEnumerationFailedWithError:error];
         };	
         
-        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll
-                               usingBlock:assetGroupEnumerator
-                             failureBlock:assetGroupEnumberatorFailure];  
+        if (self.assetsLibrary) {
+            [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll
+                                              usingBlock:assetGroupEnumerator
+                                            failureBlock:assetGroupEnumberatorFailure];  
+        } else {
+            if (self.busyView) {
+                [self.busyView removeFromParentView];
+                self.busyView = nil;        
+            }
+        }
+        
     }
     
     [pool drain];

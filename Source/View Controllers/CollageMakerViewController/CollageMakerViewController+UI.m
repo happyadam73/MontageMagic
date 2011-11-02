@@ -362,7 +362,11 @@
                 if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
                     if ((view.alpha == SELECTED_ALPHA) && [view isKindOfClass:[AWBTransformableLabel class]]) {
                         AWBTransformableLabel *label = (AWBTransformableLabel *)view;
-                        [label.labelView setTextColor:self.labelTextColor];   
+                        
+                        if (self.labelTextColor) {
+                            [label.labelView setTextColor:self.labelTextColor];   
+                        }
+                        
                         if (totalSelectedLabelsInEditMode == 1) {
                             //single object edit - set text
                             self.labelTextLine1 = [info objectForKey:kAWBInfoKeyLabelTextLine1];

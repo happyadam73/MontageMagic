@@ -63,6 +63,10 @@
 {
     if (buttonIndex != [actionSheet cancelButtonIndex]) {
         
+        if (self.exportQuality == 0.0) {
+            self.exportQuality = 1.0;
+        }
+        
         SEL methodSelector;
         id methodObject = nil;
         NSString *busyText = nil;

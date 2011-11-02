@@ -133,7 +133,9 @@
         if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
             if ([view isKindOfClass:[AWBTransformableLabel class]]) {
                 AWBTransformableLabel *label = (AWBTransformableLabel *)view;
-                [label.labelView setTextColor:self.labelTextColor];   
+                if (self.labelTextColor) {
+                    [label.labelView setTextColor:self.labelTextColor];                       
+                }
                 [label updateLabelTextWithFont:[UIFont fontWithName:self.labelTextFont size:28.0]];                                    
             }
         }            

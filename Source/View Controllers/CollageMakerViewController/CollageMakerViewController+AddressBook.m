@@ -99,7 +99,9 @@
             if (contactImage) {
                 NSUInteger recommendedResolution = [self recommendedMaxResolutionForImageSize:contactImage.size];
                 resizedImage = [contactImage imageScaledToMaxResolution:recommendedResolution withTransparentBorderThickness:0.0];
-                [contactInfo setObject:resizedImage forKey:@"ContactImage"];
+                if (resizedImage) {
+                    [contactInfo setObject:resizedImage forKey:@"ContactImage"];
+                }
             }
             [contactInfo setObject:[NSNumber numberWithInt:currentContactIndex] forKey:@"CurrentContactIndex"];
             [contactInfo setObject:[NSNumber numberWithInt:processingContactCount] forKey:@"ContactCount"]; 

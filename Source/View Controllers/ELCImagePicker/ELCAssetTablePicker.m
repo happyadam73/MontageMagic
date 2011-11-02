@@ -88,7 +88,9 @@
              [elcAsset setParent:self];
              
              @synchronized(self) {
-                 [self.elcAssets addObject:elcAsset];                 
+                 if (elcAsset) {
+                     [self.elcAssets addObject:elcAsset];                 
+                 }
              }
         
              [elcAsset release];
@@ -128,8 +130,9 @@
         for(ELCAsset *elcAsset in self.elcAssets) 
         {		
             if([elcAsset selected]) {
-                
-                [selectedAssetsImages addObject:[elcAsset asset]];
+                if ([elcAsset asset]) {
+                    [selectedAssetsImages addObject:[elcAsset asset]];
+                }
             }
         }        
     }

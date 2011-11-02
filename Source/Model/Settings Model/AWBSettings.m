@@ -243,7 +243,7 @@
         }
         
         if (settingsGroup.isMutuallyExclusive) {
-            if (settingsGroup.settingKeyForMutuallyExclusiveObjects && settingsGroup.mutuallyExclusiveObjects) {
+            if (settingsGroup.settingKeyForMutuallyExclusiveObjects && settingsGroup.mutuallyExclusiveObjects && (settingsGroup.selectedIndex != NSNotFound)) {
                 [info setObject:[settingsGroup.mutuallyExclusiveObjects objectAtIndex:settingsGroup.selectedIndex] forKey:settingsGroup.settingKeyForMutuallyExclusiveObjects];
             }
         }

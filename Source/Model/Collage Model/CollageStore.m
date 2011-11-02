@@ -75,7 +75,9 @@ static CollageStore *defaultStore = nil;
     [[NSUserDefaults standardUserDefaults] setInteger:sequenceId forKey:kAWBInfoKeyCollageSequenceNumber];
     CollageDescriptor *collage = [[[CollageDescriptor alloc] initWithCollageDocumentsSubdirectory:[NSString stringWithFormat:@"Collage %d", sequenceId]] autorelease];
     collage.themeType = [[NSUserDefaults standardUserDefaults] integerForKey:kAWBInfoKeyCollageThemeType];
-    [allCollages addObject:collage];
+    if (collage) {
+        [allCollages addObject:collage];
+    }
     
     return collage;
 }

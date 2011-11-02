@@ -54,37 +54,51 @@
             
             arrow = [[AWBTransformableArrowView alloc] initWithLength:arrowLength color:arrowColor type:kAWBArrowTypeNone thickness:thickness arrowHead:kAWBArrowHeadTypeFilledTriangle arrowLineShape:arrowLineShapeType arrowLineStroke:lineStroke];
             arrow.arrowViewDelegate = self;
-            [temp addObject:arrow];
+            if (arrow) {
+                [temp addObject:arrow];
+            }
             [arrow release];
             
             arrow = [[AWBTransformableArrowView alloc] initWithLength:arrowLength color:arrowColor type:kAWBArrowTypeSingleHeaded thickness:thickness arrowHead:kAWBArrowHeadTypeFilledTriangle arrowLineShape:arrowLineShapeType arrowLineStroke:lineStroke];
             arrow.arrowViewDelegate = self;
-            [temp addObject:arrow];
+            if (arrow) {
+                [temp addObject:arrow];
+            }
             [arrow release];    
             
             arrow = [[AWBTransformableArrowView alloc] initWithLength:arrowLength color:arrowColor type:kAWBArrowTypeSingleHeaded thickness:thickness arrowHead:kAWBArrowHeadTypeLined arrowLineShape:arrowLineShapeType arrowLineStroke:lineStroke];
             arrow.arrowViewDelegate = self;
-            [temp addObject:arrow];
+            if (arrow) {
+                [temp addObject:arrow];
+            }
             [arrow release];  
             
             arrow = [[AWBTransformableArrowView alloc] initWithLength:arrowLength color:arrowColor type:kAWBArrowTypeSingleHeaded thickness:thickness arrowHead:kAWBArrowHeadTypeFilledArrow arrowLineShape:arrowLineShapeType arrowLineStroke:lineStroke];
             arrow.arrowViewDelegate = self;
-            [temp addObject:arrow];
+            if (arrow) {
+                [temp addObject:arrow];
+            }
             [arrow release];  
             
             arrow = [[AWBTransformableArrowView alloc] initWithLength:arrowLength color:arrowColor type:kAWBArrowTypeDoubleHeaded thickness:thickness arrowHead:kAWBArrowHeadTypeFilledTriangle arrowLineShape:arrowLineShapeType arrowLineStroke:lineStroke];
             arrow.arrowViewDelegate = self;
-            [temp addObject:arrow];
+            if (arrow) {
+                [temp addObject:arrow];
+            }
             [arrow release];
             
             arrow = [[AWBTransformableArrowView alloc] initWithLength:arrowLength color:arrowColor type:kAWBArrowTypeDoubleHeaded thickness:thickness arrowHead:kAWBArrowHeadTypeLined arrowLineShape:arrowLineShapeType arrowLineStroke:lineStroke];
             arrow.arrowViewDelegate = self;
-            [temp addObject:arrow];
+            if (arrow) {
+                [temp addObject:arrow];
+            }
             [arrow release];
             
             arrow = [[AWBTransformableArrowView alloc] initWithLength:arrowLength color:arrowColor type:kAWBArrowTypeDoubleHeaded thickness:thickness arrowHead:kAWBArrowHeadTypeFilledArrow arrowLineShape:arrowLineShapeType arrowLineStroke:lineStroke];
             arrow.arrowViewDelegate = self;
-            [temp addObject:arrow];
+            if (arrow) {
+                [temp addObject:arrow];
+            }
             [arrow release];
         }
     }

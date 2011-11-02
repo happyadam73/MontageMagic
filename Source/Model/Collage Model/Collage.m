@@ -121,7 +121,9 @@
         for(UIView <AWBTransformableView> *view in [collageView subviews]) {
             //iterator will still go through every view including non transformable, so ensure conformance to the transformable protocol
             if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
-                [self.collageViews addObject:view];
+                if (view) {
+                    [self.collageViews addObject:view];
+                }
                 if ([view isKindOfClass:[AWBTransformableArrowView class]]) {
                     totalSymbolSubviews += 1;
                 }

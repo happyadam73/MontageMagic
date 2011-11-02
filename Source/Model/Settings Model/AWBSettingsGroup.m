@@ -55,7 +55,9 @@
         if (self.settings && ([self.settings count] > 0)) {
             for (AWBSetting *setting in self.settings) {
                 if (setting.visible) {
-                    [visibleSettings addObject:setting];
+                    if (setting) {
+                        [visibleSettings addObject:setting];
+                    }
                 }
             }
         }
@@ -267,14 +269,19 @@
     NSMutableArray *themes = [[NSMutableArray alloc] initWithCapacity:[[CollageTheme allCollageThemes] count]];
     for (CollageTheme *theme in [CollageTheme allCollageThemes]) {
         if (theme.isAvailableOnCurrentDevice) {
-            [themes addObject:theme];
+            if (theme) {
+                [themes addObject:theme];
+            }
         }
     }    
     
     NSMutableArray *themeSettings = [[NSMutableArray alloc] initWithCapacity:[themes count]];
     for (CollageTheme *theme in themes) {
         if (theme.isAvailableOnCurrentDevice) {
-            [themeSettings addObject:[AWBSetting imageAndTextListSettingWithText:theme.themeName value:[UIImage imageFromFile:theme.thumbnailFilename]]];
+            AWBSetting *setting = [AWBSetting imageAndTextListSettingWithText:theme.themeName value:[UIImage imageFromFile:theme.thumbnailFilename]];
+            if (setting) {
+                [themeSettings addObject:setting];
+            }
         }
     }
 
@@ -360,7 +367,10 @@
     NSMutableArray *colorSettings = [[NSMutableArray alloc] initWithCapacity:colorCount];
     
     for (NSUInteger colorIndex = 0; colorIndex < colorCount; colorIndex++) {
-        [colorSettings addObject:[AWBSetting imageAndTextListSettingWithText:[colorDescriptions objectAtIndex:colorIndex] value:[colorImages objectAtIndex:colorIndex]]];
+        AWBSetting *setting = [AWBSetting imageAndTextListSettingWithText:[colorDescriptions objectAtIndex:colorIndex] value:[colorImages objectAtIndex:colorIndex]];
+        if (setting) {
+            [colorSettings addObject:setting];
+        }
     }
 
     AWBSettingsGroup *colorSettingsGroup = [[self alloc] initWithSettings:colorSettings header:header footer:footer];
@@ -450,7 +460,10 @@
             detailText = [NSString stringWithFormat:@"%d %@",numberOfGroups, albumDesc]; 
         }
 
-        [assetGroupSettings addObject:[AWBSetting subtitleSettingWithText:assetGroupName detailText:detailText value:posterImage]];
+        AWBSetting *setting = [AWBSetting subtitleSettingWithText:assetGroupName detailText:detailText value:posterImage];
+        if (setting) {
+            [assetGroupSettings addObject:setting];            
+        }
         assetGroupIndex += 1;
     }
         
@@ -496,7 +509,10 @@
     NSMutableArray *layoutSettings = [[NSMutableArray alloc] initWithCapacity:layoutCount];
     
     for (NSUInteger layoutIndex = 0; layoutIndex < layoutCount; layoutIndex++) {
-        [layoutSettings addObject:[AWBSetting imageAndTextListSettingWithText:[layoutDescriptions objectAtIndex:layoutIndex] value:[layoutImages objectAtIndex:layoutIndex]]];
+        AWBSetting *setting = [AWBSetting imageAndTextListSettingWithText:[layoutDescriptions objectAtIndex:layoutIndex] value:[layoutImages objectAtIndex:layoutIndex]];
+        if (setting) {
+            [layoutSettings addObject:setting];            
+        }
     }
     
     AWBSettingsGroup *layoutSettingsGroup = [[self alloc] initWithSettings:layoutSettings header:header footer:footer];

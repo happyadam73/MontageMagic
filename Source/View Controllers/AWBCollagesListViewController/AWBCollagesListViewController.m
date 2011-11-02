@@ -181,17 +181,20 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         CollageStore *cs = [CollageStore defaultStore];
+        NSUInteger collageCountBeforeDelete = [[cs allCollages] count];
         NSArray *collages = [cs allCollages];
         CollageDescriptor *collage = [collages objectAtIndex:[indexPath row]];
         [cs removeCollage:collage];
         [[CollageStore defaultStore] saveAllCollages];
+        NSUInteger collageCountAfterDelete = [[[CollageStore defaultStore] allCollages] count];
         
         // We also remove that row from the table view with an animation
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                         withRowAnimation:YES];
+        if ((collageCountBeforeDelete - collageCountAfterDelete) == 1) {
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:YES];
+        }
         
-        NSUInteger totalCollageCount = [[[CollageStore defaultStore] allCollages] count];
-        if (totalCollageCount == 0) {
+        if (collageCountAfterDelete == 0) {
             [self.tableView reloadData];
         }        
     }
@@ -217,8 +220,11 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
 {
     NSUInteger totalCollageCount = [[[CollageStore defaultStore] allCollages] count];
     if (totalCollageCount > 0) {
+        self.navigationItem.leftBarButtonItem = [self editButtonItem];
         return @"Click the + button to create a new collage. Or Shake Me and I'll make one for you!";
     } else {
+        [self setEditing:NO];
+        self.navigationItem.leftBarButtonItem = nil;
         return @"There are no saved collages.  Click the + button to create a new collage or Shake Me to generate a random collage.";
     }
 }
@@ -335,26 +341,30 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
             [[NSUserDefaults standardUserDefaults] setInteger:collage.themeType forKey:kAWBInfoKeyCollageThemeType];            
         }
         NSUInteger totalCollageCount = [[[CollageStore defaultStore] allCollages] count];
-        NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:(totalCollageCount - 1) inSection:0];
-        [self loadCollageAtIndexPath:scrollIndexPath requestThemeChange:NO createMagicCollage:collage.addContentOnCreation];
+        if (totalCollageCount > 0) {
+            NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:(totalCollageCount - 1) inSection:0];
+            [self loadCollageAtIndexPath:scrollIndexPath requestThemeChange:NO createMagicCollage:collage.addContentOnCreation];            
+        }
     } else if (settingsController.controllerType == AWBSettingsControllerTypeCollageInfoSettings) {
         NSUInteger collageStoreIndex = [[info objectForKey:kAWBInfoKeyCollageStoreCollageIndex] intValue];
-        CollageDescriptor *collage = [[[CollageStore defaultStore] allCollages] objectAtIndex:collageStoreIndex]; 
-        collage.collageName = [info objectForKey:kAWBInfoKeyCollageName];
-        BOOL reloadCollage = NO;
-        if (collage.themeType != [[info objectForKey:kAWBInfoKeyCollageTheme] themeType]) {
-            //theme has changed so need to reload collage
-            reloadCollage = YES;
-            collage.themeType = [[info objectForKey:kAWBInfoKeyCollageTheme] themeType];
-            [[NSUserDefaults standardUserDefaults] setInteger:collage.themeType forKey:kAWBInfoKeyCollageThemeType];             
-        }
-        [[CollageStore defaultStore] saveAllCollages];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:collageStoreIndex inSection:0];
-        if (reloadCollage) {
-            [self loadCollageAtIndexPath:indexPath requestThemeChange:YES createMagicCollage:NO];
-        } else {
-            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone]; 
-            motionEnabled = YES;
+        if (collageStoreIndex < [[[CollageStore defaultStore] allCollages] count]) {
+            CollageDescriptor *collage = [[[CollageStore defaultStore] allCollages] objectAtIndex:collageStoreIndex]; 
+            collage.collageName = [info objectForKey:kAWBInfoKeyCollageName];
+            BOOL reloadCollage = NO;
+            if (collage.themeType != [[info objectForKey:kAWBInfoKeyCollageTheme] themeType]) {
+                //theme has changed so need to reload collage
+                reloadCollage = YES;
+                collage.themeType = [[info objectForKey:kAWBInfoKeyCollageTheme] themeType];
+                [[NSUserDefaults standardUserDefaults] setInteger:collage.themeType forKey:kAWBInfoKeyCollageThemeType];             
+            }
+            [[CollageStore defaultStore] saveAllCollages];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:collageStoreIndex inSection:0];
+            if (reloadCollage) {
+                [self loadCollageAtIndexPath:indexPath requestThemeChange:YES createMagicCollage:NO];
+            } else {
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone]; 
+                motionEnabled = YES;
+            }            
         }
     }
 }

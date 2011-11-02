@@ -76,9 +76,13 @@
             totalContactsSelected = 0;
             for (NSUInteger index = 0; index < CFArrayGetCount(people); index++) {
                 ABRecordRef person = CFArrayGetValueAtIndex(people, index);
-                AWBPersonContact *contact = [[AWBPersonContact alloc] initWithABRecordRef:person];
-                [peopleArray addObject:contact];
-                [contact release];
+                if (person != NULL) {
+                    AWBPersonContact *contact = [[AWBPersonContact alloc] initWithABRecordRef:person];                    
+                    if (contact) {
+                        [peopleArray addObject:contact];                    
+                    }
+                    [contact release];
+                }
             }
             
             CFRelease(people);
@@ -95,15 +99,21 @@
             for (AWBPersonContact *contact in sortedPeopleArray) {
                 NSString *firstCharacter = [contact firstCharacter];
                 if (![firstCharacters containsObject:firstCharacter]) {
-                    [firstCharacters addObject:firstCharacter];
+                    if (firstCharacter) {
+                        [firstCharacters addObject:firstCharacter];
+                    }
                 }
                 
                 NSMutableArray *sectionContacts = [contactsBySection objectForKey:firstCharacter];
                 if (!sectionContacts) {
                     sectionContacts = [[[NSMutableArray alloc] init] autorelease];
-                    [contactsBySection setObject:sectionContacts forKey:firstCharacter];
+                    if (sectionContacts && firstCharacter) {
+                        [contactsBySection setObject:sectionContacts forKey:firstCharacter];
+                    }
                 }
-                [sectionContacts addObject:contact];
+                if (contact) {
+                    [sectionContacts addObject:contact];                    
+                }
             }
             
             NSMutableArray *sortedSections = [NSMutableArray arrayWithArray:[firstCharacters sortedArrayUsingSelector:@selector(localizedCompare:)]];
@@ -397,7 +407,9 @@
 	{
         NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(SELF contains[cd] %@)", searchText];
         if ([predicate evaluateWithObject:contact.displayName]) {
-            [self.filteredAddressBookContacts addObject:contact];
+            if (contact) {
+                [self.filteredAddressBookContacts addObject:contact];                
+            }
         }
  	}
 }
@@ -448,7 +460,9 @@
     for (AWBPersonContact *contact in sortedAddressBookContacts) {
         if (contact.selected) {
             contact.hideNumber = (includePhoneNumbers == NO);
-            [selectedContacts addObject:contact];
+            if (contact) {
+                [selectedContacts addObject:contact];                
+            }
         }
     }
     return selectedContacts;
