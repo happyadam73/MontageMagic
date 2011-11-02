@@ -91,6 +91,11 @@
 
 - (void)assetGroupEnumerationFailedWithError:(NSError *)error
 {
+    if (self.busyView) {
+        [self.busyView removeFromParentView];
+        self.busyView = nil;        
+    }
+    
     NSString *errorDescription;
     switch ([error code]) {
         case ALAssetsLibraryDataUnavailableError:
@@ -159,6 +164,11 @@
     dismissAssetsLibrary = NO;
     [self dismissToolbarAndPopover:self.luckyDipPopover];
     self.luckyDipPopover = nil;
+
+    if (self.busyView) {
+        [self.busyView removeFromParentView];
+        self.busyView = nil;        
+    }
 
     self.selectedAssetsGroup = [info objectForKey:kAWBInfoKeySelectedAssetGroup];
     if (self.selectedAssetsGroup) {

@@ -300,7 +300,11 @@
 {
     if (createMagicCollage) {
         createMagicCollage = NO;
-        [self autoStartWithLuckyDip];
+        
+        AWBBusyView *busyIndicatorView = [[AWBBusyView alloc] initWithText:@"Looking for Photos" detailText:nil parentView:self.view centerAtPoint:self.view.center];
+        self.busyView = busyIndicatorView;
+        [busyIndicatorView release];
+        [self performSelector:@selector(autoStartWithLuckyDip) withObject:nil afterDelay:0.0];	        
     }
 }
 
