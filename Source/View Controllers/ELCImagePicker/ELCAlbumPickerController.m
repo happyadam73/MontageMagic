@@ -85,13 +85,13 @@
             NSString *errorDescription;
             switch ([error code]) {
                 case ALAssetsLibraryDataUnavailableError:
-                    errorDescription = @"Your Photo library is unavailable.  You can sync photos onto your device using iTunes.";
+                    errorDescription = @"Your Photo Library is unavailable.  You can sync photos onto your device using iTunes.";
                     break;
                 case ALAssetsLibraryAccessUserDeniedError:
-                    errorDescription = @"Photo library access requires granting Montage Magic access to Location Services.  To enable this please go to the Location Services Menu in Settings.";
+                    errorDescription = @"Photo Library access requires granting Montage Magic access to Location Services.  To enable this please go to the Location Services Menu in Settings.";
                     break;
                 case ALAssetsLibraryAccessGloballyDeniedError:
-                    errorDescription = @"Photo library access requires Location Services to be switched on.  To enable this please go to the Location Services Menu in Settings.";
+                    errorDescription = @"Photo Library access requires Location Services to be switched on.  To enable this please go to the Location Services Menu in Settings.";
                     break;
                 default:
                     errorDescription = [NSString stringWithFormat:@"An error occurred. %@", [error localizedDescription]];

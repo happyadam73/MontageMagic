@@ -84,9 +84,9 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section 
 {
     if (section == 0) {
-        return @"Lines & Arrow Colour";
+        return @"Line & Arrow Colour";
     } else {
-        return @"Lines & Arrow Shape";
+        return @"Line & Arrow Shape";
     }
 }
 

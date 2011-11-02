@@ -488,7 +488,7 @@
 + (AWBSettingsGroup *)collageAddContentOnCreationSettingsGroupWithInfo:(NSDictionary *)info
 {
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:[AWBSetting switchSettingWithText:@"Add Content" value:[info objectForKey:kAWBInfoKeyAddContentOnCreation] key:kAWBInfoKeyAddContentOnCreation], nil];
-    AWBSettingsGroup *luckyDipContactGroup = [[self alloc] initWithSettings:buttonSettings header:@"Auto Content" footer:@"If enabled, a new collage is created with a random sample of photos or contacts"];
+    AWBSettingsGroup *luckyDipContactGroup = [[self alloc] initWithSettings:buttonSettings header:@"Auto Content" footer:@"If enabled, a new collage is created with a random sample of photos or contacts."];
     
     return [luckyDipContactGroup autorelease];      
 }

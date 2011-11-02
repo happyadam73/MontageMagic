@@ -19,9 +19,9 @@
 + (NSArray *)allLayoutDescriptions
 {
     if (DEVICE_IS_IPAD) {
-        return [NSArray arrayWithObjects:@"Scattered Grid", @"Moscaic (4 Rows)", @"Moscaic (5 Rows)", @"Moscaic (6 Rows)", @"Moscaic (7 Rows)", @"Moscaic (9 Rows)", @"Moscaic (13 Rows)", nil];
+        return [NSArray arrayWithObjects:@"Scattered Grid", @"Mosaic (4 Rows)", @"Mosaic (5 Rows)", @"Mosaic (6 Rows)", @"Mosaic (7 Rows)", @"Mosaic (9 Rows)", @"Mosaic (13 Rows)", nil];
     } else {
-        return [NSArray arrayWithObjects:@"Scattered Grid", @"Moscaic (3 Rows)", @"Moscaic (4 Rows)", @"Moscaic (5 Rows)", @"Moscaic (6 Rows)", nil];        
+        return [NSArray arrayWithObjects:@"Scattered Grid", @"Mosaic (3 Rows)", @"Mosaic (4 Rows)", @"Mosaic (5 Rows)", @"Mosaic (6 Rows)", nil];        
     }
 }
 

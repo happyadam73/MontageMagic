@@ -654,7 +654,7 @@
 {
     CollageTheme *theme = [[CollageTheme alloc] init];
     theme.themeType = kAWBCollageThemeTypeNoticeBoard;
-    theme.themeName = @"Notice Board";
+    theme.themeName = @"Noticeboard";
     theme.deviceAvailability = kAWBCollageThemeDeviceAvailabilityAllDevices;
     theme.thumbnailFilename = @"NoticeboardTheme100.jpg";
     theme.addImageShadows = YES;
