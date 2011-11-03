@@ -1353,11 +1353,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/Collage Maker-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Source/Collage Maker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"OTHER_CFLAGS[arch=armv6]" = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"-mno-thumb",
+				);
+				"OTHER_CFLAGS[arch=armv7]" = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "Montage Magic";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1401,6 +1408,12 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Source/Collage Maker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"OTHER_CFLAGS[arch=armv6]" = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"-mno-thumb",
+				);
+				"OTHER_CFLAGS[arch=armv7]" = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "Montage Magic";
 				PROVISIONING_PROFILE = "CEC165D9-E8D9-4283-A1A3-F5E2B9D10A19";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC165D9-E8D9-4283-A1A3-F5E2B9D10A19";
