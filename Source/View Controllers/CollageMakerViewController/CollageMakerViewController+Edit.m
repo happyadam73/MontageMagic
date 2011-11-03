@@ -10,6 +10,7 @@
 #import "CollageMakerViewController+UI.h"
 #import "AWBTransformableImageView.h"
 #import "CollageMakerViewController+Toolbar.h"
+#import "CollageDescriptor.h"
 
 @implementation CollageMakerViewController (Edit)
 
@@ -93,6 +94,13 @@
         }  
         [self updateUserInterfaceWithTotalSelectedInEditMode];
         self.navigationItem.title = nil;
+        if (self.collageDescriptor) {
+            if (self.collageDescriptor.collageName && ([self.collageDescriptor.collageName length] > 0)) {
+                self.navigationItem.title = [NSString stringWithFormat:@"%@", self.collageDescriptor.collageName];
+            } else {
+                self.navigationItem.title = [NSString stringWithFormat:@"%@", self.collageDescriptor.collageSaveDocumentsSubdirectory];
+            }            
+        }
         self.navigationItem.rightBarButtonItem = self.editButton;
         [self resetToNormalToolbar];
         self.doubleTapGestureRecognizer.enabled = YES;

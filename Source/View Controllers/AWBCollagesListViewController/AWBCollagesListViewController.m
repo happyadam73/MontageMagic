@@ -70,12 +70,20 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    scrollToRow = [[NSUserDefaults standardUserDefaults] integerForKey:kAWBInfoKeyScrollToCollageStoreCollageIndex];
     [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
     [[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:kAWBInfoKeyCollageStoreCollageIndex];
     [[self tableView] reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    haveCreatedMagicCollage = NO;
+    motionEnabled = YES;
+    [self becomeFirstResponder];
     
+    scrollToRow = [[NSUserDefaults standardUserDefaults] integerForKey:kAWBInfoKeyScrollToCollageStoreCollageIndex];
     if (scrollToRow >= 0) {
         @try {
             [[self tableView] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:scrollToRow inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -87,14 +95,6 @@
             scrollToRow = -1;
         }
     } 
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    haveCreatedMagicCollage = NO;
-    motionEnabled = YES;
-    [self becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

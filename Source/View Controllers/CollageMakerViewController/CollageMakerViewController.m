@@ -286,9 +286,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.toolbarItems = [self normalToolbarButtons];
-    self.navigationItem.rightBarButtonItem = self.editButton;
-    [self setNavigationBarsHidden:NO animated:self.isLevel1AnimationsEnabled];
+    if (self.isCollageInEditMode) {
+        [self resetEditMode:self];
+    } else {
+        self.toolbarItems = [self normalToolbarButtons];
+        self.navigationItem.rightBarButtonItem = self.editButton;
+        [self setNavigationBarsHidden:NO animated:self.isLevel1AnimationsEnabled];        
+    }
     
     if (!self.modalViewController || requestThemeChangeOnNextLoad) {
         if (collageLoadRequired) {

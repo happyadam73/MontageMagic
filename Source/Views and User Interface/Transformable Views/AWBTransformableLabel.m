@@ -35,7 +35,8 @@
     CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;    
     CGFloat minLength = MIN(self.frame.size.width, self.frame.size.height);
     CGFloat maxLength = MAX(self.frame.size.width, self.frame.size.height);
-    minScale = 48/minLength;
+    
+    minScale = MAX((48.0/maxLength),((DEVICE_IS_IPAD ? 32.0 : 24.0)/minLength));    
     maxScale = (2.0 * screenSize.width)/maxLength;
     
     [self setUserInteractionEnabled:YES];
@@ -158,9 +159,11 @@
     CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;    
     CGFloat minLabelLength = MIN(newBounds.size.width, newBounds.size.height);
     CGFloat maxLabelLength = MAX(newBounds.size.width, newBounds.size.height);
-    initialHeight = newBounds.size.height;
-    minScale = 48/minLabelLength;
+    initialHeight = newBounds.size.height;    
+
+    minScale = MAX((48.0/maxLabelLength),((DEVICE_IS_IPAD ? 32.0 : 24.0)/minLabelLength));    
     maxScale = (2.0 * screenSize.width)/maxLabelLength; 
+
     [self setCurrentScale:currentScale];
     borderThickness = (minLabelLength/BORDER_HEIGHT_RATIO);
     if (borderThickness < 2.0) {
