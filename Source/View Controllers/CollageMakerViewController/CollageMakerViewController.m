@@ -286,9 +286,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (self.isCollageInEditMode) {
-        [self resetEditMode:self];
-    } else {
+    if (!self.isCollageInEditMode) {
         self.toolbarItems = [self normalToolbarButtons];
         self.navigationItem.rightBarButtonItem = self.editButton;
         [self setNavigationBarsHidden:NO animated:self.isLevel1AnimationsEnabled];        

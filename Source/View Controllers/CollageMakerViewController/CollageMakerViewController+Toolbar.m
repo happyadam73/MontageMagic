@@ -134,7 +134,7 @@
 - (UIBarButtonItem *)textButton
 {
     if (!textButton) {
-        textButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"textbutton24"] style:UIBarButtonItemStyleBordered target:self action:@selector(addTextView:)];
+        textButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"text"] style:UIBarButtonItemStyleBordered target:self action:@selector(addTextView:)];
     }
     return textButton;    
 }
@@ -150,7 +150,7 @@
 - (UIBarButtonItem *)addSymbolButton
 {
     if (!addSymbolButton) {
-        addSymbolButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow2"] style:UIBarButtonItemStyleBordered target:self action:@selector(addSymbol:)];
+        addSymbolButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(addSymbol:)];
     }
     return addSymbolButton;    
 }

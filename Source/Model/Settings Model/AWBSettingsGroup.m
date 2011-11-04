@@ -322,7 +322,7 @@
     NSString *imageMemoryTotal = AWBFileSizeIntToString([[info objectForKey:kAWBInfoKeyCollageTotalImageMemoryBytes] intValue]);
     NSString *collageDiskTotal = AWBFileSizeIntToString([[info objectForKey:kAWBInfoKeyCollageTotalDiskBytes] intValue]);
     
-    NSMutableArray *collageInfoSettings = [NSMutableArray arrayWithObjects:[AWBSetting textAndValueSettingWithText:@"Photos" value:imageObjectTotal], [AWBSetting textAndValueSettingWithText:@"Labels" value:labelObjectTotal], [AWBSetting textAndValueSettingWithText:@"Memory" value:imageMemoryTotal], [AWBSetting textAndValueSettingWithText:@"Disk" value:collageDiskTotal], nil];
+    NSMutableArray *collageInfoSettings = [NSMutableArray arrayWithObjects:[AWBSetting textAndValueSettingWithText:@"Photos" value:imageObjectTotal], [AWBSetting textAndValueSettingWithText:@"Labels" value:labelObjectTotal], [AWBSetting textAndValueSettingWithText:@"Photo Memory" value:imageMemoryTotal], [AWBSetting textAndValueSettingWithText:@"Disk" value:collageDiskTotal], nil];
     
     return [[[self alloc] initWithSettings:collageInfoSettings header:@"Info" footer:nil] autorelease];   
 }

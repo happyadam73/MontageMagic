@@ -46,7 +46,7 @@
 
 - (NSArray *)pickerSegmentImages
 {
-    return [NSArray arrayWithObjects:[UIImage imageNamed:@"blackbutton20"], [UIImage imageNamed:@"darkgraybutton20"], [UIImage imageNamed:@"lightgraybutton20"], [UIImage imageNamed:@"whitebutton20"], [UIImage imageNamed:@"signredbutton20"], [UIImage imageNamed:@"signgreenbutton20"], [UIImage imageNamed:@"signlightgreenbutton20"], [UIImage imageNamed:@"signbluebutton20"], [UIImage imageNamed:@"signyellowbutton20"], [UIImage imageNamed:@"signorangebutton20"], [UIImage imageNamed:@"signbrownbutton20"], nil];
+    return [NSArray arrayWithObjects:[UIImage imageNamed:@"blackbutton"], [UIImage imageNamed:@"darkgraybutton"], [UIImage imageNamed:@"lightgraybutton"], [UIImage imageNamed:@"whitebutton"], [UIImage imageNamed:@"signredbutton"], [UIImage imageNamed:@"signgreenbutton"], [UIImage imageNamed:@"signlightgreenbutton"], [UIImage imageNamed:@"signbluebutton"], [UIImage imageNamed:@"signyellowbutton"], [UIImage imageNamed:@"signorangebutton"], [UIImage imageNamed:@"signbrownbutton"], nil];
 }
 
 
