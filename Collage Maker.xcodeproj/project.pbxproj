@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0603479D14488C460056426D /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 0603479C14488C460056426D /* warning.png */; };
 		060347A114489C0E0056426D /* AWBMemoryWarningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0603479F14489C0C0056426D /* AWBMemoryWarningViewController.m */; };
 		060347A214489C0E0056426D /* AWBMemoryWarningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 060347A014489C0D0056426D /* AWBMemoryWarningViewController.xib */; };
 		0605EBA614501E5900F1C2B4 /* AWBCollageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0605EBA514501E5900F1C2B4 /* AWBCollageLayout.m */; };
@@ -55,6 +54,8 @@
 		0629027B146424EA006EE89E /* signyellowbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06290265146424EA006EE89E /* signyellowbutton@2x.png */; };
 		0629027C146424EA006EE89E /* whitebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 06290266146424EA006EE89E /* whitebutton.png */; };
 		0629027D146424EA006EE89E /* whitebutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06290267146424EA006EE89E /* whitebutton@2x.png */; };
+		0629028414642C07006EE89E /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 0629028214642C07006EE89E /* warning.png */; };
+		0629028514642C07006EE89E /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0629028314642C07006EE89E /* warning@2x.png */; };
 		0632C48F1461DEA0004E6D6D /* iPhone in Resources */ = {isa = PBXBuildFile; fileRef = 0632C48E1461DEA0004E6D6D /* iPhone */; };
 		0637FC291463FDD3004BBF51 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0637FC261463FDD3004BBF51 /* Icon-Small.png */; };
 		0637FC2A1463FDD3004BBF51 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0637FC271463FDD3004BBF51 /* Icon-Small-50.png */; };
@@ -203,7 +204,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0603479C14488C460056426D /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		0603479E14489C0A0056426D /* AWBMemoryWarningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWBMemoryWarningViewController.h; sourceTree = "<group>"; };
 		0603479F14489C0C0056426D /* AWBMemoryWarningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWBMemoryWarningViewController.m; sourceTree = "<group>"; };
 		060347A014489C0D0056426D /* AWBMemoryWarningViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AWBMemoryWarningViewController.xib; sourceTree = "<group>"; };
@@ -254,6 +254,8 @@
 		06290265146424EA006EE89E /* signyellowbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signyellowbutton@2x.png"; sourceTree = "<group>"; };
 		06290266146424EA006EE89E /* whitebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitebutton.png; sourceTree = "<group>"; };
 		06290267146424EA006EE89E /* whitebutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whitebutton@2x.png"; sourceTree = "<group>"; };
+		0629028214642C07006EE89E /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
+		0629028314642C07006EE89E /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
 		0632C48E1461DEA0004E6D6D /* iPhone */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iPhone; sourceTree = "<group>"; };
 		0637FC261463FDD3004BBF51 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		0637FC271463FDD3004BBF51 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -970,7 +972,6 @@
 				0637FC6214641B1A004BBF51 /* 1x@2x.png */,
 				0637FC6314641B1B004BBF51 /* 4x.png */,
 				0637FC6414641B1C004BBF51 /* 4x@2x.png */,
-				0603479C14488C460056426D /* warning.png */,
 				06987FE414458F1800F59264 /* blank.png */,
 				06987FE514458F1800F59264 /* defaultthumbnail.jpg */,
 				06987FE614458F1800F59264 /* defaultthumbnailsmall.jpg */,
@@ -981,6 +982,8 @@
 				0637FC3A14640A26004BBF51 /* settings@2x.png */,
 				0637FC4114640E0C004BBF51 /* text.png */,
 				0637FC4214640E0C004BBF51 /* text@2x.png */,
+				0629028214642C07006EE89E /* warning.png */,
+				0629028314642C07006EE89E /* warning@2x.png */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -1176,7 +1179,6 @@
 				0698804214458F1800F59264 /* RedAndBlackSignTheme100.jpg in Resources */,
 				0698804314458F1800F59264 /* TypewriterTheme100.jpg in Resources */,
 				0698804414458F1800F59264 /* YellowSignTheme100.jpg in Resources */,
-				0603479D14488C460056426D /* warning.png in Resources */,
 				060347A214489C0E0056426D /* AWBMemoryWarningViewController.xib in Resources */,
 				06079EA01448D448002D3D01 /* taskbar-small.jpg in Resources */,
 				0605EBC414502DF400F1C2B4 /* mosaic4row100.jpg in Resources */,
@@ -1246,6 +1248,8 @@
 				0629027B146424EA006EE89E /* signyellowbutton@2x.png in Resources */,
 				0629027C146424EA006EE89E /* whitebutton.png in Resources */,
 				0629027D146424EA006EE89E /* whitebutton@2x.png in Resources */,
+				0629028414642C07006EE89E /* warning.png in Resources */,
+				0629028514642C07006EE89E /* warning@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

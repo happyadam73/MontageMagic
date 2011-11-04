@@ -77,6 +77,7 @@
         rotationAndScaleCurrentlyQuantised = NO;
         totalLength = length;
         minScale = 0.45;
+        maxScale = 8.0;
         arrowType = type;
         arrowThicknessType = thicknessType;
         arrowHeadType = headType;
@@ -95,6 +96,8 @@
 {
     if (scale < minScale) {
         currentScale = minScale;
+    } else if (scale > maxScale) {
+        currentScale = maxScale;
     } else {
         currentScale = scale;
     }

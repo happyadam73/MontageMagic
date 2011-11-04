@@ -67,6 +67,7 @@ typedef enum AWBArrowThicknessType AWBArrowThicknessType;
     AWBArrowLineStrokeType arrowLineStrokeType;
     id arrowViewDelegate;
     CGFloat minScale;
+    CGFloat maxScale;   
     CGFloat initialHeight;
     BOOL rotationAndScaleCurrentlyQuantised;
     CGFloat currentQuantisedScale;
