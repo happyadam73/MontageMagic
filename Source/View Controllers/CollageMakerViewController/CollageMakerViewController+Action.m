@@ -385,6 +385,9 @@
         self.busyView = nil;
         
         [self displayTwitterControllerWithImage:collageImage];    
+    } else {
+        [self.busyView removeFromParentView];
+        self.busyView = nil;        
     }
 }
 
