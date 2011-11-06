@@ -296,7 +296,7 @@
 		06987E2D1445877000F59264 /* Collage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collage.h; sourceTree = "<group>"; };
 		06987E2E1445877000F59264 /* Collage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Collage.m; sourceTree = "<group>"; };
 		06987E2F1445877000F59264 /* CollageDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollageDescriptor.h; sourceTree = "<group>"; };
-		06987E301445877000F59264 /* CollageDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollageDescriptor.m; sourceTree = "<group>"; };
+		06987E301445877000F59264 /* CollageDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CollageDescriptor.m; path = "Collage Model/CollageDescriptor.m"; sourceTree = "<group>"; };
 		06987E311445877000F59264 /* CollageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollageStore.h; sourceTree = "<group>"; };
 		06987E321445877000F59264 /* CollageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollageStore.m; sourceTree = "<group>"; };
 		06987E331445877000F59264 /* CollageTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollageTheme.h; sourceTree = "<group>"; };
@@ -692,6 +692,7 @@
 			isa = PBXGroup;
 			children = (
 				06987E2A1445877000F59264 /* Collage Model */,
+				06987E301445877000F59264 /* CollageDescriptor.m */,
 				06987E351445877000F59264 /* Settings Model */,
 			);
 			name = Model;
@@ -706,7 +707,6 @@
 				06987E2D1445877000F59264 /* Collage.h */,
 				06987E2E1445877000F59264 /* Collage.m */,
 				06987E2F1445877000F59264 /* CollageDescriptor.h */,
-				06987E301445877000F59264 /* CollageDescriptor.m */,
 				06987E311445877000F59264 /* CollageStore.h */,
 				06987E321445877000F59264 /* CollageStore.m */,
 				06987E331445877000F59264 /* CollageTheme.h */,
@@ -1491,8 +1491,8 @@
 				);
 				"OTHER_CFLAGS[arch=armv7]" = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "Montage Magic";
-				PROVISIONING_PROFILE = "CEC165D9-E8D9-4283-A1A3-F5E2B9D10A19";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC165D9-E8D9-4283-A1A3-F5E2B9D10A19";
+				PROVISIONING_PROFILE = "5E5C25D4-F259-4A5A-82A2-7410CD35A000";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E5C25D4-F259-4A5A-82A2-7410CD35A000";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
