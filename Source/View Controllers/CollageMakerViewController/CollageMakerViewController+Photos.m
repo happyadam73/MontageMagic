@@ -152,6 +152,13 @@
         [self.collageObjectLocator resetLocator];
     }
     
+    //AWB, 13/11/2011 - Orientation bug, iOS5 no longer needs this to be corrected
+    NSString *osVersion = [[UIDevice currentDevice] systemVersion];
+    NSString *versionWithoutRotation = @"5.0";
+    BOOL noRotationNeeded = ([versionWithoutRotation compare:osVersion options:NSNumericSearch] 
+                             != NSOrderedDescending);
+    //NSLog(@"OSVersion: %@  Rotation Needed? %@", osVersion, (noRotationNeeded? @"NO" : @"YES"));
+    
     for(ALAsset *asset in info) { 
         if ((!self.lowMemory) && self.isImporting && (!self.luckyDipImportCollageIsFull)) {
             NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -159,7 +166,22 @@
             CGImageRef assetImageRef = [[asset defaultRepresentation] fullScreenImage];
             
             if (assetImageRef != NULL) {
-                UIImage *assetImage = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage] scale:1.0 orientation:[[asset valueForProperty:@"ALAssetPropertyOrientation"] intValue]];
+                
+                //AWB, 13/11/2011 - Orientation bug, iOS5 no longer needs this to be corrected                
+                UIImage *assetImage = nil;
+                if (noRotationNeeded) {
+                    assetImage = [UIImage imageWithCGImage:assetImageRef];
+                } else {
+                    // prior to iOS 5.0, the screen image needed to be rotated so
+                    // make sure that the UIImage we create from the CG image has the appropriate
+                    // orientation, based on the EXIF data from the image.
+                    ALAssetOrientation orientation = [[asset defaultRepresentation] orientation];
+                    assetImage = [UIImage imageWithCGImage:assetImageRef scale:1.0 
+                                                    orientation:(UIImageOrientation)orientation];
+                }
+
+                //UIImage *assetImage = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage] scale:1.0 orientation:[[asset valueForProperty:@"ALAssetPropertyOrientation"] intValue]];                
+                
                 if (assetImage) {
                     NSUInteger recommendedResolution = [self recommendedMaxResolutionForImageSize:assetImage.size];
                     UIImage *image = [assetImage imageScaledToMaxResolution:recommendedResolution withTransparentBorderThickness:0.0];
