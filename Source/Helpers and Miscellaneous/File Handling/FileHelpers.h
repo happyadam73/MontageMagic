@@ -13,7 +13,7 @@ NSString *AWBDocumentDirectory();
 NSString *AWBDocumentSubdirectory(NSString *docsSubdirectory);
 NSString *AWBPathInDocumentDirectory(NSString *fileName);
 NSString *AWBPathInDocumentSubdirectory(NSString *docsSubdirectory, NSString *fileName);
-void AWBSaveImageWithKey(UIImage *image, NSString *imageKey);
+void AWBSaveImageWithKey(UIImage *image, NSString *imageKey, BOOL saveAsPNG);
 UIImage *AWBLoadImageWithKey(NSString *imageKey);
 void AWBRemoveImageWithKey(NSString *imageKey);
 NSUInteger AWBDocumentSubdirectoryFolderSize(NSString *docsSubdirectory);

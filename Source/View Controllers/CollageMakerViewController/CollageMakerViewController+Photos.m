@@ -148,6 +148,8 @@
     NSUInteger currentAsset = 0;
     self.lowMemory = NO;
     
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     if ([self totalCollageSubviews] == 0) {
         [self.collageObjectLocator resetLocator];
     }
@@ -167,20 +169,29 @@
             
             if (assetImageRef != NULL) {
                 
+                //AWB, 13/12/2011 - determine whether this is a PNG file
+                BOOL isPNGAsset = NO;
+                NSArray *assetRepresentations = [asset valueForProperty:ALAssetPropertyRepresentations];
+                if (assetRepresentations) {
+                    isPNGAsset = [assetRepresentations containsObject:@"public.png"];
+                }
+                
                 //AWB, 13/11/2011 - Orientation bug, iOS5 no longer needs this to be corrected                
                 UIImage *assetImage = nil;
                 if (noRotationNeeded) {
                     assetImage = [UIImage imageWithCGImage:assetImageRef];
                 } else {
+                    //AWB, 13/12/2011 - need to use the full resolution image for PNG otherwise transparency is lost (only for iOS4 users)
+                    if (isPNGAsset) {
+                        assetImageRef = [[asset defaultRepresentation] fullResolutionImage];
+                    }
                     // prior to iOS 5.0, the screen image needed to be rotated so
                     // make sure that the UIImage we create from the CG image has the appropriate
-                    // orientation, based on the EXIF data from the image.
+                    // orientation, based on the EXIF data from the image.                    
                     ALAssetOrientation orientation = [[asset defaultRepresentation] orientation];
                     assetImage = [UIImage imageWithCGImage:assetImageRef scale:1.0 
                                                     orientation:(UIImageOrientation)orientation];
                 }
-
-                //UIImage *assetImage = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage] scale:1.0 orientation:[[asset valueForProperty:@"ALAssetPropertyOrientation"] intValue]];                
                 
                 if (assetImage) {
                     NSUInteger recommendedResolution = [self recommendedMaxResolutionForImageSize:assetImage.size];
@@ -190,7 +201,8 @@
                     }
                     currentAsset += 1;
                     [assetInfo setObject:[NSNumber numberWithInt:currentAsset] forKey:@"CurrentAssetIndex"];
-                    [assetInfo setObject:[NSNumber numberWithInt:processingAssetCount] forKey:@"AssetCount"];   
+                    [assetInfo setObject:[NSNumber numberWithInt:processingAssetCount] forKey:@"AssetCount"]; 
+                    [assetInfo setObject:[NSNumber numberWithBool:isPNGAsset] forKey:@"IsPNGAsset"]; 
                     
                     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0.1];
                     [[NSRunLoop currentRunLoop] runUntilDate:date];
@@ -206,6 +218,7 @@
     [info release];
     [self performSelectorOnMainThread:@selector(addImageViewsCompleted:) withObject:nil waitUntilDone:YES];
     self.lowMemory = NO;
+    [pool drain];
 }
 
 -(void)addImageView:(NSMutableDictionary *)info
@@ -213,6 +226,7 @@
     CGFloat duration = 0.5;
     CGFloat assetCount = [[info valueForKey:@"AssetCount"] intValue];
     CGFloat assetIndex = [[info valueForKey:@"CurrentAssetIndex"] intValue];
+    BOOL isPNGAsset = [[info valueForKey:@"IsPNGAsset"] boolValue];
     
     if (assetCount > 20) {
         duration = 0.1;
@@ -225,7 +239,7 @@
     UIImage *image = [info valueForKey:@"Image"];
     if (image) {        
         [self.collageObjectLocator pushPhotoObject:image isContactPhoto:NO];
-        AWBTransformableImageView *imageView = [[AWBTransformableImageView alloc] initWithImage:image rotation:self.collageObjectLocator.objectRotation scale:self.collageObjectLocator.objectScale horizontalFlip:NO imageKey:nil imageDocsSubDir:self.collageSaveDocumentsSubdirectory];
+        AWBTransformableImageView *imageView = [[AWBTransformableImageView alloc] initWithImage:image rotation:self.collageObjectLocator.objectRotation scale:self.collageObjectLocator.objectScale horizontalFlip:NO imageKey:nil imageDocsSubDir:self.collageSaveDocumentsSubdirectory isImagePNG:isPNGAsset];
         [self applySettingsToImageView:imageView];
         if (self.isLevel2AnimationsEnabled) {
             [[self view] addSubviewWithAnimation:imageView duration:duration moveToPoint:self.collageObjectLocator.objectPosition];        

@@ -46,19 +46,39 @@
     return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"blackboard512.jpg"]];
 }
 
++ (id)woodTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"wood250.jpg"]];
+}
+
++ (id)concreteTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"concrete720.jpg"]];
+}
+
++ (id)linedPaperTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"linedpaper121.jpg"]];
+}
+
++ (id)redDamaskTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"reddamask148.jpg"]];
+}
+
 + (NSArray *)allTextureColors
 {
-    return [NSArray arrayWithObjects:[UIColor corkTextureColor], [UIColor paperTextureColor], [UIColor blackboardTextureColor], [UIColor cardboardTextureColor], [UIColor brickTextureColor], [UIColor sandTextureColor], [UIColor grassTextureColor], nil];
+    return [NSArray arrayWithObjects:[UIColor corkTextureColor], [UIColor paperTextureColor], [UIColor blackboardTextureColor], [UIColor cardboardTextureColor], [UIColor brickTextureColor], [UIColor sandTextureColor], [UIColor grassTextureColor], [UIColor woodTextureColor], [UIColor concreteTextureColor], [UIColor linedPaperTextureColor], [UIColor redDamaskTextureColor], nil];
 }
 
 + (NSArray *)allTextureColorDescriptions
 {
-    return [NSArray arrayWithObjects:@"Noticeboard", @"Paper", @"Blackboard", @"Cardboard", @"Brick", @"Sand", @"Grass", nil];
+    return [NSArray arrayWithObjects:@"Noticeboard", @"Paper", @"Blackboard", @"Cardboard", @"Brick", @"Sand", @"Grass", @"Wood", @"Concrete", @"Lined Paper", @"Red Damask", nil];
 }
 
 + (NSArray *)allTextureColorImages
 {
-    return [NSArray arrayWithObjects:[UIImage imageFromFile:@"cork100.jpg"], [UIImage imageFromFile:@"paper100.jpg"], [UIImage imageFromFile:@"blackboard100.jpg"], [UIImage imageFromFile:@"cardboard100.jpg"], [UIImage imageFromFile:@"brick100.jpg"], [UIImage imageFromFile:@"sand100.jpg"], [UIImage imageFromFile:@"grass100.jpg"], nil];
+    return [NSArray arrayWithObjects:[UIImage imageFromFile:@"cork100.jpg"], [UIImage imageFromFile:@"paper100.jpg"], [UIImage imageFromFile:@"blackboard100.jpg"], [UIImage imageFromFile:@"cardboard100.jpg"], [UIImage imageFromFile:@"brick100.jpg"], [UIImage imageFromFile:@"sand100.jpg"], [UIImage imageFromFile:@"grass100.jpg"], [UIImage imageFromFile:@"wood100.jpg"], [UIImage imageFromFile:@"concrete100.jpg"], [UIImage imageFromFile:@"linedpaper100.jpg"], [UIImage imageFromFile:@"reddamask100.jpg"], nil];
 }
 
 + (id)textureColorWithDescription:(NSString *)colorDescription
@@ -77,6 +97,14 @@
         return [UIColor sandTextureColor];
     } else if ([colorDescription isEqualToString:@"Grass"]) {
         return [UIColor grassTextureColor];
+    } else if ([colorDescription isEqualToString:@"Wood"]) {
+        return [UIColor woodTextureColor];
+    } else if ([colorDescription isEqualToString:@"Concrete"]) {
+        return [UIColor concreteTextureColor];
+    } else if ([colorDescription isEqualToString:@"Lined Paper"]) {
+        return [UIColor linedPaperTextureColor];
+    } else if ([colorDescription isEqualToString:@"Red Damask"]) {
+        return [UIColor redDamaskTextureColor];
     } else {
         return [UIColor corkTextureColor];
     } 
@@ -98,6 +126,14 @@
         return [UIImage imageFromFile:@"sand512.jpg"];
     } else if ([colorDescription isEqualToString:@"Grass"]) {
         return [UIImage imageFromFile:@"grass512.jpg"];
+    } else if ([colorDescription isEqualToString:@"Wood"]) {
+        return [UIImage imageFromFile:@"wood250.jpg"];
+    } else if ([colorDescription isEqualToString:@"Concrete"]) {
+        return [UIImage imageFromFile:@"concrete720.jpg"];
+    } else if ([colorDescription isEqualToString:@"Lined Paper"]) {
+        return [UIImage imageFromFile:@"linedpaper121.jpg"];
+    } else if ([colorDescription isEqualToString:@"Red Damask"]) {
+        return [UIImage imageFromFile:@"reddamask148.jpg"];
     } else {
         return [UIImage imageFromFile:@"cork512.jpg"];
     } 

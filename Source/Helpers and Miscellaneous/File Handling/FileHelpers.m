@@ -145,7 +145,7 @@ NSString *AWBGetImageKeyFromDocumentSubdirectory(NSString *docsSubdirectory, NSS
 	return [docsSubdirectory stringByAppendingPathComponent:fileName];    
 }
 
-void AWBSaveImageWithKey(UIImage *image, NSString *imageKey)
+void AWBSaveImageWithKey(UIImage *image, NSString *imageKey, BOOL saveAsPNG)
 {
     NSString *documentsPath = AWBDocumentDirectory();
     NSString *path = [documentsPath stringByAppendingPathComponent:imageKey];
@@ -153,8 +153,13 @@ void AWBSaveImageWithKey(UIImage *image, NSString *imageKey)
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
     
     if (!fileExists) {
-        NSData *imageData = UIImageJPEGRepresentation(image, JPEG_COMPRESSION);
-        
+        //AWB, 13/12/2011 - Save as either PNG or JPEG
+        NSData *imageData;
+        if (saveAsPNG) {
+           imageData = UIImagePNGRepresentation(image); 
+        } else {
+           imageData = UIImageJPEGRepresentation(image, JPEG_COMPRESSION); 
+        }
         if (imageData) {
             [imageData writeToFile:path atomically:YES];            
         }

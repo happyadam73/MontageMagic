@@ -22,6 +22,7 @@
     BOOL rotationAndScaleCurrentlyQuantised;
     CGFloat currentQuantisedScale;
     CGFloat currentQuantisedRotation;
+    BOOL saveAsPNG;
 }
 
 @property (nonatomic, copy) NSString *imageKey;
@@ -29,6 +30,7 @@
 
 - (void)initialiseLayerRotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir;
 - (id)initWithImage:(UIImage *)image rotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir;
+- (id)initWithImage:(UIImage *)image rotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir isImagePNG:(BOOL)isImagePNG;
 - (id)initRandomWithImage:(UIImage *)image imageDocsSubDir:(NSString *)subDir;
 - (id)initRandomWithImage:(UIImage *)image imageDocsSubDir:(NSString *)subDir minLengthPercentage:(CGFloat)minPerc maxLengthPercentage:(CGFloat)maxPerc minAngle:(CGFloat)minAngle maxAngle:(CGFloat)maxAngle;
 - (void)initialiseImageKeyWithDocsSubdirPath:(NSString *)dirPath;

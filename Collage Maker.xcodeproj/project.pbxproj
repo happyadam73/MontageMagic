@@ -56,6 +56,12 @@
 		0629027D146424EA006EE89E /* whitebutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06290267146424EA006EE89E /* whitebutton@2x.png */; };
 		0629028414642C07006EE89E /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 0629028214642C07006EE89E /* warning.png */; };
 		0629028514642C07006EE89E /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0629028314642C07006EE89E /* warning@2x.png */; };
+		062D5B1714978F9900149C34 /* concrete100.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 062D5B1314978F9900149C34 /* concrete100.jpg */; };
+		062D5B1814978F9900149C34 /* concrete720.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 062D5B1414978F9900149C34 /* concrete720.jpg */; };
+		062D5B1914978F9900149C34 /* linedpaper100.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 062D5B1514978F9900149C34 /* linedpaper100.jpg */; };
+		062D5B1A14978F9900149C34 /* linedpaper121.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 062D5B1614978F9900149C34 /* linedpaper121.jpg */; };
+		062D5B1E1497906B00149C34 /* reddamask100.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 062D5B1C1497906B00149C34 /* reddamask100.jpg */; };
+		062D5B1F1497906B00149C34 /* reddamask148.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 062D5B1D1497906B00149C34 /* reddamask148.jpg */; };
 		0632C48F1461DEA0004E6D6D /* iPhone in Resources */ = {isa = PBXBuildFile; fileRef = 0632C48E1461DEA0004E6D6D /* iPhone */; };
 		0637FC291463FDD3004BBF51 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 0637FC261463FDD3004BBF51 /* Icon-Small.png */; };
 		0637FC2A1463FDD3004BBF51 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0637FC271463FDD3004BBF51 /* Icon-Small-50.png */; };
@@ -198,6 +204,8 @@
 		06B2D7A513F90F370069383F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B2D7A313F90F360069383F /* AddressBook.framework */; };
 		06B2D7A613F90F370069383F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B2D7A413F90F360069383F /* AddressBookUI.framework */; };
 		06BCCE301427DBDE00AA2B79 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06BCCE2F1427DBDD00AA2B79 /* AssetsLibrary.framework */; };
+		06C05AC2149779BE00E3F457 /* wood100.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06C05AC0149779BE00E3F457 /* wood100.jpg */; };
+		06C05AC3149779BE00E3F457 /* wood250.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06C05AC1149779BE00E3F457 /* wood250.jpg */; };
 		06C32650144C38DC007EAEAE /* AWBTransformableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C3264F144C38DB007EAEAE /* AWBTransformableImageView.m */; };
 		06C32658144C4F5D007EAEAE /* AWBLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C32657144C4F5C007EAEAE /* AWBLabel.m */; };
 		06CA59401452E035005794E6 /* cork512.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06CA593F1452E035005794E6 /* cork512.jpg */; };
@@ -256,6 +264,12 @@
 		06290267146424EA006EE89E /* whitebutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whitebutton@2x.png"; sourceTree = "<group>"; };
 		0629028214642C07006EE89E /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		0629028314642C07006EE89E /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
+		062D5B1314978F9900149C34 /* concrete100.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = concrete100.jpg; sourceTree = "<group>"; };
+		062D5B1414978F9900149C34 /* concrete720.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = concrete720.jpg; sourceTree = "<group>"; };
+		062D5B1514978F9900149C34 /* linedpaper100.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = linedpaper100.jpg; sourceTree = "<group>"; };
+		062D5B1614978F9900149C34 /* linedpaper121.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = linedpaper121.jpg; sourceTree = "<group>"; };
+		062D5B1C1497906B00149C34 /* reddamask100.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = reddamask100.jpg; sourceTree = "<group>"; };
+		062D5B1D1497906B00149C34 /* reddamask148.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = reddamask148.jpg; sourceTree = "<group>"; };
 		0632C48E1461DEA0004E6D6D /* iPhone */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iPhone; sourceTree = "<group>"; };
 		0637FC261463FDD3004BBF51 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		0637FC271463FDD3004BBF51 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -465,6 +479,8 @@
 		06B2D7A313F90F360069383F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		06B2D7A413F90F360069383F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		06BCCE2F1427DBDD00AA2B79 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		06C05AC0149779BE00E3F457 /* wood100.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood100.jpg; sourceTree = "<group>"; };
+		06C05AC1149779BE00E3F457 /* wood250.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood250.jpg; sourceTree = "<group>"; };
 		06C3264E144C38DA007EAEAE /* AWBTransformableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWBTransformableImageView.h; sourceTree = "<group>"; };
 		06C3264F144C38DB007EAEAE /* AWBTransformableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWBTransformableImageView.m; sourceTree = "<group>"; };
 		06C32656144C4F5B007EAEAE /* AWBLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWBLabel.h; sourceTree = "<group>"; };
@@ -1005,6 +1021,14 @@
 				06987FF914458F1800F59264 /* paper512.jpg */,
 				06987FFA14458F1800F59264 /* sand100.jpg */,
 				06987FFB14458F1800F59264 /* sand512.jpg */,
+				06C05AC0149779BE00E3F457 /* wood100.jpg */,
+				06C05AC1149779BE00E3F457 /* wood250.jpg */,
+				062D5B1314978F9900149C34 /* concrete100.jpg */,
+				062D5B1414978F9900149C34 /* concrete720.jpg */,
+				062D5B1514978F9900149C34 /* linedpaper100.jpg */,
+				062D5B1614978F9900149C34 /* linedpaper121.jpg */,
+				062D5B1C1497906B00149C34 /* reddamask100.jpg */,
+				062D5B1D1497906B00149C34 /* reddamask148.jpg */,
 			);
 			path = Textures;
 			sourceTree = "<group>";
@@ -1250,6 +1274,14 @@
 				0629027D146424EA006EE89E /* whitebutton@2x.png in Resources */,
 				0629028414642C07006EE89E /* warning.png in Resources */,
 				0629028514642C07006EE89E /* warning@2x.png in Resources */,
+				06C05AC2149779BE00E3F457 /* wood100.jpg in Resources */,
+				06C05AC3149779BE00E3F457 /* wood250.jpg in Resources */,
+				062D5B1714978F9900149C34 /* concrete100.jpg in Resources */,
+				062D5B1814978F9900149C34 /* concrete720.jpg in Resources */,
+				062D5B1914978F9900149C34 /* linedpaper100.jpg in Resources */,
+				062D5B1A14978F9900149C34 /* linedpaper121.jpg in Resources */,
+				062D5B1E1497906B00149C34 /* reddamask100.jpg in Resources */,
+				062D5B1F1497906B00149C34 /* reddamask148.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1491,8 +1523,8 @@
 				);
 				"OTHER_CFLAGS[arch=armv7]" = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "Montage Magic";
-				PROVISIONING_PROFILE = "5E5C25D4-F259-4A5A-82A2-7410CD35A000";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E5C25D4-F259-4A5A-82A2-7410CD35A000";
+				PROVISIONING_PROFILE = "CEC165D9-E8D9-4283-A1A3-F5E2B9D10A19";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC165D9-E8D9-4283-A1A3-F5E2B9D10A19";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

@@ -90,7 +90,13 @@
     return nil;
 }
 
+//AWB, 13/12/2011 - PNG support
 - (id)initWithImage:(UIImage *)image rotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir
+{
+    return [self initWithImage:image rotation:rotation scale:scale horizontalFlip:horizontalFlip imageKey:key imageDocsSubDir:subDir isImagePNG:NO];
+}
+
+- (id)initWithImage:(UIImage *)image rotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir isImagePNG:(BOOL)isImagePNG
 {
     if (!image || (!key && !subDir)) {
         return nil;
@@ -103,6 +109,7 @@
     
     self = [super initWithFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
     if (self) {
+        saveAsPNG = isImagePNG;
         initialHeight = image.size.height;
         [self setBackgroundColor:[UIColor clearColor]];
         UIImageView *subView = [[UIImageView alloc] initWithImage:image];
@@ -113,7 +120,7 @@
         borderThickness = tempBorderThickness;
         shadowOffset = floorf(minImageLength/SHADOW_OFFSET_HEIGHT_RATIO);
         [self initialiseLayerRotation:rotation scale:scale horizontalFlip:flip imageKey:key imageDocsSubDir:subDir];
-        AWBSaveImageWithKey(image, imageKey);
+        AWBSaveImageWithKey(image, imageKey, saveAsPNG);
         [self rotateAndScale];
     }
     [pool drain];

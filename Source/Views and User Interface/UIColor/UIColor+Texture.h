@@ -18,6 +18,10 @@
 + (id)paperTextureColor;
 + (id)sandTextureColor;
 + (id)blackboardTextureColor;
++ (id)woodTextureColor;
++ (id)concreteTextureColor;
++ (id)linedPaperTextureColor;
++ (id)redDamaskTextureColor;
 + (NSArray *)allTextureColors;
 + (NSArray *)allTextureColorDescriptions;
 + (NSArray *)allTextureColorImages;
