@@ -17,4 +17,6 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UINavigationController *mainNavigationController;
 
+- (BOOL)handleOpenURL:(NSURL *)url;
+
 @end

@@ -47,6 +47,8 @@
 + (AWBSettings *)assetGroupsSettingsWithInfo:(NSDictionary *)info;
 + (AWBSettings *)backgroundSettingsWithInfo:(NSDictionary *)info;
 + (AWBSettings *)layoutSettingsWithInfo:(NSDictionary *)info;
++ (AWBSettings *)myFontDescriptionSettingsWithInfo:(NSDictionary *)info header:(UIView *)header;
++ (AWBSettings *)helpSettingsWithFilename:(NSString *)filename title:(NSString *)title;
 
 - (id)initWithSettingsGroups:(NSMutableArray *)aSettingsGroups title:(NSString *)title;
 - (id)initWithSettingsGroups:(NSMutableArray *)aSettingsGroups;

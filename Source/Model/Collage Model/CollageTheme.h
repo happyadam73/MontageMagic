@@ -70,6 +70,9 @@ typedef enum {
     AWBCollageObjectLocatorType objectLocatorType;
     BOOL autoMemoryReduction;
     NSUInteger randomPickCount;
+    BOOL useMyFonts;
+    NSString *labelMyFont;
+    UITextAlignment labelTextAlignment;
 }
 
 @property (nonatomic, retain) NSString *themeName;
@@ -101,6 +104,9 @@ typedef enum {
 @property (nonatomic, assign) AWBCollageObjectLocatorType objectLocatorType;
 @property (nonatomic, assign) BOOL autoMemoryReduction;
 @property (nonatomic, assign) NSUInteger randomPickCount;
+@property (nonatomic, assign) BOOL useMyFonts;
+@property (nonatomic, retain) NSString *labelMyFont;
+@property (nonatomic, assign) UITextAlignment labelTextAlignment;
 
 + (id)themeWithThemeType:(CollageThemeType)themeType;
 + (id)plainTheme;

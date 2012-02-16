@@ -71,7 +71,7 @@
         self.navigationItem.rightBarButtonItem = doneButton; 
         [doneButton release];
         
-        if (DEVICE_IS_IPHONE || (self.controllerType != AWBSettingsControllerTypeLuckyDipSettings)) {
+        if ((DEVICE_IS_IPHONE || (self.controllerType != AWBSettingsControllerTypeLuckyDipSettings)) && (self.controllerType != AWBSettingsControllerTypeHelpSettings)) {
             UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissSettings:)];
             self.navigationItem.leftBarButtonItem = cancelButton;
             [cancelButton release];
@@ -127,6 +127,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    //return YES;
 }
 
 #pragma mark - Table view data source
@@ -237,6 +238,13 @@
             rowHeight = settingsGroup.iPhoneRowHeight;
         }    
     }
+    
+    CGFloat maxHeight = (tableView.bounds.size.height - 30.0);
+    
+    if ((maxHeight > 10.0) && (rowHeight > maxHeight)) {
+        rowHeight = maxHeight;
+    }
+
     return rowHeight;
 }
 

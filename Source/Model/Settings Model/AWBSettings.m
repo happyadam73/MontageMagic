@@ -7,6 +7,7 @@
 //
 
 #import "AWBSettings.h"
+#import "AWBMyFontStore.h"
 
 @implementation AWBSettings
 
@@ -139,20 +140,86 @@
 
 + (AWBSettings *)textSettingsWithInfo:(NSDictionary *)info
 {
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup textEditSettingsGroupWithInfo:info], [AWBSettingsGroup textColorPickerSettingsGroupWithInfo:info], [AWBSettingsGroup fontSettingsGroupWithInfo:info], nil];
-    return [[[self alloc] initWithSettingsGroups:settings title:@"Add Text Settings"] autorelease];
+    AWBSettings *textSettings = nil;
+    NSString *settingsTitle = @"Add Text";
+
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup textEditSettingsGroupWithInfo:info], [AWBSettingsGroup textAlignmentPickerSettingsGroupWithInfo:info], [AWBSettingsGroup textColorPickerSettingsGroupWithInfo:info], nil];
+    AWBSettingsGroup *fontTypeSettings = [AWBSettingsGroup myFontsSwitchSettingsGroupWithInfo:info];
+    AWBSettingsGroup *builtInFontSettings = [AWBSettingsGroup fontSettingsGroupWithInfo:info];
+    [settings addObject:fontTypeSettings];
+    [settings addObject:builtInFontSettings];
+    
+    if ([[[AWBMyFontStore defaultStore] allMyFonts] count] > 0) {
+        AWBSettingsGroup *myFontSettings = [AWBSettingsGroup myFontSettingsGroupWithInfo:info];
+        [settings addObject:myFontSettings];
+        textSettings = [[self alloc] initWithSettingsGroups:settings title:settingsTitle];
+        fontTypeSettings.parentSettings = textSettings;
+        fontTypeSettings.dependentVisibleSettingsGroup = myFontSettings;
+        fontTypeSettings.dependentHiddenSettingsGroup = builtInFontSettings;
+        myFontSettings.visible = fontTypeSettings.masterSwitchIsOn;
+        builtInFontSettings.visible = !fontTypeSettings.masterSwitchIsOn;
+    } else {
+        //no my fonts installed
+        textSettings = [[self alloc] initWithSettingsGroups:settings title:settingsTitle];
+    }
+    
+    return [textSettings autorelease];
 }
 
 + (AWBSettings *)editTextSettingsWithInfo:(NSDictionary *)info
 {
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup textColorPickerSettingsGroupWithInfo:info], [AWBSettingsGroup fontSettingsGroupWithInfo:info], nil];
-    return [[[self alloc] initWithSettingsGroups:settings title:@"Edit Text Labels"] autorelease];
+    AWBSettings *textSettings = nil;
+    NSString *settingsTitle = @"Edit Labels";
+    
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup textAlignmentPickerSettingsGroupWithInfo:info], [AWBSettingsGroup textColorPickerSettingsGroupWithInfo:info], nil];
+    AWBSettingsGroup *fontTypeSettings = [AWBSettingsGroup myFontsSwitchSettingsGroupWithInfo:info];
+    AWBSettingsGroup *builtInFontSettings = [AWBSettingsGroup fontSettingsGroupWithInfo:info];
+    [settings addObject:fontTypeSettings];
+    [settings addObject:builtInFontSettings];
+    
+    if ([[[AWBMyFontStore defaultStore] allMyFonts] count] > 0) {
+        AWBSettingsGroup *myFontSettings = [AWBSettingsGroup myFontSettingsGroupWithInfo:info];
+        [settings addObject:myFontSettings];
+        textSettings = [[self alloc] initWithSettingsGroups:settings title:settingsTitle];
+        fontTypeSettings.parentSettings = textSettings;
+        fontTypeSettings.dependentVisibleSettingsGroup = myFontSettings;
+        fontTypeSettings.dependentHiddenSettingsGroup = builtInFontSettings;
+        myFontSettings.visible = fontTypeSettings.masterSwitchIsOn;
+        builtInFontSettings.visible = !fontTypeSettings.masterSwitchIsOn;
+    } else {
+        //no my fonts installed
+        textSettings = [[self alloc] initWithSettingsGroups:settings title:settingsTitle];
+    }
+    
+    return [textSettings autorelease];
 }
 
 + (AWBSettings *)editSingleTextSettingsWithInfo:(NSDictionary *)info
 {
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup textEditSettingsGroupWithInfo:info], [AWBSettingsGroup textColorPickerSettingsGroupWithInfo:info], [AWBSettingsGroup fontSettingsGroupWithInfo:info], nil];
-    return [[[self alloc] initWithSettingsGroups:settings title:@"Edit Text Label"] autorelease];
+    AWBSettings *textSettings = nil;
+    NSString *settingsTitle = @"Edit Label";
+    
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup textEditSettingsGroupWithInfo:info], [AWBSettingsGroup textAlignmentPickerSettingsGroupWithInfo:info], [AWBSettingsGroup textColorPickerSettingsGroupWithInfo:info], nil];
+    AWBSettingsGroup *fontTypeSettings = [AWBSettingsGroup myFontsSwitchSettingsGroupWithInfo:info];
+    AWBSettingsGroup *builtInFontSettings = [AWBSettingsGroup fontSettingsGroupWithInfo:info];
+    [settings addObject:fontTypeSettings];
+    [settings addObject:builtInFontSettings];
+    
+    if ([[[AWBMyFontStore defaultStore] allMyFonts] count] > 0) {
+        AWBSettingsGroup *myFontSettings = [AWBSettingsGroup myFontSettingsGroupWithInfo:info];
+        [settings addObject:myFontSettings];
+        textSettings = [[self alloc] initWithSettingsGroups:settings title:settingsTitle];
+        fontTypeSettings.parentSettings = textSettings;
+        fontTypeSettings.dependentVisibleSettingsGroup = myFontSettings;
+        fontTypeSettings.dependentHiddenSettingsGroup = builtInFontSettings;
+        myFontSettings.visible = fontTypeSettings.masterSwitchIsOn;
+        builtInFontSettings.visible = !fontTypeSettings.masterSwitchIsOn;
+    } else {
+        //no my fonts installed
+        textSettings = [[self alloc] initWithSettingsGroups:settings title:settingsTitle];
+    }
+    
+    return [textSettings autorelease];    
 }
 
 + (AWBSettings *)themeSettingsWithInfo:(NSDictionary *)info
@@ -227,6 +294,22 @@
     AWBSettings *layoutSettings = [[self alloc] initWithSettingsGroups:settings title:@"Layout Settings"];
     
     return [layoutSettings autorelease];    
+}
+
++ (AWBSettings *)myFontDescriptionSettingsWithInfo:(NSDictionary *)info header:(UIView *)header
+{
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup myFontNameWithHeaderSettingsGroupWithInfo:info], [AWBSettingsGroup myFontPreviewSettingsGroupWithInfo:info], [AWBSettingsGroup myFontInfoMetricsSettingsGroupWithInfo:info], nil];
+    AWBSettings *myFontDescriptionSettings = [[self alloc] initWithSettingsGroups:settings title:@"MyFont Preview"];
+    myFontDescriptionSettings.headerView = header;
+    return [myFontDescriptionSettings autorelease];
+}
+
++ (AWBSettings *)helpSettingsWithFilename:(NSString *)filename title:(NSString *)title
+{
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup helpTextSettingsGroupWithFilename:filename], nil];
+    AWBSettings *helpSettings = [[self alloc] initWithSettingsGroups:settings title:title];
+    
+    return [helpSettings autorelease];    
 }
 
 - (NSMutableDictionary *)infoFromSettings

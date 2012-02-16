@@ -12,10 +12,11 @@
 #import "CollageDescriptor.h"
 #import "CollageStore.h"
 #import "AWBSettingsGroup.h"
+#import "AWBMyFontsListViewController.h"
 
 @implementation AWBCollagesListViewController
 
-@synthesize isLowMemory, busyView;
+@synthesize isLowMemory, busyView, myFontsButton;
 
 - (id)init
 {    
@@ -27,6 +28,8 @@
         UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewCollageDescriptor:)];
         [[self navigationItem] setRightBarButtonItem:addButton];
         [addButton release];
+        [self.navigationController setToolbarHidden:NO animated:NO];
+        self.toolbarItems = [self myCollagesToolbarButtons];
         [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
     }
     return self;
@@ -40,6 +43,7 @@
 - (void)dealloc
 {
     [busyView release];
+    [myFontsButton release];
     [super dealloc];
 }
 
@@ -71,7 +75,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setToolbarHidden:YES animated:YES];
+    [self.navigationController setToolbarHidden:NO animated:YES];
+    self.toolbarItems = [self myCollagesToolbarButtons];
     [[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:kAWBInfoKeyCollageStoreCollageIndex];
     [[self tableView] reloadData];
 }
@@ -112,6 +117,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    //return YES;
 }
 
 - (BOOL)canBecomeFirstResponder
@@ -386,6 +392,26 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
         [self awbCollageSettingsTableViewController:nil didFinishSettingsWithInfo:settingsInfo];
         [pool drain];
     }
+}
+
+- (UIBarButtonItem *)myFontsButton
+{
+    if (!myFontsButton) {
+        myFontsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"myfonts"] style:UIBarButtonItemStyleBordered target:self action:@selector(showMyFonts)];
+    }
+    return myFontsButton;    
+}
+
+- (void)showMyFonts
+{
+    AWBMyFontsListViewController *controller = [[AWBMyFontsListViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+    [controller release];                
+}
+
+- (NSArray *)myCollagesToolbarButtons
+{
+    return [NSArray arrayWithObjects:self.myFontsButton, nil];    
 }
 
 @end

@@ -18,6 +18,7 @@
 @synthesize deviceAvailability, isAvailableOnCurrentDevice;
 @synthesize addCollageBorder, collageBorderColor, useBackgroundTexture, backgroundTexture;
 @synthesize snapToGrid, objectLocatorType, autoMemoryReduction, randomPickCount;
+@synthesize labelMyFont, labelTextAlignment, useMyFonts;
 
 - (void)dealloc
 {
@@ -34,7 +35,8 @@
     [labelTextFont release];
     [labelTextColor release];
     [symbolColor release];
-    
+    [labelMyFont release];
+
     [super dealloc];
 }
 
@@ -121,6 +123,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -156,6 +161,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -191,6 +199,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -226,6 +237,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -261,6 +275,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -296,6 +313,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -331,6 +351,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -366,6 +389,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -401,6 +427,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -436,6 +465,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -471,6 +503,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 3;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -506,6 +541,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -541,6 +579,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -576,6 +617,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -611,6 +655,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -646,6 +693,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -681,6 +731,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -716,6 +769,9 @@
     theme.objectLocatorType = (DEVICE_IS_IPAD ? kAWBCollageObjectLocatorTypeMosaicSmallImages : kAWBCollageObjectLocatorTypeMosaicTinyImages);
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -751,6 +807,9 @@
     theme.objectLocatorType = (DEVICE_IS_IPAD ? kAWBCollageObjectLocatorTypeMosaicSmallImages : kAWBCollageObjectLocatorTypeMosaicTinyImages);
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -786,6 +845,9 @@
     theme.objectLocatorType = (DEVICE_IS_IPAD ? kAWBCollageObjectLocatorTypeMosaicLargeImages : kAWBCollageObjectLocatorTypeMosaicMediumImages);
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 3;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -821,6 +883,9 @@
     theme.objectLocatorType = (DEVICE_IS_IPAD ? kAWBCollageObjectLocatorTypeMosaicLargeImages : kAWBCollageObjectLocatorTypeMosaicMediumImages);
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }
@@ -856,6 +921,9 @@
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeMosaicMicroImages;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
     
     return [theme autorelease];        
 }

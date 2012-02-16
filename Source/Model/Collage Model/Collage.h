@@ -48,6 +48,9 @@ static NSString *const kAWBInfoKeyCollageObjectLocator = @"CollageObjectLocator"
     NSInteger luckyDipContactTypeIndex;
     BOOL luckyDipContactIncludePhoneNumber;
     AWBCollageObjectLocator *collageObjectLocator;
+    BOOL useMyFonts;
+    NSString *labelMyFont;
+    UITextAlignment labelTextAlignment;
 }
 
 @property (nonatomic, assign) CGFloat exportQuality;
@@ -85,6 +88,9 @@ static NSString *const kAWBInfoKeyCollageObjectLocator = @"CollageObjectLocator"
 @property (nonatomic, assign) NSInteger luckyDipContactTypeIndex;
 @property (nonatomic, assign) BOOL luckyDipContactIncludePhoneNumber;
 @property (nonatomic, retain) AWBCollageObjectLocator *collageObjectLocator;
+@property (nonatomic, assign) BOOL useMyFonts;
+@property (nonatomic, retain) NSString *labelMyFont;
+@property (nonatomic, assign) UITextAlignment labelTextAlignment;
 
 - (void)addCollageToView:(UIView *)collageView;
 - (void)initCollageFromView:(UIView *)collageView;

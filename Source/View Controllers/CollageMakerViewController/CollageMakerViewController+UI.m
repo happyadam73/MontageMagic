@@ -265,6 +265,8 @@
                                  [NSNumber numberWithFloat:self.collageObjectLocator.snapToGridSize], kAWBInfoKeyObjectLocatorSnapToGridSize, 
                                  [NSNumber numberWithInteger:self.collageObjectLocator.objectLocatorType], kAWBInfoKeyObjectLocatorType,
                                  [NSNumber numberWithBool:self.collageObjectLocator.autoMemoryReduction], kAWBInfoKeyObjectLocatorAutoMemoryReduction,
+                                 [NSNumber numberWithInteger:self.labelTextAlignment], kAWBInfoKeyTextAlignment,
+                                 [NSNumber numberWithBool:self.useMyFonts], kAWBInfoKeyUseMyFonts,
                                  nil];
     
     if (self.imageShadowColor) {
@@ -287,7 +289,10 @@
     }    
     if (self.labelTextFont) {
         [info setObject:self.labelTextFont forKey:kAWBInfoKeyTextFontName];        
-    }     
+    } 
+    if (self.labelMyFont) {
+        [info setObject:self.labelMyFont forKey:kAWBInfoKeyMyFontName];        
+    } 
     if (self.assetGroups) {
         [info setObject:self.assetGroups forKey:kAWBInfoKeyAssetGroups];        
     }
@@ -334,7 +339,10 @@
             self.labelTextLine3 = [info objectForKey:kAWBInfoKeyLabelTextLine3];
             self.labelTextColor = [info objectForKey:kAWBInfoKeyTextColor];
             self.labelTextFont = [info objectForKey:kAWBInfoKeyTextFontName];
-            
+            self.labelMyFont = [info objectForKey:kAWBInfoKeyMyFontName];
+            self.useMyFonts = [[info objectForKey:kAWBInfoKeyUseMyFonts] boolValue];
+            self.labelTextAlignment = [[info objectForKey:kAWBInfoKeyTextAlignment] integerValue];
+
             if (self.labelTextLine1 || self.labelTextLine2 || self.labelTextLine3) {
                 NSMutableArray *lines = [self textLabelLines];
                 if ([lines count] > 0) {
@@ -342,8 +350,13 @@
                         [self.collageObjectLocator resetLocator];
                     }
                     [self.collageObjectLocator pushTextLabel];
-                    AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines font:[UIFont fontWithName:self.labelTextFont size:28.0] offset:CGPointZero rotation:0.0 scale:self.collageObjectLocator.objectScale horizontalFlip:NO color:self.labelTextColor];
-                    
+                    NSString *fontName = nil;
+                    if (self.useMyFonts) {
+                        fontName = self.labelMyFont;
+                    } else {
+                        fontName = self.labelTextFont;
+                    }
+                    AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines fontName:fontName fontSize:28.0 offset:CGPointZero rotation:0.0 scale:self.collageObjectLocator.objectScale horizontalFlip:NO color:self.labelTextColor alignment:self.labelTextAlignment];
                     [label setCenter:self.collageObjectLocator.objectPosition];                    
                     [self applySettingsToLabel:label];
                     [[self view] addSubview:label];
@@ -357,12 +370,22 @@
         case AWBSettingsControllerTypeEditTextSettings:
             self.labelTextColor = [info objectForKey:kAWBInfoKeyTextColor];
             self.labelTextFont = [info objectForKey:kAWBInfoKeyTextFontName];
-            
+            self.labelMyFont = [info objectForKey:kAWBInfoKeyMyFontName];
+            self.useMyFonts = [[info objectForKey:kAWBInfoKeyUseMyFonts] boolValue];
+            self.labelTextAlignment = [[info objectForKey:kAWBInfoKeyTextAlignment] integerValue];
+            NSString *fontName = nil;
+            if (self.useMyFonts) {
+                fontName = self.labelMyFont;
+            } else {
+                fontName = self.labelTextFont;
+            }
+
             for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
                 if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
                     if ((view.alpha == SELECTED_ALPHA) && [view isKindOfClass:[AWBTransformableLabel class]]) {
                         AWBTransformableLabel *label = (AWBTransformableLabel *)view;
                         
+                        label.labelView.textAlignment = self.labelTextAlignment;
                         if (self.labelTextColor) {
                             [label.labelView setTextColor:self.labelTextColor];   
                         }
@@ -374,16 +397,15 @@
                             self.labelTextLine3 = [info objectForKey:kAWBInfoKeyLabelTextLine3];
                             NSMutableArray *lines = [self textLabelLines];
                             if ([lines count] > 0) {
-                                [label updateLabelTextLines:lines withFont:[UIFont fontWithName:self.labelTextFont size:28.0]];
+                                [label updateLabelTextLines:lines withFontName:fontName fontSize:28.0];
                             } else {
-                                [label updateLabelTextWithFont:[UIFont fontWithName:self.labelTextFont size:28.0]];                                    
+                                [label updateLabelTextWithFontName:fontName fontSize:28.0];
                             }
-                            // break because there's just one label
-                            break;
                         } else {
                             // more than one label - update the font so frame is adjusted
-                            [label updateLabelTextWithFont:[UIFont fontWithName:self.labelTextFont size:28.0]];                                    
+                            [label updateLabelTextWithFontName:fontName fontSize:28.0];
                         }
+                        [self applySettingsToLabel:label];
                     }
                 }            
             } 

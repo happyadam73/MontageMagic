@@ -12,6 +12,7 @@
 #import "AWBCollagesListViewController.h"
 #import "CollageStore.h"
 #import "CollageDescriptor.h"
+#import "AWBMyFontsListViewController.h"
 
 @implementation CollageMakerAppDelegate
 
@@ -66,7 +67,13 @@
     [navController release];
     [listController release];
     [self.window makeKeyAndVisible];
-    return YES;
+    
+    NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+    if (url) {
+        return [self handleOpenURL:url];  
+    } else {
+        return YES;            
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -109,6 +116,36 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+-(BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+{ 
+    return [self handleOpenURL:url];
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url
+{    
+    if ([url isFileURL]) {
+        [self.mainNavigationController.visibleViewController dismissModalViewControllerAnimated:YES];
+        
+        if (![self.mainNavigationController.topViewController isKindOfClass:[AWBMyFontsListViewController class]]) {
+            AWBMyFontsListViewController *controller = [[AWBMyFontsListViewController alloc] init];
+            controller.pendingMyFontInstall = YES;
+            controller.pendingMyFontInstallURL = url;
+            [self.mainNavigationController pushViewController:controller animated:YES];
+            [controller release];                
+        } else {
+            AWBMyFontsListViewController *controller = (AWBMyFontsListViewController *)self.mainNavigationController.topViewController;
+            if (controller.installMyFontAlertView) {
+                [controller.installMyFontAlertView dismissWithClickedButtonIndex:controller.installMyFontAlertView.cancelButtonIndex animated:NO];
+            } 
+            controller.pendingMyFontInstall = YES;
+            controller.pendingMyFontInstallURL = url;
+        }
+        return YES;            
+    } else {
+        return NO;
+    }
 }
 
 - (void)dealloc

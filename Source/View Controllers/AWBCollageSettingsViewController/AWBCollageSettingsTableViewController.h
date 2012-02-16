@@ -15,7 +15,9 @@ typedef enum {
     AWBSettingsControllerTypeEditTextSettings,
     AWBSettingsControllerTypeChooseThemeSettings,
     AWBSettingsControllerTypeCollageInfoSettings,
-    AWBSettingsControllerTypeLuckyDipSettings
+    AWBSettingsControllerTypeLuckyDipSettings,
+    AWBSettingsControllerTypeMyFontInfoSettings,
+    AWBSettingsControllerTypeHelpSettings
 } AWBSettingsControllerType;
 
 @class AWBCollageSettingsTableViewController;

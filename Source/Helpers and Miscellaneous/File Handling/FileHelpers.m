@@ -218,5 +218,17 @@ BOOL AWBCopyCollageHelpFilesForDevice()
     return success;
 }
 
+NSString *AWBPathInMyFontsDocumentsSubdirectory(NSString *filename)
+{
+    return AWBPathInDocumentSubdirectory(@"My Fonts", filename);
+}
+
+NSString *AWBPathInMainBundleSubdirectory(NSString *bundleSubdirectory, NSString *filename)
+{
+    NSString *bundleSubdirectoryPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:bundleSubdirectory];
+    NSString *fullBundlePath = [bundleSubdirectoryPath stringByAppendingPathComponent:filename];
+    
+	return fullBundlePath;
+}
 
 

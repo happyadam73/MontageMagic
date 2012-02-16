@@ -18,11 +18,14 @@ typedef enum {
     AWBSettingControlTypeTextEdit,
     AWBSettingControlTypeColorPicker,
     AWBSettingControlTypeFont,
+    AWBSettingControlTypeZFont,    
     AWBSettingControlTypeDrilldown,
     AWBSettingControlTypeImageAndTextList,
     AWBSettingControlTypeTextAndValue, 
     AWBSettingControlTypeSegmentControl,
-    AWBSettingControlTypeSubtitle
+    AWBSettingControlTypeSubtitle,
+    AWBSettingControlTypeMyFontPreview,
+    AWBSettingControlTypeWebView
 } AWBSettingControlType;
 
 typedef enum {
@@ -44,6 +47,7 @@ typedef enum {
     BOOL visible;
     AWBSettingsGroup *parentGroup;
     AWBSettingMasterSlaveType masterSlaveType;
+    BOOL disableControl;
 }
 
 @property (nonatomic, retain) NSString *text;
@@ -59,17 +63,22 @@ typedef enum {
 @property (nonatomic, readonly) BOOL isSwitchedOn;
 @property (nonatomic, assign) AWBSettingsGroup *parentGroup;
 @property (nonatomic, assign) AWBSettingMasterSlaveType masterSlaveType;
+@property (nonatomic, assign) BOOL disableControl;
 
 + (AWBSetting *)colorSettingWithValue:(id)aValue andKey:(NSString *)aKey;
 + (AWBSetting *)qualitySliderSettingWithValue:(id)aValue andKey:(NSString *)aKey;
 + (AWBSetting *)switchSettingWithText:(NSString *)text value:(id)aValue key:(NSString *)aKey;
 + (AWBSetting *)textEditSettingWithText:(NSString *)text value:(id)aValue key:(NSString *)aKey;
++ (AWBSetting *)webViewSettingWithValue:(id)aValue andKey:(NSString *)aKey;
 + (AWBSetting *)fontSettingWithValue:(id)aValue;
++ (AWBSetting *)zFontSettingWithValue:(id)aValue;
++ (AWBSetting *)myFontPreviewSettingWithText:(NSString *)text value:(id)aValue;
 + (AWBSetting *)drilldownSettingWithText:(NSString *)aText value:(id)aValue key:(NSString *)aKey childSettings:(AWBSettings *)settings;
 + (AWBSetting *)imageAndTextListSettingWithText:(NSString *)text value:(id)aValue;
 + (AWBSetting *)textAndValueSettingWithText:(NSString *)text value:(id)aValue;
 + (AWBSetting *)segmentControlSettingWithText:(NSString *)text items:(NSArray *)items value:(id)aValue key:(NSString *)aKey;
 + (AWBSetting *)subtitleSettingWithText:(NSString *)text detailText:(NSString *)detailText value:(id)aValue;
++ (AWBSetting *)defaultSettingWithText:(NSString *)text;
 
 - (id)initWithText:(NSString *)aText controlType:(AWBSettingControlType)aControlType value:(id)aValue key:(NSString *)aKey;
 - (UITableViewCell *)settingTableCell;

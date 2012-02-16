@@ -35,6 +35,7 @@
 @synthesize addCollageBorder, collageBorderColor, useBackgroundTexture, collageBackgroundTexture, collageBackgroundColor;
 @synthesize busyView, assetsLibrary;
 @synthesize collageObjectLocator;
+@synthesize useMyFonts, labelMyFont, labelTextAlignment;
 
 - (id)init
 {
@@ -101,6 +102,9 @@
     [self setCollageBackgroundColor:theme.collageBackgroundColor];
     [self setCollageBorderColor:theme.collageBorderColor];
     [self setCollageBackgroundTexture:theme.backgroundTexture];  
+    [self setUseMyFonts:theme.useMyFonts];
+    [self setLabelMyFont:theme.labelMyFont];
+    [self setLabelTextAlignment:theme.labelTextAlignment];
     self.collageObjectLocator.snapToGrid = theme.snapToGrid;
     self.collageObjectLocator.objectLocatorType = theme.objectLocatorType;
     self.collageObjectLocator.autoMemoryReduction = theme.autoMemoryReduction;
@@ -129,6 +133,16 @@
 
 - (void)updateAllLabels
 {
+//    self.labelMyFont = nil;
+//    self.useMyFonts = NO;
+//    self.labelTextAlignment = UITextAlignmentCenter;
+    NSString *fontName = nil;
+    if (self.useMyFonts) {
+        fontName = self.labelMyFont;
+    } else {
+        fontName = self.labelTextFont;
+    }
+    
     for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
         if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
             if ([view isKindOfClass:[AWBTransformableLabel class]]) {
@@ -136,7 +150,7 @@
                 if (self.labelTextColor) {
                     [label.labelView setTextColor:self.labelTextColor];                       
                 }
-                [label updateLabelTextWithFont:[UIFont fontWithName:self.labelTextFont size:28.0]];                                    
+                [label updateLabelTextWithFontName:fontName fontSize:28.0];                                    
             }
         }            
     } 
@@ -178,6 +192,7 @@
     [textShadowColor release];
     [textBackgroundColor release];
     [labelTextFont release];
+    [labelMyFont release];
     [labelTextColor release];
     [labelTextLine1 release];
     [labelTextLine2 release];
@@ -353,6 +368,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);   
+    //return YES;
 }
 
 - (BOOL)saveChanges:(BOOL)saveThumbnail
@@ -399,6 +415,9 @@
         collage.backgroundTexture = collageBackgroundTexture;
         collage.collageBackgroundColor = collageBackgroundColor;
         collage.collageObjectLocator = collageObjectLocator;
+        collage.labelTextAlignment = labelTextAlignment;
+        collage.labelMyFont = labelMyFont;
+        collage.useMyFonts = useMyFonts;
         
         [collage initCollageFromView:[self view]];
 
@@ -476,6 +495,8 @@
             self.imageRoundedBorders = collage.imageRoundedBorders;
             self.textRoundedBorders = collage.textRoundedBorders;
             self.addTextBackground = collage.addTextBackground;
+            self.labelTextAlignment = collage.labelTextAlignment;
+            self.useMyFonts = collage.useMyFonts;
             
             if (collage.imageBorderColor) {
                 self.imageBorderColor = collage.imageBorderColor;
@@ -500,6 +521,9 @@
             }   
             if (collage.symbolColor) {
                 self.symbolColor = collage.symbolColor;
+            }
+            if (collage.labelMyFont) {
+                self.labelMyFont = collage.labelMyFont;
             }
         }
 

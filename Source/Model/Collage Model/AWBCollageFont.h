@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZFont.h"
 
 typedef enum {
     AWBCollageFontTypeHelvetica,
@@ -21,7 +22,8 @@ typedef enum {
     AWBCollageFontTypeAcademyEngravedLetPlain,
     AWBCollageFontTypeBradleyHandITCTTBold,
     AWBCollageFontTypePapyrus,
-    AWBCollageFontTypePartyLetPlain
+    AWBCollageFontTypePartyLetPlain,
+    AWBCollageFontTypeGraffiti
 } AWBCollageFontType;
 
 @interface AWBCollageFont : NSObject {
@@ -29,10 +31,17 @@ typedef enum {
 }
 
 @property (nonatomic, assign) AWBCollageFontType fontType;
+@property (nonatomic, readonly) BOOL isZFont;
 
 - (id)initWithFontType:(AWBCollageFontType)aFontType;
 - (NSString *)fontFamilyName;
 - (NSString *)fontDescription;
 - (UIFont *)fontWithSize:(CGFloat)size;
+- (ZFont *)zFontWithSize:(CGFloat)size;
++ (BOOL)isZFont:(NSString *)fontName;
++ (BOOL)isFontNameMyFontURL:(NSString *)fontName;
++ (BOOL)isFontNameMyFontFilename:(NSString *)fontName;
++ (NSURL *)myFontUrlFromFontFilename:(NSString *)fontFilename;
++ (BOOL)myFontDoesExistWithFilename:(NSString *)fontFilename;
 
 @end

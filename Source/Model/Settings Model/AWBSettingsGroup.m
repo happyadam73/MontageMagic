@@ -18,6 +18,8 @@
 #import "UIImage+NonCached.h"
 #import "AWBCollageObjectLocator.h"
 #import "AWBCollageLayout.h"
+#import "AWBMyFont.h"
+#import "AWBMyFontStore.h"
 
 @implementation AWBSettingsGroup
 
@@ -98,7 +100,7 @@
 
 + (AWBSettingsGroup *)textColorPickerSettingsGroupWithInfo:(NSDictionary *)info
 {
-    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting colorSettingWithValue:[info objectForKey:kAWBInfoKeyTextColor] andKey:kAWBInfoKeyTextColor]] header:@"Text Colour" footer:nil] autorelease];
+    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting colorSettingWithValue:[info objectForKey:kAWBInfoKeyTextColor] andKey:kAWBInfoKeyTextColor]] header:nil footer:nil] autorelease];
 }
 
 + (AWBSettingsGroup *)backgroundColorPickerSettingsGroupWithInfo:(NSDictionary *)info
@@ -224,31 +226,92 @@
 {
     NSMutableArray *textEditSettings = [NSMutableArray arrayWithObjects:[AWBSetting textEditSettingWithText:@"Line 1" value:[info objectForKey:kAWBInfoKeyLabelTextLine1] key:kAWBInfoKeyLabelTextLine1], [AWBSetting textEditSettingWithText:@"Line 2" value:[info objectForKey:kAWBInfoKeyLabelTextLine2] key:kAWBInfoKeyLabelTextLine2], [AWBSetting textEditSettingWithText:@"Line 3" value:[info objectForKey:kAWBInfoKeyLabelTextLine3] key:kAWBInfoKeyLabelTextLine3], nil];
     
-    return [[[self alloc] initWithSettings:textEditSettings header:@"Label Text" footer:nil] autorelease];
+    return [[[self alloc] initWithSettings:textEditSettings header:nil footer:nil] autorelease];
 }
 
 + (AWBSettingsGroup *)fontSettingsGroupWithInfo:(NSDictionary *)info
 {
     NSMutableArray *fontSettings = nil;
     if (DEVICE_IS_IPAD) {
-        fontSettings = [NSMutableArray arrayWithObjects:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeArialRoundedMTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeChalkduster]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAcademyEngravedLetPlain]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeBradleyHandITCTTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeHelvetica]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeMarkerFeltThin]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypePapyrus]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypePartyLetPlain]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeSnellRoundhand]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeTrebuchetMSItalic]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAmericanTypewriter]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeZapfino]], nil];
+        fontSettings = [NSMutableArray arrayWithObjects:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeArialRoundedMTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeChalkduster]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAcademyEngravedLetPlain]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeBradleyHandITCTTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeHelvetica]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeMarkerFeltThin]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypePapyrus]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypePartyLetPlain]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeSnellRoundhand]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeTrebuchetMSItalic]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAmericanTypewriter]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeZapfino]], [AWBSetting zFontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeGraffiti]], nil];
     } else {
-        fontSettings = [NSMutableArray arrayWithObjects:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeArialRoundedMTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeHelvetica]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeMarkerFeltThin]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeSnellRoundhand]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeTrebuchetMSItalic]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAmericanTypewriter]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeZapfino]], nil];
+        fontSettings = [NSMutableArray arrayWithObjects:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeArialRoundedMTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeHelvetica]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeMarkerFeltThin]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeSnellRoundhand]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeTrebuchetMSItalic]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAmericanTypewriter]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeZapfino]], [AWBSetting zFontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeGraffiti]], nil];
     }
     
-    AWBSettingsGroup *fontGroup = [[self alloc] initWithSettings:fontSettings header:@"Font" footer:nil];
+    AWBSettingsGroup *fontGroup = [[self alloc] initWithSettings:fontSettings header:nil footer:nil];
     fontGroup.isMutuallyExclusive = YES;
     fontGroup.settingKeyForMutuallyExclusiveObjects = kAWBInfoKeyTextFontName;
     
     if (DEVICE_IS_IPAD) {
-        fontGroup.mutuallyExclusiveObjects = [NSMutableArray arrayWithObjects:@"ArialRoundedMTBold", @"Chalkduster", @"AcademyEngravedLetPlain", @"BradleyHandITCTT-Bold", @"Helvetica", @"MarkerFelt-Thin", @"Papyrus", @"PartyLetPlain", @"SnellRoundhand", @"TrebuchetMS-Italic", @"AmericanTypewriter", @"Zapfino", nil];
+        fontGroup.mutuallyExclusiveObjects = [NSMutableArray arrayWithObjects:@"ArialRoundedMTBold", @"Chalkduster", @"AcademyEngravedLetPlain", @"BradleyHandITCTT-Bold", @"Helvetica", @"MarkerFelt-Thin", @"Papyrus", @"PartyLetPlain", @"SnellRoundhand", @"TrebuchetMS-Italic", @"AmericanTypewriter", @"Zapfino", @"Most Wasted", nil];
     } else {
-        fontGroup.mutuallyExclusiveObjects = [NSMutableArray arrayWithObjects:@"ArialRoundedMTBold", @"Helvetica", @"MarkerFelt-Thin", @"SnellRoundhand", @"TrebuchetMS-Italic", @"AmericanTypewriter", @"Zapfino", nil];        
+        fontGroup.mutuallyExclusiveObjects = [NSMutableArray arrayWithObjects:@"ArialRoundedMTBold", @"Helvetica", @"MarkerFelt-Thin", @"SnellRoundhand", @"TrebuchetMS-Italic", @"AmericanTypewriter", @"Zapfino", @"Most Wasted", nil];        
     }
         
-    fontGroup.selectedIndex = [fontGroup.mutuallyExclusiveObjects indexOfObject:[info objectForKey:kAWBInfoKeyTextFontName]];
+    NSUInteger foundFontIndex = [fontGroup.mutuallyExclusiveObjects indexOfObject:[info objectForKey:kAWBInfoKeyTextFontName]];
+    if (foundFontIndex == NSNotFound) {
+        fontGroup.selectedIndex = 0;
+    } else {
+        fontGroup.selectedIndex = foundFontIndex;        
+    }
     
     return [fontGroup autorelease];
+}
+
++ (AWBSettingsGroup *)myFontSettingsGroupWithInfo:(NSDictionary *)info
+{
+    NSArray *allMyFonts = [[AWBMyFontStore defaultStore] allMyFonts];
+    NSMutableArray *fontSettings = [[NSMutableArray alloc] initWithCapacity:[allMyFonts count]];
+    NSMutableArray *fontFilenames = [[NSMutableArray alloc] initWithCapacity:[allMyFonts count]];
+    NSString *selectedFontFilename = [info objectForKey:kAWBInfoKeyMyFontName];
+    NSUInteger selectedFontIndex = 0;
+    NSUInteger currentFontIndex = 0;
+    
+    for (AWBMyFont *myFont in allMyFonts) {
+        [fontSettings addObject:[AWBSetting defaultSettingWithText:myFont.fontName]];
+        NSString *fontFilename = myFont.filename;
+        [fontFilenames addObject:fontFilename];
+        if ([selectedFontFilename isEqualToString:fontFilename]) {
+            selectedFontIndex = currentFontIndex;
+        }
+        currentFontIndex++;
+    }
+    
+    AWBSettingsGroup *fontGroup = [[self alloc] initWithSettings:fontSettings header:nil footer:nil];
+    fontGroup.isMutuallyExclusive = YES;
+    fontGroup.settingKeyForMutuallyExclusiveObjects = kAWBInfoKeyMyFontName;
+    fontGroup.mutuallyExclusiveObjects = fontFilenames; 
+    fontGroup.selectedIndex = selectedFontIndex;
+    [fontSettings release];
+    [fontFilenames release];
+    
+    return [fontGroup autorelease];
+}
+
++ (AWBSettingsGroup *)myFontsSwitchSettingsGroupWithInfo:(NSDictionary *)info
+{    
+    NSUInteger myFontCount = [[[AWBMyFontStore defaultStore] allMyFonts] count];
+    id settingValue;
+    if (myFontCount > 0) {
+        settingValue = [info objectForKey:kAWBInfoKeyUseMyFonts];
+    } else {
+        settingValue = [NSNumber numberWithBool:NO];
+    }
+    
+    AWBSetting *useMyFontsSetting = [AWBSetting switchSettingWithText:@"Use MyFonts" value:settingValue key:kAWBInfoKeyUseMyFonts];
+    NSString *footer = nil;
+    if (myFontCount > 0) {
+        useMyFontsSetting.disableControl = NO;
+    } else {
+        useMyFontsSetting.disableControl = YES;
+        footer = @"No extra fonts installed - go to the MyFonts screen or Help to find out how to install more fonts.";
+    }
+    useMyFontsSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:useMyFontsSetting];
+    AWBSettingsGroup *myFontsSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:footer];
+    myFontsSettings.masterSwitchIsOn = useMyFontsSetting.isSwitchedOn;
+    useMyFontsSetting.parentGroup = myFontsSettings;
+    return [myFontsSettings autorelease];    
 }
 
 + (AWBSettingsGroup *)shadowsAndBordersDrilldownSettingsGroupWithInfo:(NSDictionary *)info
@@ -545,6 +608,74 @@
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:autoMemoryReductionSetting, nil];
     AWBSettingsGroup *autoMemoryReductionSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:@"For mosaics with lots of smaller photos, images are further downsized to reduce memory usage.  A change to this setting does not affect existing photos."];
     return [autoMemoryReductionSettings autorelease];
+}
+
++ (AWBSettingsGroup *)myFontNameWithHeaderSettingsGroupWithInfo:(NSDictionary *)info
+{
+    NSMutableArray *myFontNameSettings = [NSMutableArray arrayWithObjects:[AWBSetting textEditSettingWithText:@"Name" value:[info objectForKey:kAWBInfoKeyMyFontFontName] key:kAWBInfoKeyMyFontFontName], nil];
+    
+    return [[[self alloc] initWithSettings:myFontNameSettings header:nil footer:@"Tap to edit the font name"] autorelease];
+}
+
++ (AWBSettingsGroup *)myFontInfoMetricsSettingsGroupWithInfo:(NSDictionary *)info
+{
+    NSDate *installDate = [info objectForKey:kAWBInfoKeyMyFontCreatedDate];
+    NSString *installDateDescription = [NSString stringWithFormat:@"%@", AWBDateStringForCurrentLocale(installDate)];   
+    NSString *myFontDiskTotal = AWBFileSizeIntToString([[info objectForKey:kAWBInfoKeyMyFontFileSizeBytes] intValue]);
+    NSString *familyName = [info objectForKey:kAWBInfoKeyMyFontFamilyName];
+    NSString *postScriptName = [info objectForKey:kAWBInfoKeyMyFontPostscriptName];
+    NSString *filename = [info objectForKey:kAWBInfoKeyMyFontFilename];
+    
+    NSMutableArray *myFontInfoSettings = [NSMutableArray arrayWithObjects:[AWBSetting textAndValueSettingWithText:@"Family" value:familyName], [AWBSetting textAndValueSettingWithText:@"Postscript" value:postScriptName], [AWBSetting textAndValueSettingWithText:@"Filename" value:filename], [AWBSetting textAndValueSettingWithText:@"Installed" value:installDateDescription], [AWBSetting textAndValueSettingWithText:@"File Size" value:myFontDiskTotal], nil];
+    
+    return [[[self alloc] initWithSettings:myFontInfoSettings header:@"Info" footer:nil] autorelease];   
+}
+
++ (AWBSettingsGroup *)myFontPreviewSettingsGroupWithInfo:(NSDictionary *)info
+{
+    NSURL *fontFileUrl = [info objectForKey:kAWBInfoKeyMyFontFileUrl];
+    NSUInteger fontDiskBytes = [[info objectForKey:kAWBInfoKeyMyFontFileSizeBytes] integerValue];
+    
+    NSString *osVersion = [[UIDevice currentDevice] systemVersion];
+    NSString *versionWithBetterFontRendering = @"5.0";
+    BOOL shorterPreviewForLargeFonts = ([versionWithBetterFontRendering compare:osVersion options:NSNumericSearch] == NSOrderedDescending);
+    NSString *previewText = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789";
+    NSString *footer = nil;
+    
+    if (shorterPreviewForLargeFonts) {
+        if (fontDiskBytes > 500000) {
+            previewText = @"ABC abc";
+            footer = @"This is a very large font and may render slowly on this device (fonts render quicker with iOS5 and above).  A short preview is being displayed.";
+        } else if (fontDiskBytes > 100000) {
+            previewText = @"ABCDEFG abcdefg 0123456789";            
+            footer = @"This font may render slowly on this device (fonts render quicker with iOS5 and above).  A shorter preview is being displayed.";
+        }
+    }
+    
+    NSMutableArray *myFontPreviewSettings = [NSMutableArray arrayWithObjects:[AWBSetting myFontPreviewSettingWithText:previewText value:fontFileUrl], nil];
+    AWBSettingsGroup *myFontPreviewSettingsGroup = [[self alloc] initWithSettings:myFontPreviewSettings header:@"Preview" footer:footer];
+    myFontPreviewSettingsGroup.iPhoneRowHeight = 200;
+    myFontPreviewSettingsGroup.iPadRowHeight = 300;
+    return [myFontPreviewSettingsGroup autorelease];
+}
+
++ (AWBSettingsGroup *)helpTextSettingsGroupWithFilename:(NSString *)filename
+{    
+    NSString *path = AWBPathInMainBundleSubdirectory(@"Help Files", filename);
+    NSURL *url = [NSURL fileURLWithPath:path];
+    NSMutableArray *helpTextSettings = [NSMutableArray arrayWithObjects:[AWBSetting webViewSettingWithValue:url andKey:nil], nil];
+    AWBSettingsGroup *helpTextSettingsGroup = [[self alloc] initWithSettings:helpTextSettings header:nil footer:nil];
+    
+    //ensure the table cell fills screen (this will be capped by the settings controller)
+    helpTextSettingsGroup.iPhoneRowHeight = 480;
+    helpTextSettingsGroup.iPadRowHeight = 1024;
+    
+    return [helpTextSettingsGroup autorelease];
+}
+
++ (AWBSettingsGroup *)textAlignmentPickerSettingsGroupWithInfo:(NSDictionary *)info
+{
+    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting segmentControlSettingWithText:@"Alignment" items:[NSArray arrayWithObjects:[UIImage imageNamed:@"leftalignment"], [UIImage imageNamed:@"centeralignment"], [UIImage imageNamed:@"rightalignment"], nil] value:[info objectForKey:kAWBInfoKeyTextAlignment] key:kAWBInfoKeyTextAlignment]] header:nil footer:nil] autorelease];
 }
 
 - (void)dealloc

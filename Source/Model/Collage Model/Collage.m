@@ -23,6 +23,7 @@
 @synthesize luckyDipAmountIndex, luckyDipSourceIndex, luckyDipContactTypeIndex, luckyDipContactIncludePhoneNumber, selectedAssetsGroupName;
 @synthesize addCollageBorder, collageBorderColor, useBackgroundTexture, backgroundTexture;
 @synthesize collageObjectLocator;
+@synthesize labelMyFont, labelTextAlignment, useMyFonts;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -57,7 +58,22 @@
     self.luckyDipSourceIndex = [aDecoder decodeIntegerForKey:kAWBInfoKeyLuckyDipSourceSelectedIndex];
     self.selectedAssetsGroupName = [aDecoder decodeObjectForKey:kAWBInfoKeySelectedAssetGroupName];
     self.collageObjectLocator = [aDecoder decodeObjectForKey:kAWBInfoKeyCollageObjectLocator];
-        
+    if ([aDecoder containsValueForKey:kAWBInfoKeyMyFontName]) {
+        self.labelMyFont = [aDecoder decodeObjectForKey:kAWBInfoKeyMyFontName];
+    } else {
+        self.labelMyFont = nil;
+    }
+    if ([aDecoder containsValueForKey:kAWBInfoKeyUseMyFonts]) {
+        self.useMyFonts = [aDecoder decodeBoolForKey:kAWBInfoKeyUseMyFonts];
+    } else {
+        self.useMyFonts = NO;
+    }
+    if ([aDecoder containsValueForKey:kAWBInfoKeyTextAlignment]) {
+        self.labelTextAlignment = [aDecoder decodeIntegerForKey:kAWBInfoKeyTextAlignment];
+    } else {
+        self.labelTextAlignment = UITextAlignmentCenter;
+    }
+
     return  self;   
 }
 
@@ -173,6 +189,9 @@
     [aCoder encodeInteger:self.luckyDipSourceIndex forKey:kAWBInfoKeyLuckyDipSourceSelectedIndex];
     [aCoder encodeObject:self.selectedAssetsGroupName forKey:kAWBInfoKeySelectedAssetGroupName];
     [aCoder encodeObject:self.collageObjectLocator forKey:kAWBInfoKeyCollageObjectLocator];
+    [aCoder encodeObject:self.labelMyFont forKey:kAWBInfoKeyMyFontName];
+    [aCoder encodeBool:self.useMyFonts forKey:kAWBInfoKeyUseMyFonts];
+    [aCoder encodeInteger:self.labelTextAlignment forKey:kAWBInfoKeyTextAlignment]; 
 }
 
 - (void)dealloc
@@ -194,7 +213,8 @@
     [backgroundTexture release];
     [selectedAssetsGroupName release];
     [collageObjectLocator release];
-    
+    [labelMyFont release];
+
     [super dealloc];
 }
 

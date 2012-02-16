@@ -7,6 +7,8 @@
 //
 
 #import "AWBCollageFont.h"
+#import "FontManager.h"
+#import "FileHelpers.h"
 
 @implementation AWBCollageFont
 
@@ -20,6 +22,43 @@
     }
     return self;
 }
+
+- (BOOL)isZFont
+{
+    switch (fontType) {
+        case AWBCollageFontTypeAmericanTypewriter:
+            return NO;
+        case AWBCollageFontTypeAppleGothic:
+            return NO;
+        case AWBCollageFontTypeArialRoundedMTBold:
+            return NO;
+        case AWBCollageFontTypeHelvetica:
+            return NO;
+        case AWBCollageFontTypeMarkerFeltThin:
+            return NO;
+        case AWBCollageFontTypeSnellRoundhand:
+            return NO;
+        case AWBCollageFontTypeTrebuchetMSItalic:
+            return NO;
+        case AWBCollageFontTypeZapfino:
+            return NO;
+        case AWBCollageFontTypeChalkduster:
+            return NO;
+        case AWBCollageFontTypeAcademyEngravedLetPlain:
+            return NO;
+        case AWBCollageFontTypeBradleyHandITCTTBold:
+            return NO;
+        case AWBCollageFontTypePapyrus:
+            return NO;
+        case AWBCollageFontTypePartyLetPlain:
+            return NO;
+        case AWBCollageFontTypeGraffiti:
+            return YES;
+        default:
+            return NO;
+    }
+}
+
 
 - (NSString *)fontFamilyName
 {
@@ -50,6 +89,8 @@
             return @"Papyrus";
         case AWBCollageFontTypePartyLetPlain:
             return @"PartyLetPlain";
+        case AWBCollageFontTypeGraffiti:
+            return @"Most Wasted";
         default:
             return @"Helvetica";
     }
@@ -84,6 +125,8 @@
             return @"Papyrus";
         case AWBCollageFontTypePartyLetPlain:
             return @"Party";
+        case AWBCollageFontTypeGraffiti:
+            return @"Graffiti";
         default:
             return @"Helvetica";
     }
@@ -92,6 +135,58 @@
 - (UIFont *)fontWithSize:(CGFloat)size
 {
     return [UIFont fontWithName:[self fontFamilyName] size:size];
+}
+
+- (ZFont *)zFontWithSize:(CGFloat)size
+{
+    if (!self.isZFont) {
+        return nil;
+    }
+    return [[FontManager sharedManager] zFontWithName:[self fontFamilyName] pointSize:size];
+}
+
++ (BOOL)isZFont:(NSString *)fontName
+{
+    if ([fontName isEqualToString:@"Most Wasted"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (BOOL)isFontNameMyFontURL:(NSString *)fontName
+{
+    NSURL *fileUrl = [NSURL URLWithString:fontName];
+    if (fileUrl) {
+        if ([fileUrl isFileURL]) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
+    }
+}
+
++ (BOOL)isFontNameMyFontFilename:(NSString *)fontName
+{
+    if ([fontName hasPrefix:@"mf"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (NSURL *)myFontUrlFromFontFilename:(NSString *)fontFilename
+{
+    NSString *filepath = AWBPathInMyFontsDocumentsSubdirectory(fontFilename);
+    return [NSURL fileURLWithPath:filepath];
+}
+
++ (BOOL)myFontDoesExistWithFilename:(NSString *)fontFilename
+{
+    NSString *filepath = AWBPathInMyFontsDocumentsSubdirectory(fontFilename);
+    return [[NSFileManager defaultManager] fileExistsAtPath:filepath];
 }
 
 @end

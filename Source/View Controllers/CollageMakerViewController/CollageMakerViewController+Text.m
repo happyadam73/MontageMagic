@@ -11,6 +11,7 @@
 #import "CollageMakerViewController+Delete.h"
 #import "UIView+Animation.h"
 #import "CollageMakerViewController+Edit.h"
+#import "AWBCollageFont.h"
 
 @implementation CollageMakerViewController (Text) 
 
@@ -44,20 +45,49 @@
     }
     
     AWBCollageSettingsTableViewController *settingsController = nil;
+    
+    UILabel *selectedLabelView = nil;
+    AWBTransformableLabel *selectedLabel = nil;
+    BOOL isZFontLabel = NO;
+    NSString *fontFilename = nil;
+    
+    for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+        if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
+            if ((view.alpha == SELECTED_ALPHA) && [view isKindOfClass:[AWBTransformableLabel class]]) {
+                selectedLabel = (AWBTransformableLabel *)view;
+                selectedLabelView = [(AWBTransformableLabel *)view labelView];
+                isZFontLabel = [(AWBTransformableLabel *)view isZFontLabel];
+                fontFilename = [(AWBTransformableLabel *)view myFontFilename];
+                break;
+            }
+        }            
+    } 
+    
+    if (isZFontLabel) {
+        if (fontFilename) {
+            if ([AWBCollageFont myFontDoesExistWithFilename:fontFilename]) {
+                self.useMyFonts = YES;
+                self.labelMyFont = fontFilename;                
+            } else {
+                self.useMyFonts = NO;
+                self.labelMyFont = @"Most Wasted";
+            }
+        } else {
+            self.useMyFonts = NO;
+            self.labelTextFont = ((FontLabel *)selectedLabelView).zFont.familyName;            
+        }
+    } else {
+        self.useMyFonts = NO;
+        self.labelTextFont = selectedLabelView.font.fontName;
+    }
+    
+    self.labelTextColor = selectedLabelView.textColor;
+    self.labelTextAlignment = selectedLabelView.textAlignment;
+    
     if (totalSelectedLabelsInEditMode == 1) {
-        //get selected label
-        AWBLabel *selectedLabel = nil;
-        for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
-            if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
-                if ((view.alpha == SELECTED_ALPHA) && [view isKindOfClass:[AWBTransformableLabel class]]) {
-                    selectedLabel = [(AWBTransformableLabel *)view labelView];
-                    break;
-                }
-            }            
-        } 
         //set info for selected label
-        if (selectedLabel) {
-            NSArray *lines = [[selectedLabel text] componentsSeparatedByString:@"\r\n"];
+        if (selectedLabelView) {
+            NSArray *lines = [[selectedLabelView text] componentsSeparatedByString:@"\r\n"];
             NSUInteger lineCount = [lines count];
             if (lineCount > 0) {
                 self.labelTextLine1 = [lines objectAtIndex:0];
@@ -74,8 +104,6 @@
             } else {
                 self.labelTextLine3 = nil;
             }
-            self.labelTextFont = selectedLabel.font.fontName;
-            self.labelTextColor = selectedLabel.textColor;
         }
         settingsController = [[AWBCollageSettingsTableViewController alloc] initWithSettings:[AWBSettings editSingleTextSettingsWithInfo:[self settingsInfo]] settingsInfo:[self settingsInfo] rootController:nil];        
     } else {

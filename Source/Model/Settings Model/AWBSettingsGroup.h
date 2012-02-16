@@ -17,7 +17,10 @@ static NSString *const kAWBInfoKeyCollageUseBackgroundTexture = @"CollageUseBack
 static NSString *const kAWBInfoKeyCollageBorder = @"CollageBorder";
 static NSString *const kAWBInfoKeyCollageBorderColor = @"CollageBorderColor";
 static NSString *const kAWBInfoKeyTextColor = @"TextColor";
+static NSString *const kAWBInfoKeyTextAlignment = @"TextAlignment";
+static NSString *const kAWBInfoKeyUseMyFonts = @"UseMyFonts";
 static NSString *const kAWBInfoKeyTextFontName = @"TextFontName";
+static NSString *const kAWBInfoKeyMyFontName = @"MyFontName";
 static NSString *const kAWBInfoKeyImageShadows = @"ImageShadows";
 static NSString *const kAWBInfoKeyTextShadows = @"TextShadows";
 static NSString *const kAWBInfoKeyImageShadowColor = @"ImageShadowColor";
@@ -92,6 +95,8 @@ static NSString *const kAWBInfoKeyAddContentOnCreation = @"AddContentOnCreation"
 + (AWBSettingsGroup *)textBackgroundColorPickerSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)qualitySliderSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)fontSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)myFontSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)myFontsSwitchSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)textEditSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)shadowsAndBordersDrilldownSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)imageShadowColorPickerSettingsGroupWithInfo:(NSDictionary *)info;
@@ -121,6 +126,11 @@ static NSString *const kAWBInfoKeyAddContentOnCreation = @"AddContentOnCreation"
 + (AWBSettingsGroup *)layoutListSettingsGroupWithInfo:(NSDictionary *)info header:(NSString *)header footer:(NSString *)footer;
 + (AWBSettingsGroup *)lockAndLayoutSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)autoMemoryReductionSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)myFontNameWithHeaderSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)myFontInfoMetricsSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)myFontPreviewSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)helpTextSettingsGroupWithFilename:(NSString *)filename;
++ (AWBSettingsGroup *)textAlignmentPickerSettingsGroupWithInfo:(NSDictionary *)info;
 
 - (id)initWithSettings:(NSMutableArray *)aSettings header:(NSString *)aHeader footer:(NSString *)aFooter;
 - (void)masterSwitchSettingHasChangedValue:(AWBSetting *)setting;

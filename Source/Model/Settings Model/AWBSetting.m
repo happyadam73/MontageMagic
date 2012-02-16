@@ -14,16 +14,20 @@
 #import "AWBColorPickerTableCell.h"
 #import "AWBColorPickerSegmentedControl.h"
 #import "AWBFontTableCell.h"
+#import "AWBZFontTableCell.h"
 #import "AWBDrilldownCell.h"
 #import "AWBTextEditCell.h"
 #import "AWBImageAndTextTableCell.h"
 #import "AWBTextValueTableCell.h"
 #import "AWBSegmentControlCell.h"
 #import "AWBSubtitleTableCell.h"
+#import "AWBMyFontPreviewTableCell.h"
+#import "AWBWebViewCell.h"
 
 @implementation AWBSetting
 
 @synthesize text, detailText, settingValue, settingKey, controlType, childSettings, readonly, items, visible, parentGroup, masterSlaveType;
+@synthesize disableControl;
 
 - (id)initWithText:(NSString *)aText controlType:(AWBSettingControlType)aControlType value:(id)aValue key:(NSString *)aKey
 {
@@ -102,9 +106,24 @@
     return [[[self alloc] initWithText:text controlType:AWBSettingControlTypeTextEdit value:aValue key:aKey] autorelease];
 }
 
++ (AWBSetting *)webViewSettingWithValue:(id)aValue andKey:(NSString *)aKey
+{
+    return [[[self alloc] initWithText:nil controlType:AWBSettingControlTypeWebView value:aValue key:aKey] autorelease];
+}
+
 + (AWBSetting *)fontSettingWithValue:(id)aValue
 {
     return [[[self alloc] initWithText:nil controlType:AWBSettingControlTypeFont value:aValue key:nil] autorelease];
+}
+
++ (AWBSetting *)zFontSettingWithValue:(id)aValue
+{
+    return [[[self alloc] initWithText:nil controlType:AWBSettingControlTypeZFont value:aValue key:nil] autorelease];
+}
+
++ (AWBSetting *)myFontPreviewSettingWithText:(NSString *)text value:(id)aValue
+{
+    return [[[self alloc] initWithText:text controlType:AWBSettingControlTypeMyFontPreview value:aValue key:nil] autorelease];
 }
 
 + (AWBSetting *)drilldownSettingWithText:(NSString *)aText value:(id)aValue key:(NSString *)aKey childSettings:(AWBSettings *)settings
@@ -133,6 +152,12 @@
     return [setting autorelease];
 }
 
++ (AWBSetting *)defaultSettingWithText:(NSString *)text
+{
+    AWBSetting *setting = [[self alloc] initWithText:text controlType:AWBSettingControlTypeDefault value:nil key:nil];
+    return [setting autorelease];
+}
+
 - (NSString *)cellReuseIdentifier
 {
     switch (controlType) {
@@ -146,6 +171,10 @@
             return @"AWBSettingControlTypeColorPicker";
         case AWBSettingControlTypeFont:
             return @"AWBSettingControlTypeFont";
+        case AWBSettingControlTypeZFont:
+            return @"AWBSettingControlTypeZFont";
+        case AWBSettingControlTypeMyFontPreview:
+            return @"AWBSettingControlTypeMyFontPreview"; 
         case AWBSettingControlTypeDrilldown:
             return @"AWBSettingControlTypeDrilldown";
         case AWBSettingControlTypeDefault:
@@ -157,7 +186,9 @@
         case AWBSettingControlTypeSegmentControl:
             return @"AWBSettingControlTypeSegmentControl";   
         case AWBSettingControlTypeSubtitle:
-            return @"AWBSettingControlTypeSubtitle";              
+            return @"AWBSettingControlTypeSubtitle"; 
+        case AWBSettingControlTypeWebView:
+            return @"AWBSettingControlTypeWebView";
         default:
             return @"AWBSettingControlTypeDefault";
     }    
@@ -171,12 +202,20 @@
         case AWBSettingControlTypeSwitch:
             tableCell = [[AWBSwitchCell alloc] initWithText:self.text value:[settingValue boolValue] reuseIdentifier:self.cellReuseIdentifier];
             tableCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (self.disableControl) {
+                tableCell.textLabel.enabled = NO;
+                [[(AWBSwitchCell *)tableCell cellSwitch] setEnabled:NO];
+            }
             [[(AWBSwitchCell *)tableCell cellSwitch] addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
             break;
         case AWBSettingControlTypeTextEdit:
             tableCell = [[AWBTextEditCell alloc] initWithLabel:self.text textValue:settingValue reuseIdentifier:self.cellReuseIdentifier];
             tableCell.selectionStyle = UITableViewCellSelectionStyleNone;
             [[(AWBTextEditCell *)tableCell cellTextField] addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventAllEditingEvents];
+            break;
+        case AWBSettingControlTypeWebView:
+            tableCell = [[AWBWebViewCell alloc] initWithUrl:settingValue ReuseIdentifier:self.cellReuseIdentifier];
+            tableCell.selectionStyle = UITableViewCellSelectionStyleNone;
             break;
         case AWBSettingControlTypeQualitySlider:
             tableCell = [[AWBQualitySliderCell alloc] initWithQualityValue:[settingValue floatValue] reuseIdentifier:self.cellReuseIdentifier];
@@ -191,6 +230,14 @@
         case AWBSettingControlTypeFont:
             tableCell = [[AWBFontTableCell alloc] initWithFontType:[settingValue integerValue] reuseIdentifier:self.cellReuseIdentifier];
             tableCell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            break;
+        case AWBSettingControlTypeZFont:
+            tableCell = [[AWBZFontTableCell alloc] initWithFontType:[settingValue integerValue] reuseIdentifier:self.cellReuseIdentifier];
+            tableCell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            break;
+        case AWBSettingControlTypeMyFontPreview:
+            tableCell = [[AWBMyFontPreviewTableCell alloc] initWithFontFileUrl:settingValue previewText:self.text reuseIdentifier:self.cellReuseIdentifier];
+            tableCell.selectionStyle = UITableViewCellSelectionStyleNone;
             break;
         case AWBSettingControlTypeDrilldown:
             tableCell = [[AWBDrilldownCell alloc] initWithText:self.text textValue:[self settingValueDescription] reuseIdentifier:self.cellReuseIdentifier];
@@ -245,6 +292,9 @@
         case AWBSettingControlTypeTextEdit:
             self.settingValue = [(UITextField *)sender text];
             break;
+        case AWBSettingControlTypeWebView:
+            self.settingValue = nil;
+            break;
         case AWBSettingControlTypeQualitySlider:            
             self.settingValue = [NSNumber numberWithFloat:(((int)(2.0 * [(UISlider *)sender value])) / 2.0)];
             break;
@@ -252,6 +302,12 @@
             self.settingValue = [(AWBColorPickerSegmentedControl *)sender selectedColor];
             break;
         case AWBSettingControlTypeFont:
+            self.settingValue = nil;
+            break;
+        case AWBSettingControlTypeZFont:
+            self.settingValue = nil;
+            break;
+        case AWBSettingControlTypeMyFontPreview:
             self.settingValue = nil;
             break;
         case AWBSettingControlTypeImageAndTextList:

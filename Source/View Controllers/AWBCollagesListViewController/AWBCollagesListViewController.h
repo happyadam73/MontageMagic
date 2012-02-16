@@ -19,15 +19,19 @@
     BOOL haveCreatedMagicCollage;
     AWBBusyView *busyView;
     BOOL motionEnabled;
+    UIBarButtonItem *myFontsButton;
 }
 
 @property (assign) BOOL isLowMemory;
 @property (nonatomic, retain) AWBBusyView *busyView;
+@property (nonatomic, retain) UIBarButtonItem *myFontsButton;
 
 - (CGFloat)borderThickness;
 - (void)addNewCollageDescriptor:(id)sender;
 - (void)loadCollageAtIndexPath:(NSIndexPath *)indexPath requestThemeChange:(BOOL)themeChange createMagicCollage:(BOOL)createMagicCollage;
 - (void)navigateToCollageController:(CollageMakerViewController *)collageController;
 - (CGPoint)centerOfVisibleRows;
+- (void)showMyFonts;
+- (NSArray *)myCollagesToolbarButtons;
 
 @end

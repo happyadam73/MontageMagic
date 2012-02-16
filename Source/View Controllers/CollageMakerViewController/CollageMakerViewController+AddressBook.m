@@ -194,8 +194,18 @@
             includePhoneNumber = YES;
         }
 
+//        self.labelMyFont = nil;
+//        self.useMyFonts = NO;
+//        self.labelTextAlignment = UITextAlignmentCenter;
+        NSString *fontName = nil;
+        if (self.useMyFonts) {
+            fontName = self.labelMyFont;
+        } else {
+            fontName = self.labelTextFont;
+        }
+
         [collageObjectLocator pushContactLabelBelowCurrentObject:labelBelowImage includesPhoneNumber:includePhoneNumber];
-        AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines font:[UIFont fontWithName:self.labelTextFont size:28.0] offset:CGPointZero rotation:self.collageObjectLocator.objectRotation scale:self.collageObjectLocator.objectScale horizontalFlip:NO color:self.labelTextColor];
+        AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines fontName:fontName fontSize:28.0 offset:CGPointZero rotation:self.collageObjectLocator.objectRotation scale:self.collageObjectLocator.objectScale horizontalFlip:NO color:self.labelTextColor alignment:self.labelTextAlignment];
 
         CGPoint position = self.collageObjectLocator.objectPosition;
         

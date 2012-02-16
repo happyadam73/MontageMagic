@@ -24,3 +24,5 @@ NSString *AWBDateStringForCurrentLocale(NSDate *date);
 NSString *AWBGetImageKeyFromDocumentSubdirectory(NSString *docsSubdirectory, NSString *fileName);
 BOOL AWBCopyBundleItemAtPathToDocumentsFolder(NSString *bundleSubdirectory, NSString *filename);
 BOOL AWBCopyCollageHelpFilesForDevice();
+NSString *AWBPathInMyFontsDocumentsSubdirectory(NSString *filename);
+NSString *AWBPathInMainBundleSubdirectory(NSString *bundleSubdirectory, NSString *filename);

@@ -82,6 +82,9 @@
     NSString *labelTextLine3;
     UIColor *labelTextColor;
     NSString *labelTextFont;
+    BOOL useMyFonts;
+    NSString *labelMyFont;
+    UITextAlignment labelTextAlignment;
     UIColor *symbolColor;
     AWBArrowLineShapeType symbolShape;
     
@@ -181,6 +184,9 @@
 @property (nonatomic, retain) NSString *labelTextLine3;
 @property (nonatomic, retain) UIColor *labelTextColor;
 @property (nonatomic, retain) NSString *labelTextFont;
+@property (nonatomic, assign) BOOL useMyFonts;
+@property (nonatomic, retain) NSString *labelMyFont;
+@property (nonatomic, assign) UITextAlignment labelTextAlignment;
 @property (nonatomic, retain) UIColor *symbolColor;
 @property (nonatomic, assign) AWBArrowLineShapeType symbolShape;
 @property (nonatomic, assign) BOOL addCollageBorder;
