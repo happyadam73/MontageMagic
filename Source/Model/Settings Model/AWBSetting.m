@@ -23,6 +23,7 @@
 #import "AWBSubtitleTableCell.h"
 #import "AWBMyFontPreviewTableCell.h"
 #import "AWBWebViewCell.h"
+#import "AWBExportQualitySliderCell.h"
 
 @implementation AWBSetting
 
@@ -87,6 +88,11 @@
 + (AWBSetting *)exportSizeSliderSettingWithValue:(id)aValue andKey:(NSString *)aKey
 {
     return [[[self alloc] initWithText:nil controlType:AWBSettingControlTypeExportSizeSlider value:aValue key:aKey] autorelease];
+}
+
++ (AWBSetting *)exportQualitySliderSettingWithValue:(id)aValue andKey:(NSString *)aKey
+{
+    return [[[self alloc] initWithText:nil controlType:AWBSettingControlTypeExportQualitySlider value:aValue key:aKey] autorelease];
 }
 
 + (AWBSetting *)switchSettingWithText:(NSString *)text value:(id)aValue key:(NSString *)aKey
@@ -167,6 +173,8 @@
             return @"AWBSettingControlTypeTextEdit";
         case AWBSettingControlTypeExportSizeSlider:
             return @"AWBSettingControlTypeExportSizeSlider";
+        case AWBSettingControlTypeExportQualitySlider:
+            return @"AWBSettingControlTypeExportQualitySlider";
         case AWBSettingControlTypeColorPicker:
             return @"AWBSettingControlTypeColorPicker";
         case AWBSettingControlTypeFont:
@@ -221,6 +229,11 @@
             tableCell = [[AWBExportSizeSliderCell alloc] initWithExportSizeValue:[settingValue floatValue] reuseIdentifier:self.cellReuseIdentifier];
             tableCell.selectionStyle = UITableViewCellSelectionStyleNone;
             [[(AWBExportSizeSliderCell *)tableCell exportSizeSlider] addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
+            break;
+        case AWBSettingControlTypeExportQualitySlider:
+            tableCell = [[AWBExportQualitySliderCell alloc] initWithExportQualityValue:[settingValue floatValue] reuseIdentifier:self.cellReuseIdentifier];
+            tableCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [[(AWBExportQualitySliderCell *)tableCell exportQualitySlider] addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
             break;
         case AWBSettingControlTypeColorPicker:
             tableCell = [[AWBColorPickerTableCell alloc] initWithSelectedColor:settingValue reuseIdentifier:self.cellReuseIdentifier];
@@ -297,6 +310,9 @@
             break;
         case AWBSettingControlTypeExportSizeSlider:            
             self.settingValue = [NSNumber numberWithFloat:(((int)(2.0 * [(UISlider *)sender value])) / 2.0)];
+            break;
+        case AWBSettingControlTypeExportQualitySlider:            
+            self.settingValue = [NSNumber numberWithFloat:(((int)(10.0 * [(UISlider *)sender value])) / 10.0)];
             break;
         case AWBSettingControlTypeColorPicker:
             self.settingValue = [(AWBColorPickerSegmentedControl *)sender selectedColor];

@@ -78,6 +78,9 @@
     UIColor *textBorderColor;
     UIColor *textBackgroundColor;
     CGFloat exportSize;
+    NSUInteger exportFormatSelectedIndex;
+    BOOL pngExportTransparentBackground;
+    CGFloat jpgExportQualityValue;
     
     NSString *labelTextLine1;
     NSString *labelTextLine2;
@@ -183,6 +186,9 @@
 @property (nonatomic, retain) UIColor *textBorderColor;
 @property (nonatomic, retain) UIColor *textBackgroundColor;
 @property (nonatomic, assign) CGFloat exportSize;
+@property (nonatomic, assign) NSUInteger exportFormatSelectedIndex;
+@property (nonatomic, assign) BOOL pngExportTransparentBackground;
+@property (nonatomic, assign) CGFloat jpgExportQualityValue;
 @property (nonatomic, retain) NSString *labelTextLine1;
 @property (nonatomic, retain) NSString *labelTextLine2;
 @property (nonatomic, retain) NSString *labelTextLine3;

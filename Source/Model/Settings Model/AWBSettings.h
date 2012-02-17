@@ -49,6 +49,7 @@
 + (AWBSettings *)layoutSettingsWithInfo:(NSDictionary *)info;
 + (AWBSettings *)myFontDescriptionSettingsWithInfo:(NSDictionary *)info header:(UIView *)header;
 + (AWBSettings *)helpSettingsWithFilename:(NSString *)filename title:(NSString *)title;
++ (AWBSettings *)exportSettingsWithInfo:(NSDictionary *)info;
 
 - (id)initWithSettingsGroups:(NSMutableArray *)aSettingsGroups title:(NSString *)title;
 - (id)initWithSettingsGroups:(NSMutableArray *)aSettingsGroups;

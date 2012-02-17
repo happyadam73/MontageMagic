@@ -77,7 +77,7 @@
 
 + (AWBSettings *)mainSettingsWithInfo:(NSDictionary *)info
 {
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup lockAndLayoutSettingsGroupWithInfo:info], [AWBSettingsGroup shadowsAndBordersDrilldownSettingsGroupWithInfo:info], [AWBSettingsGroup exportSizeSliderSettingsGroupWithInfo:info], nil];
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup lockAndLayoutSettingsGroupWithInfo:info], [AWBSettingsGroup shadowsAndBordersDrilldownSettingsGroupWithInfo:info], [AWBSettingsGroup exportDrilldownSettingsGroupWithInfo:info], nil];
     AWBSettings *mainSettings = [[self alloc] initWithSettingsGroups:settings title:@"Collage Settings"];
     
     return [mainSettings autorelease];
@@ -310,6 +310,24 @@
     AWBSettings *helpSettings = [[self alloc] initWithSettingsGroups:settings title:title];
     
     return [helpSettings autorelease];    
+}
+
++ (AWBSettings *)exportSettingsWithInfo:(NSDictionary *)info
+{
+    AWBSettingsGroup *exportQualityAndFormatSettings = [AWBSettingsGroup exportQualityAndFormatSettingsGroupWithInfo:info];
+    AWBSettingsGroup *pngExportSettings = [AWBSettingsGroup pngExportSettingsGroupWithInfo:info];
+    AWBSettingsGroup *jpgExportSettings = [AWBSettingsGroup jpgExportSettingsGroupWithInfo:info];
+    
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:exportQualityAndFormatSettings, pngExportSettings, jpgExportSettings, nil];
+    AWBSettings *exportSettings = [[self alloc] initWithSettingsGroups:settings title:@"Export Settings"];
+    
+    exportQualityAndFormatSettings.parentSettings = exportSettings;
+    exportQualityAndFormatSettings.dependentVisibleSettingsGroup = jpgExportSettings;
+    exportQualityAndFormatSettings.dependentHiddenSettingsGroup = pngExportSettings;
+    jpgExportSettings.visible = exportQualityAndFormatSettings.masterSwitchIsOn;
+    pngExportSettings.visible = !exportQualityAndFormatSettings.masterSwitchIsOn;
+    
+    return [exportSettings autorelease];        
 }
 
 - (NSMutableDictionary *)infoFromSettings

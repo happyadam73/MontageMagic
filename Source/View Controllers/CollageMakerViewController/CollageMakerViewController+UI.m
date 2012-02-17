@@ -238,9 +238,12 @@
     self.canvasView.layer.borderWidth = 0.0;            
 }
 
-- (void)setExportSizeFromSettingsInfo:(NSDictionary *)info
+- (void)setExportSettingsFromSettingsInfo:(NSDictionary *)info
 {
-    [self setExportSize:[[info objectForKey:kAWBInfoKeyExportSizeValue] floatValue]];
+    self.exportSize = [[info objectForKey:kAWBInfoKeyExportSizeValue] floatValue];
+    self.exportFormatSelectedIndex = [[info objectForKey:kAWBInfoKeyExportFormatSelectedIndex] integerValue];
+    self.pngExportTransparentBackground = [[info objectForKey:kAWBInfoKeyPNGExportTransparentBackground] boolValue];
+    self.jpgExportQualityValue = [[info objectForKey:kAWBInfoKeyJPGExportQualityValue] floatValue];
 }
 
 - (void)setCollageDrawingAidsFromSettingsInfo:(NSDictionary *)info
@@ -262,7 +265,10 @@
                                  [NSNumber numberWithBool:self.imageRoundedBorders], kAWBInfoKeyImageRoundedBorders,
                                  [NSNumber numberWithBool:self.textRoundedBorders], kAWBInfoKeyTextRoundedBorders,
                                  [NSNumber numberWithBool:self.addTextBackground], kAWBInfoKeyTextBackground,
-                                 [NSNumber numberWithFloat:self.exportSize], kAWBInfoKeyExportSizeValue, 
+                                 [NSNumber numberWithFloat:self.exportSize], kAWBInfoKeyExportSizeValue,
+                                 [NSNumber numberWithInteger:self.exportFormatSelectedIndex], kAWBInfoKeyExportFormatSelectedIndex,
+                                 [NSNumber numberWithBool:self.pngExportTransparentBackground], kAWBInfoKeyPNGExportTransparentBackground,
+                                 [NSNumber numberWithFloat:self.jpgExportQualityValue], kAWBInfoKeyJPGExportQualityValue,
                                  [NSNumber numberWithInt:self.luckyDipSourceIndex], kAWBInfoKeyLuckyDipSourceSelectedIndex,
                                  [NSNumber numberWithInt:self.luckyDipAmountIndex], kAWBInfoKeyLuckyDipAmountSelectedIndex,
                                  [NSNumber numberWithInt:self.luckyDipContactTypeIndex], kAWBInfoKeyLuckyDipContactTypeSelectedIndex,
@@ -334,7 +340,7 @@
 {
     switch (settingsController.controllerType) {
         case AWBSettingsControllerTypeMainSettings:
-            [self setExportSizeFromSettingsInfo:info];
+            [self setExportSettingsFromSettingsInfo:info];
             [self setCollageBackgroundFromSettingsInfo:info];
             [self setTextBackgroundColorFromSettingsInfo:info];
             [self setAddBordersFromSettingsInfo:info];

@@ -22,7 +22,7 @@
 - (void)settingsButtonAction:(id)sender;
 - (void)dismissAllActionSheetsAndPopovers;
 - (void)setCollageBackgroundFromSettingsInfo:(NSDictionary *)info;
-- (void)setExportSizeFromSettingsInfo:(NSDictionary *)info;
+- (void)setExportSettingsFromSettingsInfo:(NSDictionary *)info;
 - (void)setAddShadowsFromSettingsInfo:(NSDictionary *)info;
 - (void)setAddBordersFromSettingsInfo:(NSDictionary *)info;
 - (void)setCollageDrawingAidsFromSettingsInfo:(NSDictionary *)info;

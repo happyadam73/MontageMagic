@@ -114,19 +114,46 @@
 
 - (UIImage *)generateCollageImageWithScaleFactor:(CGFloat)scaleFactor
 {
-    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, scaleFactor);
-    if (self.useBackgroundTexture && self.collageBackgroundTexture) {
-        UIImage *image = [UIColor textureImageWithDescription:self.collageBackgroundTexture];
-        CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width/scaleFactor),  (image.size.height/scaleFactor)), [image CGImage]);
-        self.view.backgroundColor = [UIColor clearColor];
+    CGSize backgroundViewSize = self.canvasView.bounds.size;
+    CGRect canvasRect = CGRectMake(0.0, 0.0, backgroundViewSize.width, backgroundViewSize.height);
+    BOOL isOpaque = (self.exportFormatSelectedIndex == kAWBExportFormatIndexJPEG) || (!self.pngExportTransparentBackground);
+    UIGraphicsBeginImageContextWithOptions(canvasRect.size, isOpaque, scaleFactor);
+    
+    if (isOpaque) {
+        //need to fill in the background
+        if (self.useBackgroundTexture && self.collageBackgroundTexture) {
+            //background texture fill
+            UIImage *image = [UIColor textureImageWithDescription:self.collageBackgroundTexture];
+//            CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width * image.scale),  (image.size.height * image.scale)), [image CGImage]);
+            CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width/scaleFactor),  (image.size.height/scaleFactor)), [image CGImage]);
+        } else {
+            //solid color fill
+            [self.collageBackgroundColor setFill];        
+            UIRectFill(canvasRect);
+        }
     }
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    [self.canvasView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *collageImage = UIGraphicsGetImageFromCurrentImageContext();
     if (self.useBackgroundTexture && self.collageBackgroundTexture) {
         self.view.backgroundColor = [UIColor textureColorWithDescription:self.collageBackgroundTexture];
     }
     UIGraphicsEndImageContext();
     return collageImage;
+
+//    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, scaleFactor);
+//    if (self.useBackgroundTexture && self.collageBackgroundTexture) {
+//        UIImage *image = [UIColor textureImageWithDescription:self.collageBackgroundTexture];
+//        CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width/scaleFactor),  (image.size.height/scaleFactor)), [image CGImage]);
+//        self.view.backgroundColor = [UIColor clearColor];
+//    }
+//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *collageImage = UIGraphicsGetImageFromCurrentImageContext();
+//    if (self.useBackgroundTexture && self.collageBackgroundTexture) {
+//        self.view.backgroundColor = [UIColor textureColorWithDescription:self.collageBackgroundTexture];
+//    }
+//    UIGraphicsEndImageContext();
+//    return collageImage;
 }
 
 - (void)saveCollageAsPhoto
@@ -145,17 +172,31 @@
 
 - (void)saveImageToSavedPhotosAlbum:(UIImage *)image 
 {
-    [image retain];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    NSData *data;
+    if (self.exportFormatSelectedIndex == kAWBExportFormatIndexJPEG) {
+        data = UIImageJPEGRepresentation(image, self.jpgExportQualityValue);
+    } else {
+        data = UIImagePNGRepresentation(image);
+    }
+    
+    ALAssetsLibrary *al = [[ALAssetsLibrary alloc] init];
+	[al writeImageDataToSavedPhotosAlbum:data metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {}];
+    [al release];    
 }
 
-- (void)image:(UIImage *)image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo 
-{
-    if(error != nil) {
-        NSLog(@"ERROR SAVING:%@",[error localizedDescription]);
-    }
-    [image release];
-}
+//- (void)saveImageToSavedPhotosAlbum:(UIImage *)image 
+//{
+//    [image retain];
+//    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+//}
+//
+//- (void)image:(UIImage *)image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo 
+//{
+//    if(error != nil) {
+//        NSLog(@"ERROR SAVING:%@",[error localizedDescription]);
+//    }
+//    [image release];
+//}
 
 - (void)emailCollageAsPhoto
 {
@@ -182,8 +223,16 @@
     [picker setSubject:subjectLine];
     
     // Attach an image to the email
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-    [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"montage.jpg"];
+//    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+//    [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"montage.jpg"];    
+    NSData *imageData;
+    if (self.exportFormatSelectedIndex == kAWBExportFormatIndexJPEG) {
+        imageData = UIImageJPEGRepresentation(image, self.jpgExportQualityValue);
+        [picker addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"montage.jpg"];
+    } else {
+        imageData = UIImagePNGRepresentation(image);
+        [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"montage.png"];
+    }
     
     // Fill out the email body text
     NSString *emailBody = [NSString stringWithFormat:@"This %@ was made on my %@ using Montage Magic", [self typeOfMontageDescription], machineFriendlyName()];
@@ -221,8 +270,10 @@
     self.busyView.hidden = YES;
     
     // calculate the scaling factor that will reduce the image size to maxPixels
-    CGFloat actualHeight = self.view.bounds.size.height;
-    CGFloat actualWidth = self.view.bounds.size.width;
+//    CGFloat actualHeight = self.view.bounds.size.height;
+//    CGFloat actualWidth = self.view.bounds.size.width;
+    CGFloat actualHeight = self.canvasView.bounds.size.height;
+    CGFloat actualWidth = self.canvasView.bounds.size.width;
 
     CGFloat leftMargin = 0.0;
     CGFloat rightMargin = 0.0;
@@ -265,7 +316,7 @@
         [self removeCollageBorderFromView];
     }
     
-    self.view.backgroundColor = [UIColor clearColor];
+//    self.view.backgroundColor = [UIColor clearColor];
     
     //for non mosaics, switch off mask to bounds
     CollageThemeType themeType = self.collageDescriptor.themeType;
@@ -275,10 +326,12 @@
         case kAWBCollageThemeTypePhotoMosaicLargeImagesBlack:
         case kAWBCollageThemeTypePhotoMosaicLargeImagesWhite:
         case kAWBCollageThemeTypePhotoMosaicMicroImagesBlack:
-            [self view].layer.masksToBounds = YES;
+            //[self view].layer.masksToBounds = YES;
+            self.canvasView.layer.masksToBounds = YES;
             break;
         default:
-            [self view].layer.masksToBounds = NO;        
+            //[self view].layer.masksToBounds = NO;        
+            self.canvasView.layer.masksToBounds = NO;        
     } 
 
     if (self.useBackgroundTexture) {
@@ -291,21 +344,23 @@
 
     CGContextRef resizedContext = UIGraphicsGetCurrentContext();
     CGContextTranslateCTM(resizedContext, offsetLeft, offsetTop);
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //[self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    [self.canvasView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *collageImage = UIGraphicsGetImageFromCurrentImageContext();
     
-    if (self.useBackgroundTexture) {
-        self.view.backgroundColor = [UIColor textureColorWithDescription:self.collageBackgroundTexture];
-    } else {
-        self.view.backgroundColor = self.collageBackgroundColor;        
-    }
+//    if (self.useBackgroundTexture) {
+//        self.view.backgroundColor = [UIColor textureColorWithDescription:self.collageBackgroundTexture];
+//    } else {
+//        self.view.backgroundColor = self.collageBackgroundColor;        
+//    }
     if (self.addCollageBorder && self.collageBorderColor) {
         [self addCollageBorderToView];
     }
 
     UIGraphicsEndImageContext();      
 
-    [self view].layer.masksToBounds = YES;    
+    //[self view].layer.masksToBounds = YES;    
+    self.canvasView.layer.masksToBounds = YES;    
     self.busyView.hidden = NO;
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.toolbarHidden = NO;

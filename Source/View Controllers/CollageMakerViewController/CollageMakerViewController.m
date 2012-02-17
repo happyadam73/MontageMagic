@@ -37,6 +37,7 @@
 @synthesize collageObjectLocator;
 @synthesize useMyFonts, labelMyFont, labelTextAlignment;
 @synthesize canvasView;
+@synthesize exportFormatSelectedIndex, pngExportTransparentBackground, jpgExportQualityValue;
 
 - (id)init
 {
@@ -65,7 +66,11 @@
         } else {
             self.navigationItem.title = [NSString stringWithFormat:@"%@", collage.collageSaveDocumentsSubdirectory];
         }
-        [self setExportSize:2.0];
+        self.exportSize = 2.0;
+        self.exportFormatSelectedIndex = kAWBExportFormatIndexJPEG;
+        self.pngExportTransparentBackground = NO;
+        self.jpgExportQualityValue = 0.7;
+
         CollageTheme *theme = [collage theme];
         [self updateCollageWithTheme:theme];
         [self setLabelTextLine1:nil];
@@ -418,6 +423,9 @@
                 
         Collage *collage = [[Collage alloc] init];
         collage.exportSize = exportSize;
+        collage.exportFormatSelectedIndex = exportFormatSelectedIndex;
+        collage.pngExportTransparentBackground = pngExportTransparentBackground;
+        collage.jpgExportQualityValue = jpgExportQualityValue;
         collage.addImageShadows = addImageShadows;
         collage.addTextShadows = addTextShadows;
         collage.addImageBorders = addImageBorders;
@@ -522,7 +530,10 @@
         totalLabelSubviews = collage.totalLabelSubviews;
         totalSymbolSubviews = collage.totalSymbolSubviews;
         self.exportSize = collage.exportSize;
-        
+        self.exportFormatSelectedIndex = collage.exportFormatSelectedIndex;
+        self.pngExportTransparentBackground = collage.pngExportTransparentBackground;
+        self.jpgExportQualityValue = collage.jpgExportQualityValue;            
+
         if (!requestThemeChangeOnNextLoad) {
             self.addImageShadows = collage.addImageShadows;
             self.addTextShadows = collage.addTextShadows;

@@ -217,9 +217,44 @@
     return [collageBorderSettings autorelease];
 }
 
-+ (AWBSettingsGroup *)exportSizeSliderSettingsGroupWithInfo:(NSDictionary *)info
+//+ (AWBSettingsGroup *)exportSizeSliderSettingsGroupWithInfo:(NSDictionary *)info
+//{
+//    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting exportSizeSliderSettingWithValue:[info objectForKey:kAWBInfoKeyExportSizeValue] andKey:kAWBInfoKeyExportSizeValue]] header:@"Export Size" footer:@"Applies only to saving & emailing the collage as a photo."] autorelease];
+//}
+
++ (AWBSettingsGroup *)exportQualityAndFormatSettingsGroupWithInfo:(NSDictionary *)info
 {
-    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting exportSizeSliderSettingWithValue:[info objectForKey:kAWBInfoKeyExportSizeValue] andKey:kAWBInfoKeyExportSizeValue]] header:@"Export Size" footer:@"Applies only to saving & emailing the collage as a photo."] autorelease];
+    AWBSetting *exportSizeSetting = [AWBSetting exportSizeSliderSettingWithValue:[info objectForKey:kAWBInfoKeyExportSizeValue] andKey:kAWBInfoKeyExportSizeValue];
+    AWBSetting *exportFormatSetting = [AWBSetting segmentControlSettingWithText:@"Format" items:[NSArray arrayWithObjects:@"PNG", @"JPEG", nil] value:[info objectForKey:kAWBInfoKeyExportFormatSelectedIndex] key:kAWBInfoKeyExportFormatSelectedIndex];
+    exportFormatSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
+    NSMutableArray *exportQualityAndFormatSettings = [NSMutableArray arrayWithObjects:exportSizeSetting, exportFormatSetting, nil];
+    
+    AWBSettingsGroup *exportQualityAndFormatSettingsGroup = [[self alloc] initWithSettings:exportQualityAndFormatSettings header:@"Quality & Format" footer:@"PNG provides better quality and support for transparency.  JPEG can help reduce file size."];
+    exportQualityAndFormatSettingsGroup.masterSwitchIsOn = exportFormatSetting.isSwitchedOn;
+    exportFormatSetting.parentGroup = exportQualityAndFormatSettingsGroup; 
+    
+    return [exportQualityAndFormatSettingsGroup autorelease];    
+}
+
++ (AWBSettingsGroup *)pngExportSettingsGroupWithInfo:(NSDictionary *)info
+{
+    NSMutableArray *pngExportSettings = [NSMutableArray arrayWithObjects:[AWBSetting switchSettingWithText:@"Transparency" value:[info objectForKey:kAWBInfoKeyPNGExportTransparentBackground] key:kAWBInfoKeyPNGExportTransparentBackground], nil];
+    
+    return [[[self alloc] initWithSettings:pngExportSettings header:@"PNG Format Settings" footer:@"Exports just the roadsign with no visible background.  To include the background switch off this setting."] autorelease];
+}
+
++ (AWBSettingsGroup *)jpgExportSettingsGroupWithInfo:(NSDictionary *)info
+{
+    NSMutableArray *jpgExportSettings = [NSMutableArray arrayWithObjects:[AWBSetting exportQualitySliderSettingWithValue:[info objectForKey:kAWBInfoKeyJPGExportQualityValue] andKey:kAWBInfoKeyJPGExportQualityValue], nil];
+    
+    return [[[self alloc] initWithSettings:jpgExportSettings header:@"JPEG Format Settings" footer:@"Higher quality results in larger file sizes."] autorelease];
+}
+
++ (AWBSettingsGroup *)exportDrilldownSettingsGroupWithInfo:(NSDictionary *)info
+{
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:[AWBSetting drilldownSettingWithText:@"Export" value:nil key:nil childSettings:[AWBSettings exportSettingsWithInfo:info]], nil];
+    
+    return [[[self alloc] initWithSettings:buttonSettings header:nil footer:nil] autorelease];    
 }
 
 + (AWBSettingsGroup *)textEditSettingsGroupWithInfo:(NSDictionary *)info

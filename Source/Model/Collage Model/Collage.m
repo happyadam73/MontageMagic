@@ -24,6 +24,7 @@
 @synthesize addCollageBorder, collageBorderColor, useBackgroundTexture, backgroundTexture;
 @synthesize collageObjectLocator;
 @synthesize labelMyFont, labelTextAlignment, useMyFonts;
+@synthesize exportFormatSelectedIndex, pngExportTransparentBackground, jpgExportQualityValue;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -73,6 +74,21 @@
     } else {
         self.labelTextAlignment = UITextAlignmentCenter;
     }
+    if ([aDecoder containsValueForKey:kAWBInfoKeyExportFormatSelectedIndex]) {
+        self.exportFormatSelectedIndex = [aDecoder decodeIntegerForKey:kAWBInfoKeyExportFormatSelectedIndex];        
+    } else {
+        self.exportFormatSelectedIndex = kAWBExportFormatIndexJPEG;
+    }
+    if ([aDecoder containsValueForKey:kAWBInfoKeyPNGExportTransparentBackground]) {
+        self.pngExportTransparentBackground = [aDecoder decodeBoolForKey:kAWBInfoKeyPNGExportTransparentBackground];
+    } else {
+        self.pngExportTransparentBackground = NO;
+    }
+    if ([aDecoder containsValueForKey:kAWBInfoKeyJPGExportQualityValue]) {
+        self.jpgExportQualityValue = [aDecoder decodeFloatForKey:kAWBInfoKeyJPGExportQualityValue];
+    } else {
+        self.jpgExportQualityValue = 0.7;
+    } 
 
     return  self;   
 }
@@ -179,6 +195,9 @@
     [aCoder encodeObject:self.textBorderColor forKey:kAWBInfoKeyTextBorderColor];
     [aCoder encodeObject:self.textBackgroundColor forKey:kAWBInfoKeyTextBackgroundColor];
     [aCoder encodeFloat:self.exportSize forKey:kAWBInfoKeyExportSizeValue];
+    [aCoder encodeInteger:self.exportFormatSelectedIndex forKey:kAWBInfoKeyExportFormatSelectedIndex]; 
+    [aCoder encodeBool:self.pngExportTransparentBackground forKey:kAWBInfoKeyPNGExportTransparentBackground]; 
+    [aCoder encodeFloat:self.jpgExportQualityValue forKey:kAWBInfoKeyJPGExportQualityValue]; 
     [aCoder encodeBool:self.addImageShadows forKey:kAWBInfoKeyImageShadows];
     [aCoder encodeBool:self.addTextShadows forKey:kAWBInfoKeyTextShadows];    
     [aCoder encodeBool:self.addImageBorders forKey:kAWBInfoKeyImageBorders];

@@ -171,3 +171,9 @@ NSString *AWBImageSizeFromExportSizeValue(CGFloat value)
     
     return [NSString stringWithFormat:@"%d x %d", (int)(screenSize.height * value), (int)(screenSize.width * value)];
 }
+
+NSString *AWBExportQualityDescriptionFromValue(CGFloat value)
+{   
+    return [NSString stringWithFormat:@"%d%%", (int)(roundf(value * 100.0))];
+}
+

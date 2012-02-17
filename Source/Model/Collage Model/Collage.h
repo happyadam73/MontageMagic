@@ -12,8 +12,16 @@
 static NSString *const kAWBInfoKeyCollageViews = @"CollageViews";
 static NSString *const kAWBInfoKeyCollageObjectLocator = @"CollageObjectLocator";
 
+enum {
+    kAWBExportFormatIndexPNG = 0,
+    kAWBExportFormatIndexJPEG = 1
+};
+
 @interface Collage : NSObject {
     CGFloat exportSize;
+    NSUInteger exportFormatSelectedIndex;
+    BOOL pngExportTransparentBackground;
+    CGFloat jpgExportQualityValue;
     BOOL addImageShadows;
     BOOL addTextShadows;
     BOOL addImageBorders;
@@ -54,6 +62,9 @@ static NSString *const kAWBInfoKeyCollageObjectLocator = @"CollageObjectLocator"
 }
 
 @property (nonatomic, assign) CGFloat exportSize;
+@property (nonatomic, assign) NSUInteger exportFormatSelectedIndex;
+@property (nonatomic, assign) BOOL pngExportTransparentBackground;
+@property (nonatomic, assign) CGFloat jpgExportQualityValue;
 @property (nonatomic, assign) BOOL addImageShadows;
 @property (nonatomic, assign) BOOL addImageBorders;
 @property (nonatomic, assign) BOOL addTextShadows;

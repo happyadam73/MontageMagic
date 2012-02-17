@@ -23,3 +23,4 @@ void AWBBuildRotatedBoundsPointsPath(CGMutablePathRef path, CGSize rotatedRectSi
 int AWBRandomSortComparitor(id obj1, id obj2, void *context );
 CGFloat AWBQuantizeFloat(CGFloat value, CGFloat quantizationFactor, BOOL roundUp);
 NSString *AWBImageSizeFromExportSizeValue(CGFloat value);
+NSString *AWBExportQualityDescriptionFromValue(CGFloat value);
