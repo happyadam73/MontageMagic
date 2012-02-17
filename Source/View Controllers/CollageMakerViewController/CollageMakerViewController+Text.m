@@ -47,14 +47,15 @@
     AWBCollageSettingsTableViewController *settingsController = nil;
     
     UILabel *selectedLabelView = nil;
-    AWBTransformableLabel *selectedLabel = nil;
+//    AWBTransformableLabel *selectedLabel = nil;
     BOOL isZFontLabel = NO;
     NSString *fontFilename = nil;
     
-    for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+    //for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+    for(UIView <AWBTransformableView> *view in [[self.canvasView subviews] reverseObjectEnumerator]) {
         if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
             if ((view.alpha == SELECTED_ALPHA) && [view isKindOfClass:[AWBTransformableLabel class]]) {
-                selectedLabel = (AWBTransformableLabel *)view;
+//                selectedLabel = (AWBTransformableLabel *)view;
                 selectedLabelView = [(AWBTransformableLabel *)view labelView];
                 isZFontLabel = [(AWBTransformableLabel *)view isZFontLabel];
                 fontFilename = [(AWBTransformableLabel *)view myFontFilename];

@@ -13,7 +13,7 @@ static NSString *const kAWBInfoKeyCollageViews = @"CollageViews";
 static NSString *const kAWBInfoKeyCollageObjectLocator = @"CollageObjectLocator";
 
 @interface Collage : NSObject {
-    CGFloat exportQuality;
+    CGFloat exportSize;
     BOOL addImageShadows;
     BOOL addTextShadows;
     BOOL addImageBorders;
@@ -53,7 +53,7 @@ static NSString *const kAWBInfoKeyCollageObjectLocator = @"CollageObjectLocator"
     UITextAlignment labelTextAlignment;
 }
 
-@property (nonatomic, assign) CGFloat exportQuality;
+@property (nonatomic, assign) CGFloat exportSize;
 @property (nonatomic, assign) BOOL addImageShadows;
 @property (nonatomic, assign) BOOL addImageBorders;
 @property (nonatomic, assign) BOOL addTextShadows;
@@ -92,7 +92,8 @@ static NSString *const kAWBInfoKeyCollageObjectLocator = @"CollageObjectLocator"
 @property (nonatomic, retain) NSString *labelMyFont;
 @property (nonatomic, assign) UITextAlignment labelTextAlignment;
 
-- (void)addCollageToView:(UIView *)collageView;
+- (void)applyCollageBackgroundToView:(UIView *)backgroundView;
+- (void)addCollageObjectsToView:(UIView *)collageView;
 - (void)initCollageFromView:(UIView *)collageView;
 
 @end

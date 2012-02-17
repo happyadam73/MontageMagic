@@ -63,8 +63,8 @@
 {
     if (buttonIndex != [actionSheet cancelButtonIndex]) {
         
-        if (self.exportQuality == 0.0) {
-            self.exportQuality = 1.0;
+        if (self.exportSize == 0.0) {
+            self.exportSize = 1.0;
         }
         
         SEL methodSelector;
@@ -75,12 +75,12 @@
         if (buttonIndex == [actionSheet firstOtherButtonIndex]) {
             //Save Image
             busyText = @"Exporting Image";
-            busyTextDetail = [NSString stringWithFormat:@"(Size: %@)", AWBScreenSizeFromQualityValue(self.exportQuality)];
+            busyTextDetail = [NSString stringWithFormat:@"(Size: %@)", AWBImageSizeFromExportSizeValue(self.exportSize)];
             methodSelector = @selector(saveCollageAsPhoto);
         } else if (buttonIndex == ([actionSheet firstOtherButtonIndex]+1)) {
             //Email Image
             busyText = @"Preparing for Email";
-            busyTextDetail = [NSString stringWithFormat:@"(Size: %@)", AWBScreenSizeFromQualityValue(self.exportQuality)];
+            busyTextDetail = [NSString stringWithFormat:@"(Size: %@)", AWBImageSizeFromExportSizeValue(self.exportSize)];
             methodSelector = @selector(emailCollageAsPhoto);
         } else if (buttonIndex == ([actionSheet firstOtherButtonIndex]+2)) {
             // Print Image (4x6, A6)
@@ -97,13 +97,14 @@
         } else if (buttonIndex == ([actionSheet firstOtherButtonIndex]+4)) {
             // Twitter Image
             busyText = @"Preparing for Twitter";
-            CGFloat quality = (DEVICE_IS_IPAD? 1.0 : 2.0);
-            busyTextDetail = [NSString stringWithFormat:@"(Size: %@)", AWBScreenSizeFromQualityValue(quality)];
+            CGFloat exportSizeValue = (DEVICE_IS_IPAD? 1.0 : 2.0);
+            busyTextDetail = [NSString stringWithFormat:@"(Size: %@)", AWBImageSizeFromExportSizeValue(exportSizeValue)];
             methodSelector = @selector(twitterCollageAsPhoto);
         }
         
         if (busyText) {
-            AWBBusyView *busyIndicatorView = [[AWBBusyView alloc] initWithText:busyText detailText:busyTextDetail parentView:self.view centerAtPoint:self.view.center];
+            //AWBBusyView *busyIndicatorView = [[AWBBusyView alloc] initWithText:busyText detailText:busyTextDetail parentView:self.view centerAtPoint:self.view.center];
+            AWBBusyView *busyIndicatorView = [[AWBBusyView alloc] initWithText:busyText detailText:busyTextDetail parentView:self.canvasView centerAtPoint:self.canvasView.center];
             self.busyView = busyIndicatorView;
             [busyIndicatorView release];
             [self performSelector:methodSelector withObject:methodObject afterDelay:0.0];	
@@ -133,7 +134,7 @@
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.toolbarHidden = YES;
     self.busyView.hidden = YES;
-    UIImage *collageImage = [self generateCollageImageWithScaleFactor:self.exportQuality];    
+    UIImage *collageImage = [self generateCollageImageWithScaleFactor:self.exportSize];    
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.toolbarHidden = NO;
     self.busyView.hidden = NO;
@@ -161,7 +162,7 @@
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.toolbarHidden = YES;
     self.busyView.hidden = YES;
-    UIImage *collageImage = [self generateCollageImageWithScaleFactor:self.exportQuality];
+    UIImage *collageImage = [self generateCollageImageWithScaleFactor:self.exportSize];
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.toolbarHidden = NO;
     self.busyView.hidden = NO;
@@ -376,8 +377,8 @@
         self.navigationController.navigationBar.hidden = YES;
         self.navigationController.toolbarHidden = YES;
         self.busyView.hidden = YES;
-        CGFloat quality = (DEVICE_IS_IPAD? 1.0 : 2.0);
-        UIImage *collageImage = [self generateCollageImageWithScaleFactor:quality];
+        CGFloat exportSizeValue = (DEVICE_IS_IPAD? 1.0 : 2.0);
+        UIImage *collageImage = [self generateCollageImageWithScaleFactor:exportSizeValue];
         self.navigationController.navigationBar.hidden = NO;
         self.navigationController.toolbarHidden = NO;
         self.busyView.hidden = NO;

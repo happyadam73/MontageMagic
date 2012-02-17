@@ -47,7 +47,8 @@
     
     if (buttonIndex != [actionSheet cancelButtonIndex]) {
         
-        for(UIView <AWBTransformableView> *view in [[self view] subviews]) {
+        //for(UIView <AWBTransformableView> *view in [[self view] subviews]) {
+        for(UIView <AWBTransformableView> *view in [self.canvasView subviews]) {
             if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
                 if (view.alpha == SELECTED_ALPHA) {
                     if ([view isMemberOfClass:[AWBTransformableImageView class]]) {

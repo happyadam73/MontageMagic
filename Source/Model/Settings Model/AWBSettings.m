@@ -77,7 +77,7 @@
 
 + (AWBSettings *)mainSettingsWithInfo:(NSDictionary *)info
 {
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup lockAndLayoutSettingsGroupWithInfo:info], [AWBSettingsGroup shadowsAndBordersDrilldownSettingsGroupWithInfo:info], [AWBSettingsGroup qualitySliderSettingsGroupWithInfo:info], nil];
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup lockAndLayoutSettingsGroupWithInfo:info], [AWBSettingsGroup shadowsAndBordersDrilldownSettingsGroupWithInfo:info], [AWBSettingsGroup exportSizeSliderSettingsGroupWithInfo:info], nil];
     AWBSettings *mainSettings = [[self alloc] initWithSettingsGroups:settings title:@"Collage Settings"];
     
     return [mainSettings autorelease];

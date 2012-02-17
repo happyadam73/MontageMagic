@@ -167,9 +167,11 @@
             [self applySettingsToImageView:imageView];
             
             if (self.isLevel2AnimationsEnabled) {
-                [[self view] addSubviewWithAnimation:imageView duration:duration moveToPoint:self.collageObjectLocator.objectPosition];        
+                //[[self view] addSubviewWithAnimation:imageView duration:duration moveToPoint:self.collageObjectLocator.objectPosition];        
+                [self.canvasView addSubviewWithAnimation:imageView duration:duration moveToPoint:self.collageObjectLocator.objectPosition];        
             } else {
-                [[self view] addSubview:imageView];
+                //[[self view] addSubview:imageView];
+                [self.canvasView addSubview:imageView];
                 imageView.center = self.collageObjectLocator.objectPosition;
             }    
             totalImageSubviews += 1; 
@@ -223,7 +225,8 @@
         
         [label setCenter:position];
         [self applySettingsToLabel:label];
-        [[self view] addSubview:label];
+        //[[self view] addSubview:label];
+        [self.canvasView addSubview:label];
         totalLabelSubviews += 1;
         [label release];
         [lines release];

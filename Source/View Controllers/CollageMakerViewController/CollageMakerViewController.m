@@ -28,7 +28,7 @@
 @synthesize isCollageInEditMode, cameraButton, addressBookButton, actionButton, progressView, progressViewHolder, textButton, luckyDipButton, addSymbolButton;
 @synthesize cancelButton, editButton, deleteButton, editTextButton, selectNoneOrAllButton, settingsButton, memoryWarningButton, importingLabel, importingLabelHolder, toolbarSpacing, fixedToolbarSpacing;
 @synthesize imagePickerPopover, addressBookPopover, luckyDipPopover, memoryWarningPopover, deleteConfirmationSheet, choosePhotoSourceSheet, addSymbolPopover, chooseActionTypeSheet;
-@synthesize lowMemoryCount, isImporting, exportQuality, addImageShadows, addTextBorders, addImageBorders, addTextShadows, imageRoundedBorders, textRoundedBorders, addTextBackground, imageShadowColor, textShadowColor, imageBorderColor, textBorderColor, textBackgroundColor;
+@synthesize lowMemoryCount, isImporting, exportSize, addImageShadows, addTextBorders, addImageBorders, addTextShadows, imageRoundedBorders, textRoundedBorders, addTextBackground, imageShadowColor, textShadowColor, imageBorderColor, textBorderColor, textBackgroundColor;
 @synthesize labelTextFont, labelTextColor, labelTextLine1, labelTextLine2, labelTextLine3, symbolColor, symbolShape;
 @synthesize collageSaveDocumentsSubdirectory, totalCollageSubviews, totalCollageSubviewsWithShadows, isLevel1AnimationsEnabled, isLevel2AnimationsEnabled, excessiveSubviewCount, totalImageSubviews, totalLabelSubviews, totalSymbolSubviews;
 @synthesize collageDescriptor, requestThemeChangeOnNextLoad, assetGroups, selectedAssetsGroup, selectedAssetsGroupName, luckyDipSourceIndex, luckyDipAmountIndex, luckyDipContactTypeIndex, luckyDipContactIncludePhoneNumber, createMagicCollage;
@@ -36,6 +36,7 @@
 @synthesize busyView, assetsLibrary;
 @synthesize collageObjectLocator;
 @synthesize useMyFonts, labelMyFont, labelTextAlignment;
+@synthesize canvasView;
 
 - (id)init
 {
@@ -64,7 +65,7 @@
         } else {
             self.navigationItem.title = [NSString stringWithFormat:@"%@", collage.collageSaveDocumentsSubdirectory];
         }
-        [self setExportQuality:2.0];
+        [self setExportSize:2.0];
         CollageTheme *theme = [collage theme];
         [self updateCollageWithTheme:theme];
         [self setLabelTextLine1:nil];
@@ -74,6 +75,7 @@
         [self setIsImporting:NO]; 
         displayMemoryWarningIndicator = NO;
         animateMemoryWarningIndicator = YES;
+        viewDidUnload = NO;
         imageCountWhenMemoryWarningOccurred = 0;
         [locator release];
     }
@@ -110,25 +112,32 @@
     self.collageObjectLocator.autoMemoryReduction = theme.autoMemoryReduction;
     
     if (self.useBackgroundTexture && self.collageBackgroundTexture) {
-        [[self view] setBackgroundColor:[UIColor textureColorWithDescription:self.collageBackgroundTexture]];
+        //[[self view] setBackgroundColor:[UIColor textureColorWithDescription:self.collageBackgroundTexture]];
+        [self.view setBackgroundColor:[UIColor textureColorWithDescription:self.collageBackgroundTexture]];
     } else {
         if (self.collageBackgroundColor) {
-            [[self view] setBackgroundColor:self.collageBackgroundColor];
+            //[[self view] setBackgroundColor:self.collageBackgroundColor];
+            [self.view setBackgroundColor:self.collageBackgroundColor];
         }            
     }
     
     if (self.addCollageBorder && self.collageBorderColor) {
-        [self view].layer.borderColor = [self.collageBorderColor CGColor];
+        //[self view].layer.borderColor = [self.collageBorderColor CGColor];
+        self.canvasView.layer.borderColor = [self.collageBorderColor CGColor];
         CGFloat borderThickness = 4.0;
         if (DEVICE_IS_IPAD) {
             borderThickness = 6.0;
         }
-        [self view].layer.borderWidth = borderThickness;
+        //[self view].layer.borderWidth = borderThickness;
+        self.canvasView.layer.borderWidth = borderThickness;
     } else {
-        [self view].layer.borderColor = [[UIColor blackColor] CGColor];
-        [self view].layer.borderWidth = 0.0;            
+        //[self view].layer.borderColor = [[UIColor blackColor] CGColor];
+        //[self view].layer.borderWidth = 0.0;            
+        self.canvasView.layer.borderColor = [[UIColor blackColor] CGColor];
+        self.canvasView.layer.borderWidth = 0.0;            
     }
-    [self view].layer.masksToBounds = YES;
+    //[self view].layer.masksToBounds = YES;
+    self.canvasView.layer.masksToBounds = YES;
 }
 
 - (void)updateAllLabels
@@ -143,7 +152,8 @@
         fontName = self.labelTextFont;
     }
     
-    for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+    //for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+    for(UIView <AWBTransformableView> *view in [[self.canvasView subviews] reverseObjectEnumerator]) {
         if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
             if ([view isKindOfClass:[AWBTransformableLabel class]]) {
                 AWBTransformableLabel *label = (AWBTransformableLabel *)view;
@@ -159,6 +169,7 @@
 - (void)dealloc
 {
     [self deallocGestureRecognizers];
+    [canvasView release];
     [cancelButton release];
     [editButton release];
     [deleteButton release];
@@ -286,6 +297,22 @@
     collageLoadRequired = YES;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    
+    CGSize currentBounds = self.view.bounds.size;
+    CGFloat width = MAX(currentBounds.width, currentBounds.height);
+    CGFloat height = MIN(currentBounds.width, currentBounds.height);
+    
+    UIView *backgroundCanvasView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, width, height)];
+    backgroundCanvasView.backgroundColor = [UIColor clearColor];
+    backgroundCanvasView.userInteractionEnabled = YES;
+    self.canvasView = backgroundCanvasView;
+    [self.view addSubview:self.canvasView];
+    [backgroundCanvasView release];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     if (!self.modalViewController) {
@@ -307,7 +334,8 @@
         [self setNavigationBarsHidden:NO animated:self.isLevel1AnimationsEnabled];        
     }
     
-    if (!self.modalViewController || requestThemeChangeOnNextLoad) {
+    if (!self.modalViewController || requestThemeChangeOnNextLoad || viewDidUnload) {
+        viewDidUnload = NO;
         if (collageLoadRequired) {
             collageLoadRequired = NO;
             [self loadChanges];
@@ -320,11 +348,12 @@
     if (createMagicCollage) {
         createMagicCollage = NO;
         
-        AWBBusyView *busyIndicatorView = [[AWBBusyView alloc] initWithText:@"Looking for Photos" detailText:nil parentView:self.view centerAtPoint:self.view.center];
+//        AWBBusyView *busyIndicatorView = [[AWBBusyView alloc] initWithText:@"Looking for Photos" detailText:nil parentView:self.view centerAtPoint:self.view.center];
+        AWBBusyView *busyIndicatorView = [[AWBBusyView alloc] initWithText:@"Looking for Photos" detailText:nil parentView:self.canvasView centerAtPoint:self.canvasView.center];
         self.busyView = busyIndicatorView;
         [busyIndicatorView release];
         [self performSelector:@selector(autoStartWithLuckyDip) withObject:nil afterDelay:0.0];	        
-    }
+    }    
 }
 
 - (void)viewDidUnload
@@ -363,6 +392,8 @@
     self.selectedAssetsGroupName = nil;
     self.busyView = nil;
     self.assetsLibrary = nil;
+    self.canvasView = nil;
+    viewDidUnload = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -376,7 +407,8 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     BOOL success = NO;
     
-    if ([self view]) {
+    //if ([self view]) {
+    if (self.canvasView) {
         
         //if excessive objects, then reset the selected collage index
         //trying to avoid memory crash when loading the app
@@ -385,7 +417,7 @@
         }
                 
         Collage *collage = [[Collage alloc] init];
-        collage.exportQuality = exportQuality;
+        collage.exportSize = exportSize;
         collage.addImageShadows = addImageShadows;
         collage.addTextShadows = addTextShadows;
         collage.addImageBorders = addImageBorders;
@@ -419,7 +451,8 @@
         collage.labelMyFont = labelMyFont;
         collage.useMyFonts = useMyFonts;
         
-        [collage initCollageFromView:[self view]];
+        //[collage initCollageFromView:[self view]];
+        [collage initCollageFromView:self.canvasView];
 
         self.collageDescriptor.totalImageObjects = self.totalImageSubviews;
         self.collageDescriptor.totalLabelObjects = self.totalLabelSubviews;
@@ -478,14 +511,17 @@
             }
         }
         
-        [collage addCollageToView:[self view]];
+        //[collage addCollageObjectsToView:[self view]];
+        [collage applyCollageBackgroundToView:self.view];
+        [collage addCollageObjectsToView:self.canvasView];
+        
         if (requestThemeChangeOnNextLoad) {
             [self updateAllLabels];
         }       
         totalImageSubviews = collage.totalImageSubviews;
         totalLabelSubviews = collage.totalLabelSubviews;
         totalSymbolSubviews = collage.totalSymbolSubviews;
-        self.exportQuality = collage.exportQuality;
+        self.exportSize = collage.exportSize;
         
         if (!requestThemeChangeOnNextLoad) {
             self.addImageShadows = collage.addImageShadows;

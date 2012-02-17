@@ -13,7 +13,7 @@
 
 typedef enum {
     AWBSettingControlTypeDefault,
-    AWBSettingControlTypeQualitySlider,              
+    AWBSettingControlTypeExportSizeSlider,              
     AWBSettingControlTypeSwitch,
     AWBSettingControlTypeTextEdit,
     AWBSettingControlTypeColorPicker,
@@ -66,7 +66,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL disableControl;
 
 + (AWBSetting *)colorSettingWithValue:(id)aValue andKey:(NSString *)aKey;
-+ (AWBSetting *)qualitySliderSettingWithValue:(id)aValue andKey:(NSString *)aKey;
++ (AWBSetting *)exportSizeSliderSettingWithValue:(id)aValue andKey:(NSString *)aKey;
 + (AWBSetting *)switchSettingWithText:(NSString *)text value:(id)aValue key:(NSString *)aKey;
 + (AWBSetting *)textEditSettingWithText:(NSString *)text value:(id)aValue key:(NSString *)aKey;
 + (AWBSetting *)webViewSettingWithValue:(id)aValue andKey:(NSString *)aKey;

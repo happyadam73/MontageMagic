@@ -45,7 +45,8 @@
 
         self.selectNoneOrAllButton.title = @"Select All";
         
-        for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+        //for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+        for(UIView <AWBTransformableView> *view in [[self.canvasView subviews] reverseObjectEnumerator]) {
             if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
                 view.alpha = UNSELECTED_ALPHA;
             }            
@@ -64,7 +65,8 @@
     
     totalSelectedInEditMode = 0;
     totalSelectedLabelsInEditMode = 0;
-    for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+    //for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+    for(UIView <AWBTransformableView> *view in [[self.canvasView subviews] reverseObjectEnumerator]) {
         if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
             if (buttonSelectsAll) {
                 view.alpha = SELECTED_ALPHA;
@@ -87,7 +89,8 @@
         self.isCollageInEditMode = NO;
         totalSelectedInEditMode = 0;
         totalSelectedLabelsInEditMode = 0;
-        for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+        //for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+        for(UIView <AWBTransformableView> *view in [[self.canvasView subviews] reverseObjectEnumerator]) {
             if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
                 view.alpha = NORMAL_ALPHA;
             }            

@@ -20,6 +20,8 @@
 @class CollageTheme;
 
 @interface CollageMakerViewController : UIViewController <UINavigationControllerDelegate, UIActionSheetDelegate> {
+    UIView *canvasView;
+    
     UIRotationGestureRecognizer *rotationGestureRecognizer;
     UIPanGestureRecognizer *panGestureRecognizer;
     UIPinchGestureRecognizer *pinchGestureRecognizer;
@@ -75,7 +77,7 @@
     UIColor *imageBorderColor;
     UIColor *textBorderColor;
     UIColor *textBackgroundColor;
-    CGFloat exportQuality;
+    CGFloat exportSize;
     
     NSString *labelTextLine1;
     NSString *labelTextLine2;
@@ -127,8 +129,10 @@
     BOOL animateMemoryWarningIndicator;
     
     AWBCollageObjectLocator *collageObjectLocator;
+    BOOL viewDidUnload;
 }
 
+@property (nonatomic, retain) UIView *canvasView;
 @property (nonatomic, retain) UIRotationGestureRecognizer *rotationGestureRecognizer;
 @property (nonatomic, retain) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic, retain) UIPinchGestureRecognizer *pinchGestureRecognizer;
@@ -178,7 +182,7 @@
 @property (nonatomic, retain) UIColor *imageBorderColor;
 @property (nonatomic, retain) UIColor *textBorderColor;
 @property (nonatomic, retain) UIColor *textBackgroundColor;
-@property (nonatomic, assign) CGFloat exportQuality;
+@property (nonatomic, assign) CGFloat exportSize;
 @property (nonatomic, retain) NSString *labelTextLine1;
 @property (nonatomic, retain) NSString *labelTextLine2;
 @property (nonatomic, retain) NSString *labelTextLine3;

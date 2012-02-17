@@ -16,7 +16,7 @@
 
 @implementation Collage
 
-@synthesize exportQuality, addImageShadows, addTextShadows, addImageBorders, addTextBorders, imageRoundedBorders, textRoundedBorders, addTextBackground; 
+@synthesize exportSize, addImageShadows, addTextShadows, addImageBorders, addTextBorders, imageRoundedBorders, textRoundedBorders, addTextBackground; 
 @synthesize collageViews, collageBackgroundColor, imageShadowColor, textShadowColor, imageBorderColor, textBorderColor, textBackgroundColor;
 @synthesize labelTextFont, labelTextColor, labelTextLine1, labelTextLine2, labelTextLine3, symbolColor;
 @synthesize totalImageSubviews, totalSymbolSubviews, totalLabelSubviews, totalImageMemoryBytes;
@@ -28,7 +28,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self.collageViews = [aDecoder decodeObjectForKey:kAWBInfoKeyCollageViews];
-    self.exportQuality = [aDecoder decodeFloatForKey:kAWBInfoKeyExportQualityValue];
+    self.exportSize = [aDecoder decodeFloatForKey:kAWBInfoKeyExportSizeValue];
     self.addImageShadows = [aDecoder decodeBoolForKey:kAWBInfoKeyImageShadows];
     self.addTextShadows = [aDecoder decodeBoolForKey:kAWBInfoKeyTextShadows];
     self.addImageBorders = [aDecoder decodeBoolForKey:kAWBInfoKeyImageBorders];
@@ -77,17 +77,30 @@
     return  self;   
 }
 
-- (void)addCollageToView:(UIView *)collageView
+- (void)applyCollageBackgroundToView:(UIView *)backgroundView
+{
+    if (backgroundView) {
+        if (self.useBackgroundTexture && self.backgroundTexture) {
+            [backgroundView setBackgroundColor:[UIColor textureColorWithDescription:self.backgroundTexture]];
+        } else {
+            if (self.collageBackgroundColor) {
+                [backgroundView setBackgroundColor:self.collageBackgroundColor];
+            }            
+        }        
+    }    
+}
+
+- (void)addCollageObjectsToView:(UIView *)collageView
 {
     if (collageView) {
         
-        if (self.useBackgroundTexture && self.backgroundTexture) {
-            [collageView setBackgroundColor:[UIColor textureColorWithDescription:self.backgroundTexture]];
-        } else {
-            if (self.collageBackgroundColor) {
-                [collageView setBackgroundColor:self.collageBackgroundColor];
-            }            
-        }
+//        if (self.useBackgroundTexture && self.backgroundTexture) {
+//            [collageView setBackgroundColor:[UIColor textureColorWithDescription:self.backgroundTexture]];
+//        } else {
+//            if (self.collageBackgroundColor) {
+//                [collageView setBackgroundColor:self.collageBackgroundColor];
+//            }            
+//        }
         
         if (self.addCollageBorder && self.collageBorderColor) {
             collageView.layer.borderColor = [self.collageBorderColor CGColor];
@@ -165,7 +178,7 @@
     [aCoder encodeObject:self.imageBorderColor forKey:kAWBInfoKeyImageBorderColor];
     [aCoder encodeObject:self.textBorderColor forKey:kAWBInfoKeyTextBorderColor];
     [aCoder encodeObject:self.textBackgroundColor forKey:kAWBInfoKeyTextBackgroundColor];
-    [aCoder encodeFloat:self.exportQuality forKey:kAWBInfoKeyExportQualityValue];
+    [aCoder encodeFloat:self.exportSize forKey:kAWBInfoKeyExportSizeValue];
     [aCoder encodeBool:self.addImageShadows forKey:kAWBInfoKeyImageShadows];
     [aCoder encodeBool:self.addTextShadows forKey:kAWBInfoKeyTextShadows];    
     [aCoder encodeBool:self.addImageBorders forKey:kAWBInfoKeyImageBorders];

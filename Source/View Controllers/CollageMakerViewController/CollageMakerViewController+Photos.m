@@ -107,9 +107,11 @@
             [self applySettingsToImageView:imageView];
             
             if (self.isLevel2AnimationsEnabled) {
-                [[self view] addSubviewWithAnimation:imageView duration:0.5 moveToPoint:self.collageObjectLocator.objectPosition];        
+                //[[self view] addSubviewWithAnimation:imageView duration:0.5 moveToPoint:self.collageObjectLocator.objectPosition];        
+                [self.canvasView addSubviewWithAnimation:imageView duration:0.5 moveToPoint:self.collageObjectLocator.objectPosition];        
             } else {
-                [[self view] addSubview:imageView];
+                //[[self view] addSubview:imageView];
+                [self.canvasView addSubview:imageView];
                 imageView.center = self.collageObjectLocator.objectPosition;
             }
             
@@ -242,9 +244,11 @@
         AWBTransformableImageView *imageView = [[AWBTransformableImageView alloc] initWithImage:image rotation:self.collageObjectLocator.objectRotation scale:self.collageObjectLocator.objectScale horizontalFlip:NO imageKey:nil imageDocsSubDir:self.collageSaveDocumentsSubdirectory isImagePNG:isPNGAsset];
         [self applySettingsToImageView:imageView];
         if (self.isLevel2AnimationsEnabled) {
-            [[self view] addSubviewWithAnimation:imageView duration:duration moveToPoint:self.collageObjectLocator.objectPosition];        
+            //[[self view] addSubviewWithAnimation:imageView duration:duration moveToPoint:self.collageObjectLocator.objectPosition];        
+            [self.canvasView addSubviewWithAnimation:imageView duration:duration moveToPoint:self.collageObjectLocator.objectPosition];        
         } else {
-            [[self view] addSubview:imageView];
+            //[[self view] addSubview:imageView];
+            [self.canvasView addSubview:imageView];
             imageView.center = self.collageObjectLocator.objectPosition;
         }    
         totalImageSubviews += 1;

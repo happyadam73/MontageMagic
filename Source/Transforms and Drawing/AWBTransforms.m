@@ -165,7 +165,7 @@ CGFloat AWBQuantizeFloat(CGFloat value, CGFloat quantizationFactor, BOOL roundUp
     }
 }
 
-NSString *AWBScreenSizeFromQualityValue(CGFloat value)
+NSString *AWBImageSizeFromExportSizeValue(CGFloat value)
 {
     CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;    
     

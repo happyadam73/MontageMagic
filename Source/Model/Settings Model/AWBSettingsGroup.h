@@ -33,7 +33,7 @@ static NSString *const kAWBInfoKeyTextBackgroundColor = @"TextBackgroundColor";
 static NSString *const kAWBInfoKeyImageRoundedBorders = @"ImageRoundedBorders";
 static NSString *const kAWBInfoKeyTextRoundedBorders = @"TextRoundedBorders";
 static NSString *const kAWBInfoKeyTextBackground = @"TextBackground";
-static NSString *const kAWBInfoKeyExportQualityValue = @"ExportQualityValue";
+static NSString *const kAWBInfoKeyExportSizeValue = @"ExportQualityValue";
 static NSString *const kAWBInfoKeyLabelTextLine1 = @"LabelTextLine1";
 static NSString *const kAWBInfoKeyLabelTextLine2 = @"LabelTextLine2";
 static NSString *const kAWBInfoKeyLabelTextLine3 = @"LabelTextLine3";
@@ -93,7 +93,7 @@ static NSString *const kAWBInfoKeyAddContentOnCreation = @"AddContentOnCreation"
 + (AWBSettingsGroup *)shadowsSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)textBackgroundSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)textBackgroundColorPickerSettingsGroupWithInfo:(NSDictionary *)info;
-+ (AWBSettingsGroup *)qualitySliderSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)exportSizeSliderSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)fontSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)myFontSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)myFontsSwitchSettingsGroupWithInfo:(NSDictionary *)info;

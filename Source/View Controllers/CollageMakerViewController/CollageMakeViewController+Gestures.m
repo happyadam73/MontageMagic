@@ -21,27 +21,31 @@
     self.rotationGestureRecognizer = rotationRegonizer;
     self.rotationGestureRecognizer.delegate = self;
     [rotationRegonizer release];
-    [self.view addGestureRecognizer:self.rotationGestureRecognizer];
+    //[self.view addGestureRecognizer:self.rotationGestureRecognizer];
+    [self.canvasView addGestureRecognizer:self.rotationGestureRecognizer];
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestures:)];
     [panRecognizer setMinimumNumberOfTouches:1];
     [panRecognizer setMaximumNumberOfTouches:1];
     self.panGestureRecognizer = panRecognizer;
     [panRecognizer release];
-    [self.view addGestureRecognizer:self.panGestureRecognizer];
+    //[self.view addGestureRecognizer:self.panGestureRecognizer];
+    [self.canvasView addGestureRecognizer:self.panGestureRecognizer];
     
     UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinches:)];
     self.pinchGestureRecognizer = pinchRecognizer;
     self.pinchGestureRecognizer.delegate = self;
     [pinchRecognizer release];
-    [self.view addGestureRecognizer:self.pinchGestureRecognizer]; 
+    //[self.view addGestureRecognizer:self.pinchGestureRecognizer]; 
+    [self.canvasView addGestureRecognizer:self.pinchGestureRecognizer]; 
     
     UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTaps:)];
     doubleTapRecognizer.numberOfTouchesRequired = 1;
     doubleTapRecognizer.numberOfTapsRequired = 2;
     self.doubleTapGestureRecognizer = doubleTapRecognizer;
     [doubleTapRecognizer release];
-    [self.view addGestureRecognizer:self.doubleTapGestureRecognizer]; 
+    //[self.view addGestureRecognizer:self.doubleTapGestureRecognizer]; 
+    [self.canvasView addGestureRecognizer:self.doubleTapGestureRecognizer]; 
 
     UITapGestureRecognizer *singleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTaps:)];
     singleTapRecognizer.numberOfTouchesRequired = 1;
@@ -49,14 +53,16 @@
     self.singleTapGestureRecognizer = singleTapRecognizer;
     [self.singleTapGestureRecognizer requireGestureRecognizerToFail:self.doubleTapGestureRecognizer];
     [singleTapRecognizer release];
-    [self.view addGestureRecognizer:self.singleTapGestureRecognizer]; 
+    //[self.view addGestureRecognizer:self.singleTapGestureRecognizer]; 
+    [self.canvasView addGestureRecognizer:self.singleTapGestureRecognizer]; 
     
     UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftAndRightSwipes:)];
     swipeRecognizer.numberOfTouchesRequired = 2;
     swipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight;
     self.swipeGestureRecognizer = swipeRecognizer;
     [swipeRecognizer release];
-    [self.view addGestureRecognizer:self.swipeGestureRecognizer];    
+    //[self.view addGestureRecognizer:self.swipeGestureRecognizer];    
+    [self.canvasView addGestureRecognizer:self.swipeGestureRecognizer];    
 }
 
 - (void)deallocGestureRecognizers
@@ -90,12 +96,15 @@
     }
     
     if (paramSender.state == UIGestureRecognizerStateBegan) {
-        CGPoint point = [paramSender locationInView:self.view]; 
-        capturedView = [[self view] topTransformableViewAtPoint:point];
+//        CGPoint point = [paramSender locationInView:self.view]; 
+//        capturedView = [[self view] topTransformableViewAtPoint:point];
+        CGPoint point = [paramSender locationInView:self.canvasView]; 
+        capturedView = [self.canvasView topTransformableViewAtPoint:point];
     }
     
     if (capturedView) {
-        [[self view] bringSubviewToFront:capturedView];
+        //[[self view] bringSubviewToFront:capturedView];
+        [self.canvasView bringSubviewToFront:capturedView];
         if (paramSender.state == UIGestureRecognizerStateBegan) {
             [capturedView applyPendingRotationToCapturedView];
         } else {
@@ -117,12 +126,15 @@
     }
     
     if (paramSender.state == UIGestureRecognizerStateBegan) {
-        CGPoint point = [paramSender locationInView:self.view]; 
-        capturedView = [[self view] topTransformableViewAtPoint:point];
+//        CGPoint point = [paramSender locationInView:self.view]; 
+//        capturedView = [[self view] topTransformableViewAtPoint:point];
+        CGPoint point = [paramSender locationInView:self.canvasView]; 
+        capturedView = [self.canvasView topTransformableViewAtPoint:point];
     }
     
     if (capturedView) {
-        [[self view] bringSubviewToFront:capturedView];
+        //[[self view] bringSubviewToFront:capturedView];
+        [self.canvasView bringSubviewToFront:capturedView];
         
         if (paramSender.state == UIGestureRecognizerStateBegan && capturedView.currentScale != 0.0) {
             paramSender.scale = capturedView.currentScale;
@@ -143,10 +155,12 @@
         [self setNavigationBarsHidden:YES animated:NO];
     }
     
-    CGPoint point = [paramSender locationInView:self.view]; 
+    //CGPoint point = [paramSender locationInView:self.view]; 
+    CGPoint point = [paramSender locationInView:self.canvasView]; 
     
     if (paramSender.state == UIGestureRecognizerStateBegan) {
-        capturedView = [[self view] topTransformableViewAtPoint:point];
+        //capturedView = [[self view] topTransformableViewAtPoint:point];
+        capturedView = [self.canvasView topTransformableViewAtPoint:point];
         if (capturedView) {
             [capturedView applyPendingRotationToCapturedView];
             capturedCenterOffset = AWBTransformedViewCenterOffsetFromPoint(capturedView, [paramSender locationInView:capturedView]);
@@ -154,7 +168,8 @@
     }
     
     if (capturedView) {
-        [[self view] bringSubviewToFront:capturedView];        
+        //[[self view] bringSubviewToFront:capturedView];        
+        [self.canvasView bringSubviewToFront:capturedView];        
         if (paramSender.state != UIGestureRecognizerStateEnded && paramSender.state != UIGestureRecognizerStateFailed) { 
             CGFloat x = point.x - capturedCenterOffset.x;
             CGFloat y = point.y - capturedCenterOffset.y;
@@ -171,8 +186,10 @@
 - (void)handleSingleTaps:(UITapGestureRecognizer *)paramSender
 {
     if (self.isCollageInEditMode) {
-        CGPoint point = [paramSender locationInView:self.view]; 
-        UIView <AWBTransformableView> *view = [[self view] topTransformableViewAtPoint:point];
+        //CGPoint point = [paramSender locationInView:self.view]; 
+        CGPoint point = [paramSender locationInView:self.canvasView]; 
+        //UIView <AWBTransformableView> *view = [[self view] topTransformableViewAtPoint:point];
+        UIView <AWBTransformableView> *view = [self.canvasView topTransformableViewAtPoint:point];
         if (view) {
             [self objectTappedInEditMode:view];            
         }
@@ -195,14 +212,18 @@
             [self setNavigationBarsHidden:YES animated:NO];
         }
 
-        CGPoint point = [paramSender locationInView:self.view]; 
-        UIView <AWBTransformableView> *view = [[self view] topTransformableViewAtPoint:point];
+        //CGPoint point = [paramSender locationInView:self.view]; 
+        //UIView <AWBTransformableView> *view = [[self view] topTransformableViewAtPoint:point];
+        CGPoint point = [paramSender locationInView:self.canvasView]; 
+        UIView <AWBTransformableView> *view = [self.canvasView topTransformableViewAtPoint:point];
         
         if (view) {
             if ([view isInFront]) {
-                [[self view] sendSubviewToBack:view];
+                //[[self view] sendSubviewToBack:view];
+                [self.canvasView sendSubviewToBack:view];
             } else {
-                [[self view] bringSubviewToFront:view];                
+                //[[self view] bringSubviewToFront:view];                
+                [self.canvasView bringSubviewToFront:view];                
             }
         }        
     }
@@ -218,8 +239,10 @@
         [self setNavigationBarsHidden:YES animated:NO];
     }
     
-    CGPoint point = [paramSender locationInView:self.view]; 
-    UIView <AWBTransformableView> *view = [[self view] topTransformableViewAtPoint:point];
+    //CGPoint point = [paramSender locationInView:self.view]; 
+    //UIView <AWBTransformableView> *view = [[self view] topTransformableViewAtPoint:point];
+    CGPoint point = [paramSender locationInView:self.canvasView]; 
+    UIView <AWBTransformableView> *view = [self.canvasView topTransformableViewAtPoint:point];
     
     if (view) {
         view.horizontalFlip = view.horizontalFlip ? NO : YES; 

@@ -217,9 +217,9 @@
     return [collageBorderSettings autorelease];
 }
 
-+ (AWBSettingsGroup *)qualitySliderSettingsGroupWithInfo:(NSDictionary *)info
++ (AWBSettingsGroup *)exportSizeSliderSettingsGroupWithInfo:(NSDictionary *)info
 {
-    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting qualitySliderSettingWithValue:[info objectForKey:kAWBInfoKeyExportQualityValue] andKey:kAWBInfoKeyExportQualityValue]] header:@"Export Quality" footer:@"Applies only to saving & emailing the collage as a photo."] autorelease];
+    return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting exportSizeSliderSettingWithValue:[info objectForKey:kAWBInfoKeyExportSizeValue] andKey:kAWBInfoKeyExportSizeValue]] header:@"Export Size" footer:@"Applies only to saving & emailing the collage as a photo."] autorelease];
 }
 
 + (AWBSettingsGroup *)textEditSettingsGroupWithInfo:(NSDictionary *)info

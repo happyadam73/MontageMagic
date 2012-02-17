@@ -75,7 +75,8 @@
     [self.collageObjectLocator pushSymbol];
     AWBTransformableArrowView *arrow = [[AWBTransformableArrowView alloc] initWithLength:arrowLength color:symbol.arrowColor type:symbol.arrowType thickness:symbol.arrowThicknessType arrowHead:symbol.arrowHeadType arrowLineShape:symbol.arrowLineShapeType arrowLineStroke:symbol.arrowLineStrokeType];
     arrow.center = self.collageObjectLocator.objectPosition;
-    [[self view] addSubview:arrow];
+    //[[self view] addSubview:arrow];
+    [self.canvasView addSubview:arrow];
     [arrow release];
 
     totalSymbolSubviews += 1;

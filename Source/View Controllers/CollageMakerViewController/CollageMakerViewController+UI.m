@@ -106,7 +106,8 @@
 
 - (void)updateViewShadows   
 {
-    for(UIView <AWBTransformableView> *view in [[self view] subviews]) {
+    //for(UIView <AWBTransformableView> *view in [[self view] subviews]) {
+    for(UIView <AWBTransformableView> *view in [self.canvasView subviews]) {
         if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
             //image shadows
             if ([view isKindOfClass:[AWBTransformableImageView class]]) {
@@ -125,7 +126,8 @@
 
 - (void)updateViewBorders
 {
-    for(UIView <AWBTransformableView> *view in [[self view] subviews]) {
+    //for(UIView <AWBTransformableView> *view in [[self view] subviews]) {
+    for(UIView <AWBTransformableView> *view in [self.canvasView subviews]) {
         if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
             //image borders
             if ([view isKindOfClass:[AWBTransformableImageView class]]) {
@@ -146,7 +148,8 @@
 
 - (void)updateTextViewBackgrounds
 {
-    for(UIView <AWBTransformableView> *view in [[self view] subviews]) {
+    //for(UIView <AWBTransformableView> *view in [[self view] subviews]) {
+    for(UIView <AWBTransformableView> *view in [self.canvasView subviews]) {
         if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
             //text background
             if ([view isKindOfClass:[AWBTransformableLabel class]]) {
@@ -199,10 +202,12 @@
     self.collageBackgroundColor = [info objectForKey:kAWBInfoKeyCollageBackgroundColor];
     
     if (self.useBackgroundTexture && self.collageBackgroundTexture) {
-        [[self view] setBackgroundColor:[UIColor textureColorWithDescription:self.collageBackgroundTexture]];
+        //[[self view] setBackgroundColor:[UIColor textureColorWithDescription:self.collageBackgroundTexture]];
+        [self.view setBackgroundColor:[UIColor textureColorWithDescription:self.collageBackgroundTexture]];
     } else {
         if (self.collageBackgroundColor) {
-            [[self view] setBackgroundColor:self.collageBackgroundColor];
+            //[[self view] setBackgroundColor:self.collageBackgroundColor];
+            [self.view setBackgroundColor:self.collageBackgroundColor];
         }            
     }
     
@@ -215,23 +220,27 @@
 
 - (void)addCollageBorderToView
 {
-    [self view].layer.borderColor = [self.collageBorderColor CGColor];
+    //[self view].layer.borderColor = [self.collageBorderColor CGColor];
+    self.canvasView.layer.borderColor = [self.collageBorderColor CGColor];
     CGFloat borderThickness = 4.0;
     if (DEVICE_IS_IPAD) {
         borderThickness = 6.0;
     }
-    [self view].layer.borderWidth = borderThickness;
+    //[self view].layer.borderWidth = borderThickness;
+    self.canvasView.layer.borderWidth = borderThickness;
 }
 
 - (void)removeCollageBorderFromView
 {
-    [self view].layer.borderColor = [[UIColor blackColor] CGColor];
-    [self view].layer.borderWidth = 0.0;            
+//    [self view].layer.borderColor = [[UIColor blackColor] CGColor];
+//    [self view].layer.borderWidth = 0.0;            
+    self.canvasView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.canvasView.layer.borderWidth = 0.0;            
 }
 
-- (void)setExportQualityFromSettingsInfo:(NSDictionary *)info
+- (void)setExportSizeFromSettingsInfo:(NSDictionary *)info
 {
-    [self setExportQuality:[[info objectForKey:kAWBInfoKeyExportQualityValue] floatValue]];
+    [self setExportSize:[[info objectForKey:kAWBInfoKeyExportSizeValue] floatValue]];
 }
 
 - (void)setCollageDrawingAidsFromSettingsInfo:(NSDictionary *)info
@@ -253,7 +262,7 @@
                                  [NSNumber numberWithBool:self.imageRoundedBorders], kAWBInfoKeyImageRoundedBorders,
                                  [NSNumber numberWithBool:self.textRoundedBorders], kAWBInfoKeyTextRoundedBorders,
                                  [NSNumber numberWithBool:self.addTextBackground], kAWBInfoKeyTextBackground,
-                                 [NSNumber numberWithFloat:self.exportQuality], kAWBInfoKeyExportQualityValue, 
+                                 [NSNumber numberWithFloat:self.exportSize], kAWBInfoKeyExportSizeValue, 
                                  [NSNumber numberWithInt:self.luckyDipSourceIndex], kAWBInfoKeyLuckyDipSourceSelectedIndex,
                                  [NSNumber numberWithInt:self.luckyDipAmountIndex], kAWBInfoKeyLuckyDipAmountSelectedIndex,
                                  [NSNumber numberWithInt:self.luckyDipContactTypeIndex], kAWBInfoKeyLuckyDipContactTypeSelectedIndex,
@@ -325,7 +334,7 @@
 {
     switch (settingsController.controllerType) {
         case AWBSettingsControllerTypeMainSettings:
-            [self setExportQualityFromSettingsInfo:info];
+            [self setExportSizeFromSettingsInfo:info];
             [self setCollageBackgroundFromSettingsInfo:info];
             [self setTextBackgroundColorFromSettingsInfo:info];
             [self setAddBordersFromSettingsInfo:info];
@@ -359,7 +368,8 @@
                     AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines fontName:fontName fontSize:28.0 offset:CGPointZero rotation:0.0 scale:self.collageObjectLocator.objectScale horizontalFlip:NO color:self.labelTextColor alignment:self.labelTextAlignment];
                     [label setCenter:self.collageObjectLocator.objectPosition];                    
                     [self applySettingsToLabel:label];
-                    [[self view] addSubview:label];
+                    //[[self view] addSubview:label];
+                    [self.canvasView addSubview:label];
                     totalLabelSubviews += 1;
                     [label release];                        
                 }
@@ -380,7 +390,8 @@
                 fontName = self.labelTextFont;
             }
 
-            for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+            //for(UIView <AWBTransformableView> *view in [[[self view] subviews] reverseObjectEnumerator]) {
+            for(UIView <AWBTransformableView> *view in [[self.canvasView subviews] reverseObjectEnumerator]) {
                 if ([view conformsToProtocol:@protocol(AWBTransformableView)]) {
                     if ((view.alpha == SELECTED_ALPHA) && [view isKindOfClass:[AWBTransformableLabel class]]) {
                         AWBTransformableLabel *label = (AWBTransformableLabel *)view;
