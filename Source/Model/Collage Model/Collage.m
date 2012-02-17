@@ -25,6 +25,7 @@
 @synthesize collageObjectLocator;
 @synthesize labelMyFont, labelTextAlignment, useMyFonts;
 @synthesize exportFormatSelectedIndex, pngExportTransparentBackground, jpgExportQualityValue;
+@synthesize imageRoundedCornerSize;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -88,6 +89,11 @@
         self.jpgExportQualityValue = [aDecoder decodeFloatForKey:kAWBInfoKeyJPGExportQualityValue];
     } else {
         self.jpgExportQualityValue = 0.7;
+    } 
+    if ([aDecoder containsValueForKey:kAWBInfoKeyImageRoundedCornerSize]) {
+        self.imageRoundedCornerSize = [aDecoder decodeIntegerForKey:kAWBInfoKeyImageRoundedCornerSize];
+    } else {
+        self.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     } 
 
     return  self;   
@@ -203,6 +209,7 @@
     [aCoder encodeBool:self.addImageBorders forKey:kAWBInfoKeyImageBorders];
     [aCoder encodeBool:self.addTextBorders forKey:kAWBInfoKeyTextBorders];
     [aCoder encodeBool:self.imageRoundedBorders forKey:kAWBInfoKeyImageRoundedBorders];
+    [aCoder encodeInteger:self.imageRoundedCornerSize forKey:kAWBInfoKeyImageRoundedCornerSize];
     [aCoder encodeBool:self.textRoundedBorders forKey:kAWBInfoKeyTextRoundedBorders];
     [aCoder encodeBool:self.addTextBackground forKey:kAWBInfoKeyTextBackground];
     [aCoder encodeObject:self.labelTextColor forKey:kAWBInfoKeyTextColor];

@@ -70,6 +70,7 @@
     BOOL addImageBorders;
     BOOL addTextBorders;
     BOOL imageRoundedBorders;
+    AWBImageRoundedCornerSize imageRoundedCornerSize;
     BOOL textRoundedBorders;
     BOOL addTextBackground;
     UIColor *imageShadowColor;
@@ -178,6 +179,7 @@
 @property (nonatomic, assign) BOOL addImageBorders;
 @property (nonatomic, assign) BOOL addTextBorders;
 @property (nonatomic, assign) BOOL imageRoundedBorders;
+@property (nonatomic, assign) AWBImageRoundedCornerSize imageRoundedCornerSize;
 @property (nonatomic, assign) BOOL textRoundedBorders;
 @property (nonatomic, assign) BOOL addTextBackground;
 @property (nonatomic, retain) UIColor *imageShadowColor;

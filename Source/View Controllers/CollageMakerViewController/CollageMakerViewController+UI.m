@@ -132,6 +132,7 @@
             //image borders
             if ([view isKindOfClass:[AWBTransformableImageView class]]) {
                 view.roundedBorder = self.imageRoundedBorders;
+                view.roundedCornerSize = [self imageViewCornerSizeFromCornerSizeType:self.imageRoundedCornerSize];
                 view.viewBorderColor = self.imageBorderColor;
                 view.addBorder = self.addImageBorders;
             }   
@@ -178,6 +179,7 @@
     self.addImageBorders = [[info objectForKey:kAWBInfoKeyImageBorders] boolValue];
     self.addTextBorders = [[info objectForKey:kAWBInfoKeyTextBorders] boolValue];
     self.imageRoundedBorders = [[info objectForKey:kAWBInfoKeyImageRoundedBorders] boolValue];
+    self.imageRoundedCornerSize = [[info objectForKey:kAWBInfoKeyImageRoundedCornerSize] integerValue];
     self.textRoundedBorders = [[info objectForKey:kAWBInfoKeyTextRoundedBorders] boolValue];
     self.imageBorderColor = [info objectForKey:kAWBInfoKeyImageBorderColor];
     self.textBorderColor = [info objectForKey:kAWBInfoKeyTextBorderColor];
@@ -263,6 +265,7 @@
                                  [NSNumber numberWithBool:self.addImageBorders], kAWBInfoKeyImageBorders,
                                  [NSNumber numberWithBool:self.addTextBorders], kAWBInfoKeyTextBorders,
                                  [NSNumber numberWithBool:self.imageRoundedBorders], kAWBInfoKeyImageRoundedBorders,
+                                 [NSNumber numberWithInteger:self.imageRoundedCornerSize], kAWBInfoKeyImageRoundedCornerSize,
                                  [NSNumber numberWithBool:self.textRoundedBorders], kAWBInfoKeyTextRoundedBorders,
                                  [NSNumber numberWithBool:self.addTextBackground], kAWBInfoKeyTextBackground,
                                  [NSNumber numberWithFloat:self.exportSize], kAWBInfoKeyExportSizeValue,
@@ -467,6 +470,24 @@
     }
     [self.navigationController setNavigationBarHidden:hidden animated:animated];
     [self.navigationController setToolbarHidden:hidden animated:animated];  
+}
+
+- (CGFloat)imageViewCornerSizeFromCornerSizeType:(AWBImageRoundedCornerSize)cornerSize
+{
+    switch (cornerSize) {
+        case kAWBImageRoundedCornerSizeXS:
+            return 2.0;
+        case kAWBImageRoundedCornerSizeS:
+            return 4.0;
+        case kAWBImageRoundedCornerSizeM:
+            return 7.0;
+        case kAWBImageRoundedCornerSizeL:
+            return 10.0;
+        case kAWBImageRoundedCornerSizeXL:
+            return 12.0;
+        default:
+            return 2.0;
+    }    
 }
 
 @end

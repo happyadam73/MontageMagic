@@ -38,9 +38,10 @@
 
 - (id)initWithFrame:(CGRect)frame zFont:(ZFont *)font {
 	if ((self = [super initWithFrame:frame])) {
-        CATiledLayer *layerForView = (CATiledLayer *)self.layer;
-        layerForView.levelsOfDetailBias = 2;
-        layerForView.levelsOfDetail = 0;
+        [self setLevelsOfDetail];
+//        CATiledLayer *layerForView = (CATiledLayer *)self.layer;
+//        layerForView.levelsOfDetailBias = 2;
+//        layerForView.levelsOfDetail = 0;
 		zFont = [font retain];
 	}
 	return self;
@@ -188,6 +189,13 @@
 		}
 	}
 	return bounds;
+}
+
+- (void)setLevelsOfDetail
+{
+    CATiledLayer *layerForView = (CATiledLayer *)self.layer;
+    layerForView.levelsOfDetailBias = 2;
+    layerForView.levelsOfDetail = 0;    
 }
 
 + (Class)layerClass {

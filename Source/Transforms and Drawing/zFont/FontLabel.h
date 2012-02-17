@@ -41,4 +41,6 @@
 - (id)initWithFrame:(CGRect)frame fontName:(NSString *)fontName pointSize:(CGFloat)pointSize;
 - (id)initWithFrame:(CGRect)frame zFont:(ZFont *)font;
 - (id)initWithFrame:(CGRect)frame font:(CGFontRef)font pointSize:(CGFloat)pointSize __AVAILABILITY_INTERNAL_DEPRECATED;
+- (void)setLevelsOfDetail;
+
 @end

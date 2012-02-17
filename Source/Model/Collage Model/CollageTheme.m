@@ -19,6 +19,7 @@
 @synthesize addCollageBorder, collageBorderColor, useBackgroundTexture, backgroundTexture;
 @synthesize snapToGrid, objectLocatorType, autoMemoryReduction, randomPickCount;
 @synthesize labelMyFont, labelTextAlignment, useMyFonts;
+@synthesize imageRoundedCornerSize;
 
 - (void)dealloc
 {
@@ -126,6 +127,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -164,6 +166,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -202,6 +205,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -240,6 +244,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -278,6 +283,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -316,6 +322,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -354,6 +361,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -392,6 +400,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -430,6 +439,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -468,6 +478,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -506,6 +517,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -544,6 +556,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -582,6 +595,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -620,6 +634,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -658,6 +673,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -696,6 +712,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -734,6 +751,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -772,6 +790,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -810,6 +829,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -848,6 +868,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -886,6 +907,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }
@@ -924,6 +946,7 @@
     theme.labelMyFont = nil;
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     
     return [theme autorelease];        
 }

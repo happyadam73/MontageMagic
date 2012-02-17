@@ -23,6 +23,7 @@
 @synthesize rotationAngleInRadians, currentScale, pendingRotationAngleInRadians, horizontalFlip;
 @synthesize roundedBorder, viewBorderColor, viewShadowColor, addShadow, addBorder;
 @synthesize labelView, isZFontLabel, myFontFilename;
+@synthesize roundedCornerSize;
 
 - (void)initialiseLayerRotation:(CGFloat)rotation scale:(CGFloat)scale  
 {
@@ -312,6 +313,7 @@
     [self setBounds:newBounds];
     [self.labelView setBounds:newBounds];
     self.labelView.center = CGPointMake((newBounds.size.width/2.0), (newBounds.size.height/2.0));
+    [(FontLabel *)self.labelView setLevelsOfDetail];
     
     CGFloat minLabelLength = MIN(newBounds.size.width, newBounds.size.height);
     CGFloat maxLabelLength = MAX(newBounds.size.width, newBounds.size.height);
@@ -549,7 +551,7 @@
 }
 
 - (void)addViewBorder
-{
+{    
     self.labelView.layer.borderWidth = borderThickness;
     self.labelView.layer.cornerRadius = (self.roundedBorder ? (3.0 * borderThickness) : 0.0); 
     self.labelView.layer.borderColor = [self.viewBorderColor CGColor];

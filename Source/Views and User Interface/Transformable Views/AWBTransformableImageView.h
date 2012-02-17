@@ -39,5 +39,6 @@
 - (void)removeViewShadow;
 - (void)addViewBorder;
 - (void)removeViewBorder;
+- (void)addRoundedCorner;
 
 @end

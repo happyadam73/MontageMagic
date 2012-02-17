@@ -19,6 +19,7 @@
 @synthesize rotationAngleInRadians, currentScale, pendingRotationAngleInRadians, horizontalFlip;
 @synthesize roundedBorder, viewBorderColor, viewShadowColor, addShadow, addBorder;
 @synthesize labelView;
+@synthesize roundedCornerSize;
 
 - (void)initialiseLayerRotation:(CGFloat)rotation scale:(CGFloat)scale  
 {

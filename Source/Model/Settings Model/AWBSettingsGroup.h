@@ -31,6 +31,7 @@ static NSString *const kAWBInfoKeyImageBorderColor = @"ImageBorderColor";
 static NSString *const kAWBInfoKeyTextBorderColor = @"TextBorderColor";
 static NSString *const kAWBInfoKeyTextBackgroundColor = @"TextBackgroundColor";
 static NSString *const kAWBInfoKeyImageRoundedBorders = @"ImageRoundedBorders";
+static NSString *const kAWBInfoKeyImageRoundedCornerSize = @"ImageRoundedCornerSize";
 static NSString *const kAWBInfoKeyTextRoundedBorders = @"TextRoundedBorders";
 static NSString *const kAWBInfoKeyTextBackground = @"TextBackground";
 static NSString *const kAWBInfoKeyExportSizeValue = @"ExportQualityValue";

@@ -20,6 +20,7 @@
 @synthesize rotationAngleInRadians, currentScale, pendingRotationAngleInRadians, horizontalFlip;
 @synthesize roundedBorder, viewBorderColor, viewShadowColor, addShadow, addBorder;
 @synthesize imageKey, imageView;
+@synthesize roundedCornerSize;
 
 - (void)initialiseLayerRotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir 
 {      
@@ -48,6 +49,7 @@
     self.viewBorderColor = [UIColor blackColor];
     self.viewShadowColor = [UIColor blackColor];
     self.roundedBorder = YES;
+    self.roundedCornerSize = 2.0;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -217,7 +219,11 @@
     if (addBorder) {
         [self addViewBorder];
     } else {
-        [self removeViewBorder];
+        if (self.roundedBorder) {
+            [self addRoundedCorner];
+        } else {
+            [self removeViewBorder];            
+        }
     }
 }
 
@@ -250,8 +256,14 @@
 - (void)addViewBorder
 {
     self.imageView.layer.borderWidth = borderThickness;
-    self.imageView.layer.cornerRadius = (self.roundedBorder ? (2.0 * borderThickness) : 0.0); 
+    self.imageView.layer.cornerRadius = (self.roundedBorder ? (self.roundedCornerSize * borderThickness) : 0.0); 
     self.imageView.layer.borderColor = [self.viewBorderColor CGColor];
+}
+
+- (void)addRoundedCorner
+{
+    self.imageView.layer.borderWidth = 0.0;
+    self.imageView.layer.cornerRadius = (self.roundedCornerSize * borderThickness); 
 }
 
 - (void)removeViewBorder

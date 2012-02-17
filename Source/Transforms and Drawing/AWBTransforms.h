@@ -11,6 +11,14 @@
 #import "AWBTransformableView.h"
 #import <stdlib.h>
 
+typedef enum {
+    kAWBImageRoundedCornerSizeXS,
+    kAWBImageRoundedCornerSizeS,
+    kAWBImageRoundedCornerSizeM,
+    kAWBImageRoundedCornerSizeL,
+    kAWBImageRoundedCornerSizeXL
+} AWBImageRoundedCornerSize;
+
 CGAffineTransform AWBCGAffineTransformMakeRotationAndScale(CGFloat rotation, CGFloat scale, BOOL horizontalFlip);
 CGFloat AWBDistanceBetweenTwoPoints(CGPoint point1,CGPoint point2);
 CGFloat AWBAreaOfTriangle(CGPoint p0, CGPoint p1, CGPoint p2);

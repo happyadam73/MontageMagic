@@ -182,10 +182,18 @@
 {
     AWBSetting *addPhotoBordersSetting = [AWBSetting switchSettingWithText:@"Add Photo Borders" value:[info objectForKey:kAWBInfoKeyImageBorders] key:kAWBInfoKeyImageBorders];
     addPhotoBordersSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
-    AWBSetting *roundedBordersSetting = [AWBSetting switchSettingWithText:@"Rounded Borders" value:[info objectForKey:kAWBInfoKeyImageRoundedBorders] key:kAWBInfoKeyImageRoundedBorders];
-    roundedBordersSetting.masterSlaveType = AWBSettingMasterSlaveTypeSlaveCell;
-    roundedBordersSetting.visible = addPhotoBordersSetting.isSwitchedOn;
-    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:addPhotoBordersSetting, roundedBordersSetting, nil];    
+    AWBSetting *roundedBordersSetting = [AWBSetting switchSettingWithText:@"Rounded Corners" value:[info objectForKey:kAWBInfoKeyImageRoundedBorders] key:kAWBInfoKeyImageRoundedBorders];
+
+//    roundedBordersSetting.masterSlaveType = AWBSettingMasterSlaveTypeSlaveCell;
+//    roundedBordersSetting.visible = addPhotoBordersSetting.isSwitchedOn;
+    roundedBordersSetting.masterSlaveType = AWBSettingMasterSlaveTypeNone;
+    roundedBordersSetting.visible = YES;
+
+    AWBSetting *roundedCornerSizeSetting = [AWBSetting segmentControlSettingWithText:@"Rounded Corner Size" items:[NSArray arrayWithObjects:@"XS", @"S", @"M", @"L", @"XL", nil] value:[info objectForKey:kAWBInfoKeyImageRoundedCornerSize] key:kAWBInfoKeyImageRoundedCornerSize];
+    roundedCornerSizeSetting.masterSlaveType = AWBSettingMasterSlaveTypeNone;
+    roundedCornerSizeSetting.visible = YES;
+    
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:addPhotoBordersSetting, roundedBordersSetting, roundedCornerSizeSetting, nil];    
     AWBSettingsGroup *imageBorderSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     imageBorderSettings.masterSwitchIsOn = addPhotoBordersSetting.isSwitchedOn;
     addPhotoBordersSetting.parentGroup = imageBorderSettings;

@@ -17,6 +17,7 @@
 @synthesize rotationAngleInRadians, currentScale, pendingRotationAngleInRadians, horizontalFlip;
 @synthesize roundedBorder, viewBorderColor, viewShadowColor, addShadow, addBorder;
 @synthesize totalLength, arrowColor, arrowType, arrowThicknessType, arrowHeadType, arrowLineShapeType, arrowLineStrokeType, arrowViewDelegate;  
+@synthesize roundedCornerSize;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {

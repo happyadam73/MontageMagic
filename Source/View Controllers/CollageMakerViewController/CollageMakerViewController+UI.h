@@ -34,5 +34,6 @@
 - (void)setNavigationBarsHidden:(BOOL)hidden animated:(BOOL)animated;
 - (void)addCollageBorderToView;
 - (void)removeCollageBorderFromView;
+- (CGFloat)imageViewCornerSizeFromCornerSizeType:(AWBImageRoundedCornerSize)cornerSize;
 
 @end

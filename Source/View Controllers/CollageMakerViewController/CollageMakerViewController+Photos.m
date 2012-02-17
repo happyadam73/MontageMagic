@@ -259,6 +259,7 @@
 - (void)applySettingsToImageView:(AWBTransformableImageView *)imageView
 {
     [imageView setRoundedBorder:self.imageRoundedBorders];
+    [imageView setRoundedCornerSize:[self imageViewCornerSizeFromCornerSizeType:self.imageRoundedCornerSize]];
     [imageView setViewBorderColor:self.imageBorderColor];
     [imageView setViewShadowColor:self.imageShadowColor];
     imageView.addShadow = self.addImageShadows;

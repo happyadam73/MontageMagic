@@ -22,6 +22,7 @@
 @property (nonatomic, assign) BOOL addShadow;
 @property (nonatomic, assign) BOOL addBorder;
 @property (nonatomic, assign) BOOL roundedBorder;
+@property (nonatomic, assign) CGFloat roundedCornerSize;
 
 - (void)rotateAndScale;
 - (void)rotateAndScaleWithSnapToGrid:(BOOL)snapToGrid gridSize:(CGFloat)gridSize;
