@@ -112,6 +112,7 @@ static NSString *const kAWBInfoKeyAddContentOnCreation = @"AddContentOnCreation"
 + (AWBSettingsGroup *)collageBorderColorPickerSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)textShadowColorPickerSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)textBorderColorPickerSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)imageRoundedCornersSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)imageBordersSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)textBordersSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)collageBorderSettingsGroupWithInfo:(NSDictionary *)info;

@@ -85,6 +85,7 @@
 
 + (AWBSettings *)borderSettingsWithInfo:(NSDictionary *)info    
 {
+    AWBSettingsGroup *imageRoundedCornerSettings = [AWBSettingsGroup imageRoundedCornersSettingsGroupWithInfo:info];
     AWBSettingsGroup *imageBorderSettings = [AWBSettingsGroup imageBordersSettingsGroupWithInfo:info];
     AWBSettingsGroup *imageBorderColorPicker = [AWBSettingsGroup imageBorderColorPickerSettingsGroupWithInfo:info];
     AWBSettingsGroup *textBorderSettings = [AWBSettingsGroup textBordersSettingsGroupWithInfo:info];
@@ -92,8 +93,9 @@
     AWBSettingsGroup *collageBorderSettings = [AWBSettingsGroup collageBorderSettingsGroupWithInfo:info];
     AWBSettingsGroup *collageBorderColorPicker = [AWBSettingsGroup collageBorderColorPickerSettingsGroupWithInfo:info];
     
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:imageBorderSettings, imageBorderColorPicker, textBorderSettings, textBorderColorPicker, collageBorderSettings, collageBorderColorPicker, nil];
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:imageRoundedCornerSettings, imageBorderSettings, imageBorderColorPicker, textBorderSettings, textBorderColorPicker, collageBorderSettings, collageBorderColorPicker, nil];
     AWBSettings *borderSettings = [[self alloc] initWithSettingsGroups:settings title:@"Borders"];
+    imageRoundedCornerSettings.parentSettings = borderSettings;
     imageBorderSettings.parentSettings = borderSettings;
     imageBorderSettings.dependentVisibleSettingsGroup = imageBorderColorPicker;
     imageBorderColorPicker.visible = imageBorderSettings.masterSwitchIsOn;

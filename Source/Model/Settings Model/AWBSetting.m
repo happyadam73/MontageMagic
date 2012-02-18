@@ -274,7 +274,7 @@
             tableCell.selectionStyle = UITableViewCellSelectionStyleBlue;
             break;
         case AWBSettingControlTypeDefault:
-            tableCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.cellReuseIdentifier];
+            tableCell = [[AWBSettingTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.cellReuseIdentifier];
             tableCell.selectionStyle = UITableViewCellSelectionStyleBlue;
             tableCell.textLabel.text = self.text;
             break;

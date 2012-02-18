@@ -27,3 +27,12 @@
 }
 
 @end
+
+@implementation AWBSettingTableCell
+
+- (void)updateCellWithSetting:(AWBSetting *)aSetting
+{
+    self.textLabel.text = aSetting.text;
+}
+
+@end
