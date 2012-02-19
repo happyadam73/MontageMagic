@@ -124,8 +124,8 @@
         if (self.useBackgroundTexture && self.collageBackgroundTexture) {
             //background texture fill
             UIImage *image = [UIColor textureImageWithDescription:self.collageBackgroundTexture];
-//            CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width * image.scale),  (image.size.height * image.scale)), [image CGImage]);
-            CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width/scaleFactor),  (image.size.height/scaleFactor)), [image CGImage]);
+            CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, ((image.size.width * image.scale)/scaleFactor),  ((image.size.height * image.scale)/scaleFactor)), [image CGImage]);
+//            CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width/scaleFactor),  (image.size.height/scaleFactor)), [image CGImage]);
         } else {
             //solid color fill
             [self.collageBackgroundColor setFill];        
@@ -336,7 +336,8 @@
 
     if (self.useBackgroundTexture) {
         UIImage *image = [UIColor textureImageWithDescription:self.collageBackgroundTexture];
-        CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width/scaleFactor),  (image.size.height/scaleFactor)), [image CGImage]);        
+        CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, ((image.size.width * image.scale)/scaleFactor),  ((image.size.height * image.scale)/scaleFactor)), [image CGImage]);
+//        CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), CGRectMake(0.0, 0.0, (image.size.width/scaleFactor),  (image.size.height/scaleFactor)), [image CGImage]);        
     } else {
         [self.collageBackgroundColor setFill];        
         UIRectFill(rect);

@@ -13,57 +13,57 @@
 
 + (id)brickTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"brick512.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"brick512.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)cardboardTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"cardboard512.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"cardboard512.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)corkTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"cork512.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"cork512.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)grassTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"grass512.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"grass512.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)paperTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"paper512.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"paper512.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)sandTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"sand512.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"sand512.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)blackboardTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"blackboard512.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"blackboard512.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)woodTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"wood250.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"wood250.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)concreteTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"concrete720.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"concrete720.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)linedPaperTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"linedpaper121.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"linedpaper121.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (id)redDamaskTextureColor
 {
-    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"reddamask148.jpg"]];
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"reddamask148.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
 + (NSArray *)allTextureColors
@@ -78,7 +78,7 @@
 
 + (NSArray *)allTextureColorImages
 {
-    return [NSArray arrayWithObjects:[UIImage imageFromFile:@"cork100.jpg"], [UIImage imageFromFile:@"paper100.jpg"], [UIImage imageFromFile:@"blackboard100.jpg"], [UIImage imageFromFile:@"cardboard100.jpg"], [UIImage imageFromFile:@"brick100.jpg"], [UIImage imageFromFile:@"sand100.jpg"], [UIImage imageFromFile:@"grass100.jpg"], [UIImage imageFromFile:@"wood100.jpg"], [UIImage imageFromFile:@"concrete100.jpg"], [UIImage imageFromFile:@"linedpaper100.jpg"], [UIImage imageFromFile:@"reddamask100.jpg"], nil];
+    return [NSArray arrayWithObjects:[UIImage imageFromFile:@"cork100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"paper100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"blackboard100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"cardboard100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"brick100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"sand100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"grass100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"wood100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"concrete100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"linedpaper100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"reddamask100.jpg" withNoUpscaleForNonRetina:YES], nil];
 }
 
 + (id)textureColorWithDescription:(NSString *)colorDescription

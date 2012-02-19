@@ -389,7 +389,7 @@
     NSMutableArray *themeSettings = [[NSMutableArray alloc] initWithCapacity:[themes count]];
     for (CollageTheme *theme in themes) {
         if (theme.isAvailableOnCurrentDevice) {
-            AWBSetting *setting = [AWBSetting imageAndTextListSettingWithText:theme.themeName value:[UIImage imageFromFile:theme.thumbnailFilename]];
+            AWBSetting *setting = [AWBSetting imageAndTextListSettingWithText:theme.themeName value:[UIImage imageFromFile:theme.thumbnailFilename withNoUpscaleForNonRetina:YES]];
             if (setting) {
                 [themeSettings addObject:setting];
             }

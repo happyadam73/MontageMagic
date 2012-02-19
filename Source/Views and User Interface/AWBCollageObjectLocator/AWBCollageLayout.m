@@ -35,9 +35,9 @@
 + (NSArray *)allLayoutImages
 {
     if (DEVICE_IS_IPAD) {
-        return [NSArray arrayWithObjects:[UIImage imageFromFile:@"scattergrid100.jpg"], [UIImage imageFromFile:@"grid2x3100.jpg"], [UIImage imageFromFile:@"grid4x5100.jpg"], [UIImage imageFromFile:@"grid8x10100.jpg"], [UIImage imageFromFile:@"mosaic4row100.jpg"], [UIImage imageFromFile:@"mosaic5row100.jpg"], [UIImage imageFromFile:@"mosaic6row100.jpg"], [UIImage imageFromFile:@"mosaic7row100.jpg"], [UIImage imageFromFile:@"mosaic9row100.jpg"], [UIImage imageFromFile:@"mosaic13row100.jpg"], nil];        
+        return [NSArray arrayWithObjects:[UIImage imageFromFile:@"scatteriPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"grid3x2iPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"grid5x4iPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"grid10x8iPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx4iPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx5iPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx6iPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx7iPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx9iPad.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx13iPad.png" withNoUpscaleForNonRetina:YES], nil];        
     } else {
-        return [NSArray arrayWithObjects:[UIImage imageFromFile:@"scattergrid50.jpg"], [UIImage imageFromFile:@"grid2x350.jpg"], [UIImage imageFromFile:@"grid4x650.jpg"], [UIImage imageFromFile:@"mosaic3row50.jpg"], [UIImage imageFromFile:@"mosaic4row50.jpg"], [UIImage imageFromFile:@"mosaic5row50.jpg"], [UIImage imageFromFile:@"mosaic6row50.jpg"], nil]; 
+        return [NSArray arrayWithObjects:[UIImage imageFromFile:@"scatteriPhone.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"grid3x2iPhone.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"grid6x4iPhone.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx3iPhone.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx4iPhone.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx5iPhone.png" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"mosaicx6iPhone.png" withNoUpscaleForNonRetina:YES], nil]; 
     }
 }
 
