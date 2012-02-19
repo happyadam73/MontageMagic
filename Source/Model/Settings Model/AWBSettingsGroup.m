@@ -654,7 +654,7 @@
 {
     AWBSetting *autoMemoryReductionSetting = [AWBSetting switchSettingWithText:@"Reduce Memory" value:[info objectForKey:kAWBInfoKeyObjectLocatorAutoMemoryReduction] key:kAWBInfoKeyObjectLocatorAutoMemoryReduction];    
     NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:autoMemoryReductionSetting, nil];
-    AWBSettingsGroup *autoMemoryReductionSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:@"For mosaics with lots of smaller photos, images are further downsized to reduce memory usage.  A change to this setting does not affect existing photos."];
+    AWBSettingsGroup *autoMemoryReductionSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:@"For layouts with lots of smaller photos, images are further downsized to reduce memory usage.  A change to this setting does not affect existing photos."];
     return [autoMemoryReductionSettings autorelease];
 }
 

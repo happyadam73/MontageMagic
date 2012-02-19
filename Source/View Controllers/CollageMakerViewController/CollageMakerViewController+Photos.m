@@ -239,7 +239,7 @@
     self.progressView.progress = (assetIndex/assetCount);
     
     UIImage *image = [info valueForKey:@"Image"];
-    if (image) {        
+    if (image) {     
         [self.collageObjectLocator pushPhotoObject:image isContactPhoto:NO];
         AWBTransformableImageView *imageView = [[AWBTransformableImageView alloc] initWithImage:image rotation:self.collageObjectLocator.objectRotation scale:self.collageObjectLocator.objectScale horizontalFlip:NO imageKey:nil imageDocsSubDir:self.collageSaveDocumentsSubdirectory isImagePNG:isPNGAsset];
         [self applySettingsToImageView:imageView];
@@ -278,8 +278,12 @@
 - (NSUInteger)recommendedMaxResolutionForImageSize:(CGSize)imageSize
 {
     if (self.collageObjectLocator.autoMemoryReduction) {
-        if (self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeScatter) {
+        if ((self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeScatter) || (self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3)) {
             return MAX_PIXELS;
+        } else if (self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeGrid4x6) {
+            return (DEVICE_IS_IPHONE? MAX_PIXELS : (MAX_PIXELS/2.0));
+        } else if (self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3iPad) {
+            return (MAX_PIXELS * 2.0);
         } else {
             if (imageSize.height > 0.0) {
                 CGFloat widthToHeightRatio = (imageSize.width/imageSize.height);

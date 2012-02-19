@@ -146,6 +146,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        UILongPressGestureRecognizer *longPressGesture = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)] autorelease];
+        longPressGesture.minimumPressDuration = 1.4; //seconds
+        longPressGesture.delegate = self;
+		[cell addGestureRecognizer:longPressGesture];
     }
     
     CollageDescriptor *collage = [[[CollageStore defaultStore] allCollages] objectAtIndex:[indexPath row]];
@@ -412,6 +416,31 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
 - (NSArray *)myCollagesToolbarButtons
 {
     return [NSArray arrayWithObjects:self.myFontsButton, nil];    
+}
+
+- (void)longPress:(UILongPressGestureRecognizer *)gesture
+{
+	// only when gesture was recognized, not when ended
+	if (gesture.state == UIGestureRecognizerStateBegan)
+	{
+		// get affected cell
+		UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        
+		// get indexPath of cell
+		NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+		// do something with this action
+		NSLog(@"Long-pressed cell at row %@", indexPath);
+	}
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) && (self.tableView.editing)) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 @end

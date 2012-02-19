@@ -398,6 +398,15 @@
                 case kAWBCollageObjectLocatorTypeScatter:
                     amount = (DEVICE_IS_IPHONE? 15 : 24);
                     break;
+                case kAWBCollageObjectLocatorTypeGrid2x3:
+                    amount = (DEVICE_IS_IPHONE ? 6 : 20);
+                    break;
+                case kAWBCollageObjectLocatorTypeGrid2x3iPad:
+                    amount = 6;
+                    break;
+                case kAWBCollageObjectLocatorTypeGrid4x6:
+                    amount = (DEVICE_IS_IPHONE ? 24 : 80);
+                    break;
                 case kAWBCollageObjectLocatorTypeMosaicLargeImages:
                     amount = (DEVICE_IS_IPHONE? 25 : 50);
                     break;

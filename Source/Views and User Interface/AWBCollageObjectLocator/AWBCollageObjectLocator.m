@@ -160,6 +160,57 @@
     return [[self.mosaicRowHeights objectAtIndex:currentMosaicRow] floatValue];
 }
 
+
+- (void)pushPhotoObjectForGridLayout:(UIImage *)image isContactPhoto:(BOOL)isContactPhoto
+{
+    NSUInteger gridNumColumns;
+    NSUInteger gridNumRows;
+
+    if (DEVICE_IS_IPAD && (objectLocatorType != kAWBCollageObjectLocatorTypeGrid2x3iPad)) {
+        gridNumRows = 4;
+        gridNumColumns = 5;
+    } else {
+        gridNumRows = 2;
+        gridNumColumns = 3;
+    }
+    
+    if (objectLocatorType == kAWBCollageObjectLocatorTypeGrid4x6) {
+        gridNumRows *= 2;
+        gridNumColumns *= 2;
+    }
+    
+    CGFloat screenMarginPerc = 0.01;
+    CGFloat areaMarginPerc = 0.05;
+    CGFloat screenOffsetX = screenLength * screenMarginPerc;
+    CGFloat screenOffsetY = screenHeight * screenMarginPerc;
+    CGFloat areaWidth = ((1.0 - (2.0*screenMarginPerc))*screenLength)/gridNumColumns;
+    CGFloat areaHeight = ((1.0 - (2.0*screenMarginPerc))*screenHeight)/gridNumRows;
+    CGFloat areaWidthRange = ((1.0 - (2.0*areaMarginPerc))*areaWidth);
+    CGFloat areaHeightRange = ((1.0 - (2.0*areaMarginPerc))*areaHeight);
+    CGFloat minAreaX = areaMarginPerc * areaWidth;
+    CGFloat maxAreaX = minAreaX + areaWidthRange;
+    CGFloat minAreaY = areaMarginPerc * areaHeight;
+    CGFloat maxAreaY = minAreaY + areaHeightRange;
+    CGFloat areaPointX = (minAreaX+maxAreaX)/2.0;
+    CGFloat areaPointY = (minAreaY+maxAreaY)/2.0;
+    
+    //now work out from index, which box we are in
+    NSUInteger areaXIndex = ((objectCount-1) % gridNumColumns)+1;
+    NSUInteger areaYIndex = (((objectCount-1)/gridNumColumns) % gridNumRows)+1;
+    
+    CGFloat pointX = screenOffsetX + ((areaXIndex-1)*areaWidth) + areaPointX;
+    CGFloat pointY = screenOffsetY + ((areaYIndex-1)*areaHeight) + areaPointY;
+    
+    objectPosition = CGPointMake(pointX, pointY);
+    
+    if (objectCount >= (gridNumRows * gridNumColumns)) {
+        collageFull = YES;
+    }
+
+    objectRotation = 0.0;    
+    objectScale = MIN((areaWidthRange/objectWidth),(areaHeightRange/objectHeight));    
+}
+
 - (void)pushPhotoObjectForScatterLayout:(UIImage *)image isContactPhoto:(BOOL)isContactPhoto
 {
     objectPosition = [self randomPointInAreaWithIndex:objectCount totalAreasWide:scatterGridNumColumns totalAreasHigh:scatterGridNumRows screenMarginPercentage:0.03 areaMarginPercentage:0.4 adjustMidPointsOnIndexOverflow:YES];
@@ -271,6 +322,13 @@
                     [self pushPhotoObjectForMosaicLayout:image isContactPhoto:isContactPhoto];                                        
                 }
                 break;
+            case kAWBCollageObjectLocatorTypeGrid2x3:
+            case kAWBCollageObjectLocatorTypeGrid2x3iPad:                
+            case kAWBCollageObjectLocatorTypeGrid4x6:
+                if ((objectWidth > 0.0) && (objectHeight > 0.0)) {
+                    [self pushPhotoObjectForGridLayout:image isContactPhoto:isContactPhoto];
+                }
+                break;
             default:
                 [self pushPhotoObjectForScatterLayout:image isContactPhoto:isContactPhoto];
                 break;
@@ -295,10 +353,92 @@
         case kAWBCollageObjectLocatorTypeMosaicLargeImages:
             [self pushContactLabelForMosaicLayoutBelowCurrentObject:belowCurrentObject includesPhoneNumber:includesPhoneNumber];
             break;
+        case kAWBCollageObjectLocatorTypeGrid2x3:
+        case kAWBCollageObjectLocatorTypeGrid2x3iPad:
+        case kAWBCollageObjectLocatorTypeGrid4x6:
+            [self pushContactLabelForGridLayoutBelowCurrentObject:belowCurrentObject includesPhoneNumber:includesPhoneNumber];
+            break;
         default:
             [self pushContactLabelForScatterLayoutBelowCurrentObject:belowCurrentObject includesPhoneNumber:includesPhoneNumber];
             break;
     }            
+}
+
+- (void)pushContactLabelForGridLayoutBelowCurrentObject:(BOOL)belowCurrentObject includesPhoneNumber:(BOOL)includesPhoneNumber
+{    
+    NSUInteger gridNumColumns;
+    NSUInteger gridNumRows;
+    
+    if (DEVICE_IS_IPAD && (objectLocatorType != kAWBCollageObjectLocatorTypeGrid2x3iPad)) {
+        gridNumRows = 4;
+        gridNumColumns = 5;
+    } else {
+        gridNumRows = 2;
+        gridNumColumns = 3;
+    }
+    
+    if (objectLocatorType == kAWBCollageObjectLocatorTypeGrid4x6) {
+        gridNumRows *= 2;
+        gridNumColumns *= 2;
+    }
+    
+    if (!belowCurrentObject) {
+        CGFloat screenMarginPerc = 0.01;
+        CGFloat areaMarginPerc = 0.05;
+        CGFloat screenOffsetX = screenLength * screenMarginPerc;
+        CGFloat screenOffsetY = screenHeight * screenMarginPerc;
+        CGFloat areaWidth = ((1.0 - (2.0*screenMarginPerc))*screenLength)/gridNumColumns;
+        CGFloat areaHeight = ((1.0 - (2.0*screenMarginPerc))*screenHeight)/gridNumRows;
+        CGFloat areaWidthRange = ((1.0 - (2.0*areaMarginPerc))*areaWidth);
+        CGFloat areaHeightRange = ((1.0 - (2.0*areaMarginPerc))*areaHeight);
+        CGFloat minAreaX = areaMarginPerc * areaWidth;
+        CGFloat maxAreaX = minAreaX + areaWidthRange;
+        CGFloat minAreaY = areaMarginPerc * areaHeight;
+        CGFloat maxAreaY = minAreaY + areaHeightRange;
+        CGFloat areaPointX = (minAreaX+maxAreaX)/2.0;
+        CGFloat areaPointY = (minAreaY+maxAreaY)/2.0;
+        
+        //now work out from index, which box we are in
+        NSUInteger areaXIndex = ((objectCount-1) % gridNumColumns)+1;
+        NSUInteger areaYIndex = (((objectCount-1)/gridNumColumns) % gridNumRows)+1;
+        
+        CGFloat pointX = screenOffsetX + ((areaXIndex-1)*areaWidth) + areaPointX;
+        CGFloat pointY = screenOffsetY + ((areaYIndex-1)*areaHeight) + areaPointY;
+        
+        objectPosition = CGPointMake(pointX, pointY);
+                
+//        if (DEVICE_IS_IPAD) {
+//            objectPosition.y -= 30.0;
+//        } else {
+//            objectPosition.y -= 20.0;            
+//        }
+        if (objectCount >= (gridNumRows * gridNumColumns)) {
+            collageFull = YES;
+        }
+    } else {
+        objectPosition.y += (objectHeight /2.0) * objectScale;
+    }
+    
+    objectRotation = 0.0;
+    objectScale = 0.5;
+    if (DEVICE_IS_IPAD) {
+        objectScale = 0.7;
+    }
+    
+    if (objectLocatorType == kAWBCollageObjectLocatorTypeGrid4x6) {
+        objectScale *= 0.5;
+    } else if  (objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3iPad) {
+        objectScale *= 2.0;
+    }
+    
+    if (includesPhoneNumber) {
+        objectScale *= 0.85;
+    }
+    
+    if (self.snapToGrid && (snapToGridSize > 0.0)) {
+        objectPosition.x = AWBQuantizeFloat(objectPosition.x, (self.snapToGridSize/2.0), NO);
+        objectPosition.y = AWBQuantizeFloat(objectPosition.y, (self.snapToGridSize/2.0), NO);                
+    }
 }
 
 - (void)pushContactLabelForScatterLayoutBelowCurrentObject:(BOOL)belowCurrentObject includesPhoneNumber:(BOOL)includesPhoneNumber
@@ -585,6 +725,44 @@
     return CGPointMake(pointX, pointY);
 }
 
+- (CGPoint)gridPointInAreaWithIndex:(NSUInteger)areaIndex totalAreasWide:(NSUInteger)areasWide totalAreasHigh:(NSUInteger)areasHigh screenMarginPercentage:(CGFloat)screenMarginPerc areaMarginPercentage:(CGFloat)areaMarginPerc
+{
+    CGFloat screenOffsetX = screenLength * screenMarginPerc;
+    CGFloat screenOffsetY = screenHeight * screenMarginPerc;
+    CGFloat areaWidth = ((1.0 - (2.0*screenMarginPerc))*screenLength)/areasWide;
+    CGFloat areaHeight = ((1.0 - (2.0*screenMarginPerc))*screenHeight)/areasHigh;
+    CGFloat areaWidthRange = ((1.0 - (2.0*areaMarginPerc))*areaWidth);
+    CGFloat areaHeightRange = ((1.0 - (2.0*areaMarginPerc))*areaHeight);
+    CGFloat minAreaX = areaMarginPerc * areaWidth;
+    CGFloat maxAreaX = minAreaX + areaWidthRange;
+    CGFloat minAreaY = areaMarginPerc * areaHeight;
+    CGFloat maxAreaY = minAreaY + areaHeightRange;
+    
+    CGFloat areaPointX = (minAreaX+maxAreaX)/2.0;
+    CGFloat areaPointY = (minAreaY+maxAreaY)/2.0;
+    
+    //now work out from index, which box we are in
+    NSUInteger areaXIndex = ((areaIndex-1) % areasWide)+1;
+    NSUInteger areaYIndex = (((areaIndex-1)/areasWide) % areasHigh)+1;
+    
+    CGFloat pointX = screenOffsetX + ((areaXIndex-1)*areaWidth) + areaPointX;
+    CGFloat pointY = screenOffsetY + ((areaYIndex-1)*areaHeight) + areaPointY;
+        
+    if (pointX > (screenLength - screenOffsetX)) {
+        pointX = (screenLength - screenOffsetX);
+    } else if (pointX < screenOffsetX) {
+        pointX = screenOffsetX;
+    }
+    
+    if (pointY > (screenHeight - screenOffsetY)) {
+        pointY = (screenHeight - screenOffsetY);
+    } else if (pointY < screenOffsetY) {
+        pointY = screenOffsetY;
+    }    
+    
+    return CGPointMake(pointX, pointY);
+}
+
 - (BOOL)collageIsFullForContactLabelBelowCurrentObject:(BOOL)belowCurrentObject
 {
     if (belowCurrentObject) {
@@ -593,7 +771,7 @@
         if (self.collageFull) {
             return YES;
         } else {
-            if (self.objectLocatorType == kAWBCollageObjectLocatorTypeScatter) {
+            if ((self.objectLocatorType == kAWBCollageObjectLocatorTypeScatter) || (self.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3iPad) || (self.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3) || (self.objectLocatorType == kAWBCollageObjectLocatorTypeGrid4x6)) {
                 return NO;
             } else {
                 CGFloat requiredHeight = [[self.mosaicRowHeights objectAtIndex:currentMosaicRow] floatValue];
@@ -616,7 +794,7 @@
     if (self.collageFull) {
         return YES;
     } else {
-        if (self.objectLocatorType == kAWBCollageObjectLocatorTypeScatter) {
+        if ((self.objectLocatorType == kAWBCollageObjectLocatorTypeScatter) || (self.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3iPad) || (self.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3) || (self.objectLocatorType == kAWBCollageObjectLocatorTypeGrid4x6)) {
             return NO;
         } else {
             CGFloat imageHeight = imageSize.height;

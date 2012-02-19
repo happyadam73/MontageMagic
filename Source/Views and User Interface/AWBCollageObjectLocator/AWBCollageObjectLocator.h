@@ -32,7 +32,10 @@ typedef enum {
     kAWBCollageObjectLocatorTypeMosaicSmallImages,
     kAWBCollageObjectLocatorTypeMosaicTinyImages,
     kAWBCollageObjectLocatorTypeMosaicMicroImages,    
-    kAWBCollageObjectLocatorTypeMosaicNanoImages    
+    kAWBCollageObjectLocatorTypeMosaicNanoImages,
+    kAWBCollageObjectLocatorTypeGrid2x3,
+    kAWBCollageObjectLocatorTypeGrid4x6,
+    kAWBCollageObjectLocatorTypeGrid2x3iPad    
 } AWBCollageObjectLocatorType;
 
 @interface AWBCollageObjectLocator : NSObject
@@ -79,6 +82,7 @@ typedef enum {
 - (void)pushPhotoObjectForScatterLayout:(UIImage *)image isContactPhoto:(BOOL)isContactPhoto;
 - (void)pushPhotoObjectForMosaicLayout:(UIImage *)image isContactPhoto:(BOOL)isContactPhoto;
 - (void)pushContactLabelBelowCurrentObject:(BOOL)belowCurrentObject includesPhoneNumber:(BOOL)includesPhoneNumber;
+- (void)pushContactLabelForGridLayoutBelowCurrentObject:(BOOL)belowCurrentObject includesPhoneNumber:(BOOL)includesPhoneNumber;
 - (void)pushContactLabelForScatterLayoutBelowCurrentObject:(BOOL)belowCurrentObject includesPhoneNumber:(BOOL)includesPhoneNumber;
 - (void)pushContactLabelForMosaicLayoutBelowCurrentObject:(BOOL)belowCurrentObject includesPhoneNumber:(BOOL)includesPhoneNumber;
 - (void)pushSymbol;
@@ -91,6 +95,7 @@ typedef enum {
 - (void)pushTextLabelForMosaicLayout;
 - (void)resetLocator;
 - (CGPoint)randomPointInAreaWithIndex:(NSUInteger)areaIndex totalAreasWide:(NSUInteger)areasWide totalAreasHigh:(NSUInteger)areasHigh screenMarginPercentage:(CGFloat)screenMarginPerc areaMarginPercentage:(CGFloat)areaMarginPerc adjustMidPointsOnIndexOverflow:(BOOL)adjustMidPoints;
+- (CGPoint)gridPointInAreaWithIndex:(NSUInteger)areaIndex totalAreasWide:(NSUInteger)areasWide totalAreasHigh:(NSUInteger)areasHigh screenMarginPercentage:(CGFloat)screenMarginPerc areaMarginPercentage:(CGFloat)areaMarginPerc;
 - (BOOL)collageIsFullForContactLabelBelowCurrentObject:(BOOL)belowCurrentObject;
 - (BOOL)collageIsFullForContactImageOfSize:(CGSize)imageSize;
 - (CGPoint)randomCenterPoint;

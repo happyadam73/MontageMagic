@@ -12,7 +12,7 @@
 
 @class CollageMakerViewController;
 
-@interface AWBCollagesListViewController : UITableViewController <AWBCollageSettingsTableViewControllerDelegate>
+@interface AWBCollagesListViewController : UITableViewController <AWBCollageSettingsTableViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     NSInteger scrollToRow;
     BOOL isLowMemory;
