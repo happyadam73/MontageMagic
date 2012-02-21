@@ -28,5 +28,6 @@ static NSString *const kAWBInfoKeyScrollToCollageStoreCollageIndex = @"ScrollToC
 - (BOOL)saveAllCollages;
 - (void)fetchCollagesIfNecessary;
 - (NSString *)nextDefaultCollageName;
+- (BOOL)copyCollageAtIndex:(NSUInteger)fromIndex;
 
 @end

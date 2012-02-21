@@ -9,6 +9,7 @@
 #import "CollageStore.h"
 #import "CollageDescriptor.h"
 #import "FileHelpers.h"
+#import "Collage.h"
 
 static CollageStore *defaultStore = nil;
 
@@ -82,6 +83,59 @@ static CollageStore *defaultStore = nil;
     return collage;
 }
 
+- (BOOL)copyCollageAtIndex:(NSUInteger)fromIndex
+{
+    [self fetchCollagesIfNecessary];
+    NSInteger sequenceId = [[NSUserDefaults standardUserDefaults] integerForKey:kAWBInfoKeyCollageSequenceNumber];
+    sequenceId += 1;
+
+    BOOL success = NO;
+    CollageDescriptor *collage = [allCollages objectAtIndex:fromIndex];
+    if (collage) {
+        NSString *subDirFrom = collage.collageSaveDocumentsSubdirectory;
+        NSString *subDirDest = [NSString stringWithFormat:@"Collage %d", sequenceId];
+        success = AWBCopyDocsSubdirToSubdir(subDirFrom, subDirDest);
+        if (success) {
+            NSString *collagePath = AWBPathInDocumentSubdirectory(subDirDest, @"collage.data");
+            Collage *newCollage = [NSKeyedUnarchiver unarchiveObjectWithFile:collagePath];
+            [newCollage updateImageKeysWithNewSubdir:subDirDest];
+            success = [NSKeyedArchiver archiveRootObject:newCollage toFile:collagePath];
+            if (success) {
+                BOOL isCopy = [collage.collageName hasSuffix:@" (Copy)"];
+                NSString *newCollageName = [NSString stringWithFormat:@"%@%@", collage.collageName, (isCopy? @"" : @" (Copy)")];
+                [[NSUserDefaults standardUserDefaults] setInteger:sequenceId forKey:kAWBInfoKeyCollageSequenceNumber];
+                CollageDescriptor *duplicateCollage = [[CollageDescriptor alloc] initWithCollageName:newCollageName documentsSubdirectory:subDirDest];
+                duplicateCollage.themeType = collage.themeType;
+                duplicateCollage.totalImageObjects = collage.totalImageObjects;
+                duplicateCollage.totalLabelObjects = collage.totalLabelObjects;
+                duplicateCollage.totalImageMemoryBytes = collage.totalImageMemoryBytes;
+                duplicateCollage.addContentOnCreation = collage.addContentOnCreation;
+                [allCollages addObject:duplicateCollage];
+                [self saveAllCollages];
+                [duplicateCollage release]; 
+                
+                //now move it 
+                NSUInteger srcIndex = [allCollages count] - 1;
+                NSUInteger destIndex = fromIndex + 1;
+                [self moveCollageAtIndex:srcIndex toIndex:destIndex];
+                
+            } else {
+                //clean up in case some files were copied
+                NSError *error;
+                NSString *path = AWBDocumentSubdirectory(subDirDest);
+                [[NSFileManager defaultManager] removeItemAtPath:path error:&error];                
+            }
+        } else {
+            //clean up in case some files were copied
+            NSError *error;
+            NSString *path = AWBDocumentSubdirectory(subDirDest);
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+        }
+    }
+    
+    return success;
+}
+
 - (NSString *)nextDefaultCollageName
 {
     NSInteger sequenceId = [[NSUserDefaults standardUserDefaults] integerForKey:kAWBInfoKeyCollageSequenceNumber];
@@ -93,6 +147,7 @@ static CollageStore *defaultStore = nil;
 {
     NSError *error;
     NSString *path = AWBDocumentSubdirectory([collage collageSaveDocumentsSubdirectory]);
+    NSLog(@"Remove Path: %@", path);
     [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
     [allCollages removeObjectIdenticalTo:collage];
 }

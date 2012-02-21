@@ -13,6 +13,7 @@
 #import "CollageMakerViewController.h"
 #import "AWBTransformableArrowView.h"
 #import "UIColor+Texture.h"
+#import "FileHelpers.h"
 
 @implementation Collage
 
@@ -188,6 +189,18 @@
                 }                
             }            
         }    
+    }
+}
+
+- (void)updateImageKeysWithNewSubdir:(NSString *)subDir
+{
+    if (self.collageViews) {
+        for(UIView <AWBTransformableView> *view in self.collageViews) {
+            if ([view isKindOfClass:[AWBTransformableImageView class]]) {
+                AWBTransformableImageView *imageView = (AWBTransformableImageView *)view;
+                imageView.imageKey = AWBReplaceSubdirInImageKey(imageView.imageKey, subDir);
+            }     
+        }  
     }
 }
 

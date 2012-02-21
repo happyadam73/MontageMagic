@@ -91,7 +91,7 @@
     scrollToRow = [[NSUserDefaults standardUserDefaults] integerForKey:kAWBInfoKeyScrollToCollageStoreCollageIndex];
     if (scrollToRow >= 0) {
         @try {
-            [[self tableView] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:scrollToRow inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            [[self tableView] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:scrollToRow inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
         }
         @catch (NSException *e) {
             NSLog(@"%@", [e reason]);
@@ -147,7 +147,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
         UILongPressGestureRecognizer *longPressGesture = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)] autorelease];
-        longPressGesture.minimumPressDuration = 1.4; //seconds
+        longPressGesture.minimumPressDuration = 1.2; //seconds
         longPressGesture.delegate = self;
 		[cell addGestureRecognizer:longPressGesture];
     }
@@ -231,7 +231,7 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
     NSUInteger totalCollageCount = [[[CollageStore defaultStore] allCollages] count];
     if (totalCollageCount > 0) {
         self.navigationItem.leftBarButtonItem = [self editButtonItem];
-        return @"Click the + button to create a new collage. Or Shake Me and I'll make one for you!";
+        return @"Click the + button to create a new collage. Or Shake Me and I'll make one for you!  Tap and Hold a collage to make a copy.";
     } else {
         [self setEditing:NO];
         self.navigationItem.leftBarButtonItem = nil;
@@ -423,6 +423,7 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
 	// only when gesture was recognized, not when ended
 	if (gesture.state == UIGestureRecognizerStateBegan)
 	{
+        motionEnabled = NO;
 		// get affected cell
 		UITableViewCell *cell = (UITableViewCell *)[gesture view];
         
@@ -430,7 +431,9 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
 		// do something with this action
-		NSLog(@"Long-pressed cell at row %@", indexPath);
+        pendingCopyIndexRow = [indexPath row];
+        CollageDescriptor *collage = [[[CollageStore defaultStore] allCollages] objectAtIndex:pendingCopyIndexRow]; 
+        [self confirmCopyCollage:collage.collageName];
 	}
 }
 
@@ -441,6 +444,47 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
     } else {
         return YES;
     }
+}
+
+- (void)confirmCopyCollage:(NSString *)collageName
+{
+    NSString *msg = [NSString stringWithFormat:@"Make a copy of %@ ?", collageName];
+    UIAlertView *alertView = [[UIAlertView alloc] 
+                              initWithTitle:@"Copy Collage?" 
+                              message:msg 
+                              delegate:self 
+                              cancelButtonTitle:@"No" 
+                              otherButtonTitles:@"Yes", 
+                              nil];
+    
+    [alertView show];
+    [alertView release];   
+}
+
+- (void)copyCollageError
+{
+    UIAlertView *alertView = [[UIAlertView alloc] 
+                              initWithTitle:@"Copy Failed!" 
+                              message:@"An error occurred while copying the collage." 
+                              delegate:nil 
+                              cancelButtonTitle:@"OK" 
+                              otherButtonTitles:nil, 
+                              nil];
+    [alertView show];
+    [alertView release];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == alertView.firstOtherButtonIndex) {
+        BOOL success = [[CollageStore defaultStore] copyCollageAtIndex:pendingCopyIndexRow]; 
+        if (success) {
+            [self.tableView reloadData];            
+        } else {
+            [self copyCollageError];
+        }
+    }
+    motionEnabled = YES;
 }
 
 @end

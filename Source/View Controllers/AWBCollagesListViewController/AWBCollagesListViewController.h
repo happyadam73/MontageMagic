@@ -12,7 +12,7 @@
 
 @class CollageMakerViewController;
 
-@interface AWBCollagesListViewController : UITableViewController <AWBCollageSettingsTableViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface AWBCollagesListViewController : UITableViewController <AWBCollageSettingsTableViewControllerDelegate, UIGestureRecognizerDelegate, UIAlertViewDelegate>
 {
     NSInteger scrollToRow;
     BOOL isLowMemory;
@@ -20,6 +20,7 @@
     AWBBusyView *busyView;
     BOOL motionEnabled;
     UIBarButtonItem *myFontsButton;
+    NSUInteger pendingCopyIndexRow;
 }
 
 @property (assign) BOOL isLowMemory;
@@ -33,5 +34,7 @@
 - (CGPoint)centerOfVisibleRows;
 - (void)showMyFonts;
 - (NSArray *)myCollagesToolbarButtons;
+- (void)confirmCopyCollage:(NSString *)collageName;
+- (void)copyCollageError;
 
 @end

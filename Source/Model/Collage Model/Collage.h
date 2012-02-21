@@ -108,5 +108,6 @@ enum {
 - (void)applyCollageBackgroundToView:(UIView *)backgroundView;
 - (void)addCollageObjectsToView:(UIView *)collageView;
 - (void)initCollageFromView:(UIView *)collageView;
+- (void)updateImageKeysWithNewSubdir:(NSString *)subDir;
 
 @end

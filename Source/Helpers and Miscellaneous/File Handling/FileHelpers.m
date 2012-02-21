@@ -231,4 +231,27 @@ NSString *AWBPathInMainBundleSubdirectory(NSString *bundleSubdirectory, NSString
 	return fullBundlePath;
 }
 
+BOOL AWBCopyDocsSubdirToSubdir(NSString *subdirFrom, NSString *subdirTo)
+{
+    NSString *directoryPathSrc = AWBDocumentSubdirectory(subdirFrom);
+    NSString *directoryPathDest = AWBDocumentSubdirectory(subdirTo);
 
+    BOOL success = NO;
+    BOOL srcDirExists = [[NSFileManager defaultManager] fileExistsAtPath:directoryPathSrc];
+    if (srcDirExists) {
+        success = [[NSFileManager defaultManager] copyItemAtPath:directoryPathSrc toPath:directoryPathDest error:nil];
+    }
+    
+    return success;
+}
+
+NSString *AWBReplaceSubdirInImageKey(NSString *imageKey, NSString *subDir)
+{
+    NSString *newImageKey = nil;
+    NSArray *items = [imageKey componentsSeparatedByString:@"/"];
+    if ([items count] == 2) {
+        NSString *key = [items objectAtIndex:1];
+        newImageKey = [NSString stringWithFormat:@"%@/%@", subDir, key];
+    }
+    return newImageKey;
+}

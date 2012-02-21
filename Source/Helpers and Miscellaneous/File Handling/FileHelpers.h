@@ -26,3 +26,5 @@ BOOL AWBCopyBundleItemAtPathToDocumentsFolder(NSString *bundleSubdirectory, NSSt
 BOOL AWBCopyCollageHelpFilesForDevice();
 NSString *AWBPathInMyFontsDocumentsSubdirectory(NSString *filename);
 NSString *AWBPathInMainBundleSubdirectory(NSString *bundleSubdirectory, NSString *filename);
+BOOL AWBCopyDocsSubdirToSubdir(NSString *subdirFrom, NSString *subdirTo);
+NSString *AWBReplaceSubdirInImageKey(NSString *imageKey, NSString *subDir);
