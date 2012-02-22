@@ -10,11 +10,12 @@
 #import "FileHelpers.h"
 #import "AWBMyFontStore.h"
 #import "AWBSettingsGroup.h"
+#import "SSZipArchive.h"
 
 @implementation AWBMyFontsListViewController
 
-@synthesize theTableView, pendingMyFontInstall, pendingMyFontInstallURL, installMyFontAlertView, helpButton, toolbarSpacing;
-@synthesize pendingMyFont;
+@synthesize theTableView, pendingMyFontInstall, pendingMyFontInstallURL, installMyFontAlertView, installExtractedFontsAlertView, helpButton, toolbarSpacing;
+@synthesize pendingMyFont, extractedFontFiles;
 
 - (void)loadView {
 	
@@ -46,8 +47,10 @@
     [pendingMyFontInstallURL release];
     [pendingMyFont release];
     [installMyFontAlertView release];
+    [installExtractedFontsAlertView release];
     [helpButton release];
     [toolbarSpacing release];
+    [extractedFontFiles release];
 	[super dealloc];
 }
 
@@ -102,12 +105,18 @@
 {
     [[AWBMyFontStore defaultStore] saveAllMyFonts];
     
-    //dismiss alert view if neccessary
+    //dismiss alert views if neccessary
     if (self.installMyFontAlertView) {
         self.installMyFontAlertView.delegate = nil;
         [self.installMyFontAlertView dismissWithClickedButtonIndex:self.installMyFontAlertView.cancelButtonIndex animated:NO];
         [self alertView:self.installMyFontAlertView didDismissWithButtonIndex:self.installMyFontAlertView.cancelButtonIndex];
     }
+    
+    if (self.installExtractedFontsAlertView) {
+        self.installExtractedFontsAlertView.delegate = nil;
+        [self.installExtractedFontsAlertView dismissWithClickedButtonIndex:self.installExtractedFontsAlertView.cancelButtonIndex animated:NO];
+        [self alertView:self.installExtractedFontsAlertView didDismissWithButtonIndex:self.installExtractedFontsAlertView.cancelButtonIndex];
+    }    
     
     [super viewWillDisappear:animated];
 }
@@ -272,22 +281,106 @@
 {
     //need a URL
     if (self.pendingMyFontInstallURL) {
-        AWBMyFont *font = [[AWBMyFont alloc] initWithUrl:self.pendingMyFontInstallURL];
-        self.pendingMyFont = font;
-        [font release];
-        if (self.pendingMyFont) {
-            [self confirmMyFontInstall:self.pendingMyFont.fontName];
+        
+        BOOL isZipFile = [[[self.pendingMyFontInstallURL pathExtension] uppercaseString] isEqualToString:@"ZIP"];
+        if (isZipFile) {
+            [self handleMyFontZipFileInstall];
         } else {
-            NSString *path = [self.pendingMyFontInstallURL path];
-            [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
-            [self showFontInstallError:path.lastPathComponent];
+            AWBMyFont *font = [[AWBMyFont alloc] initWithUrl:self.pendingMyFontInstallURL];
+            self.pendingMyFont = font;
+            [font release];
+            if (self.pendingMyFont) {
+                [self confirmMyFontInstall:self.pendingMyFont.fontName];
+            } else {
+                NSString *path = [self.pendingMyFontInstallURL path];
+                [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+                [self showFontInstallError:path.lastPathComponent];
+            }            
         }
     }
 }
 
+- (void)handleMyFontZipFileInstall
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    NSString *path = [self.pendingMyFontInstallURL path];
+    NSString *extractFolder = AWBPathInMyFontsExtractionSubdirectory();
+    
+    BOOL success = [SSZipArchive unzipFontFilesAtPath:path toDestination:extractFolder];
+    if (success) {
+        NSArray *fontFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:extractFolder error:nil];
+        if (fontFiles && ([fontFiles count] > 0)) {
+            self.extractedFontFiles = fontFiles;
+            [self confirmExtractedFontsInstall];
+        } else {
+            [self showFontZipNoFilesError:path.lastPathComponent];
+            [self myFontZipFileCleanup];            
+        }
+    } else {
+        [self showFontZipFileInstallError:path.lastPathComponent];
+        [self myFontZipFileCleanup];
+    }
+    
+    [pool drain];
+}
+
+- (void)myFontZipFileCleanup
+{
+    NSString *path = [self.pendingMyFontInstallURL path];
+    NSString *extractFolder = AWBPathInMyFontsExtractionSubdirectory();
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];  
+    [[NSFileManager defaultManager] removeItemAtPath:extractFolder error:nil];  
+    self.pendingMyFontInstallURL = nil;
+    self.extractedFontFiles = nil;
+    self.installExtractedFontsAlertView = nil;
+}
+
+- (void)showFontZipFileInstallError:(NSString *)filename
+{
+    NSString *message = [NSString stringWithFormat:@"%@ is either an invalid Zip file or could not be opened and extracted.", filename];
+    UIAlertView *alertView = [[UIAlertView alloc] 
+                              initWithTitle:@"Zip Extraction Failed" 
+                              message:message 
+                              delegate:nil 
+                              cancelButtonTitle:@"OK" 
+                              otherButtonTitles:nil, 
+                              nil];
+    [alertView show];
+    [alertView release];       
+}
+
+- (void)showFontZipNoFilesError:(NSString *)filename
+{
+    NSString *message = [NSString stringWithFormat:@"%@ contained no font files to install.", filename];
+    UIAlertView *alertView = [[UIAlertView alloc] 
+                              initWithTitle:@"No Fonts Found" 
+                              message:message 
+                              delegate:nil 
+                              cancelButtonTitle:@"OK" 
+                              otherButtonTitles:nil, 
+                              nil];
+    [alertView show];
+    [alertView release];       
+}
+
+- (void)showFontZipOneOrMoreInstallErrors:(NSUInteger)errorCount
+{
+    NSString *message = [NSString stringWithFormat:@"%d font%@ either invalid or could not be installed.", errorCount, (errorCount > 1 ? @"s were" : @" was")];
+    UIAlertView *alertView = [[UIAlertView alloc] 
+                              initWithTitle:@"Install Error" 
+                              message:message 
+                              delegate:nil 
+                              cancelButtonTitle:@"OK" 
+                              otherButtonTitles:nil, 
+                              nil];
+    [alertView show];
+    [alertView release];       
+}
+
 - (void)showFontInstallError:(NSString *)filename
 {
-    NSString *message = [NSString stringWithFormat:@"%@ was invalid and could not be installed", filename];
+    NSString *message = [NSString stringWithFormat:@"%@ was invalid and could not be installed.", filename];
     UIAlertView *alertView = [[UIAlertView alloc] 
                               initWithTitle:@"Install Failed" 
                               message:message 
@@ -297,6 +390,33 @@
                               nil];
     [alertView show];
     [alertView release];       
+}
+
+- (void)confirmExtractedFontsInstall
+{
+    NSUInteger fontCount = [self.extractedFontFiles count];
+    NSString *firstFontFilename = [self.extractedFontFiles objectAtIndex:0];
+    NSString *message = nil;
+    NSString *title = nil;
+    
+    if (fontCount > 1) {
+        message = [NSString stringWithFormat:@"Do you want to install %@ and %d other font%@?", firstFontFilename, (fontCount - 1), (((fontCount - 1) > 1)? @"s" : @"")];
+        title = [NSString stringWithFormat:@"Install %d fonts?", fontCount];
+    } else {
+        message = [NSString stringWithFormat:@"Do you want to install %@ ?", firstFontFilename];
+        title = @"Install Font?";
+    }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] 
+                              initWithTitle:title 
+                              message:message 
+                              delegate:self 
+                              cancelButtonTitle:@"No" 
+                              otherButtonTitles:@"Yes", 
+                              nil];
+    self.installExtractedFontsAlertView = alertView;
+    [self.installExtractedFontsAlertView show];
+    [alertView release];   
 }
 
 - (void)confirmMyFontInstall:(NSString *)fontName
@@ -333,7 +453,47 @@
         self.installMyFontAlertView = nil;
         self.pendingMyFontInstallURL = nil;
         self.pendingMyFont = nil;
+    } else if (alertView == self.installExtractedFontsAlertView) {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            [self installExtractedFonts];
+        } else {
+            [self myFontZipFileCleanup];
+        }        
     }
+}
+
+- (void)installExtractedFonts
+{
+    NSUInteger errorCount = 0;
+    NSUInteger successCount = 0;
+    for (NSString *fontFileName in self.extractedFontFiles) {
+        NSString *fullPath = AWBPathWithFilenameInMyFontsExtractionSubdirectory(fontFileName);
+        AWBMyFont *font = [[AWBMyFont alloc] initWithUrl:[NSURL fileURLWithPath:fullPath]];
+        if (font) {
+            [[AWBMyFontStore defaultStore] installMyFont:font];
+            successCount += 1;
+        } else {
+            errorCount += 1;
+        }
+        [font release];
+    }
+    
+    if (errorCount > 0) {
+        [self showFontZipOneOrMoreInstallErrors:errorCount];
+    }
+    
+    if (successCount > 0) {
+        [self.theTableView reloadData];
+        NSUInteger scrollToRow = [theTableView numberOfRowsInSection:0] - 1;
+        @try {
+            [theTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:scrollToRow inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        @catch (NSException *e) {
+            //NSLog(@"%@", [e reason]);
+        }
+    }
+    
+    [self myFontZipFileCleanup];
 }
 
 - (UIBarButtonItem *)helpButton

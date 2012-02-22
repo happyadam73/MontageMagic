@@ -21,9 +21,11 @@
     AWBMyFont *pendingMyFont;
     NSURL *pendingMyFontInstallURL;
     UIAlertView *installMyFontAlertView;
+    UIAlertView *installExtractedFontsAlertView;
     UIBarButtonItem *helpButton;
     UIBarButtonItem *toolbarSpacing;
     BOOL showPurchaseWarning;
+    NSArray *extractedFontFiles;
 }
 
 @property (nonatomic, retain) UITableView *theTableView;
@@ -31,12 +33,21 @@
 @property (nonatomic, retain) NSURL *pendingMyFontInstallURL;
 @property (nonatomic, retain) AWBMyFont *pendingMyFont;
 @property (nonatomic, retain) UIAlertView *installMyFontAlertView;
+@property (nonatomic, retain) UIAlertView *installExtractedFontsAlertView;
 @property (nonatomic, retain) UIBarButtonItem *helpButton;
 @property (nonatomic, retain) UIBarButtonItem *toolbarSpacing;
+@property (nonatomic, retain) NSArray *extractedFontFiles;
 
 - (void)attemptMyFontInstall;
+- (void)handleMyFontZipFileInstall;
+- (void)myFontZipFileCleanup;
 - (void)confirmMyFontInstall:(NSString *)fontName;
+- (void)confirmExtractedFontsInstall;
+- (void)installExtractedFonts;
+- (void)showFontZipFileInstallError:(NSString *)filename;
+- (void)showFontZipNoFilesError:(NSString *)filename;
 - (void)showFontInstallError:(NSString *)filename;
+- (void)showFontZipOneOrMoreInstallErrors:(NSUInteger)errorCount;
 - (UIBarButtonItem *)helpButton;
 - (void)showHelp;
 - (NSArray *)myFontsToolbarButtons;

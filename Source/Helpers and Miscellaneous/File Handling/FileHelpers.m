@@ -223,6 +223,24 @@ NSString *AWBPathInMyFontsDocumentsSubdirectory(NSString *filename)
     return AWBPathInDocumentSubdirectory(@"My Fonts", filename);
 }
 
+NSString *AWBPathWithFilenameInMyFontsExtractionSubdirectory(NSString *filename)
+{
+    return AWBPathInDocumentSubdirectory(@"Extract Fonts", filename);
+}
+
+NSString *AWBPathInMyFontsExtractionSubdirectory()
+{
+	NSString *directoryPath = AWBDocumentSubdirectory(@"Extract Fonts");
+    
+    BOOL directoryExists = [[NSFileManager defaultManager] fileExistsAtPath:directoryPath];    
+    if (!directoryExists) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:NULL];
+    }
+    
+	// Append passed in file name to that directory, return it
+	return directoryPath;
+}
+
 NSString *AWBPathInMainBundleSubdirectory(NSString *bundleSubdirectory, NSString *filename)
 {
     NSString *bundleSubdirectoryPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:bundleSubdirectory];
