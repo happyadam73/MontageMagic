@@ -22,6 +22,16 @@
 + (id)concreteTextureColor;
 + (id)linedPaperTextureColor;
 + (id)redDamaskTextureColor;
++ (id)cloudsTextureColor;
++ (id)nebulaTextureColor;
++ (id)brightlightsTextureColor;
++ (id)metalTextureColor;
++ (id)darkWoodTextureColor;
++ (id)leatherTextureColor;
++ (id)denimTextureColor;
++ (id)basketWeaveTextureColor;
++ (id)graphPaperTextureColor;
+
 + (NSArray *)allTextureColors;
 + (NSArray *)allTextureColorDescriptions;
 + (NSArray *)allTextureColorImages;

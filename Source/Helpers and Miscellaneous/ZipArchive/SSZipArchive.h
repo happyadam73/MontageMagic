@@ -19,9 +19,6 @@
 // Zip
 + (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray *)filenames;
 
-// Contents
-+ (NSMutableArray *)getZipFileContents:(NSString *)path error:(NSError **)error;
-
 - (id)initWithPath:(NSString *)path;
 - (BOOL)open;
 - (BOOL)writeFile:(NSString *)path;

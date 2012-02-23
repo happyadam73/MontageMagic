@@ -66,19 +66,64 @@
     return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"reddamask148.jpg" withNoUpscaleForNonRetina:YES]];
 }
 
++ (id)cloudsTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"sky1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
++ (id)nebulaTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"nebula1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
++ (id)brightlightsTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"brightlights1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
++ (id)metalTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"metal1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
++ (id)darkWoodTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"darkwood1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
++ (id)leatherTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"leather1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
++ (id)denimTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"denim1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
++ (id)basketWeaveTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"basketweave1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
++ (id)graphPaperTextureColor
+{
+    return [UIColor colorWithPatternImage:[UIImage imageFromFile:@"graphpaper1024.jpg" withNoUpscaleForNonRetina:YES]];
+}
+
 + (NSArray *)allTextureColors
 {
-    return [NSArray arrayWithObjects:[UIColor corkTextureColor], [UIColor paperTextureColor], [UIColor blackboardTextureColor], [UIColor cardboardTextureColor], [UIColor brickTextureColor], [UIColor sandTextureColor], [UIColor grassTextureColor], [UIColor woodTextureColor], [UIColor concreteTextureColor], [UIColor linedPaperTextureColor], [UIColor redDamaskTextureColor], nil];
+    return [NSArray arrayWithObjects:[UIColor corkTextureColor], [UIColor paperTextureColor], [UIColor blackboardTextureColor], [UIColor cardboardTextureColor], [UIColor brickTextureColor], [UIColor sandTextureColor], [UIColor grassTextureColor], [UIColor woodTextureColor], [UIColor concreteTextureColor], [UIColor linedPaperTextureColor], [UIColor redDamaskTextureColor], [UIColor cloudsTextureColor], [UIColor nebulaTextureColor], [UIColor brightlightsTextureColor], [UIColor metalTextureColor], [UIColor darkWoodTextureColor], [UIColor leatherTextureColor], [UIColor denimTextureColor], [UIColor basketWeaveTextureColor], [UIColor graphPaperTextureColor], nil];
 }
 
 + (NSArray *)allTextureColorDescriptions
 {
-    return [NSArray arrayWithObjects:@"Noticeboard", @"Paper", @"Blackboard", @"Cardboard", @"Brick", @"Sand", @"Grass", @"Wood", @"Concrete", @"Lined Paper", @"Red Damask", nil];
+    return [NSArray arrayWithObjects:@"Noticeboard", @"Paper", @"Blackboard", @"Cardboard", @"Brick", @"Sand", @"Grass", @"Wood", @"Concrete", @"Lined Paper", @"Red Damask", @"Clouds", @"Nebula", @"Bright Lights", @"Metal", @"Dark Wood", @"Leather", @"Denim", @"Basket Weave", @"Graph Paper", nil];
 }
 
 + (NSArray *)allTextureColorImages
 {
-    return [NSArray arrayWithObjects:[UIImage imageFromFile:@"cork100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"paper100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"blackboard100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"cardboard100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"brick100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"sand100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"grass100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"wood100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"concrete100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"linedpaper100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"reddamask100.jpg" withNoUpscaleForNonRetina:YES], nil];
+    return [NSArray arrayWithObjects:[UIImage imageFromFile:@"cork100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"paper100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"blackboard100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"cardboard100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"brick100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"sand100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"grass100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"wood100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"concrete100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"linedpaper100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"reddamask100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"sky100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"nebula100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"brightlights100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"metal100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"darkwood100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"leather100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"denim100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"basketweave100.jpg" withNoUpscaleForNonRetina:YES], [UIImage imageFromFile:@"graphpaper100.jpg" withNoUpscaleForNonRetina:YES], nil];
 }
 
 + (id)textureColorWithDescription:(NSString *)colorDescription
@@ -105,6 +150,24 @@
         return [UIColor linedPaperTextureColor];
     } else if ([colorDescription isEqualToString:@"Red Damask"]) {
         return [UIColor redDamaskTextureColor];
+    } else if ([colorDescription isEqualToString:@"Clouds"]) {
+        return [UIColor cloudsTextureColor];
+    } else if ([colorDescription isEqualToString:@"Nebula"]) {
+        return [UIColor nebulaTextureColor];
+    } else if ([colorDescription isEqualToString:@"Bright Lights"]) {
+        return [UIColor brightlightsTextureColor];
+    } else if ([colorDescription isEqualToString:@"Metal"]) {
+        return [UIColor metalTextureColor];
+    } else if ([colorDescription isEqualToString:@"Dark Wood"]) {
+        return [UIColor darkWoodTextureColor];
+    } else if ([colorDescription isEqualToString:@"Leather"]) {
+        return [UIColor leatherTextureColor];
+    } else if ([colorDescription isEqualToString:@"Denim"]) {
+        return [UIColor denimTextureColor];
+    } else if ([colorDescription isEqualToString:@"Basket Weave"]) {
+        return [UIColor basketWeaveTextureColor];
+    } else if ([colorDescription isEqualToString:@"Graph Paper"]) {
+        return [UIColor graphPaperTextureColor];
     } else {
         return [UIColor corkTextureColor];
     } 
@@ -134,6 +197,24 @@
         return [UIImage imageFromFile:@"linedpaper121.jpg"];
     } else if ([colorDescription isEqualToString:@"Red Damask"]) {
         return [UIImage imageFromFile:@"reddamask148.jpg"];
+    } else if ([colorDescription isEqualToString:@"Clouds"]) {
+        return [UIImage imageFromFile:@"sky1024.jpg"];
+    } else if ([colorDescription isEqualToString:@"Nebula"]) {
+        return [UIImage imageFromFile:@"nebula1024.jpg"];
+    } else if ([colorDescription isEqualToString:@"Bright Lights"]) {
+        return [UIImage imageFromFile:@"brightlights1024.jpg"];
+    } else if ([colorDescription isEqualToString:@"Metal"]) {
+        return [UIImage imageFromFile:@"metal1024.jpg"];
+    } else if ([colorDescription isEqualToString:@"Dark Wood"]) {
+        return [UIImage imageFromFile:@"darkwood1024.jpg"];
+    } else if ([colorDescription isEqualToString:@"Leather"]) {
+        return [UIImage imageFromFile:@"leather1024.jpg"];
+    } else if ([colorDescription isEqualToString:@"Denim"]) {
+        return [UIImage imageFromFile:@"denim1024.jpg"];
+    } else if ([colorDescription isEqualToString:@"Basket Weave"]) {
+        return [UIImage imageFromFile:@"basketweave1024.jpg"];
+    } else if ([colorDescription isEqualToString:@"Graph Paper"]) {
+        return [UIImage imageFromFile:@"graphpaper1024.jpg"];
     } else {
         return [UIImage imageFromFile:@"cork512.jpg"];
     } 

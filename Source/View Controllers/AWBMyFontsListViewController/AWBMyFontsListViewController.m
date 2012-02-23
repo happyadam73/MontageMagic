@@ -15,7 +15,7 @@
 @implementation AWBMyFontsListViewController
 
 @synthesize theTableView, pendingMyFontInstall, pendingMyFontInstallURL, installMyFontAlertView, installExtractedFontsAlertView, helpButton, toolbarSpacing;
-@synthesize pendingMyFont, extractedFontFiles;
+@synthesize pendingMyFont, extractedFontFiles, freeFontsActionSheet, freeFontsButton;
 
 - (void)loadView {
 	
@@ -49,8 +49,10 @@
     [installMyFontAlertView release];
     [installExtractedFontsAlertView release];
     [helpButton release];
+    [freeFontsButton release];
     [toolbarSpacing release];
     [extractedFontFiles release];
+    [freeFontsActionSheet release];
 	[super dealloc];
 }
 
@@ -74,7 +76,9 @@
 	theTableView.dataSource = nil;
     self.theTableView = nil;
     self.helpButton = nil;
+    self.freeFontsButton = nil;
     self.toolbarSpacing = nil;
+    self.freeFontsActionSheet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -512,6 +516,14 @@
     return toolbarSpacing;    
 }
 
+- (UIBarButtonItem *)freeFontsButton
+{
+    if (!freeFontsButton) {
+        freeFontsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"freefonts"] style:UIBarButtonItemStyleBordered target:self action:@selector(showFreeFontSites)];
+    }
+    return freeFontsButton;    
+}
+
 - (void)showHelp
 {    
     AWBCollageSettingsTableViewController *settingsController = [[AWBCollageSettingsTableViewController alloc] initWithSettings:[AWBSettings helpSettingsWithFilename:@"MyFonts.rtfd.zip" title:@"MyFonts Help"] settingsInfo:nil rootController:nil]; 
@@ -527,7 +539,34 @@
 
 - (NSArray *)myFontsToolbarButtons
 {
-    return [NSArray arrayWithObjects:self.toolbarSpacing, self.helpButton, nil];    
+    return [NSArray arrayWithObjects:self.freeFontsButton, self.toolbarSpacing, self.helpButton, nil];    
+}
+
+- (void)showFreeFontSites
+{
+    if (self.freeFontsActionSheet.visible) {
+        [self.freeFontsActionSheet dismissWithClickedButtonIndex:self.freeFontsActionSheet.cancelButtonIndex animated:YES];
+        return;
+    }
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self 
+                                                    cancelButtonTitle:@"Cancel" 
+                                               destructiveButtonTitle:nil 
+                                                    otherButtonTitles:@"dafont.com", @"FontSquirrel.com", @"1001FreeFonts.com", @"UrbanFonts.com", @"FontSpace.com", nil];
+    
+    self.freeFontsActionSheet = actionSheet;
+    [actionSheet release];
+    
+    [self.freeFontsActionSheet showFromBarButtonItem:self.freeFontsButton animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != [actionSheet cancelButtonIndex]) {
+        NSString *website = [actionSheet buttonTitleAtIndex:buttonIndex];
+        NSString *websiteUrl = [NSString stringWithFormat:@"http://www.%@", website];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:websiteUrl]];
+    }
 }
 
 @end

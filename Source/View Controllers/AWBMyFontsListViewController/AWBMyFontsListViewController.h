@@ -14,6 +14,7 @@
 @interface AWBMyFontsListViewController : UIViewController <UITableViewDataSource, 
                                                             UITableViewDelegate, 
                                                             UIAlertViewDelegate, 
+                                                            UIActionSheetDelegate,
                                                             AWBCollageSettingsTableViewControllerDelegate>
 {
 	UITableView *theTableView;
@@ -23,9 +24,11 @@
     UIAlertView *installMyFontAlertView;
     UIAlertView *installExtractedFontsAlertView;
     UIBarButtonItem *helpButton;
+    UIBarButtonItem *freeFontsButton;    
     UIBarButtonItem *toolbarSpacing;
     BOOL showPurchaseWarning;
     NSArray *extractedFontFiles;
+    UIActionSheet *freeFontsActionSheet; 
 }
 
 @property (nonatomic, retain) UITableView *theTableView;
@@ -35,8 +38,10 @@
 @property (nonatomic, retain) UIAlertView *installMyFontAlertView;
 @property (nonatomic, retain) UIAlertView *installExtractedFontsAlertView;
 @property (nonatomic, retain) UIBarButtonItem *helpButton;
+@property (nonatomic, retain) UIBarButtonItem *freeFontsButton;
 @property (nonatomic, retain) UIBarButtonItem *toolbarSpacing;
 @property (nonatomic, retain) NSArray *extractedFontFiles;
+@property (nonatomic, retain) UIActionSheet *freeFontsActionSheet; 
 
 - (void)attemptMyFontInstall;
 - (void)handleMyFontZipFileInstall;
@@ -51,5 +56,6 @@
 - (UIBarButtonItem *)helpButton;
 - (void)showHelp;
 - (NSArray *)myFontsToolbarButtons;
+- (void)showFreeFontSites;
 
 @end
