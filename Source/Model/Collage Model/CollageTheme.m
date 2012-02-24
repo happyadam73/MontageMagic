@@ -17,7 +17,7 @@
 @synthesize imageBorderColor, textBorderColor, textBackgroundColor, symbolColor, labelTextFont, labelTextColor;
 @synthesize deviceAvailability, isAvailableOnCurrentDevice;
 @synthesize addCollageBorder, collageBorderColor, useBackgroundTexture, backgroundTexture;
-@synthesize snapToGrid, objectLocatorType, autoMemoryReduction, randomPickCount;
+@synthesize snapToGrid, snapRotation, objectLocatorType, autoMemoryReduction, randomPickCount;
 @synthesize labelMyFont, labelTextAlignment, useMyFonts;
 @synthesize imageRoundedCornerSize, imageShadowOffsetSize, textShadowOffsetSize;
 
@@ -121,6 +121,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
@@ -162,6 +163,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor whiteColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
@@ -203,6 +205,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor whiteColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
@@ -244,6 +247,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
@@ -285,6 +289,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor whiteColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -326,6 +331,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
@@ -367,6 +373,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -408,6 +415,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -449,6 +457,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -490,6 +499,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
@@ -531,6 +541,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor whiteColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 3;
@@ -572,6 +583,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -613,6 +625,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;
@@ -654,6 +667,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -695,6 +709,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor whiteColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -736,6 +751,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -777,6 +793,7 @@
     theme.addCollageBorder = NO;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = NO;
+    theme.snapRotation = NO;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -818,6 +835,7 @@
     theme.addCollageBorder = YES;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = YES;
+    theme.snapRotation = YES;
     theme.objectLocatorType = (DEVICE_IS_IPAD ? kAWBCollageObjectLocatorTypeMosaicSmallImages : kAWBCollageObjectLocatorTypeMosaicTinyImages);
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -859,6 +877,7 @@
     theme.addCollageBorder = YES;
     theme.collageBorderColor = [UIColor whiteColor];
     theme.snapToGrid = YES;
+    theme.snapRotation = YES;
     theme.objectLocatorType = (DEVICE_IS_IPAD ? kAWBCollageObjectLocatorTypeMosaicSmallImages : kAWBCollageObjectLocatorTypeMosaicTinyImages);
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -900,6 +919,7 @@
     theme.addCollageBorder = YES;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = YES;
+    theme.snapRotation = YES;
     theme.objectLocatorType = (DEVICE_IS_IPAD ? kAWBCollageObjectLocatorTypeMosaicLargeImages : kAWBCollageObjectLocatorTypeMosaicMediumImages);
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 3;
@@ -941,6 +961,7 @@
     theme.addCollageBorder = YES;
     theme.collageBorderColor = [UIColor whiteColor];
     theme.snapToGrid = YES;
+    theme.snapRotation = YES;
     theme.objectLocatorType = (DEVICE_IS_IPAD ? kAWBCollageObjectLocatorTypeMosaicLargeImages : kAWBCollageObjectLocatorTypeMosaicMediumImages);
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 2;
@@ -982,6 +1003,7 @@
     theme.addCollageBorder = YES;
     theme.collageBorderColor = [UIColor blackColor];
     theme.snapToGrid = YES;
+    theme.snapRotation = YES;
     theme.objectLocatorType = kAWBCollageObjectLocatorTypeMosaicMicroImages;
     theme.autoMemoryReduction = YES;
     theme.randomPickCount = 1;

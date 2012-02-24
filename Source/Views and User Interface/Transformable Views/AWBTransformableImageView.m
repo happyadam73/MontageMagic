@@ -24,7 +24,8 @@
 
 - (void)initialiseLayerRotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir 
 {      
-    rotationAndScaleCurrentlyQuantised = NO;
+    rotationCurrentlyQuantised = NO;
+    scaleCurrentlyQuantised = NO;
     rotationAngleInRadians = rotation;
     pendingRotationAngleInRadians = 0.0;
     currentScale = scale;
@@ -168,10 +169,10 @@
 
 -(void)rotateAndScale
 {    
-    [self rotateAndScaleWithSnapToGrid:NO gridSize:0.0];
+    [self rotateAndScaleWithSnapToGrid:NO gridSize:0.0 snapRotation:NO];
 }
 
-- (void)rotateAndScaleWithSnapToGrid:(BOOL)snapToGrid gridSize:(CGFloat)gridSize
+- (void)rotateAndScaleWithSnapToGrid:(BOOL)snapToGrid gridSize:(CGFloat)gridSize snapRotation:(BOOL)snapRotation
 {
     CGFloat rotation = rotationAngleInRadians+pendingRotationAngleInRadians;
     CGFloat scale = currentScale;
@@ -179,20 +180,26 @@
     if (snapToGrid && (gridSize > 0.0) && (initialHeight > 0.0)) {
         CGFloat quantisedHeight = AWBQuantizeFloat((scale * initialHeight), gridSize, YES);
         scale = quantisedHeight / initialHeight;
-        rotation = AWBQuantizeFloat(rotation, QUANTISED_ROTATION, NO);
-        rotationAndScaleCurrentlyQuantised = YES;
-        currentQuantisedRotation = rotation;
+        scaleCurrentlyQuantised = YES;
         currentQuantisedScale = scale;
     } else {
-        rotationAndScaleCurrentlyQuantised = NO;
+        scaleCurrentlyQuantised = NO;
     }
     
+    if (snapRotation) {
+        rotation = AWBQuantizeFloat(rotation, QUANTISED_ROTATION, NO);
+        rotationCurrentlyQuantised = YES;
+        currentQuantisedRotation = rotation;
+    } else {
+        rotationCurrentlyQuantised = NO;
+    }
+
     self.transform = AWBCGAffineTransformMakeRotationAndScale(rotation, scale, horizontalFlip);
 }
 
 - (CGFloat)quantisedRotation
 {
-    if (rotationAndScaleCurrentlyQuantised) {
+    if (rotationCurrentlyQuantised) {
         return currentQuantisedRotation;
     } else {
         return rotationAngleInRadians+pendingRotationAngleInRadians;
@@ -201,7 +208,7 @@
 
 - (CGFloat)quantisedScale
 {
-    if (rotationAndScaleCurrentlyQuantised) {
+    if (scaleCurrentlyQuantised) {
         return currentQuantisedScale;
     } else {
         return currentScale;

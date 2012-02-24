@@ -12,7 +12,7 @@
 
 @implementation AWBCollageObjectLocator
 
-@synthesize objectLocatorType, lockCollage, snapToGrid, snapToGridSize, objectPosition, objectScale, objectRotation, objectWidth, objectHeight, collageFull, mosaicRowHeights, autoMemoryReduction;
+@synthesize objectLocatorType, lockCollage, snapToGrid, snapRotation, snapToGridSize, objectPosition, objectScale, objectRotation, objectWidth, objectHeight, collageFull, mosaicRowHeights, autoMemoryReduction;
 
 - (void)initialise
 {
@@ -23,6 +23,7 @@
     objectRotation = 0.0;
     objectScale = 1.0;
     snapToGrid = NO;
+    snapRotation = NO;
     lockCollage = NO;  
     autoMemoryReduction = YES;
 
@@ -75,6 +76,12 @@
         currentMosaicOffset.y = [decoder decodeFloatForKey:kAWBInfoKeyObjectLocatorCurrentMosaicOffsetY];
         collageFull = [decoder decodeBoolForKey:kAWBInfoKeyObjectLocatorCollageFull];
         autoMemoryReduction = [decoder decodeBoolForKey:kAWBInfoKeyObjectLocatorAutoMemoryReduction];
+        
+        if ([decoder containsValueForKey:kAWBInfoKeyObjectLocatorSnapRotation]) {
+            snapRotation = [decoder decodeBoolForKey:kAWBInfoKeyObjectLocatorSnapRotation];
+        } else {
+            snapRotation = snapToGrid;
+        }
     }
     return self;
 }
@@ -84,6 +91,7 @@
     [encoder encodeInteger:objectCount forKey:kAWBInfoKeyObjectLocatorObjectCount];
     [encoder encodeInteger:objectLocatorType forKey:kAWBInfoKeyObjectLocatorType];
     [encoder encodeBool:snapToGrid forKey:kAWBInfoKeyObjectLocatorSnapToGrid];
+    [encoder encodeBool:snapRotation forKey:kAWBInfoKeyObjectLocatorSnapRotation];
     [encoder encodeFloat:snapToGridSize forKey:kAWBInfoKeyObjectLocatorSnapToGridSize];
     [encoder encodeBool:lockCollage forKey:kAWBInfoKeyObjectLocatorLockCollage];
     [encoder encodeFloat:objectScale forKey:kAWBInfoKeyObjectLocatorObjectScale];
@@ -247,10 +255,13 @@
     objectScale = AWBCGSizeRandomScaleFromMinMaxLength(image.size, (minPhotoScale * screenLength), (maxPhotoScale * screenLength));
     objectRotation = AWBRandomRotationFromMinMaxRadians((-M_PI_4/2.0), (M_PI_4/2.0));   
     
+    if (snapRotation) {
+        objectRotation = AWBQuantizeFloat(AWBRandomRotationFromMinMaxRadians(-QUANTISED_ROTATION, ((2 * QUANTISED_ROTATION) - 0.001)), QUANTISED_ROTATION, NO);        
+    }
+    
     if (self.snapToGrid && (snapToGridSize > 0.0) && (objectHeight > 0.0)) {
         CGFloat quantisedHeight = AWBQuantizeFloat((objectScale * objectHeight), self.snapToGridSize, YES);
         objectScale = quantisedHeight / objectHeight;
-        objectRotation = AWBQuantizeFloat(AWBRandomRotationFromMinMaxRadians(-QUANTISED_ROTATION, ((2 * QUANTISED_ROTATION) - 0.001)), QUANTISED_ROTATION, NO);
         objectPosition.x = AWBQuantizeFloat(objectPosition.x, (self.snapToGridSize/2.0), NO);
         objectPosition.y = AWBQuantizeFloat(objectPosition.y, (self.snapToGridSize/2.0), NO);                
     } else {

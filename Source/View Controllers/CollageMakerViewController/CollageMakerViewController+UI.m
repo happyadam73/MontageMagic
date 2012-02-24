@@ -255,6 +255,7 @@
 {
     self.collageObjectLocator.lockCollage = [[info objectForKey:kAWBInfoKeyObjectLocatorLockCollage] boolValue];
     self.collageObjectLocator.snapToGrid = [[info objectForKey:kAWBInfoKeyObjectLocatorSnapToGrid] boolValue];
+    self.collageObjectLocator.snapRotation = [[info objectForKey:kAWBInfoKeyObjectLocatorSnapRotation] boolValue];
     self.collageObjectLocator.snapToGridSize = [[info objectForKey:kAWBInfoKeyObjectLocatorSnapToGridSize] floatValue];
     self.collageObjectLocator.objectLocatorType = [[info objectForKey:kAWBInfoKeyObjectLocatorType] integerValue];
     self.collageObjectLocator.autoMemoryReduction = [[info objectForKey:kAWBInfoKeyObjectLocatorAutoMemoryReduction] boolValue];
@@ -285,6 +286,7 @@
                                  [NSNumber numberWithBool:self.useBackgroundTexture], kAWBInfoKeyCollageUseBackgroundTexture,
                                  [NSNumber numberWithBool:self.collageObjectLocator.lockCollage], kAWBInfoKeyObjectLocatorLockCollage, 
                                  [NSNumber numberWithBool:self.collageObjectLocator.snapToGrid], kAWBInfoKeyObjectLocatorSnapToGrid, 
+                                 [NSNumber numberWithBool:self.collageObjectLocator.snapRotation], kAWBInfoKeyObjectLocatorSnapRotation, 
                                  [NSNumber numberWithFloat:self.collageObjectLocator.snapToGridSize], kAWBInfoKeyObjectLocatorSnapToGridSize, 
                                  [NSNumber numberWithInteger:self.collageObjectLocator.objectLocatorType], kAWBInfoKeyObjectLocatorType,
                                  [NSNumber numberWithBool:self.collageObjectLocator.autoMemoryReduction], kAWBInfoKeyObjectLocatorAutoMemoryReduction,

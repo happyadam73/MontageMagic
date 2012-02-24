@@ -117,6 +117,7 @@
     [self setLabelMyFont:theme.labelMyFont];
     [self setLabelTextAlignment:theme.labelTextAlignment];
     self.collageObjectLocator.snapToGrid = theme.snapToGrid;
+    self.collageObjectLocator.snapRotation = theme.snapRotation;
     self.collageObjectLocator.objectLocatorType = theme.objectLocatorType;
     self.collageObjectLocator.autoMemoryReduction = theme.autoMemoryReduction;
     
@@ -310,6 +311,9 @@
 {
     [super loadView];
     
+    currentlyPinching = NO;
+    currentlyRotating = NO;
+
     CGSize currentBounds = self.view.bounds.size;
     CGFloat width = MAX(currentBounds.width, currentBounds.height);
     CGFloat height = MIN(currentBounds.width, currentBounds.height);

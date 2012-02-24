@@ -629,8 +629,9 @@
 + (AWBSettingsGroup *)snapToGridSettingsGroupWithInfo:(NSDictionary *)info
 {
     AWBSetting *snapToGridSetting = [AWBSetting switchSettingWithText:@"Snap to Grid" value:[info objectForKey:kAWBInfoKeyObjectLocatorSnapToGrid] key:kAWBInfoKeyObjectLocatorSnapToGrid];    
-    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:snapToGridSetting, nil];
-    AWBSettingsGroup *snapToGridSettings = [[self alloc] initWithSettings:buttonSettings header:@"Manual Layout" footer:nil];
+    AWBSetting *snapRotationSetting = [AWBSetting switchSettingWithText:@"Snap Rotation" value:[info objectForKey:kAWBInfoKeyObjectLocatorSnapRotation] key:kAWBInfoKeyObjectLocatorSnapRotation];    
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:snapToGridSetting, snapRotationSetting, nil];
+    AWBSettingsGroup *snapToGridSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     return [snapToGridSettings autorelease];
 }
 

@@ -549,7 +549,7 @@
         return;
     }
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self 
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select one of the sites below, download a font from the site, then use the \"Open in Montage Magic\" option within Safari." delegate:self 
                                                     cancelButtonTitle:@"Cancel" 
                                                destructiveButtonTitle:nil 
                                                     otherButtonTitles:@"dafont.com", @"FontSquirrel.com", @"1001FreeFonts.com", @"UrbanFonts.com", @"FontSpace.com", nil];

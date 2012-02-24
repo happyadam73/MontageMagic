@@ -70,6 +70,7 @@ typedef enum {
     BOOL useBackgroundTexture;
     NSString *backgroundTexture;
     BOOL snapToGrid;
+    BOOL snapRotation;
     AWBCollageObjectLocatorType objectLocatorType;
     BOOL autoMemoryReduction;
     NSUInteger randomPickCount;
@@ -107,6 +108,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL useBackgroundTexture;
 @property (nonatomic, retain) NSString *backgroundTexture;
 @property (nonatomic, assign) BOOL snapToGrid;
+@property (nonatomic, assign) BOOL snapRotation;
 @property (nonatomic, assign) AWBCollageObjectLocatorType objectLocatorType;
 @property (nonatomic, assign) BOOL autoMemoryReduction;
 @property (nonatomic, assign) NSUInteger randomPickCount;

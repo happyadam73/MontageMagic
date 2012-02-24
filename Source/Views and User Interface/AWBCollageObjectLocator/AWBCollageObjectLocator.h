@@ -12,6 +12,7 @@
 
 static NSString *const kAWBInfoKeyObjectLocatorType = @"LocatorType";
 static NSString *const kAWBInfoKeyObjectLocatorSnapToGrid = @"SnapToGrid";
+static NSString *const kAWBInfoKeyObjectLocatorSnapRotation = @"SnapRotation";
 static NSString *const kAWBInfoKeyObjectLocatorSnapToGridSize = @"SnapToGridSize";
 static NSString *const kAWBInfoKeyObjectLocatorObjectCount = @"ObjectCount";
 static NSString *const kAWBInfoKeyObjectLocatorLockCollage = @"LockCollage";
@@ -43,6 +44,7 @@ typedef enum {
     AWBCollageObjectLocatorType objectLocatorType;
     BOOL lockCollage;
     BOOL snapToGrid;
+    BOOL snapRotation;
     CGFloat snapToGridSize;
     NSUInteger objectCount;
     CGPoint objectPosition;
@@ -64,6 +66,7 @@ typedef enum {
 @property (nonatomic, assign) AWBCollageObjectLocatorType objectLocatorType;
 @property (nonatomic, assign) BOOL lockCollage;
 @property (nonatomic, assign) BOOL snapToGrid;
+@property (nonatomic, assign) BOOL snapRotation;
 @property (nonatomic, assign) CGFloat snapToGridSize;
 @property (nonatomic, readonly) CGPoint objectPosition;
 @property (nonatomic, readonly) CGFloat objectRotation;

@@ -31,7 +31,9 @@
     
     UIView <AWBTransformableView> *capturedView;
     CGPoint capturedCenterOffset;
-    
+    BOOL currentlyPinching;
+    BOOL currentlyRotating;
+
     UIBarButtonItem *editButton;
     UIBarButtonItem *cancelButton;
     UIBarButtonItem *deleteButton;

@@ -26,7 +26,7 @@
 @property (nonatomic, assign) CGFloat shadowOffsetRatio;
 
 - (void)rotateAndScale;
-- (void)rotateAndScaleWithSnapToGrid:(BOOL)snapToGrid gridSize:(CGFloat)gridSize;
+- (void)rotateAndScaleWithSnapToGrid:(BOOL)snapToGrid gridSize:(CGFloat)gridSize snapRotation:(BOOL)snapRotation;
 - (void)applyPendingRotationToCapturedView;
 
 @end
