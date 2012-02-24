@@ -14,7 +14,7 @@
 @synthesize rotationAngleInRadians, currentScale, pendingRotationAngleInRadians, horizontalFlip;
 @synthesize scaledSize;
 @synthesize roundedBorder, viewBorderColor, viewShadowColor, addShadow, addBorder;
-@synthesize roundedCornerSize;
+@synthesize roundedCornerSize, shadowOffsetRatio;
 
 - (id)initWithFrame:(CGRect)frame
 {

@@ -35,5 +35,6 @@
 - (void)addCollageBorderToView;
 - (void)removeCollageBorderFromView;
 - (CGFloat)imageViewCornerSizeFromCornerSizeType:(AWBImageRoundedCornerSize)cornerSize;
+- (CGFloat)shadowOffsetRatioFromShadowOffsetSizeType:(AWBShadowOffsetSize)offset;
 
 @end

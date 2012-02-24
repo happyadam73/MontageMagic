@@ -50,6 +50,8 @@ typedef enum {
     BOOL addTextBorders;
     BOOL imageRoundedBorders;
     AWBImageRoundedCornerSize imageRoundedCornerSize;
+    AWBShadowOffsetSize imageShadowOffsetSize;
+    AWBShadowOffsetSize textShadowOffsetSize;
     BOOL textRoundedBorders;
     BOOL addTextBackground;
     UIColor *collageBackgroundColor;
@@ -85,6 +87,8 @@ typedef enum {
 @property (nonatomic, assign) BOOL addTextBorders;
 @property (nonatomic, assign) BOOL imageRoundedBorders;
 @property (nonatomic, assign) AWBImageRoundedCornerSize imageRoundedCornerSize;
+@property (nonatomic, assign) AWBShadowOffsetSize imageShadowOffsetSize;
+@property (nonatomic, assign) AWBShadowOffsetSize textShadowOffsetSize;
 @property (nonatomic, assign) BOOL textRoundedBorders;
 @property (nonatomic, assign) BOOL addTextBackground;
 @property (nonatomic, retain) UIColor *collageBackgroundColor;

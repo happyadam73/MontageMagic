@@ -19,6 +19,14 @@ typedef enum {
     kAWBImageRoundedCornerSizeXL
 } AWBImageRoundedCornerSize;
 
+typedef enum {
+    kAWBShadowOffsetSizeXS,
+    kAWBShadowOffsetSizeS,
+    kAWBShadowOffsetSizeM,
+    kAWBShadowOffsetSizeL,
+    kAWBShadowOffsetSizeXL
+} AWBShadowOffsetSize;
+
 CGAffineTransform AWBCGAffineTransformMakeRotationAndScale(CGFloat rotation, CGFloat scale, BOOL horizontalFlip);
 CGFloat AWBDistanceBetweenTwoPoints(CGPoint point1,CGPoint point2);
 CGFloat AWBAreaOfTriangle(CGPoint p0, CGPoint p1, CGPoint p2);

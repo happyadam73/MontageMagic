@@ -38,7 +38,7 @@
 @synthesize useMyFonts, labelMyFont, labelTextAlignment;
 @synthesize canvasView;
 @synthesize exportFormatSelectedIndex, pngExportTransparentBackground, jpgExportQualityValue;
-@synthesize imageRoundedCornerSize;
+@synthesize imageRoundedCornerSize, imageShadowOffsetSize, textShadowOffsetSize;
 
 - (id)init
 {
@@ -96,6 +96,8 @@
     [self setAddTextBorders:theme.addTextBorders];
     [self setImageRoundedBorders:theme.imageRoundedBorders];
     [self setImageRoundedCornerSize:theme.imageRoundedCornerSize];
+    [self setImageShadowOffsetSize:theme.imageShadowOffsetSize];
+    [self setTextShadowOffsetSize:theme.textShadowOffsetSize];
     [self setTextRoundedBorders:theme.textRoundedBorders];
     [self setAddTextBackground:theme.addTextBackground];
     [self setImageShadowColor:theme.imageShadowColor];
@@ -434,6 +436,8 @@
         collage.addTextBorders  = addTextBorders;
         collage.imageRoundedBorders = imageRoundedBorders;
         collage.imageRoundedCornerSize = imageRoundedCornerSize;
+        collage.imageShadowOffsetSize = imageShadowOffsetSize;
+        collage.textShadowOffsetSize = textShadowOffsetSize;
         collage.textRoundedBorders = textRoundedBorders;
         collage.imageShadowColor = imageShadowColor;
         collage.textShadowColor = textShadowColor;
@@ -544,6 +548,8 @@
             self.addTextBorders = collage.addTextBorders;
             self.imageRoundedBorders = collage.imageRoundedBorders;
             self.imageRoundedCornerSize = collage.imageRoundedCornerSize;
+            self.imageShadowOffsetSize = collage.imageShadowOffsetSize;
+            self.textShadowOffsetSize = collage.textShadowOffsetSize;
             self.textRoundedBorders = collage.textRoundedBorders;
             self.addTextBackground = collage.addTextBackground;
             self.labelTextAlignment = collage.labelTextAlignment;

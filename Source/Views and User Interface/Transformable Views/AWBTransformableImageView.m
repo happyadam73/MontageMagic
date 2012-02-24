@@ -20,7 +20,7 @@
 @synthesize rotationAngleInRadians, currentScale, pendingRotationAngleInRadians, horizontalFlip;
 @synthesize roundedBorder, viewBorderColor, viewShadowColor, addShadow, addBorder;
 @synthesize imageKey, imageView;
-@synthesize roundedCornerSize;
+@synthesize roundedCornerSize, shadowOffsetRatio;
 
 - (void)initialiseLayerRotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir 
 {      
@@ -50,6 +50,7 @@
     self.viewShadowColor = [UIColor blackColor];
     self.roundedBorder = YES;
     self.roundedCornerSize = 2.0;
+    self.shadowOffsetRatio = 1.0;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -239,8 +240,8 @@
 
 - (void)addViewShadow
 {
-    self.layer.shadowOffset = CGSizeMake(shadowOffset, shadowOffset);
-    self.layer.shadowRadius = (shadowOffset/3.0);
+    self.layer.shadowOffset = CGSizeMake(shadowOffsetRatio * shadowOffset, shadowOffsetRatio * shadowOffset);
+    self.layer.shadowRadius = ((shadowOffsetRatio * shadowOffset)/3.0);
     self.layer.shadowOpacity = 0.3;
     self.layer.shadowColor = [self.viewShadowColor CGColor];
 }

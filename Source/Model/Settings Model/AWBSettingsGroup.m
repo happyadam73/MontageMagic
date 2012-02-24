@@ -144,7 +144,12 @@
 {
     AWBSetting *addPhotoShadowsSetting = [AWBSetting switchSettingWithText:@"Photo Shadows" value:[info objectForKey:kAWBInfoKeyImageShadows] key:kAWBInfoKeyImageShadows];
     addPhotoShadowsSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
-    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:addPhotoShadowsSetting];    
+    
+    AWBSetting *imageShadowOffsetSizeSetting = [AWBSetting segmentControlSettingWithText:@"Shadow Offset Size" items:[NSArray arrayWithObjects:@"XS", @"S", @"M", @"L", @"XL", nil] value:[info objectForKey:kAWBInfoKeyImageShadowOffsetSize] key:kAWBInfoKeyImageShadowOffsetSize];
+    imageShadowOffsetSizeSetting.masterSlaveType = AWBSettingMasterSlaveTypeSlaveCell;
+    imageShadowOffsetSizeSetting.visible = addPhotoShadowsSetting.isSwitchedOn;
+    
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:addPhotoShadowsSetting, imageShadowOffsetSizeSetting, nil];    
     AWBSettingsGroup *imageShadowSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:nil];
     imageShadowSettings.masterSwitchIsOn = addPhotoShadowsSetting.isSwitchedOn;
     addPhotoShadowsSetting.parentGroup = imageShadowSettings;
@@ -155,7 +160,13 @@
 {
     AWBSetting *addTextShadowsSetting = [AWBSetting switchSettingWithText:@"Text Shadows" value:[info objectForKey:kAWBInfoKeyTextShadows] key:kAWBInfoKeyTextShadows];
     addTextShadowsSetting.masterSlaveType = AWBSettingMasterSlaveTypeMasterSwitch;
-    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObject:addTextShadowsSetting];
+    
+    AWBSetting *textShadowOffsetSizeSetting = [AWBSetting segmentControlSettingWithText:@"Shadow Offset Size" items:[NSArray arrayWithObjects:@"XS", @"S", @"M", @"L", @"XL", nil] value:[info objectForKey:kAWBInfoKeyTextShadowOffsetSize] key:kAWBInfoKeyTextShadowOffsetSize];
+    textShadowOffsetSizeSetting.masterSlaveType = AWBSettingMasterSlaveTypeSlaveCell;
+    textShadowOffsetSizeSetting.visible = addTextShadowsSetting.isSwitchedOn;
+
+    
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:addTextShadowsSetting, textShadowOffsetSizeSetting, nil];
     AWBSettingsGroup *textShadowSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:@"Shadows can affect performance.  Try laying out photos and text before adding shadows."];
     textShadowSettings.masterSwitchIsOn = addTextShadowsSetting.isSwitchedOn;
     addTextShadowsSetting.parentGroup = textShadowSettings;
@@ -281,9 +292,16 @@
 {
     NSMutableArray *fontSettings = nil;
     if (DEVICE_IS_IPAD) {
-        fontSettings = [NSMutableArray arrayWithObjects:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeArialRoundedMTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeChalkduster]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAcademyEngravedLetPlain]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeBradleyHandITCTTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeHelvetica]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeMarkerFeltThin]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypePapyrus]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypePartyLetPlain]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeSnellRoundhand]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeTrebuchetMSItalic]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAmericanTypewriter]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeZapfino]], [AWBSetting zFontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeGraffiti]], nil];
+        fontSettings = [NSMutableArray arrayWithObjects:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeArialRoundedMTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeChalkduster]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAcademyEngravedLetPlain]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeBradleyHandITCTTBold]], [AWBSetting zFontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeJennaSue]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeHelvetica]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeMarkerFeltThin]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypePapyrus]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypePartyLetPlain]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeSnellRoundhand]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeTrebuchetMSItalic]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAmericanTypewriter]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeZapfino]], [AWBSetting zFontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeGraffiti]], nil];
     } else {
-        fontSettings = [NSMutableArray arrayWithObjects:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeArialRoundedMTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeHelvetica]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeMarkerFeltThin]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeSnellRoundhand]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeTrebuchetMSItalic]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAmericanTypewriter]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeZapfino]], [AWBSetting zFontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeGraffiti]], nil];
+        fontSettings = [NSMutableArray arrayWithObjects:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeArialRoundedMTBold]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeHelvetica]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeMarkerFeltThin]], [AWBSetting zFontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeJennaSue]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeSnellRoundhand]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeTrebuchetMSItalic]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeAmericanTypewriter]], [AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeZapfino]], [AWBSetting zFontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeGraffiti]], nil];
+    }
+    
+    NSString *osVersion = [[UIDevice currentDevice] systemVersion];
+    NSString *versionWithExtraFonts = @"5.0";
+    BOOL extraFontsAvailable = ([versionWithExtraFonts compare:osVersion options:NSNumericSearch] != NSOrderedDescending);
+    if (extraFontsAvailable) {
+        [fontSettings insertObject:[AWBSetting fontSettingWithValue:[NSNumber numberWithInteger:AWBCollageFontTypeGillSans]] atIndex:1];
     }
     
     AWBSettingsGroup *fontGroup = [[self alloc] initWithSettings:fontSettings header:nil footer:nil];
@@ -291,11 +309,15 @@
     fontGroup.settingKeyForMutuallyExclusiveObjects = kAWBInfoKeyTextFontName;
     
     if (DEVICE_IS_IPAD) {
-        fontGroup.mutuallyExclusiveObjects = [NSMutableArray arrayWithObjects:@"ArialRoundedMTBold", @"Chalkduster", @"AcademyEngravedLetPlain", @"BradleyHandITCTT-Bold", @"Helvetica", @"MarkerFelt-Thin", @"Papyrus", @"PartyLetPlain", @"SnellRoundhand", @"TrebuchetMS-Italic", @"AmericanTypewriter", @"Zapfino", @"Most Wasted", nil];
+        fontGroup.mutuallyExclusiveObjects = [NSMutableArray arrayWithObjects:@"ArialRoundedMTBold", @"Chalkduster", @"AcademyEngravedLetPlain", @"BradleyHandITCTT-Bold", @"Jenna Sue", @"Helvetica", @"MarkerFelt-Thin", @"Papyrus", @"PartyLetPlain", @"SnellRoundhand", @"TrebuchetMS-Italic", @"AmericanTypewriter", @"Zapfino", @"Most Wasted", nil];
     } else {
-        fontGroup.mutuallyExclusiveObjects = [NSMutableArray arrayWithObjects:@"ArialRoundedMTBold", @"Helvetica", @"MarkerFelt-Thin", @"SnellRoundhand", @"TrebuchetMS-Italic", @"AmericanTypewriter", @"Zapfino", @"Most Wasted", nil];        
+        fontGroup.mutuallyExclusiveObjects = [NSMutableArray arrayWithObjects:@"ArialRoundedMTBold", @"Helvetica", @"MarkerFelt-Thin", @"Jenna Sue", @"SnellRoundhand", @"TrebuchetMS-Italic", @"AmericanTypewriter", @"Zapfino", @"Most Wasted", nil];        
     }
-        
+
+    if (extraFontsAvailable) {
+        [fontGroup.mutuallyExclusiveObjects insertObject:@"GillSans" atIndex:1];
+    }
+
     NSUInteger foundFontIndex = [fontGroup.mutuallyExclusiveObjects indexOfObject:[info objectForKey:kAWBInfoKeyTextFontName]];
     if (foundFontIndex == NSNotFound) {
         fontGroup.selectedIndex = 0;

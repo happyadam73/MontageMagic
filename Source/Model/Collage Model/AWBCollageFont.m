@@ -54,6 +54,10 @@
             return NO;
         case AWBCollageFontTypeGraffiti:
             return YES;
+        case AWBCollageFontTypeJennaSue:
+            return YES;
+        case AWBCollageFontTypeGillSans:
+            return NO;
         default:
             return NO;
     }
@@ -91,6 +95,10 @@
             return @"PartyLetPlain";
         case AWBCollageFontTypeGraffiti:
             return @"Most Wasted";
+        case AWBCollageFontTypeJennaSue:
+            return @"Jenna Sue";
+        case AWBCollageFontTypeGillSans:
+            return @"GillSans";            
         default:
             return @"Helvetica";
     }
@@ -127,6 +135,10 @@
             return @"Party";
         case AWBCollageFontTypeGraffiti:
             return @"Graffiti";
+        case AWBCollageFontTypeJennaSue:
+            return @"Cute Handwriting ^";
+        case AWBCollageFontTypeGillSans:
+            return @"Gill Sans";            
         default:
             return @"Helvetica";
     }
@@ -148,6 +160,8 @@
 + (BOOL)isZFont:(NSString *)fontName
 {
     if ([fontName isEqualToString:@"Most Wasted"]) {
+        return YES;
+    } else if ([fontName isEqualToString:@"Jenna Sue"]) {
         return YES;
     } else {
         return NO;

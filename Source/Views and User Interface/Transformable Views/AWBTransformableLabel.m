@@ -23,7 +23,7 @@
 @synthesize rotationAngleInRadians, currentScale, pendingRotationAngleInRadians, horizontalFlip;
 @synthesize roundedBorder, viewBorderColor, viewShadowColor, addShadow, addBorder;
 @synthesize labelView, isZFontLabel, myFontFilename;
-@synthesize roundedCornerSize;
+@synthesize roundedCornerSize, shadowOffsetRatio;
 
 - (void)initialiseLayerRotation:(CGFloat)rotation scale:(CGFloat)scale  
 {
@@ -51,7 +51,7 @@
     self.viewBorderColor = [UIColor blackColor];
     self.viewShadowColor = [UIColor blackColor];
     self.roundedBorder = YES;
-    
+    self.shadowOffsetRatio = 1.0;
     self.labelView.numberOfLines = 0;
 }
 
@@ -538,7 +538,8 @@
 
 - (void)addViewShadow
 {
-    self.layer.shadowOffset = CGSizeMake(10, 10);
+    self.layer.shadowOffset = CGSizeMake((shadowOffsetRatio * 10), (shadowOffsetRatio * 10));
+    self.layer.shadowRadius = ((shadowOffsetRatio * 10)/3.0);
     self.layer.shadowOpacity = 0.3; 
     self.layer.shadowColor = [self.viewShadowColor CGColor];
 }
@@ -546,6 +547,7 @@
 - (void)removeViewShadow
 {
     self.layer.shadowOffset = CGSizeMake(0.0, -3.0);
+    self.layer.shadowRadius = 3.0;    
     self.layer.shadowOpacity = 0.0;    
     self.layer.shadowColor = [[UIColor blackColor] CGColor];
 }

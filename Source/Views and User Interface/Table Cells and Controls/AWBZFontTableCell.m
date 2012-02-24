@@ -16,7 +16,7 @@
     if (self) {
         // Initialization code
         AWBCollageFont *font = [[AWBCollageFont alloc] initWithFontType:fontType];
-        fontLabel = [[FontLabel alloc] initWithFrame:CGRectZero zFont:[font zFontWithSize:18.0]];
+        fontLabel = [[FontLabel alloc] initWithFrame:CGRectZero zFont:[font zFontWithSize:24.0]];
         fontLabel.backgroundColor = [UIColor clearColor];
         fontLabel.text = [font fontDescription];
         [[self contentView] addSubview:fontLabel];
@@ -35,7 +35,7 @@
 {
     AWBCollageFontType fontType = [aSetting.settingValue integerValue];
     AWBCollageFont *font = [[AWBCollageFont alloc] initWithFontType:fontType];
-    fontLabel.zFont = [font zFontWithSize:18.0];
+    fontLabel.zFont = [font zFontWithSize:24.0];
     fontLabel.text = [font fontDescription];
     [font release];    
 }

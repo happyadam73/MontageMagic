@@ -26,7 +26,7 @@
 @synthesize collageObjectLocator;
 @synthesize labelMyFont, labelTextAlignment, useMyFonts;
 @synthesize exportFormatSelectedIndex, pngExportTransparentBackground, jpgExportQualityValue;
-@synthesize imageRoundedCornerSize;
+@synthesize imageRoundedCornerSize, imageShadowOffsetSize, textShadowOffsetSize;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -96,7 +96,16 @@
     } else {
         self.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
     } 
-
+    if ([aDecoder containsValueForKey:kAWBInfoKeyImageShadowOffsetSize]) {
+        self.imageShadowOffsetSize = [aDecoder decodeIntegerForKey:kAWBInfoKeyImageShadowOffsetSize];
+    } else {
+        self.imageShadowOffsetSize = kAWBShadowOffsetSizeM;
+    } 
+    if ([aDecoder containsValueForKey:kAWBInfoKeyTextShadowOffsetSize]) {
+        self.textShadowOffsetSize = [aDecoder decodeIntegerForKey:kAWBInfoKeyTextShadowOffsetSize];
+    } else {
+        self.textShadowOffsetSize = kAWBShadowOffsetSizeM;
+    } 
     return  self;   
 }
 
@@ -223,6 +232,8 @@
     [aCoder encodeBool:self.addTextBorders forKey:kAWBInfoKeyTextBorders];
     [aCoder encodeBool:self.imageRoundedBorders forKey:kAWBInfoKeyImageRoundedBorders];
     [aCoder encodeInteger:self.imageRoundedCornerSize forKey:kAWBInfoKeyImageRoundedCornerSize];
+    [aCoder encodeInteger:self.imageShadowOffsetSize forKey:kAWBInfoKeyImageShadowOffsetSize];
+    [aCoder encodeInteger:self.textShadowOffsetSize forKey:kAWBInfoKeyTextShadowOffsetSize];
     [aCoder encodeBool:self.textRoundedBorders forKey:kAWBInfoKeyTextRoundedBorders];
     [aCoder encodeBool:self.addTextBackground forKey:kAWBInfoKeyTextBackground];
     [aCoder encodeObject:self.labelTextColor forKey:kAWBInfoKeyTextColor];

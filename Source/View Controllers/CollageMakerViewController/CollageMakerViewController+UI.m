@@ -112,12 +112,14 @@
             //image shadows
             if ([view isKindOfClass:[AWBTransformableImageView class]]) {
                 view.viewShadowColor = self.imageShadowColor;
+                view.shadowOffsetRatio = [self shadowOffsetRatioFromShadowOffsetSizeType:self.imageShadowOffsetSize];
                 view.addShadow = self.addImageShadows;
             }       
 
             //text shadows
             if ([view isKindOfClass:[AWBTransformableLabel class]]) {
                 view.viewShadowColor = self.textShadowColor;
+                view.shadowOffsetRatio = [self shadowOffsetRatioFromShadowOffsetSizeType:self.textShadowOffsetSize];
                 view.addShadow = self.addTextShadows;
             }         
         }            
@@ -170,7 +172,8 @@
     self.addTextShadows = [[info objectForKey:kAWBInfoKeyTextShadows] boolValue];
     self.imageShadowColor = [info objectForKey:kAWBInfoKeyImageShadowColor];
     self.textShadowColor = [info objectForKey:kAWBInfoKeyTextShadowColor];
-
+    self.imageShadowOffsetSize = [[info objectForKey:kAWBInfoKeyImageShadowOffsetSize] integerValue];
+    self.textShadowOffsetSize = [[info objectForKey:kAWBInfoKeyTextShadowOffsetSize] integerValue];
     [self updateViewShadows];
 }
 
@@ -266,6 +269,8 @@
                                  [NSNumber numberWithBool:self.addTextBorders], kAWBInfoKeyTextBorders,
                                  [NSNumber numberWithBool:self.imageRoundedBorders], kAWBInfoKeyImageRoundedBorders,
                                  [NSNumber numberWithInteger:self.imageRoundedCornerSize], kAWBInfoKeyImageRoundedCornerSize,
+                                 [NSNumber numberWithInteger:self.imageShadowOffsetSize], kAWBInfoKeyImageShadowOffsetSize,
+                                 [NSNumber numberWithInteger:self.textShadowOffsetSize], kAWBInfoKeyTextShadowOffsetSize,
                                  [NSNumber numberWithBool:self.textRoundedBorders], kAWBInfoKeyTextRoundedBorders,
                                  [NSNumber numberWithBool:self.addTextBackground], kAWBInfoKeyTextBackground,
                                  [NSNumber numberWithFloat:self.exportSize], kAWBInfoKeyExportSizeValue,
@@ -455,6 +460,7 @@
     [label setRoundedBorder:self.textRoundedBorders];
     [label setViewBorderColor:self.textBorderColor];
     [label setViewShadowColor:self.textShadowColor];
+    [label setShadowOffsetRatio:[self shadowOffsetRatioFromShadowOffsetSizeType:self.textShadowOffsetSize]];
     label.addBorder = self.addTextBorders;
     label.addShadow = self.addTextShadows;
     
@@ -487,6 +493,24 @@
             return 12.0;
         default:
             return 2.0;
+    }    
+}
+
+- (CGFloat)shadowOffsetRatioFromShadowOffsetSizeType:(AWBShadowOffsetSize)offset
+{
+    switch (offset) {
+        case kAWBShadowOffsetSizeXS:
+            return 0.2;
+        case kAWBShadowOffsetSizeS:
+            return 0.5;
+        case kAWBShadowOffsetSizeM:
+            return 0.8;
+        case kAWBShadowOffsetSizeL:
+            return 1.1;
+        case kAWBShadowOffsetSizeXL:
+            return 1.4;
+        default:
+            return 0.8;
     }    
 }
 

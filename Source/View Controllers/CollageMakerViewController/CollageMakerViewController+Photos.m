@@ -262,6 +262,7 @@
     [imageView setRoundedCornerSize:[self imageViewCornerSizeFromCornerSizeType:self.imageRoundedCornerSize]];
     [imageView setViewBorderColor:self.imageBorderColor];
     [imageView setViewShadowColor:self.imageShadowColor];
+    [imageView setShadowOffsetRatio:[self shadowOffsetRatioFromShadowOffsetSizeType:self.imageShadowOffsetSize]];
     imageView.addShadow = self.addImageShadows;
     imageView.addBorder = self.addImageBorders;
 }

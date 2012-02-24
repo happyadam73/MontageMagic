@@ -19,7 +19,7 @@
 @synthesize addCollageBorder, collageBorderColor, useBackgroundTexture, backgroundTexture;
 @synthesize snapToGrid, objectLocatorType, autoMemoryReduction, randomPickCount;
 @synthesize labelMyFont, labelTextAlignment, useMyFonts;
-@synthesize imageRoundedCornerSize;
+@synthesize imageRoundedCornerSize, imageShadowOffsetSize, textShadowOffsetSize;
 
 - (void)dealloc
 {
@@ -128,6 +128,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -167,6 +169,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -206,6 +210,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -245,6 +251,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -284,6 +292,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -323,6 +333,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -362,6 +374,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -401,6 +415,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -440,6 +456,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -479,6 +497,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -518,6 +538,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -557,6 +579,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -596,6 +620,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -635,6 +661,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -674,6 +702,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -713,6 +743,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -752,6 +784,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -791,6 +825,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -830,6 +866,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -869,6 +907,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -908,6 +948,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }
@@ -947,6 +989,8 @@
     theme.useMyFonts = NO;
     theme.labelTextAlignment = UITextAlignmentCenter;
     theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
     
     return [theme autorelease];        
 }

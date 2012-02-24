@@ -23,7 +23,9 @@ typedef enum {
     AWBCollageFontTypeBradleyHandITCTTBold,
     AWBCollageFontTypePapyrus,
     AWBCollageFontTypePartyLetPlain,
-    AWBCollageFontTypeGraffiti
+    AWBCollageFontTypeGraffiti,
+    AWBCollageFontTypeJennaSue,
+    AWBCollageFontTypeGillSans
 } AWBCollageFontType;
 
 @interface AWBCollageFont : NSObject {
