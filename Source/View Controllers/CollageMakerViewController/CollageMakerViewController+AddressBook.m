@@ -205,9 +205,13 @@
         } else {
             fontName = self.labelTextFont;
         }
-
+        
         [collageObjectLocator pushContactLabelBelowCurrentObject:labelBelowImage includesPhoneNumber:includePhoneNumber];
-        AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines fontName:fontName fontSize:28.0 offset:CGPointZero rotation:self.collageObjectLocator.objectRotation scale:self.collageObjectLocator.objectScale horizontalFlip:NO color:self.labelTextColor alignment:self.labelTextAlignment];
+        CGFloat scale = self.collageObjectLocator.objectScale;
+        if ([fontName isEqualToString:@"Jenna Sue"]) {
+            scale *= 1.3;
+        }
+        AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines fontName:fontName fontSize:28.0 offset:CGPointZero rotation:self.collageObjectLocator.objectRotation scale:scale horizontalFlip:NO color:self.labelTextColor alignment:self.labelTextAlignment];
 
         CGPoint position = self.collageObjectLocator.objectPosition;
         

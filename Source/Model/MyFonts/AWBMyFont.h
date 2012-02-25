@@ -1,6 +1,6 @@
 //
 //  AWBMyFont.h
-//  Roadsign Magic
+//  Montage Magic
 //
 //  Created by Buckley Adam on 02/01/2012.
 //  Copyright (c) 2012 Callcredit. All rights reserved.

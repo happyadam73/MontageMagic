@@ -20,12 +20,16 @@
     AWBBusyView *busyView;
     BOOL motionEnabled;
     UIBarButtonItem *myFontsButton;
+    UIBarButtonItem *helpButton;
+    UIBarButtonItem *toolbarSpacing;
     NSUInteger pendingCopyIndexRow;
 }
 
 @property (assign) BOOL isLowMemory;
 @property (nonatomic, retain) AWBBusyView *busyView;
 @property (nonatomic, retain) UIBarButtonItem *myFontsButton;
+@property (nonatomic, retain) UIBarButtonItem *helpButton;
+@property (nonatomic, retain) UIBarButtonItem *toolbarSpacing;
 
 - (CGFloat)borderThickness;
 - (void)addNewCollageDescriptor:(id)sender;
@@ -36,5 +40,6 @@
 - (NSArray *)myCollagesToolbarButtons;
 - (void)confirmCopyCollage:(NSString *)collageName;
 - (void)copyCollageError;
+- (void)showHelp;
 
 @end

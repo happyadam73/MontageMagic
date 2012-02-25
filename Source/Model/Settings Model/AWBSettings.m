@@ -77,7 +77,7 @@
 
 + (AWBSettings *)mainSettingsWithInfo:(NSDictionary *)info
 {
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup lockAndLayoutSettingsGroupWithInfo:info], [AWBSettingsGroup shadowsAndBordersDrilldownSettingsGroupWithInfo:info], [AWBSettingsGroup exportDrilldownSettingsGroupWithInfo:info], nil];
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:[AWBSettingsGroup lockAndLayoutSettingsGroupWithInfo:info], [AWBSettingsGroup shadowsAndBordersDrilldownSettingsGroupWithInfo:info], [AWBSettingsGroup exportDrilldownSettingsGroupWithInfo:info], [AWBSettingsGroup helpSettingsDrilldownSettingsGroupWithInfo:info], nil];
     AWBSettings *mainSettings = [[self alloc] initWithSettingsGroups:settings title:@"Collage Settings"];
     
     return [mainSettings autorelease];

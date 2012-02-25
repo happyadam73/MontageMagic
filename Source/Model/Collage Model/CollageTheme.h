@@ -31,7 +31,10 @@ typedef enum {
     kAWBCollageThemeTypePhotoMosaicSmallImagesWhite,
     kAWBCollageThemeTypePhotoMosaicLargeImagesBlack,
     kAWBCollageThemeTypePhotoMosaicLargeImagesWhite,
-    kAWBCollageThemeTypePhotoMosaicMicroImagesBlack    
+    kAWBCollageThemeTypePhotoMosaicMicroImagesBlack,
+    kAWBCollageThemeTypeSpringtime,
+    kAWBCollageThemeTypeSummertime,
+    kAWBCollageThemeTypeTechnical
 } CollageThemeType;
 
 typedef enum {
@@ -139,6 +142,9 @@ typedef enum {
 + (id)photoMosaicLargeImagesBlackTheme;
 + (id)photoMosaicLargeImagesWhiteTheme;
 + (id)photoMosaicMicroImagesBlackTheme;
++ (id)springTimeTheme;
++ (id)summerTimeTheme;
++ (id)technicalTheme;
 + (id)randomCollageTheme;
 
 + (NSArray *)allCollageThemes;

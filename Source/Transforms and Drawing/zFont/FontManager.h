@@ -82,4 +82,6 @@
 	@description You are responsible for releasing the CFArrayRef
 */
 - (CFArrayRef)copyAllFonts;
+- (void)clearAll;
+
 @end

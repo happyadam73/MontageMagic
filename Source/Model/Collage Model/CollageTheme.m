@@ -88,6 +88,12 @@
             return [CollageTheme photoMosaicLargeImagesWhiteTheme];
         case kAWBCollageThemeTypePhotoMosaicMicroImagesBlack:
             return [CollageTheme photoMosaicMicroImagesBlackTheme];
+        case kAWBCollageThemeTypeSpringtime:
+            return [CollageTheme springTimeTheme];
+        case kAWBCollageThemeTypeSummertime:
+            return [CollageTheme summerTimeTheme];
+        case kAWBCollageThemeTypeTechnical:
+            return [CollageTheme technicalTheme];
         default:
             return [CollageTheme plainTheme];
     }    
@@ -1017,9 +1023,135 @@
     return [theme autorelease];        
 }
 
++ (id)springTimeTheme
+{
+    CollageTheme *theme = [[CollageTheme alloc] init];
+    theme.themeType = kAWBCollageThemeTypeSpringtime;
+    theme.themeName = @"Springtime";
+    theme.deviceAvailability = kAWBCollageThemeDeviceAvailabilityAllDevices;
+    theme.thumbnailFilename = @"SpringtimeTheme100.jpg";
+    theme.addImageShadows = YES;
+    theme.addTextShadows = YES;
+    theme.addImageBorders = YES;
+    theme.addTextBorders = NO;
+    theme.imageRoundedBorders = NO;
+    theme.textRoundedBorders = NO;
+    theme.addTextBackground = NO;
+    theme.collageBackgroundColor = [UIColor brownSignBackgroundColor];
+    theme.imageShadowColor = [UIColor blackColor];
+    theme.textShadowColor = [UIColor blackColor];
+    theme.imageBorderColor = [UIColor whiteColor];
+    theme.textBorderColor = [UIColor whiteColor];
+    theme.textBackgroundColor = [UIColor blackColor];
+    theme.labelTextColor = [UIColor whiteColor];
+    theme.labelTextFont = @"Jenna Sue";
+    theme.symbolColor = [UIColor whiteColor];
+    theme.useBackgroundTexture = YES;
+    theme.backgroundTexture = @"Dark Wood";
+    theme.addCollageBorder = NO;
+    theme.collageBorderColor = [UIColor whiteColor];
+    theme.snapToGrid = NO;
+    theme.snapRotation = YES;
+    theme.objectLocatorType = (DEVICE_IS_IPAD? kAWBCollageObjectLocatorTypeGrid2x3iPad : kAWBCollageObjectLocatorTypeGrid2x3);
+    theme.autoMemoryReduction = NO;
+    theme.randomPickCount = 3;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeS;
+    
+    return [theme autorelease];        
+}
+
++ (id)summerTimeTheme
+{
+    CollageTheme *theme = [[CollageTheme alloc] init];
+    theme.themeType = kAWBCollageThemeTypeSummertime;
+    theme.themeName = @"Summertime";
+    theme.deviceAvailability = kAWBCollageThemeDeviceAvailabilityAllDevices;
+    theme.thumbnailFilename = @"SummertimeTheme100.jpg";
+    theme.addImageShadows = YES;
+    theme.addTextShadows = YES;
+    theme.addImageBorders = YES;
+    theme.addTextBorders = NO;
+    theme.imageRoundedBorders = NO;
+    theme.textRoundedBorders = NO;
+    theme.addTextBackground = NO;
+    theme.collageBackgroundColor = [UIColor blueSignBackgroundColor];
+    theme.imageShadowColor = [UIColor blackColor];
+    theme.textShadowColor = [UIColor blackColor];
+    theme.imageBorderColor = [UIColor whiteColor];
+    theme.textBorderColor = [UIColor whiteColor];
+    theme.textBackgroundColor = [UIColor blackColor];
+    theme.labelTextColor = [UIColor whiteColor];
+    theme.labelTextFont = @"GillSans";
+    theme.symbolColor = [UIColor blackColor];
+    theme.useBackgroundTexture = YES;
+    theme.backgroundTexture = @"Clouds";
+    theme.addCollageBorder = NO;
+    theme.collageBorderColor = [UIColor whiteColor];
+    theme.snapToGrid = NO;
+    theme.snapRotation = NO;
+    theme.objectLocatorType = kAWBCollageObjectLocatorTypeScatter;
+    theme.autoMemoryReduction = NO;
+    theme.randomPickCount = 3;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeXS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeXS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeXS;
+    
+    return [theme autorelease];        
+}
+
++ (id)technicalTheme
+{
+    CollageTheme *theme = [[CollageTheme alloc] init];
+    theme.themeType = kAWBCollageThemeTypeTechnical;
+    theme.themeName = @"Technical";
+    theme.deviceAvailability = kAWBCollageThemeDeviceAvailabilityAllDevices;
+    theme.thumbnailFilename = @"TechnicalTheme100.jpg";
+    theme.addImageShadows = YES;
+    theme.addTextShadows = NO;
+    theme.addImageBorders = NO;
+    theme.addTextBorders = NO;
+    theme.imageRoundedBorders = YES;
+    theme.textRoundedBorders = NO;
+    theme.addTextBackground = NO;
+    theme.collageBackgroundColor = [UIColor whiteColor];
+    theme.imageShadowColor = [UIColor blackColor];
+    theme.textShadowColor = [UIColor blackColor];
+    theme.imageBorderColor = [UIColor blackColor];
+    theme.textBorderColor = [UIColor blackColor];
+    theme.textBackgroundColor = [UIColor whiteColor];
+    theme.labelTextColor = [UIColor blackColor];
+    theme.labelTextFont = @"Jenna Sue";
+    theme.symbolColor = [UIColor blackColor];
+    theme.useBackgroundTexture = YES;
+    theme.backgroundTexture = @"Graph Paper";
+    theme.addCollageBorder = NO;
+    theme.collageBorderColor = [UIColor blackColor];
+    theme.snapToGrid = NO;
+    theme.snapRotation = YES;
+    theme.objectLocatorType = kAWBCollageObjectLocatorTypeGrid2x3;
+    theme.autoMemoryReduction = NO;
+    theme.randomPickCount = 3;
+    theme.labelMyFont = nil;
+    theme.useMyFonts = NO;
+    theme.labelTextAlignment = UITextAlignmentCenter;
+    theme.imageRoundedCornerSize = kAWBImageRoundedCornerSizeS;
+    theme.imageShadowOffsetSize = kAWBShadowOffsetSizeXS;
+    theme.textShadowOffsetSize = kAWBShadowOffsetSizeXS;
+    
+    return [theme autorelease];        
+}
+
 + (NSArray *)allCollageThemes
 {
-    return [NSMutableArray arrayWithObjects:[CollageTheme plainTheme], [CollageTheme photoModernBlackTheme], [CollageTheme photoModernWhiteTheme], [CollageTheme noticeBoardTheme], [CollageTheme chalkboardTheme], [CollageTheme handwrittenTheme], [CollageTheme cardboardTheme], [CollageTheme holidayTheme], [CollageTheme blackboardTheme], [CollageTheme typewriterTheme], [CollageTheme photoMosaicLargeImagesBlackTheme], [CollageTheme photoMosaicLargeImagesWhiteTheme], [CollageTheme photoMosaicSmallImagesBlackTheme], [CollageTheme photoMosaicSmallImagesWhiteTheme], [CollageTheme photoMosaicMicroImagesBlackTheme], [CollageTheme blueContrastItalicTheme], [CollageTheme greenAndRedSignTheme], [CollageTheme blueAndGreenSignTheme], [CollageTheme yellowSignTheme], [CollageTheme redAndBlackSignTheme], [CollageTheme elegantTheme], nil];
+    return [NSMutableArray arrayWithObjects:[CollageTheme plainTheme], [CollageTheme photoModernBlackTheme], [CollageTheme photoModernWhiteTheme], [CollageTheme springTimeTheme], [CollageTheme summerTimeTheme], [CollageTheme technicalTheme], [CollageTheme noticeBoardTheme], [CollageTheme chalkboardTheme], [CollageTheme handwrittenTheme], [CollageTheme cardboardTheme], [CollageTheme holidayTheme], [CollageTheme blackboardTheme], [CollageTheme typewriterTheme], [CollageTheme photoMosaicLargeImagesBlackTheme], [CollageTheme photoMosaicLargeImagesWhiteTheme], [CollageTheme photoMosaicSmallImagesBlackTheme], [CollageTheme photoMosaicSmallImagesWhiteTheme], [CollageTheme photoMosaicMicroImagesBlackTheme], [CollageTheme blueContrastItalicTheme], [CollageTheme greenAndRedSignTheme], [CollageTheme blueAndGreenSignTheme], [CollageTheme yellowSignTheme], [CollageTheme redAndBlackSignTheme], [CollageTheme elegantTheme], nil];
 }
 
 + (id)randomCollageTheme

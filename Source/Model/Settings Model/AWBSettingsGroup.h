@@ -140,6 +140,7 @@ static NSString *const kAWBInfoKeyAddContentOnCreation = @"AddContentOnCreation"
 + (AWBSettingsGroup *)myFontNameWithHeaderSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)myFontInfoMetricsSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)myFontPreviewSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)helpSettingsDrilldownSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)helpTextSettingsGroupWithFilename:(NSString *)filename;
 + (AWBSettingsGroup *)textAlignmentPickerSettingsGroupWithInfo:(NSDictionary *)info;
 

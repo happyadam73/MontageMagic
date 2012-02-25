@@ -13,10 +13,11 @@
 #import "CollageStore.h"
 #import "AWBSettingsGroup.h"
 #import "AWBMyFontsListViewController.h"
+#import "FontManager.h"
 
 @implementation AWBCollagesListViewController
 
-@synthesize isLowMemory, busyView, myFontsButton;
+@synthesize isLowMemory, busyView, myFontsButton, helpButton, toolbarSpacing;
 
 - (id)init
 {    
@@ -44,12 +45,15 @@
 {
     [busyView release];
     [myFontsButton release];
+    [helpButton release];
+    [toolbarSpacing release];
     [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
 {
     self.isLowMemory = YES;
+    [[FontManager sharedManager] clearAll];
     [super didReceiveMemoryWarning];
 }
 
@@ -69,6 +73,9 @@
 - (void)viewDidUnload
 {
     self.busyView = nil;
+    self.helpButton = nil;
+    self.myFontsButton = nil;
+    self.toolbarSpacing = nil;
     [super viewDidUnload];
 }
 
@@ -415,7 +422,7 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
 
 - (NSArray *)myCollagesToolbarButtons
 {
-    return [NSArray arrayWithObjects:self.myFontsButton, nil];    
+    return [NSArray arrayWithObjects:self.myFontsButton, self.toolbarSpacing, self.helpButton, nil];    
 }
 
 - (void)longPress:(UILongPressGestureRecognizer *)gesture
@@ -485,6 +492,35 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
         }
     }
     motionEnabled = YES;
+}
+
+- (UIBarButtonItem *)toolbarSpacing
+{
+    if (!toolbarSpacing) {
+        toolbarSpacing = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    }
+    return toolbarSpacing;    
+}
+
+- (UIBarButtonItem *)helpButton
+{
+    if (!helpButton) {
+        helpButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"help"] style:UIBarButtonItemStyleBordered target:self action:@selector(showHelp)];
+    }
+    return helpButton;    
+}
+
+- (void)showHelp
+{    
+    AWBCollageSettingsTableViewController *settingsController = [[AWBCollageSettingsTableViewController alloc] initWithSettings:[AWBSettings helpSettingsWithFilename:@"SavedCollages.rtfd.zip" title:@"Saved Collages Help"] settingsInfo:nil rootController:nil]; 
+    settingsController.delegate = nil;
+    settingsController.controllerType = AWBSettingsControllerTypeHelpSettings;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settingsController];
+    navController.modalPresentationStyle = UIModalPresentationPageSheet;
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;  
+    [self presentModalViewController:navController animated:YES];
+    [settingsController release];   
+    [navController release];                
 }
 
 @end

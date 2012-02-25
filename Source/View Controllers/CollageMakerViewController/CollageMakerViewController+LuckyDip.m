@@ -633,6 +633,15 @@
         case kAWBCollageThemeTypePhotoMosaicMicroImagesBlack:
             sourceIndex = kAWBLuckyDipSourceIndexPhotos;
             break;
+        case kAWBCollageThemeTypeSpringtime:
+            sourceIndex = (randomNumber >= 1 ? kAWBLuckyDipSourceIndexPhotos : kAWBLuckyDipSourceIndexContacts);
+            break;
+        case kAWBCollageThemeTypeSummertime:
+            sourceIndex = (randomNumber >= 1 ? kAWBLuckyDipSourceIndexPhotos : kAWBLuckyDipSourceIndexContacts);
+            break;
+        case kAWBCollageThemeTypeTechnical:
+            sourceIndex = (randomNumber >= 1 ? kAWBLuckyDipSourceIndexPhotos : kAWBLuckyDipSourceIndexContacts);
+            break;
         default:
             sourceIndex = (randomNumber >= 2 ? kAWBLuckyDipSourceIndexPhotos : kAWBLuckyDipSourceIndexContacts);
             break;

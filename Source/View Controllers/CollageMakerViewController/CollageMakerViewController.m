@@ -21,6 +21,7 @@
 #import "AWBTransformableArrowView.h"
 #import "UIColor+Texture.h"
 #import "AWBMemoryWarningViewController.h"
+#import "FontManager.h"
 
 @implementation CollageMakerViewController
 
@@ -240,6 +241,10 @@
     displayMemoryWarningIndicator = YES;
     animateMemoryWarningIndicator = YES;
     
+    if (self.lowMemoryCount > 2) {
+        [[FontManager sharedManager] clearAll];
+    }
+    
     if (!self.isCollageInEditMode && !self.isImporting) {
         [self resetToNormalToolbar];
     }
@@ -335,6 +340,7 @@
             saveThumbnail = NO;
         }
         [self saveChanges:saveThumbnail];
+        [[FontManager sharedManager] clearAll];
     }
     [super viewWillDisappear:YES];
 }

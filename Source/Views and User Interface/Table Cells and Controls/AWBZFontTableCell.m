@@ -1,6 +1,6 @@
 //
 //  AWBZFontTableCell.m
-//  Roadsign Magic
+//  Montage Magic
 //
 //  Created by Buckley Adam on 19/12/2011.
 //  Copyright (c) 2011 Callcredit. All rights reserved.

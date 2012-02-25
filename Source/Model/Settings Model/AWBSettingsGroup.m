@@ -264,7 +264,7 @@
 {
     NSMutableArray *pngExportSettings = [NSMutableArray arrayWithObjects:[AWBSetting switchSettingWithText:@"Transparency" value:[info objectForKey:kAWBInfoKeyPNGExportTransparentBackground] key:kAWBInfoKeyPNGExportTransparentBackground], nil];
     
-    return [[[self alloc] initWithSettings:pngExportSettings header:@"PNG Format Settings" footer:@"Exports just the roadsign with no visible background.  To include the background switch off this setting."] autorelease];
+    return [[[self alloc] initWithSettings:pngExportSettings header:@"PNG Format Settings" footer:@"Exports just the collage objects with no visible background.  To include the background switch off this setting."] autorelease];
 }
 
 + (AWBSettingsGroup *)jpgExportSettingsGroupWithInfo:(NSDictionary *)info
@@ -728,6 +728,13 @@
     myFontPreviewSettingsGroup.iPhoneRowHeight = 200;
     myFontPreviewSettingsGroup.iPadRowHeight = 300;
     return [myFontPreviewSettingsGroup autorelease];
+}
+
++ (AWBSettingsGroup *)helpSettingsDrilldownSettingsGroupWithInfo:(NSDictionary *)info
+{
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:[AWBSetting drilldownSettingWithText:@"Help" value:nil key:nil childSettings:[AWBSettings helpSettingsWithFilename:@"Help.rtf" title:@"Help"]], [AWBSetting drilldownSettingWithText:@"About" value:nil key:nil childSettings:[AWBSettings helpSettingsWithFilename:@"AboutMontageMagic.rtf" title:@"About"]], nil];
+    
+    return [[[self alloc] initWithSettings:buttonSettings header:nil footer:nil] autorelease];    
 }
 
 + (AWBSettingsGroup *)helpTextSettingsGroupWithFilename:(NSString *)filename

@@ -115,6 +115,12 @@ static FontManager *sharedFontManager = nil;
 	return array;
 }
 
+- (void)clearAll
+{
+    CFDictionaryRemoveAllValues(fonts);
+    [urls removeAllObjects];
+}
+
 - (void)dealloc {
 	CFRelease(fonts);
 	[urls release];

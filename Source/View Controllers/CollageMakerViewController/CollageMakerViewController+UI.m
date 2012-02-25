@@ -19,6 +19,7 @@
 #import "CollageMakerViewController+Text.h"
 #import "CollageMakerViewController+LuckyDip.h"
 #import "UIColor+Texture.h"
+#import "FontManager.h"
 
 @implementation CollageMakerViewController (UI) 
 
@@ -381,7 +382,12 @@
                     } else {
                         fontName = self.labelTextFont;
                     }
-                    AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines fontName:fontName fontSize:28.0 offset:CGPointZero rotation:0.0 scale:self.collageObjectLocator.objectScale horizontalFlip:NO color:self.labelTextColor alignment:self.labelTextAlignment];
+                    CGFloat scale = self.collageObjectLocator.objectScale;
+                    if ([fontName isEqualToString:@"Jenna Sue"]) {
+                        scale *= 1.65;
+                    }
+                    
+                    AWBTransformableLabel *label = [[AWBTransformableLabel alloc] initWithTextLines:lines fontName:fontName fontSize:28.0 offset:CGPointZero rotation:0.0 scale:scale horizontalFlip:NO color:self.labelTextColor alignment:self.labelTextAlignment];
                     [label setCenter:self.collageObjectLocator.objectPosition];                    
                     [self applySettingsToLabel:label];
                     //[[self view] addSubview:label];

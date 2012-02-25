@@ -1,6 +1,6 @@
 //
-//  AWBRoadsignsListViewController.h
-//  Roadsign Magic
+//  AWBMyFontsListViewController.h
+//  Montage Magic
 //
 //  Created by Adam Buckley on 05/12/2011.
 //  Copyright (c) 2011 happyadam development. All rights reserved.

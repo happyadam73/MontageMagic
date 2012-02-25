@@ -1,6 +1,6 @@
 //
-//  AWBRoadsignsListViewController.m
-//  Roadsign Magic
+//  AWBMyFontsListViewController.m
+//  Montage Magic
 //
 //  Created by Adam Buckley on 05/12/2011.
 //  Copyright (c) 2011 happyadam development. All rights reserved.
@@ -11,6 +11,7 @@
 #import "AWBMyFontStore.h"
 #import "AWBSettingsGroup.h"
 #import "SSZipArchive.h"
+#import "FontManager.h"
 
 @implementation AWBMyFontsListViewController
 
@@ -58,6 +59,7 @@
 
 - (void)didReceiveMemoryWarning
 {
+    [[FontManager sharedManager] clearAll];
     [super didReceiveMemoryWarning];
 }
 
@@ -122,6 +124,7 @@
         [self alertView:self.installExtractedFontsAlertView didDismissWithButtonIndex:self.installExtractedFontsAlertView.cancelButtonIndex];
     }    
     
+    [[FontManager sharedManager] clearAll];
     [super viewWillDisappear:animated];
 }
 
@@ -278,7 +281,13 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:myFontStoreIndex inSection:0];
             [self.theTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone]; 
         }
+        [[FontManager sharedManager] clearAll];
     }
+}
+
+- (void)awbCollageSettingsTableViewControllerDidDissmiss:(AWBCollageSettingsTableViewController *)settingsController
+{
+    [[FontManager sharedManager] clearAll];
 }
 
 - (void)attemptMyFontInstall
@@ -440,6 +449,8 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     if (alertView == self.installMyFontAlertView) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [[AWBMyFontStore defaultStore] installMyFont:self.pendingMyFont];
@@ -464,6 +475,8 @@
             [self myFontZipFileCleanup];
         }        
     }
+    
+    [pool drain];
 }
 
 - (void)installExtractedFonts
@@ -487,6 +500,7 @@
     }
     
     if (successCount > 0) {
+        [[FontManager sharedManager] clearAll];
         [self.theTableView reloadData];
         NSUInteger scrollToRow = [theTableView numberOfRowsInSection:0] - 1;
         @try {
