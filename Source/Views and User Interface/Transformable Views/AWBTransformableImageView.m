@@ -67,7 +67,6 @@
         CGFloat imageRotation = [aDecoder decodeFloatForKey:@"imageRotation"];
         CGFloat imageScale = [aDecoder decodeFloatForKey:@"imageScale"];
         BOOL imageHFlip = [aDecoder decodeBoolForKey:@"imageHFlip"];
-        
         CGPoint offset = CGPointMake(imageOffsetX, imageOffsetY);        
         self = [self initWithImage:image rotation:imageRotation scale:imageScale horizontalFlip:imageHFlip imageKey:key imageDocsSubDir:nil];
         [self setCenter:offset];
@@ -97,7 +96,7 @@
 //AWB, 13/12/2011 - PNG support
 - (id)initWithImage:(UIImage *)image rotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir
 {
-    return [self initWithImage:image rotation:rotation scale:scale horizontalFlip:horizontalFlip imageKey:key imageDocsSubDir:subDir isImagePNG:NO];
+    return [self initWithImage:image rotation:rotation scale:scale horizontalFlip:flip imageKey:key imageDocsSubDir:subDir isImagePNG:NO];
 }
 
 - (id)initWithImage:(UIImage *)image rotation:(CGFloat)rotation scale:(CGFloat)scale horizontalFlip:(BOOL)flip imageKey:(NSString *)key imageDocsSubDir:(NSString *)subDir isImagePNG:(BOOL)isImagePNG

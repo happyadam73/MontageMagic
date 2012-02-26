@@ -116,7 +116,7 @@
     [alert show];
     [alert release];
     self.assetsLibrary = nil;
-    NSLog(@"A problem occured %@", [error description]);	    
+//    NSLog(@"A problem occured %@", [error description]);	    
 }
 
 - (void)initialiseLuckyDipPopoverWithViewController:(UIViewController *)viewController andBarButtonItem:(UIBarButtonItem *)button    
@@ -203,8 +203,8 @@
         } else {
             NSUInteger assetGroupCount = [self.selectedAssetsGroup numberOfAssets];
             if (assetGroupCount > 0) {
-                [self setToolbarForImporting];
                 [self setIsImporting:YES];            
+                [self setToolbarForImporting];
                 NSUInteger requestedAmount = [self luckyDipAmountFromIndex:self.luckyDipAmountIndex];
                 NSIndexSet *randomIndices = [self randomUniqueNumbersFromLow:0 toHigh:(assetGroupCount-1) totalRequired:requestedAmount];
                 
@@ -361,8 +361,8 @@
                 [photoContactIndices release];
                 [nameContactIndices release];
                 if ([peopleArray1 count]>0) {
-                    [self setToolbarForImporting];
                     [self setIsImporting:YES];
+                    [self setToolbarForImporting];
                     luckyDipInProgress = YES;
                     [self performSelectorInBackground:@selector(addContactViewsWithContacts:) withObject:peopleArray1];
                 }

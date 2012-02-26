@@ -218,7 +218,7 @@
 
 - (void)didReceiveMemoryWarning
 {
-    NSLog(@"ELCAssetTablePicker received memory warning!");
+//    NSLog(@"ELCAssetTablePicker received memory warning!");
     self.lowMemory = YES;
     self.navigationItem.title = @"Not Enough Memory";
 }

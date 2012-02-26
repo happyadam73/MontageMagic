@@ -101,7 +101,7 @@
             UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"No Photos" message:errorDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
             [alert release];
-            NSLog(@"A problem occured %@", [error description]);
+//            NSLog(@"A problem occured %@", [error description]);
             [self.parent performSelectorOnMainThread:@selector(cancelImagePicker) withObject:nil waitUntilDone:NO];
         };	
         

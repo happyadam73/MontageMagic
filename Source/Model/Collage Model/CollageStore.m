@@ -147,7 +147,6 @@ static CollageStore *defaultStore = nil;
 {
     NSError *error;
     NSString *path = AWBDocumentSubdirectory([collage collageSaveDocumentsSubdirectory]);
-    NSLog(@"Remove Path: %@", path);
     [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
     [allCollages removeObjectIdenticalTo:collage];
 }

@@ -127,8 +127,8 @@
 
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info   
 {
-    [self setToolbarForImporting];
     [self setIsImporting:YES];
+    [self setToolbarForImporting];
     luckyDipInProgress = NO;
     [self performSelectorInBackground:@selector(addPhotosWithInfo:) withObject:info];
     [self dismissToolbarAndPopover:self.imagePickerPopover];

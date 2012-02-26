@@ -235,7 +235,7 @@
 
 - (void)didReceiveMemoryWarning
 {
-    NSLog(@"CollageMakerViewController Did receive memory warning!");
+//    NSLog(@"CollageMakerViewController Did receive memory warning!");
     self.lowMemoryCount += 1;
     imageCountWhenMemoryWarningOccurred = totalImageSubviews;
     displayMemoryWarningIndicator = YES;
@@ -347,7 +347,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (!self.isCollageInEditMode) {
+    if (!self.isCollageInEditMode && !self.isImporting) {
         self.toolbarItems = [self normalToolbarButtons];
         self.navigationItem.rightBarButtonItem = self.editButton;
         [self setNavigationBarsHidden:NO animated:self.isLevel1AnimationsEnabled];        

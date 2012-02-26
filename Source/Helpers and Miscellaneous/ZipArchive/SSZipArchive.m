@@ -104,9 +104,6 @@
 		
 		NSString* fullPath = [destination stringByAppendingPathComponent:strPath];
 		
-        NSLog(@"strPath: %@", strPath);
-        NSLog(@"fullPath: %@", fullPath);
-        
 		if (isDirectory) {
 			[fileManager createDirectoryAtPath:fullPath withIntermediateDirectories:YES attributes:nil error:nil];
 		} else {

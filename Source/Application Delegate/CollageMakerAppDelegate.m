@@ -42,7 +42,7 @@
         if ((collageIndex >= 0) && (collageIndex < totalSavedCollages)) {
             collage = [[[CollageStore defaultStore] allCollages] objectAtIndex:collageIndex];
             if (collage.totalObjects >= [CollageMakerViewController excessiveSubviewCountThreshold]) {
-                NSLog(@"Collage Total Objects: %d - exceed threshold (%d), so don't load", collage.totalObjects, [CollageMakerViewController excessiveSubviewCountThreshold]);
+//                NSLog(@"Collage Total Objects: %d - exceed threshold (%d), so don't load", collage.totalObjects, [CollageMakerViewController excessiveSubviewCountThreshold]);
                 collage = nil;
             }
         }

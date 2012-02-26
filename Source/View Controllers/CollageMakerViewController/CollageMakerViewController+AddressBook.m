@@ -69,8 +69,8 @@
 
 - (void)awbPeoplePickerController:(AWBPeoplePickerController *)picker didFinishPickingContacts:(NSArray *)contacts
 {
-    [self setToolbarForImporting];
     [self setIsImporting:YES];
+    [self setToolbarForImporting];
     luckyDipInProgress = NO;
     [self performSelectorInBackground:@selector(addContactViewsWithContacts:) withObject:contacts];
     [self dismissToolbarAndPopover:self.addressBookPopover];
