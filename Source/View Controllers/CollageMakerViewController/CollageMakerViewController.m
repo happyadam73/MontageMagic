@@ -39,7 +39,7 @@
 @synthesize useMyFonts, labelMyFont, labelTextAlignment;
 @synthesize canvasView;
 @synthesize exportFormatSelectedIndex, pngExportTransparentBackground, jpgExportQualityValue;
-@synthesize imageRoundedCornerSize, imageShadowOffsetSize, textShadowOffsetSize;
+@synthesize imageRoundedCornerSize, imageShadowOffsetSize, textShadowOffsetSize, increasePhotoImportResolution;
 
 - (id)init
 {
@@ -84,6 +84,7 @@
         animateMemoryWarningIndicator = YES;
         viewDidUnload = NO;
         imageCountWhenMemoryWarningOccurred = 0;
+        increasePhotoImportResolution = NO;
         [locator release];
     }
     return self;
@@ -475,6 +476,7 @@
         collage.labelTextAlignment = labelTextAlignment;
         collage.labelMyFont = labelMyFont;
         collage.useMyFonts = useMyFonts;
+        collage.increasePhotoImportResolution = increasePhotoImportResolution;
         
         //[collage initCollageFromView:[self view]];
         [collage initCollageFromView:self.canvasView];
@@ -550,7 +552,8 @@
         self.exportFormatSelectedIndex = collage.exportFormatSelectedIndex;
         self.pngExportTransparentBackground = collage.pngExportTransparentBackground;
         self.jpgExportQualityValue = collage.jpgExportQualityValue;            
-
+        self.increasePhotoImportResolution = collage.increasePhotoImportResolution;
+        
         if (!requestThemeChangeOnNextLoad) {
             self.addImageShadows = collage.addImageShadows;
             self.addTextShadows = collage.addTextShadows;

@@ -34,8 +34,8 @@
                         stringByAppendingPathComponent:[NSString stringWithFormat:@"%@@2x.%@", 
                                                         [[path lastPathComponent] stringByDeletingPathExtension], 
                                                         [path pathExtension]]];
-    
-    if ( [[[UIDevice currentDevice] systemVersion] intValue] >= 4 && [[UIScreen mainScreen] scale] == 2.0 ) 
+        
+    if ( [[[UIDevice currentDevice] systemVersion] intValue] >= 4 && [[UIScreen mainScreen] scale] >= 2.0 ) 
     {
         //retina device - iPad3, iPhone 4, 4S - check for a 2x file first
         if ([[NSFileManager defaultManager] fileExistsAtPath:path2x]) 

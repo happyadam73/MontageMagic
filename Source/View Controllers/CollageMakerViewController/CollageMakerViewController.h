@@ -138,6 +138,8 @@
     
     AWBCollageObjectLocator *collageObjectLocator;
     BOOL viewDidUnload;
+    
+    BOOL increasePhotoImportResolution;
 }
 
 @property (nonatomic, retain) UIView *canvasView;
@@ -235,6 +237,7 @@
 @property (nonatomic, retain) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, retain) AWBCollageObjectLocator *collageObjectLocator;
 @property (nonatomic, readonly) BOOL luckyDipImportCollageIsFull;
+@property (nonatomic, assign) BOOL increasePhotoImportResolution;
 
 - (id)initWithCollageDescriptor:(CollageDescriptor *)collage;
 - (void)updateCollageWithTheme:(CollageTheme *)theme;

@@ -62,6 +62,7 @@ enum {
     BOOL useMyFonts;
     NSString *labelMyFont;
     UITextAlignment labelTextAlignment;
+    BOOL increasePhotoImportResolution;
 }
 
 @property (nonatomic, assign) CGFloat exportSize;
@@ -108,6 +109,7 @@ enum {
 @property (nonatomic, assign) BOOL useMyFonts;
 @property (nonatomic, retain) NSString *labelMyFont;
 @property (nonatomic, assign) UITextAlignment labelTextAlignment;
+@property (nonatomic, assign) BOOL increasePhotoImportResolution;
 
 - (void)applyCollageBackgroundToView:(UIView *)backgroundView;
 - (void)addCollageObjectsToView:(UIView *)collageView;

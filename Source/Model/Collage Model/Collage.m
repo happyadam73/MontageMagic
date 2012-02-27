@@ -26,7 +26,7 @@
 @synthesize collageObjectLocator;
 @synthesize labelMyFont, labelTextAlignment, useMyFonts;
 @synthesize exportFormatSelectedIndex, pngExportTransparentBackground, jpgExportQualityValue;
-@synthesize imageRoundedCornerSize, imageShadowOffsetSize, textShadowOffsetSize;
+@synthesize imageRoundedCornerSize, imageShadowOffsetSize, textShadowOffsetSize, increasePhotoImportResolution;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -106,6 +106,11 @@
     } else {
         self.textShadowOffsetSize = kAWBShadowOffsetSizeM;
     } 
+    if ([aDecoder containsValueForKey:kAWBInfoKeyIncreasePhotoImportResolution]) {
+        self.increasePhotoImportResolution = [aDecoder decodeBoolForKey:kAWBInfoKeyIncreasePhotoImportResolution];
+    } else {
+        self.increasePhotoImportResolution = NO;
+    }
     return  self;   
 }
 
@@ -255,6 +260,7 @@
     [aCoder encodeObject:self.labelMyFont forKey:kAWBInfoKeyMyFontName];
     [aCoder encodeBool:self.useMyFonts forKey:kAWBInfoKeyUseMyFonts];
     [aCoder encodeInteger:self.labelTextAlignment forKey:kAWBInfoKeyTextAlignment]; 
+    [aCoder encodeBool:self.increasePhotoImportResolution forKey:kAWBInfoKeyIncreasePhotoImportResolution];
 }
 
 - (void)dealloc

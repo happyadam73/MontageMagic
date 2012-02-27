@@ -320,8 +320,8 @@
     AWBSettingsGroup *pngExportSettings = [AWBSettingsGroup pngExportSettingsGroupWithInfo:info];
     AWBSettingsGroup *jpgExportSettings = [AWBSettingsGroup jpgExportSettingsGroupWithInfo:info];
     
-    NSMutableArray *settings = [NSMutableArray arrayWithObjects:exportQualityAndFormatSettings, pngExportSettings, jpgExportSettings, nil];
-    AWBSettings *exportSettings = [[self alloc] initWithSettingsGroups:settings title:@"Export Settings"];
+    NSMutableArray *settings = [NSMutableArray arrayWithObjects:exportQualityAndFormatSettings, pngExportSettings, jpgExportSettings, [AWBSettingsGroup increasePhotoImportResolutionSettingsGroupWithInfo:info], nil];
+    AWBSettings *exportSettings = [[self alloc] initWithSettingsGroups:settings title:@"Import & Export"];
     
     exportQualityAndFormatSettings.parentSettings = exportSettings;
     exportQualityAndFormatSettings.dependentVisibleSettingsGroup = jpgExportSettings;

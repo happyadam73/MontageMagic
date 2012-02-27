@@ -56,6 +56,7 @@ static NSString *const kAWBInfoKeyObjectPlacementIndex = @"ObjectPlacementIndex"
 static NSString *const kAWBAllPhotosGroupName = @"All Photos";
 static NSString *const kAWBAllPhotosGroupPersistentID = @"+MM/AllPhotos";
 static NSString *const kAWBInfoKeyAddContentOnCreation = @"AddContentOnCreation";
+static NSString *const kAWBInfoKeyIncreasePhotoImportResolution = @"IncreasePhotoImportResolution";
 
 @class AWBSetting;
 @class AWBSettings;
@@ -143,6 +144,7 @@ static NSString *const kAWBInfoKeyAddContentOnCreation = @"AddContentOnCreation"
 + (AWBSettingsGroup *)helpSettingsDrilldownSettingsGroupWithInfo:(NSDictionary *)info;
 + (AWBSettingsGroup *)helpTextSettingsGroupWithFilename:(NSString *)filename;
 + (AWBSettingsGroup *)textAlignmentPickerSettingsGroupWithInfo:(NSDictionary *)info;
++ (AWBSettingsGroup *)increasePhotoImportResolutionSettingsGroupWithInfo:(NSDictionary *)info;
 
 - (id)initWithSettings:(NSMutableArray *)aSettings header:(NSString *)aHeader footer:(NSString *)aFooter;
 - (void)masterSwitchSettingHasChangedValue:(AWBSetting *)setting;

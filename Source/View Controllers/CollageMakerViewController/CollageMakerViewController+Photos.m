@@ -278,32 +278,56 @@
 
 - (NSUInteger)recommendedMaxResolutionForImageSize:(CGSize)imageSize
 {
+    NSUInteger recommendedResolution = MAX_PIXELS;
+    
     if (self.collageObjectLocator.autoMemoryReduction) {
         if ((self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeScatter) || (self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3)) {
-            return MAX_PIXELS;
+            recommendedResolution = MAX_PIXELS;
         } else if (self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeGrid4x6) {
-            return (DEVICE_IS_IPHONE? MAX_PIXELS : (MAX_PIXELS/2.0));
+            recommendedResolution = (DEVICE_IS_IPHONE? MAX_PIXELS : (MAX_PIXELS/2.0));
         } else if (self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3iPad) {
-            return (MAX_PIXELS * 2.0);
+            recommendedResolution = (MAX_PIXELS * 2.0);
         } else {
             if (imageSize.height > 0.0) {
                 CGFloat widthToHeightRatio = (imageSize.width/imageSize.height);
                 CGFloat mosaicHeight = self.collageObjectLocator.currentMosaicRowHeight;
                 CGFloat mosaicWidth = mosaicHeight * widthToHeightRatio;
                 CGFloat deviceMultiplier = (DEVICE_IS_IPAD ? 8.0 : 16.0);
-                CGFloat recommendedResolution = mosaicHeight * mosaicWidth * deviceMultiplier;
-                if (recommendedResolution > (MAX_PIXELS * 1.5)) {
-                    return (MAX_PIXELS * 1.5);
+                CGFloat resolution = mosaicHeight * mosaicWidth * deviceMultiplier;
+                if (resolution > (MAX_PIXELS * 1.5)) {
+                    recommendedResolution = (MAX_PIXELS * 1.5);
                 } else {
-                    return recommendedResolution;
+                    recommendedResolution = resolution;
                 }
             } else {
-                return MAX_PIXELS;
+                recommendedResolution = MAX_PIXELS;
             }
         }
     } else {
-        return MAX_PIXELS;
+        if (self.collageObjectLocator.objectLocatorType == kAWBCollageObjectLocatorTypeGrid2x3iPad) {
+            recommendedResolution = (MAX_PIXELS * 2.0);
+        } else {
+            recommendedResolution = MAX_PIXELS;
+        }
     }
+    
+    if (self.increasePhotoImportResolution) {
+        recommendedResolution *= 2;
+        if (recommendedResolution > (MAX_PIXELS * 3)) {
+            recommendedResolution = (MAX_PIXELS * 3);
+        }
+    }
+    
+    CGFloat screenScale = [[UIScreen mainScreen] scale];
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    CGFloat maxScreenPixels = MAX((screenSize.width * screenScale), (screenSize.height * screenScale));
+    
+    //iPad 3 and other unknown device support - increase the resolution if screen >= 1440px
+    if (maxScreenPixels >= 1440) {
+        recommendedResolution *= 2;
+    }
+    
+    return recommendedResolution;
 }
 
 @end

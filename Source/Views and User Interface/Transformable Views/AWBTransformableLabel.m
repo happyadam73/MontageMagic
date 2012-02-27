@@ -43,7 +43,7 @@
     CGFloat maxLength = MAX(self.frame.size.width, self.frame.size.height);
     
     minScale = MAX((48.0/maxLength),((DEVICE_IS_IPAD ? 32.0 : 24.0)/minLength));    
-    maxScale = (MAX(screenSize.width, screenSize.height))/maxLength;
+    maxScale = 1.2 * (MAX(screenSize.width, screenSize.height))/maxLength;
     
     [self setUserInteractionEnabled:YES];
     self.clipsToBounds = NO;

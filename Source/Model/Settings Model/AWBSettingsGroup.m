@@ -276,7 +276,7 @@
 
 + (AWBSettingsGroup *)exportDrilldownSettingsGroupWithInfo:(NSDictionary *)info
 {
-    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:[AWBSetting drilldownSettingWithText:@"Export" value:nil key:nil childSettings:[AWBSettings exportSettingsWithInfo:info]], nil];
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:[AWBSetting drilldownSettingWithText:@"Import & Export" value:nil key:nil childSettings:[AWBSettings exportSettingsWithInfo:info]], nil];
     
     return [[[self alloc] initWithSettings:buttonSettings header:nil footer:nil] autorelease];    
 }
@@ -754,6 +754,14 @@
 + (AWBSettingsGroup *)textAlignmentPickerSettingsGroupWithInfo:(NSDictionary *)info
 {
     return [[[self alloc] initWithSettings:[NSMutableArray arrayWithObject:[AWBSetting segmentControlSettingWithText:@"Alignment" items:[NSArray arrayWithObjects:[UIImage imageNamed:@"leftalignment"], [UIImage imageNamed:@"centeralignment"], [UIImage imageNamed:@"rightalignment"], nil] value:[info objectForKey:kAWBInfoKeyTextAlignment] key:kAWBInfoKeyTextAlignment]] header:nil footer:nil] autorelease];
+}
+
++ (AWBSettingsGroup *)increasePhotoImportResolutionSettingsGroupWithInfo:(NSDictionary *)info
+{
+    AWBSetting *increasePhotoImportResolutionSetting = [AWBSetting switchSettingWithText:@"Photo Import HQ" value:[info objectForKey:kAWBInfoKeyIncreasePhotoImportResolution] key:kAWBInfoKeyIncreasePhotoImportResolution];    
+    NSMutableArray *buttonSettings = [NSMutableArray arrayWithObjects:increasePhotoImportResolutionSetting, nil];
+    AWBSettingsGroup *increasePhotoImportResolutionSettings = [[self alloc] initWithSettings:buttonSettings header:nil footer:@"Import photos at a higher resolution.  Memory usage is higher and warnings may occur. A change to this setting does not affect existing photos."];
+    return [increasePhotoImportResolutionSettings autorelease];
 }
 
 - (void)dealloc

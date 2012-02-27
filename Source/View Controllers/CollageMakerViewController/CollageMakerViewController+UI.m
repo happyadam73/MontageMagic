@@ -260,6 +260,7 @@
     self.collageObjectLocator.snapToGridSize = [[info objectForKey:kAWBInfoKeyObjectLocatorSnapToGridSize] floatValue];
     self.collageObjectLocator.objectLocatorType = [[info objectForKey:kAWBInfoKeyObjectLocatorType] integerValue];
     self.collageObjectLocator.autoMemoryReduction = [[info objectForKey:kAWBInfoKeyObjectLocatorAutoMemoryReduction] boolValue];
+    self.increasePhotoImportResolution = [[info objectForKey:kAWBInfoKeyIncreasePhotoImportResolution] boolValue];
 }
 
 - (NSMutableDictionary *)settingsInfo
@@ -293,6 +294,7 @@
                                  [NSNumber numberWithBool:self.collageObjectLocator.autoMemoryReduction], kAWBInfoKeyObjectLocatorAutoMemoryReduction,
                                  [NSNumber numberWithInteger:self.labelTextAlignment], kAWBInfoKeyTextAlignment,
                                  [NSNumber numberWithBool:self.useMyFonts], kAWBInfoKeyUseMyFonts,
+                                 [NSNumber numberWithBool:self.increasePhotoImportResolution], kAWBInfoKeyIncreasePhotoImportResolution,                                 
                                  nil];
     
     if (self.imageShadowColor) {
