@@ -126,7 +126,7 @@
 - (BOOL)handleOpenURL:(NSURL *)url
 {    
     if ([url isFileURL]) {
-        [self.mainNavigationController.visibleViewController dismissModalViewControllerAnimated:YES];
+        [self.mainNavigationController.visibleViewController dismissModalViewControllerAnimated:NO];
         
         if (![self.mainNavigationController.topViewController isKindOfClass:[AWBMyFontsListViewController class]]) {
             AWBMyFontsListViewController *controller = [[AWBMyFontsListViewController alloc] init];
