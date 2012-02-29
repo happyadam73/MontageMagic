@@ -43,7 +43,7 @@
     CGFloat maxLength = MAX(self.frame.size.width, self.frame.size.height);
     
     minScale = MAX((48.0/maxLength),((DEVICE_IS_IPAD ? 32.0 : 24.0)/minLength));    
-    maxScale = 1.2 * (MAX(screenSize.width, screenSize.height))/maxLength;
+    maxScale = (MAX(screenSize.width, screenSize.height))/maxLength;
     
     [self setUserInteractionEnabled:YES];
     self.clipsToBounds = NO;
@@ -69,7 +69,16 @@
     CGFloat labelOffsetX = [aDecoder decodeFloatForKey:@"labelOffsetX"];
     CGFloat labelOffsetY = [aDecoder decodeFloatForKey:@"labelOffsetY"];
     CGFloat labelRotation = [aDecoder decodeFloatForKey:@"labelRotation"];
-    CGFloat labelScale = [aDecoder decodeFloatForKey:@"labelScale"];
+    
+    //AWB, 29/2/2012 - Possible Inf or NaN value in scale; first assign to double and check
+    CGFloat labelScale = 1.0;
+    double scaleValue = [aDecoder decodeDoubleForKey:@"labelScale"];
+    if ((isinf(scaleValue)) || (isnan(scaleValue))) {
+        NSLog(@"Scale is Inf or NaN - scale remains 1.0");
+    } else {
+        labelScale = [aDecoder decodeFloatForKey:@"labelScale"];
+    }    
+    
     BOOL labelHFlip = [aDecoder decodeBoolForKey:@"labelHFlip"];        
     CGPoint offset = CGPointMake(labelOffsetX, labelOffsetY);
         
