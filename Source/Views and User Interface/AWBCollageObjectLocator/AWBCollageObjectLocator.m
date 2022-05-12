@@ -128,6 +128,9 @@
             case kAWBCollageObjectLocatorTypeMosaicNanoImages:
                 rowHeights = [NSArray arrayWithObjects:[NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:72.0], [NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:72.0], [NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:72.0], [NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:72.0], [NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:72.0], [NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:72.0], [NSNumber numberWithFloat:48.0], nil];
                 break;
+            case kAWBCollageObjectLocatorTypeMosaicPicoImages:
+                rowHeights = [NSArray arrayWithObjects:[NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], [NSNumber numberWithFloat:32.0], nil];
+                break;
             default:
                 rowHeights = [NSArray arrayWithObjects:[NSNumber numberWithFloat:144.0], [NSNumber numberWithFloat:192.0], [NSNumber numberWithFloat:240.0], [NSNumber numberWithFloat:192.0], nil];
                 break;
@@ -146,6 +149,7 @@
             case kAWBCollageObjectLocatorTypeMosaicTinyImages:
             case kAWBCollageObjectLocatorTypeMosaicMicroImages:
             case kAWBCollageObjectLocatorTypeMosaicNanoImages:
+            case kAWBCollageObjectLocatorTypeMosaicPicoImages:
                 rowHeights = [NSArray arrayWithObjects:[NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:64.0], [NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:48.0], [NSNumber numberWithFloat:64.0], [NSNumber numberWithFloat:48.0], nil];
                 break;
             default:
@@ -323,6 +327,7 @@
             case kAWBCollageObjectLocatorTypeScatter:
                 [self pushPhotoObjectForScatterLayout:image isContactPhoto:isContactPhoto];
                 break;
+            case kAWBCollageObjectLocatorTypeMosaicPicoImages:
             case kAWBCollageObjectLocatorTypeMosaicNanoImages:
             case kAWBCollageObjectLocatorTypeMosaicMicroImages:
             case kAWBCollageObjectLocatorTypeMosaicTinyImages:
@@ -356,6 +361,7 @@
         case kAWBCollageObjectLocatorTypeScatter:
             [self pushContactLabelForScatterLayoutBelowCurrentObject:belowCurrentObject includesPhoneNumber:includesPhoneNumber];
             break;
+        case kAWBCollageObjectLocatorTypeMosaicPicoImages:
         case kAWBCollageObjectLocatorTypeMosaicNanoImages:
         case kAWBCollageObjectLocatorTypeMosaicMicroImages:
         case kAWBCollageObjectLocatorTypeMosaicTinyImages:

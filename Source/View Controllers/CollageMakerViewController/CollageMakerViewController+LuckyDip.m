@@ -424,6 +424,8 @@
                     break;
                 case kAWBCollageObjectLocatorTypeMosaicNanoImages:
                     amount = (DEVICE_IS_IPHONE? 90 : 400);
+                case kAWBCollageObjectLocatorTypeMosaicPicoImages:
+                    amount = (DEVICE_IS_IPHONE? 90 : 800);
                 default:
                     break;
             }

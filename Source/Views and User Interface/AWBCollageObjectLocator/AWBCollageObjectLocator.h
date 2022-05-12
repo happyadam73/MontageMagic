@@ -36,7 +36,8 @@ typedef enum {
     kAWBCollageObjectLocatorTypeMosaicNanoImages,
     kAWBCollageObjectLocatorTypeGrid2x3,
     kAWBCollageObjectLocatorTypeGrid4x6,
-    kAWBCollageObjectLocatorTypeGrid2x3iPad    
+    kAWBCollageObjectLocatorTypeGrid2x3iPad,
+    kAWBCollageObjectLocatorTypeMosaicPicoImages
 } AWBCollageObjectLocatorType;
 
 @interface AWBCollageObjectLocator : NSObject
